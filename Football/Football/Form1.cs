@@ -12,9 +12,18 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
+        string team1;
+        string team2;
+
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            team1 = teamBox1.Text;
+            team2 = teamBox2.Text;
         }
     }
 }
