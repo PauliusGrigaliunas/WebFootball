@@ -34,6 +34,10 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cannyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laplasianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -66,7 +70,8 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.edgeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(782, 28);
@@ -86,16 +91,47 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // edgeToolStripMenuItem
+            // 
+            this.edgeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cannyToolStripMenuItem,
+            this.sobelToolStripMenuItem,
+            this.laplasianToolStripMenuItem});
+            this.edgeToolStripMenuItem.Name = "edgeToolStripMenuItem";
+            this.edgeToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.edgeToolStripMenuItem.Text = "Edge";
+            // 
+            // cannyToolStripMenuItem
+            // 
+            this.cannyToolStripMenuItem.Name = "cannyToolStripMenuItem";
+            this.cannyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.cannyToolStripMenuItem.Text = "Canny";
+            this.cannyToolStripMenuItem.Click += new System.EventHandler(this.cannyToolStripMenuItem_Click);
+            // 
+            // sobelToolStripMenuItem
+            // 
+            this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
+            this.sobelToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.sobelToolStripMenuItem.Text = "Sobel";
+            this.sobelToolStripMenuItem.Click += new System.EventHandler(this.sobelToolStripMenuItem_Click);
+            // 
+            // laplasianToolStripMenuItem
+            // 
+            this.laplasianToolStripMenuItem.Name = "laplasianToolStripMenuItem";
+            this.laplasianToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.laplasianToolStripMenuItem.Text = "Laplasian";
+            this.laplasianToolStripMenuItem.Click += new System.EventHandler(this.laplasianToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -125,6 +161,10 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem edgeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cannyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem laplasianToolStripMenuItem;
     }
 }
 

@@ -16,6 +16,8 @@ namespace Football
 {
     public partial class Form1 : Form
     {
+        Image<Bgr, byte> imgInput;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace Football
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
+                    imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
                 }
             }
@@ -59,7 +61,11 @@ namespace Football
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (MessageBox.Show("Are you sure you want to close?", "System message", MessageBoxButtons.YesNo)==DialogResult.Yes)
+            {
+                this.Close();
+            }
+            
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,6 +76,43 @@ namespace Football
         private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void cannyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imgInput == null)
+            {
+                return;
+            }
+            Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
+            imgCanny = imgInput.Canny(50, 20);
+            pictureBox1.Image = imgCanny.Bitmap;
+
+
+        }
+
+        private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imgInput == null)
+            {
+                return;
+            }
+            Image <Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
+            Image <Gray, float> imgSobel = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
+            imgSobel = imgGray.Sobel(1,1,3);
+            pictureBox1.Image = imgSobel.Bitmap;
+        }
+
+        private void laplasianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imgInput == null)
+            {
+                return;
+            }
+            Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
+            Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
+            imgLaplasian = imgGray.Laplace(3);
+            pictureBox1.Image = imgLaplasian.Bitmap;
         }
     }
 }
