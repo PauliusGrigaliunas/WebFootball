@@ -24,6 +24,7 @@ namespace Football
         {
             team1 = teamBox1.Text;
             team2 = teamBox2.Text;
+            Application.Exit();
         }
     }
 }
