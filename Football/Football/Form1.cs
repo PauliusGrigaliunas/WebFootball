@@ -19,6 +19,8 @@ namespace Football
     {
         VideoCapture capture;
         Image<Bgr, byte> imgInput;
+        Image<Gray, byte> imgGray;
+        Image<Ycc, byte> imgYcc;
 
         public Form1()
         {
@@ -42,10 +44,6 @@ namespace Football
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -59,7 +57,6 @@ namespace Football
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {
-            takeAPicture();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,7 +86,7 @@ namespace Football
             }
             Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
             imgCanny = imgInput.Canny(50, 20);
-            pictureBox1.Image = imgCanny.Bitmap;
+            pictureBox2.Image = imgCanny.Bitmap;
 
 
         }
@@ -103,7 +100,7 @@ namespace Football
             Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
             Image<Gray, float> imgSobel = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
             imgSobel = imgGray.Sobel(1, 1, 3);
-            pictureBox1.Image = imgSobel.Bitmap;
+            pictureBox2.Image = imgSobel.Bitmap;
         }
 
         private void laplasianToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,7 +112,7 @@ namespace Football
             Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
             Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
             imgLaplasian = imgGray.Laplace(3);
-            pictureBox1.Image = imgLaplasian.Bitmap;
+            pictureBox2.Image = imgLaplasian.Bitmap;
         }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,6 +209,26 @@ namespace Football
             {
                 capture.Pause();
             }
+        }
+
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imgGray = imgInput.Convert<Gray, byte>();
+            pictureBox2.Image = imgGray.Bitmap;
+
+
+        }
+
+        private void iccToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imgYcc = imgInput.Convert<Ycc, byte>();
+            pictureBox2.Image = imgYcc.Bitmap;
+        }
+        
+        //coordinates
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("X =" + e.X +" Y ="+ e.Y);
         }
     }
 }
