@@ -12,13 +12,17 @@ using Emgu;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
+using Emgu.CV.UI;
 
 namespace Football
 {
     public partial class Form1 : Form
     {
         VideoCapture capture;
+        bool captureInProgress = false;
         Image<Bgr, byte> imgInput;
+        Image<Gray, byte> imgGray;
+        Image<Ycc, byte> imgYcc;
 
         public Form1()
         {
@@ -42,10 +46,6 @@ namespace Football
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -59,7 +59,6 @@ namespace Football
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {
-            takeAPicture();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,7 +88,7 @@ namespace Football
             }
             Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
             imgCanny = imgInput.Canny(50, 20);
-            pictureBox1.Image = imgCanny.Bitmap;
+            pictureBox2.Image = imgCanny.Bitmap;
 
 
         }
@@ -103,7 +102,7 @@ namespace Football
             Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
             Image<Gray, float> imgSobel = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
             imgSobel = imgGray.Sobel(1, 1, 3);
-            pictureBox1.Image = imgSobel.Bitmap;
+            pictureBox2.Image = imgSobel.Bitmap;
         }
 
         private void laplasianToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,7 +114,7 @@ namespace Football
             Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
             Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
             imgLaplasian = imgGray.Laplace(3);
-            pictureBox1.Image = imgLaplasian.Bitmap;
+            pictureBox2.Image = imgLaplasian.Bitmap;
         }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,6 +211,112 @@ namespace Football
             {
                 capture.Pause();
             }
+        }
+
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imgGray = imgInput.Convert<Gray, byte>();
+            pictureBox2.Image = imgGray.Bitmap;
+
+
+        }
+
+        private void iccToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imgYcc = imgInput.Convert<Ycc, byte>();
+            pictureBox2.Image = imgYcc.Bitmap;
+        }
+        
+        //coordinates
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("X =" + e.X +" Y ="+ e.Y);
+        }
+
+        // colors
+        // Blue
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // Green
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // Red
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        
+        }
+            
+// kol kas nereikalinga
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox4_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox5_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox6_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int lowBlue = 0, highBlue =100;
+            int lowGreen = 0, highGreen = 100;
+            int lowRed = 175, highRed = 256 ;
+
+
+            if (imgInput == null) return;
+            //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
+
+            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+                ;
+
+            imgRange.SmoothGaussian(9);
+
+            pictureBox2.Image = imgRange.Bitmap;
+
         }
     }
 }
