@@ -12,12 +12,14 @@ using Emgu;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
+using Emgu.CV.UI;
 
 namespace Football
 {
     public partial class Form1 : Form
     {
         VideoCapture capture;
+        bool captureInProgress = false;
         Image<Bgr, byte> imgInput;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
@@ -295,6 +297,25 @@ namespace Football
 
         private void comboBox6_Leave(object sender, EventArgs e)
         {
+
+        }
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int lowBlue = 0, highBlue =100;
+            int lowGreen = 0, highGreen = 100;
+            int lowRed = 175, highRed = 256 ;
+
+
+            if (imgInput == null) return;
+            //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
+
+            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+                ;
+
+            imgRange.SmoothGaussian(9);
+
+            pictureBox2.Image = imgRange.Bitmap;
 
         }
     }

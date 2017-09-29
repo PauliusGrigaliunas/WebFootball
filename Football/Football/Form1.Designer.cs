@@ -62,6 +62,7 @@
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iccToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,9 +89,9 @@
             this.panel1.Controls.Add(this.lblBlue);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(0, 31);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1344, 573);
+            this.panel1.Size = new System.Drawing.Size(1344, 613);
             this.panel1.TabIndex = 2;
             // 
             // comboBox6
@@ -145,6 +146,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(177, 66);
             this.comboBox1.Name = "comboBox1";
@@ -216,18 +218,18 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(731, 153);
+            this.pictureBox2.Location = new System.Drawing.Point(669, 133);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(600, 400);
+            this.pictureBox2.Size = new System.Drawing.Size(640, 480);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 153);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 133);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 400);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -371,7 +373,8 @@
             // 
             this.colourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.grayToolStripMenuItem,
-            this.iccToolStripMenuItem});
+            this.iccToolStripMenuItem,
+            this.redToolStripMenuItem});
             this.colourToolStripMenuItem.Name = "colourToolStripMenuItem";
             this.colourToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
             this.colourToolStripMenuItem.Text = "Colour";
@@ -390,12 +393,19 @@
             this.iccToolStripMenuItem.Text = "Icc";
             this.iccToolStripMenuItem.Click += new System.EventHandler(this.iccToolStripMenuItem_Click);
             // 
+            // redToolStripMenuItem
+            // 
+            this.redToolStripMenuItem.Name = "redToolStripMenuItem";
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.redToolStripMenuItem.Text = "Red";
+            this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1343, 596);
+            this.ClientSize = new System.Drawing.Size(1343, 638);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
@@ -448,6 +458,7 @@
         private System.Windows.Forms.Label lblMin;
         private System.Windows.Forms.Label lblRed;
         private System.Windows.Forms.Label lblGreen;
+        private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
     }
 }
 
