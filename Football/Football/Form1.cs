@@ -230,5 +230,72 @@ namespace Football
         {
             MessageBox.Show("X =" + e.X +" Y ="+ e.Y);
         }
+
+        // colors
+        // Blue
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // Green
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // Red
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        
+        }
+            
+// kol kas nereikalinga
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox4_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox5_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox6_Leave(object sender, EventArgs e)
+        {
+
+        }
     }
 }
