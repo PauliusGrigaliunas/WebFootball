@@ -186,6 +186,8 @@ namespace Football
                 Mat mat = new Mat();
                 capture.Retrieve(mat);
                 pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
+                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(20, 40, 200), new Bgr(100, 150, 255));
+                pictureBox2.Image = imgRange.Bitmap;
                 Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
 
             }
@@ -230,7 +232,9 @@ namespace Football
         //coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("X =" + e.X +" Y ="+ e.Y);
+            Bitmap bitmap = new Bitmap(pictureBox1.Image);
+            Color pixelColor = bitmap.GetPixel(e.X, e.Y);
+            MessageBox.Show(pixelColor.ToString());
         }
 
         // colors
@@ -302,21 +306,21 @@ namespace Football
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int lowBlue = Convert.ToInt32(comboBox1.Text);
+            /*int lowBlue = Convert.ToInt32(comboBox1.Text);
             int highBlue = Convert.ToInt32(comboBox4.Text);
             int lowGreen = Convert.ToInt32(comboBox2.Text);
             int highGreen = Convert.ToInt32(comboBox5.Text);
             int lowRed = Convert.ToInt32(comboBox3.Text);
-            int highRed = Convert.ToInt32(comboBox6.Text); 
+            int highRed = Convert.ToInt32(comboBox6.Text); */
 
 
             if (imgInput == null) return;
             //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
 
-            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
-                ;
+            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
+            //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
 
-            imgRange.SmoothGaussian(9);
+            //imgRange.SmoothGaussian(9);
 
             pictureBox2.Image = imgRange.Bitmap;
 
