@@ -302,9 +302,12 @@ namespace Football
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int lowBlue = 0, highBlue =100;
-            int lowGreen = 0, highGreen = 100;
-            int lowRed = 175, highRed = 256 ;
+            int lowBlue = Convert.ToInt32(comboBox1.Text);
+            int highBlue = Convert.ToInt32(comboBox4.Text);
+            int lowGreen = Convert.ToInt32(comboBox2.Text);
+            int highGreen = Convert.ToInt32(comboBox5.Text);
+            int lowRed = Convert.ToInt32(comboBox3.Text);
+            int highRed = Convert.ToInt32(comboBox6.Text); 
 
 
             if (imgInput == null) return;
