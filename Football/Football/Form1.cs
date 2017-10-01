@@ -19,46 +19,13 @@ namespace Football
     public partial class Form1 : Form
     {
         VideoCapture capture;
-        bool captureInProgress = false;
-        Image<Bgr, byte> imgInput;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
+        private Picture imageInput;
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void takeAPicture()
-        {
-            try
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    imgInput = new Image<Bgr, byte>(ofd.FileName);
-                    pictureBox1.Image = imgInput.Bitmap;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click_1(object sender, EventArgs e)
-        {
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,59 +36,55 @@ namespace Football
             }
 
         }
-//Picture
+        //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            takeAPicture();
+            imageInput = new Picture();
+            pictureBox1.Image = imageInput.TakeAPicture().Bitmap;
         }
-
-        private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-//layers
+        //layers
         private void cannyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (imgInput == null)
+            if (imageInput != null)
             {
-                return;
+                pictureBox2.Image = imageInput.ConvertToCanny(20, 50).Bitmap;
             }
-            Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgCanny = imgInput.Canny(50, 20);
-            pictureBox2.Image = imgCanny.Bitmap;
-
-
+            else return;
         }
 
         private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (imgInput == null)
+            if (imageInput != null)
             {
-                return;
+                pictureBox2.Image = imageInput.ConvertToSobel(1, 1, 3).Bitmap;
             }
-            Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
-            Image<Gray, float> imgSobel = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgSobel = imgGray.Sobel(1, 1, 3);
-            pictureBox2.Image = imgSobel.Bitmap;
+            else return;
         }
 
         private void laplasianToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (imgInput == null)
+            if (imageInput != null)
             {
-                return;
+                pictureBox2.Image = imageInput.ConvertToLaplase(3).Bitmap;
             }
-            Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
-            Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgLaplasian = imgGray.Laplace(3);
-            pictureBox2.Image = imgLaplasian.Bitmap;
+            else return;
         }
 
-        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (imageInput != null)
+            {
+                pictureBox2.Image = imageInput.ConvertToGray().Bitmap;
+            }
+            else if (capture != null)
+            {
+
+            }
+            else return;
 
         }
-//Camera
+
+        //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (capture == null)
@@ -163,7 +126,7 @@ namespace Football
                 capture.Pause();
             }
         }
-// Video
+        // Video
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (capture == null)
@@ -215,22 +178,14 @@ namespace Football
             }
         }
 
-        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (capture != null || imgInput != null)
-            {
-                imgGray = imgInput.Convert<Gray, byte>();
-                pictureBox2.Image = imgGray.Bitmap;
-            }
 
-        }
-
+        // Ycc
         private void iccToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            imgYcc = imgInput.Convert<Ycc, byte>();
+            imgYcc = imageInput.GetImage.Convert<Ycc, byte>();
             pictureBox2.Image = imgYcc.Bitmap;
         }
-        
+
         //coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -246,7 +201,7 @@ namespace Football
         {
 
         }
-        
+
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -257,7 +212,7 @@ namespace Football
         {
 
         }
-        
+
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -271,9 +226,9 @@ namespace Football
 
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
+
         }
-            
+
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -285,10 +240,10 @@ namespace Football
             int highRed = Convert.ToInt32(comboBox6.Text); */
 
 
-            if (imgInput == null) return;
+            if (imageInput.GetImage == null) return;
             //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
 
-            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
+            Image<Gray, Byte> imgRange = imageInput.GetImage.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
             //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
 
             //imgRange.SmoothGaussian(9);
@@ -299,7 +254,8 @@ namespace Football
 
         private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar)) {
+            if (!char.IsDigit(e.KeyChar))
+            {
 
                 e.Handled = true;
             }
