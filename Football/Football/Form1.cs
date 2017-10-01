@@ -364,5 +364,43 @@ namespace Football
             pictureBox2.Image = imgRange.Bitmap;
 
         }
+
+        private void redToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            label5.Text = "0";
+            label6.Text = "0";
+            label4.Text = "255";
+            redToolStripMenuItem_Click(sender, e);
+            
+
+        }
+
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            label4.Text = "0";
+            label6.Text = "0";
+            label5.Text = "255";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            label4.Text = "0";
+            label5.Text = "0";
+            label6.Text = "255";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            label4.Text = "255";
+            label5.Text = "145";
+            label6.Text = "30";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        
+
+       
     }
 }
