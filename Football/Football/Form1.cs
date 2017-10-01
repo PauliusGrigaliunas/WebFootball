@@ -217,9 +217,11 @@ namespace Football
 
         private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            imgGray = imgInput.Convert<Gray, byte>();
-            pictureBox2.Image = imgGray.Bitmap;
-
+            if (capture != null || imgInput != null)
+            {
+                imgGray = imgInput.Convert<Gray, byte>();
+                pictureBox2.Image = imgGray.Bitmap;
+            }
 
         }
 
@@ -272,37 +274,6 @@ namespace Football
         
         }
             
-// kol kas nereikalinga
-
-        private void comboBox1_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox3_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox4_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox5_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox6_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -324,6 +295,53 @@ namespace Football
 
             pictureBox2.Image = imgRange.Bitmap;
 
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar)) {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void comboBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
         }
     }
 }
