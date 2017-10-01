@@ -72,7 +72,7 @@ namespace Football
                     }
                     pictureBox2.Image = imgCircles.Bitmap;
                     //end
-                    Double dblRhoRes = 1.0;
+                   /* Double dblRhoRes = 1.0;
                     Double dblThetaRes = 4.0 * (Math.PI / 180.0);
                     int intThreshold = 20;
                     Double dblMinLineWidth = 30.0;
@@ -84,7 +84,7 @@ namespace Football
                     {
                         imgLines.Draw(line, new Bgr(Color.DarkGreen), 2);
                     }
-                    imageBox1.Image = imgLines;
+                    imageBox1.Image = imgLines;*/
 
                 }
             }
