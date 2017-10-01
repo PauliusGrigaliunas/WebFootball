@@ -13,6 +13,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
 using Emgu.CV.UI;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Cuda;
 
 namespace Football
 {
@@ -24,6 +26,8 @@ namespace Football
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
         Image<Gray, byte> imgSmoothed;
+        Image<Gray, byte> imgCanny;
+        Image<Bgr, byte> imgLines;
         Gray grayCircle = new Gray(100);
         Gray cannyThreshold = new Gray(160);
         Image<Bgr, byte> imgCircles;
@@ -32,6 +36,7 @@ namespace Football
         int minRadius = 10;
         int maxRadius = 400;
         CircleF[] circles;
+        Gray grayThresLinkings = new Gray(60);
 
         public Form1()
         {
@@ -45,6 +50,7 @@ namespace Football
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    //searching for cirxle shapes
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
                     imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
@@ -52,7 +58,10 @@ namespace Football
                     imgSmoothed._SmoothGaussian(3);
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
                     pictureBox3.Image = imgSmoothed.Bitmap;
+
+                    imgCanny = imgSmoothed.Canny(160.0, 60.0);
                     imgCircles = imgInput.CopyBlank();
+                    imgLines = imgInput.CopyBlank();
 
                     minDistanceBtwCircles = imgSmoothed.Height / 4;
                     circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
@@ -61,7 +70,21 @@ namespace Football
                     {
                         imgCircles.Draw(circle, new Bgr(Color.Red), 2);
                     }
-                    pictureBox4.Image = imgCircles.Bitmap;
+                    pictureBox2.Image = imgCircles.Bitmap;
+                    //end
+                    Double dblRhoRes = 1.0;
+                    Double dblThetaRes = 4.0 * (Math.PI / 180.0);
+                    int intThreshold = 20;
+                    Double dblMinLineWidth = 30.0;
+                    Double dblMinGapBetweenLines = 10.0;
+
+                    LineSegment2D[] lines = imgCanny.Clone().HoughLinesBinary(dblRhoRes, dblThetaRes, intThreshold, dblMinLineWidth, dblMinGapBetweenLines)[0];
+
+                    foreach (LineSegment2D line in lines)
+                    {
+                        imgLines.Draw(line, new Bgr(Color.DarkGreen), 2);
+                    }
+                    imageBox1.Image = imgLines;
 
                 }
             }
