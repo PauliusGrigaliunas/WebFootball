@@ -239,130 +239,111 @@ namespace Football
             MessageBox.Show(pixelColor.ToString());
         }
 
-        // colors:
-        //low red
-        private void label1_Click(object sender, EventArgs e)
-        {
-           
-        }
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            trackBar1.Maximum = 255;         // max value
-            trackBar1.Minimum = 0;           // min value
-            trackBar1.TickFrequency = 10;    // distance between tick-mark
-            trackBar1.LargeChange = 5;       // when clicked on a side of a slider move by X
-            trackBar1.SmallChange = 1;       // move using keyboard arrows
+        // colors
+        // Blue
 
-            label1.Text = trackBar1.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //low green
-        private void label2_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        private void trackBar2_Scroll(object sender, EventArgs e)
-        {
-            trackBar2.Maximum = 255;
-            trackBar2.Minimum = 0;
-            trackBar2.TickFrequency = 10;
-            trackBar2.LargeChange = 5;
-            trackBar2.SmallChange = 1;      
-
-            label2.Text = trackBar2.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //low blue
-        private void label3_Click(object sender, EventArgs e)
+        
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        private void trackBar3_Scroll(object sender, EventArgs e)
-        {
-            trackBar3.Maximum = 255;
-            trackBar3.Minimum = 0;
-            trackBar3.TickFrequency = 10;
-            trackBar3.LargeChange = 5;
-            trackBar3.SmallChange = 1;
 
-            label3.Text = trackBar3.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //high red
-        private void label4_Click(object sender, EventArgs e)
+        // Green
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        private void trackBar4_Scroll(object sender, EventArgs e)
-        {
-            trackBar4.Maximum = 255;
-            trackBar4.Minimum = 0;
-            trackBar4.TickFrequency = 10;
-            trackBar4.LargeChange = 5;
-            trackBar4.SmallChange = 1;
-
-            label4.Text = trackBar4.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //high green
-        private void label5_Click(object sender, EventArgs e)
+        
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        private void trackBar5_Scroll(object sender, EventArgs e)
-        {
-            trackBar5.Maximum = 255;
-            trackBar5.Minimum = 0;
-            trackBar5.TickFrequency = 10;
-            trackBar5.LargeChange = 5;
-            trackBar5.SmallChange = 1;
 
-            label5.Text = trackBar5.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
+        // Red
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
-        //high red
-        private void label6_Click(object sender, EventArgs e)
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
+        
+        }
             
-        }
-        private void trackBar6_Scroll(object sender, EventArgs e)
-        {
-            trackBar6.Maximum = 255;
-            trackBar6.Minimum = 0;
-            trackBar6.TickFrequency = 10;
-            trackBar6.LargeChange = 5;
-            trackBar6.SmallChange = 1;
 
-            label6.Text = trackBar6.Value.ToString();
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //ColorFilter
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int lowBlue = Convert.ToInt32(label3.Text);
-            int highBlue = Convert.ToInt32(label6.Text);
-            int lowGreen = Convert.ToInt32(label2.Text);
-            int highGreen = Convert.ToInt32(label5.Text);
-            int lowRed = Convert.ToInt32(label1.Text);
-            int highRed = Convert.ToInt32(label4.Text); 
+            /*int lowBlue = Convert.ToInt32(comboBox1.Text);
+            int highBlue = Convert.ToInt32(comboBox4.Text);
+            int lowGreen = Convert.ToInt32(comboBox2.Text);
+            int highGreen = Convert.ToInt32(comboBox5.Text);
+            int lowRed = Convert.ToInt32(comboBox3.Text);
+            int highRed = Convert.ToInt32(comboBox6.Text); */
 
 
             if (imgInput == null) return;
             //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
 
-            //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
-            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
+            //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
 
-            imgRange.SmoothGaussian(9);
+            //imgRange.SmoothGaussian(9);
 
             pictureBox2.Image = imgRange.Bitmap;
 
         }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar)) {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+        private void comboBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void comboBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = true;
+            }
+        }
+
+       
     }
 }
