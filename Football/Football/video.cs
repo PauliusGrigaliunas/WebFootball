@@ -32,6 +32,7 @@ namespace Football
         public VideoCapture Camera()
         {
             return new Emgu.CV.VideoCapture(0);
+
         }
 
         public void startVideo() {
