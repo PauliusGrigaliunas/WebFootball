@@ -90,16 +90,9 @@ namespace Football
         {
             if (capture == null)
             {
-                try
-                {
-                    capture = new VideoCapture(0);
-                }
-                catch (NullReferenceException excpt)
-                {
-                    MessageBox.Show(excpt.Message);
-                }
+                video = new Video();
+                capture = video.Camera();
             }
-
             if (capture != null)
             {
                 Application.Idle += ProcessFrame;
@@ -136,46 +129,47 @@ namespace Football
         {
             if (capture != null)
             {
-                capture.Pause();
+                Application.Idle -= ProcessFrame;
             }
         }
         // Video
+
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Video Files |*.mp4";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (capture == null)
             {
-                if (capture == null)
-                {
-
-
-                    try
-                    {
-                        capture = new Emgu.CV.VideoCapture(ofd.FileName);
-
-                    }
-                    catch (NullReferenceException excpt)
-                    {
-                        MessageBox.Show(excpt.Message);
-                    }
-                }
-                if (capture != null)
-                {
-                    Application.Idle += ProcessFrame;
-                }
+                video = new Video();
+                capture = video.TakeAVideo();
+                capture.ImageGrabbed += Capture_ImageGrabbed1;
+                capture.Start();
             }
-
-
         }
 
+        private void Capture_ImageGrabbed1(object sender, EventArgs e)
+        {
+            try
+            {
+                Mat mat = new Mat();
+                capture.Retrieve(mat);
+                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
+                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
+                pictureBox2.Image = imgRange.Bitmap;
+                Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
 
-        private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+        }
+
+            private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(video.ToString());
             if (capture != null)
             {
-                Application.Idle -= ProcessFrame;
+                capture.Stop();
+                capture = null;
 
             }
         }
@@ -188,30 +182,6 @@ namespace Football
             }
         }
 
-        private void Capture_ImageGrabbed(object sender, EventArgs e)
-        {
-            try
-            {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-
-
-
-                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-
-                /*
-                                pictureBox2.Image = imgRange.Bitmap;
-                                Thread.Sleep((int)
-                                    video.GetVideo.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-                */
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
 
         //-----------------------------
         // Ycc

@@ -31,31 +31,17 @@ namespace Football
 
         public VideoCapture Camera()
         {
-            return new Emgu.CV.VideoCapture(0);
+                try
+                {
+                    capture = new VideoCapture(0);
+                }
+                catch (NullReferenceException excpt)
+                {
+                    MessageBox.Show(excpt.Message);
+                }
 
+            return capture;
         }
 
-        public void startVideo() {
-            if (capture != null)
-            {
-                capture.Start();
-            }
-        }
-
-        public void stopVideo() {
-
-            if (capture != null)
-            {
-                capture.Stop();
-                capture = null;
-            }
-        }
-
-        public void pauseVideo() { 
-            if (capture != null)
-            {
-                capture.Pause();
-            }
-        }  
     }
 }
