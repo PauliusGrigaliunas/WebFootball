@@ -109,9 +109,9 @@ namespace Football
 
                 Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
                 pictureBox2.Image = imgRange.Bitmap;
-/*                Thread.Sleep((int)
+                Thread.Sleep((int)
                     video.GetVideo.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-*/
+
             }
                     catch (Exception ex)
                     {
@@ -125,6 +125,8 @@ namespace Football
             if (capture != null) { 
             capture.Stop();
             capture = null;
+            video = null;
+
             }
             //MessageBox.Show(video.ToString());
             //video.stopVideo();
@@ -154,11 +156,11 @@ namespace Football
         private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(video.ToString());
-            video.stopVideo();
             if (capture != null)
             {
                 capture.Stop();
                 capture = null;
+                video = null;
             }
         }
 
