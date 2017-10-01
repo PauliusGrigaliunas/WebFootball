@@ -90,30 +90,50 @@ namespace Football
         {
             if (capture == null)
             {
-                video = new Video();
-                capture = video.Camera();
-                capture.ImageGrabbed += Capture_ImageGrabbed;
+                try
+                {
+                    capture = new VideoCapture(0);
+                }
+                catch (NullReferenceException excpt)
+                {
+                    MessageBox.Show(excpt.Message);
+                }
+            }
 
-                capture.Start();
+            if (capture != null)
+            {
+                Application.Idle += ProcessFrame;
             }
         }
+
+
+        private void ProcessFrame(object sender, EventArgs e)
+        {
+            try
+            {
+                Mat mat = new Mat();
+                capture.Retrieve(mat);
+                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("klaida!");
+                return;
+            }
+        }
+
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (capture != null)
             {
-                capture.Stop();
-                capture = null;
-
+                Application.Idle -= ProcessFrame;
             }
-            //MessageBox.Show(video.ToString());
-            //video.stopVideo();
-            //video.GetVideo = null;
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            video.pauseVideo();
             if (capture != null)
             {
                 capture.Pause();
@@ -122,13 +142,31 @@ namespace Football
         // Video
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (video == null)
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Video Files |*.mp4";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                video = new Video();
-                capture = video.TakeAVideo();
-                capture.ImageGrabbed += Capture_ImageGrabbed;
-                capture.Start();
+                if (capture == null)
+                {
+
+
+                    try
+                    {
+                        capture = new Emgu.CV.VideoCapture(ofd.FileName);
+
+                    }
+                    catch (NullReferenceException excpt)
+                    {
+                        MessageBox.Show(excpt.Message);
+                    }
+                }
+                if (capture != null)
+                {
+                    Application.Idle += ProcessFrame;
+                }
             }
+
+
         }
 
 
@@ -137,14 +175,13 @@ namespace Football
             //MessageBox.Show(video.ToString());
             if (capture != null)
             {
-                capture.Stop();
-                capture = null;
+                Application.Idle -= ProcessFrame;
+
             }
         }
 
         private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            video.pauseVideo();
             if (capture != null)
             {
                 capture.Pause();
@@ -163,11 +200,11 @@ namespace Football
 
                 Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
 
-/*
-                pictureBox2.Image = imgRange.Bitmap;
-                Thread.Sleep((int)
-                    video.GetVideo.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-*/
+                /*
+                                pictureBox2.Image = imgRange.Bitmap;
+                                Thread.Sleep((int)
+                                    video.GetVideo.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+                */
             }
             catch (Exception ex)
             {
