@@ -22,6 +22,7 @@ namespace Football
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
         private Picture imageInput;
+        private Video video;
 
         public Form1()
         {

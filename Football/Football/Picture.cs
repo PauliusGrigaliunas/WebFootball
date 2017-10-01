@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 using Emgu;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
 using Emgu.CV.UI;
-using System.Windows.Forms;
 
 namespace Football
 {
