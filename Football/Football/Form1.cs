@@ -215,9 +215,11 @@ namespace Football
 
         private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            imgGray = imgInput.Convert<Gray, byte>();
-            pictureBox2.Image = imgGray.Bitmap;
-
+            if (capture != null || imgInput != null)
+            {
+                imgGray = imgInput.Convert<Gray, byte>();
+                pictureBox2.Image = imgGray.Bitmap;
+            }
 
         }
 
