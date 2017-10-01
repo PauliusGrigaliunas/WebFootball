@@ -18,7 +18,7 @@ namespace Football
 {
     public partial class Form1 : Form
     {
-        VideoCapture capture;
+        private VideoCapture capture;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
         private Picture imageInput;
@@ -77,7 +77,7 @@ namespace Football
             {
                 pictureBox2.Image = imageInput.ConvertToGray().Bitmap;
             }
-            else if (capture != null)
+            else if (video.GetVideo != null)
             {
 
             }
@@ -90,38 +90,50 @@ namespace Football
         {
             if (capture == null)
             {
-                capture = new Emgu.CV.VideoCapture(0);
+                video = new Video();
+                capture = video.Camera();
+                capture.ImageGrabbed += Capture_ImageGrabbed;
+                capture.Start();
             }
-            capture.ImageGrabbed += Capture_ImageGrabbed;
-            capture.Start();
         }
 
         private void Capture_ImageGrabbed(object sender, EventArgs e)
-        {
-            try
-            {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                {
+                    try
+                    {
+                        Mat mat = new Mat();
+                        capture.Retrieve(mat);
+                        pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
 
-        }
+
+
+                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
+                pictureBox2.Image = imgRange.Bitmap;
+/*                Thread.Sleep((int)
+                    video.GetVideo.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+*/
+            }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (capture != null)
-            {
-                capture.Stop();
-                capture = null;
+            if (capture != null) { 
+            capture.Stop();
+            capture = null;
             }
+            //MessageBox.Show(video.ToString());
+            //video.stopVideo();
+            //video.GetVideo = null;
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            video.pauseVideo();
             if (capture != null)
             {
                 capture.Pause();
@@ -130,40 +142,19 @@ namespace Football
         // Video
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (capture == null)
+            if (video == null)
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Video Files |*.mp4";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                }
-                capture.ImageGrabbed += Capture_ImageGrabbed1;
+                video = new Video();
+                capture = video.TakeAVideo();
+                capture.ImageGrabbed += Capture_ImageGrabbed;
                 capture.Start();
             }
         }
 
-        private void Capture_ImageGrabbed1(object sender, EventArgs e)
-        {
-            try
-            {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-                pictureBox2.Image = imgRange.Bitmap;
-                Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace);
-            }
-
-        }
-
         private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(video.ToString());
+            video.stopVideo();
             if (capture != null)
             {
                 capture.Stop();
@@ -173,6 +164,7 @@ namespace Football
 
         private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            video.pauseVideo();
             if (capture != null)
             {
                 capture.Pause();

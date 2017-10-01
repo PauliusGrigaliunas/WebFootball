@@ -16,7 +16,7 @@ namespace Football
     {
         private VideoCapture capture;
 
-        public VideoCapture GetImage { get { return capture; } }
+        public VideoCapture GetVideo { get { return capture; } set { capture = value; } }
 
         public VideoCapture TakeAVideo()
         {
@@ -26,8 +26,35 @@ namespace Football
             {
                 capture = new Emgu.CV.VideoCapture(ofd.FileName);
             }
-
             return capture;
         }
+
+        public VideoCapture Camera()
+        {
+            return new Emgu.CV.VideoCapture(0);
+        }
+
+        public void startVideo() {
+            if (capture != null)
+            {
+                capture.Start();
+            }
+        }
+
+        public void stopVideo() {
+
+            if (capture != null)
+            {
+                capture.Stop();
+                capture = null;
+            }
+        }
+
+        public void pauseVideo() { 
+            if (capture != null)
+            {
+                capture.Pause();
+            }
+        }  
     }
 }
