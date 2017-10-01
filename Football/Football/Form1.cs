@@ -23,6 +23,15 @@ namespace Football
         Image<Bgr, byte> imgInput;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
+        Image<Gray, byte> imgSmoothed;
+        Gray grayCircle = new Gray(100);
+        Gray cannyThreshold = new Gray(160);
+        Image<Bgr, byte> imgCircles;
+        double lAccumRes = 2.0;
+        double minDistanceBtwCircles;
+        int minRadius = 10;
+        int maxRadius = 400;
+        CircleF[] circles;
 
         public Form1()
         {
@@ -38,6 +47,22 @@ namespace Football
                 {
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
+                    imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
+                    imgSmoothed = imgSmoothed.PyrDown().PyrUp();
+                    imgSmoothed._SmoothGaussian(3);
+                    imgSmoothed = imgSmoothed.Convert<Gray, byte>();
+                    pictureBox3.Image = imgSmoothed.Bitmap;
+                    imgCircles = imgInput.CopyBlank();
+
+                    minDistanceBtwCircles = imgSmoothed.Height / 4;
+                    circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
+
+                    foreach (CircleF circle in circles)
+                    {
+                        imgCircles.Draw(circle, new Bgr(Color.Red), 2);
+                    }
+                    pictureBox4.Image = imgCircles.Bitmap;
+
                 }
             }
             catch (Exception ex)
