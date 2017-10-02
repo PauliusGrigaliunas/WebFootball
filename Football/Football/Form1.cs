@@ -343,7 +343,7 @@ namespace Football
         }
 
         //ColorFilter
-        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        public void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int lowBlue = Convert.ToInt32(label3.Text);
             int highBlue = Convert.ToInt32(label6.Text);
@@ -362,7 +362,12 @@ namespace Football
             imgRange.SmoothGaussian(9);
 
             pictureBox2.Image = imgRange.Bitmap;
+        }
 
+        public static int Divide(int numerator, int denomerator)
+        {
+            int result = numerator / denomerator;
+            return result;
         }
     }
 }
