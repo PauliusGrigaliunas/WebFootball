@@ -12,9 +12,13 @@ using Emgu.CV.UI;
 
 namespace Football
 {
-    class Video
+    class Video : Picture
     {
         private VideoCapture capture;
+
+        public Video()
+        {
+        }
 
         public VideoCapture GetVideo { get { return capture; } set { capture = value; } }
 
@@ -31,17 +35,24 @@ namespace Football
 
         public VideoCapture Camera()
         {
-                try
-                {
-                    capture = new VideoCapture(0);
-                }
-                catch (NullReferenceException excpt)
-                {
-                    MessageBox.Show(excpt.Message);
-                }
-
+            try
+            {
+                capture = new VideoCapture(0);
+            }
+            catch (NullReferenceException excpt)
+            {
+                MessageBox.Show(excpt.Message);
+            }
             return capture;
         }
+
+        public Image<Gray, Byte> ColorRange(Mat mat, int xBlue, int xGreen, int xRed, int yBlue, int yGreen, int yRed)
+        {
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(xBlue, xGreen, xRed), new Bgr(yBlue, yGreen, yRed));
+
+            return imgRange;
+        }
+        
 
     }
 }

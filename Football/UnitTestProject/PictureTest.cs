@@ -1,6 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using Football;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject
 {
@@ -12,17 +13,17 @@ namespace UnitTestProject
             {
             //Access
 
-            PictureTest a = new PictureTest();
+
+            Picture image = new Picture();
 
             //Act
-            /*image.
-                ;
-            int sum;
-            sum = Calculator.Sum(2, 2);*/
+
+            Image< Rgb ,byte > pictures;
+
+            pictures = null;
 
             //Assert
-            Assert.AreEqual(a, a);
-
+            Assert.AreEqual(pictures, image.GetImage);
 
         }
         

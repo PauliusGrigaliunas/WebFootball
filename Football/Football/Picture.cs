@@ -12,12 +12,22 @@ using Emgu.CV.UI;
 
 namespace Football
 {
-    class Picture
+    public class Picture
     {
         private Image<Bgr, byte> imgInput;
         private Image<Gray, byte> imgGray;
 
-        public Image<Bgr, byte> GetImage { get { return imgInput; } }
+        public Image<Bgr, byte> GetImage {
+            get
+            {
+                return imgInput;
+            }
+        }
+
+        public Picture()
+        {
+
+        }
         //--------------------------------------
         public Image<Bgr, byte> TakeAPicture()
         {
@@ -56,7 +66,7 @@ namespace Football
             imgSobel = imgGray.Sobel(x, y, z);
             return imgSobel;
         }
-
+        //-----------------------------------------------------
         public Image<Gray, float> ConvertToLaplase(int x)
         {
             Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();

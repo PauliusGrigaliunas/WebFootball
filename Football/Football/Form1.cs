@@ -50,6 +50,14 @@ namespace Football
             {
                 pictureBox2.Image = imageInput.ConvertToCanny(20, 50).Bitmap;
             }
+            else if (video != null)
+            {
+                /* bandymas
+                Mat mat = new Mat();
+                video.GetVideo.Retrieve(mat);
+                pictureBox2.Image = mat.ToImage<Gray, byte>().Bitmap;
+                */
+            }
             else return;
         }
 
@@ -58,6 +66,10 @@ namespace Football
             if (imageInput != null)
             {
                 pictureBox2.Image = imageInput.ConvertToSobel(1, 1, 3).Bitmap;
+            }
+            else if (video != null)
+            {
+
             }
             else return;
         }
@@ -68,6 +80,10 @@ namespace Football
             {
                 pictureBox2.Image = imageInput.ConvertToLaplase(3).Bitmap;
             }
+            else if (video != null)
+            {
+
+            }
             else return;
         }
 
@@ -77,7 +93,7 @@ namespace Football
             {
                 pictureBox2.Image = imageInput.ConvertToGray().Bitmap;
             }
-            else if (video.GetVideo != null)
+            else if (video != null)
             {
 
             }
@@ -99,7 +115,7 @@ namespace Football
             }
         }
 
-
+//
         private void ProcessFrame(object sender, EventArgs e)
         {
             try
@@ -122,6 +138,7 @@ namespace Football
             if (capture != null)
             {
                 Application.Idle -= ProcessFrame;
+                capture = null;
             }
         }
 
@@ -152,8 +169,11 @@ namespace Football
                 Mat mat = new Mat();
                 capture.Retrieve(mat);
                 pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-                pictureBox2.Image = imgRange.Bitmap;
+
+                //pictureBox2.Image = video.ConvertToGray().Bitmap;
+                //pictureBox2.Image = mat.ToImage<Gray, byte>().Bitmap;
+                pictureBox2.Image = video.ColorRange(mat, 0, 0, 140, 80, 255, 255).Bitmap;
+
                 Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
 
             }
@@ -163,7 +183,7 @@ namespace Football
             }
         }
 
-            private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(video.ToString());
             if (capture != null)
@@ -185,7 +205,7 @@ namespace Football
 
         //-----------------------------
         // Ycc
-        private void iccToolStripMenuItem_Click(object sender, EventArgs e)
+        private void yccToolStripMenuItem_Click(object sender, EventArgs e)
         {
             imgYcc = imageInput.GetImage.Convert<Ycc, byte>();
             pictureBox2.Image = imgYcc.Bitmap;
@@ -198,42 +218,6 @@ namespace Football
             Color pixelColor = bitmap.GetPixel(e.X, e.Y);
             MessageBox.Show(pixelColor.ToString());
         }
-
-        // colors
-        // Blue
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Green
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Red
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {

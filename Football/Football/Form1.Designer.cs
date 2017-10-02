@@ -102,7 +102,6 @@
             this.comboBox6.Size = new System.Drawing.Size(121, 24);
             this.comboBox6.TabIndex = 13;
             this.comboBox6.Text = "256";
-            this.comboBox6.SelectedIndexChanged += new System.EventHandler(this.comboBox6_SelectedIndexChanged);
             // 
             // comboBox5
             // 
@@ -112,7 +111,6 @@
             this.comboBox5.Size = new System.Drawing.Size(121, 24);
             this.comboBox5.TabIndex = 12;
             this.comboBox5.Text = "256";
-            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
             // 
             // comboBox4
             // 
@@ -131,7 +129,6 @@
             this.comboBox3.Size = new System.Drawing.Size(121, 24);
             this.comboBox3.TabIndex = 10;
             this.comboBox3.Text = "0";
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -141,7 +138,6 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 9;
             this.comboBox2.Text = "0";
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox1
             // 
@@ -151,7 +147,6 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.Text = "0";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // checkBox1
@@ -387,7 +382,7 @@
             this.iccToolStripMenuItem.Name = "iccToolStripMenuItem";
             this.iccToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.iccToolStripMenuItem.Text = "Icc";
-            this.iccToolStripMenuItem.Click += new System.EventHandler(this.iccToolStripMenuItem_Click);
+            this.iccToolStripMenuItem.Click += new System.EventHandler(this.yccToolStripMenuItem_Click);
             // 
             // redToolStripMenuItem
             // 
