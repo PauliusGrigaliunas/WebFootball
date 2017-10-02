@@ -157,12 +157,12 @@ namespace Football
             {
                 video = new Video();
                 capture = video.TakeAVideo();
-                capture.ImageGrabbed += Capture_ImageGrabbed1;
+                capture.ImageGrabbed += Capture_ImageGrabbed;
                 capture.Start();
             }
         }
 
-        private void Capture_ImageGrabbed1(object sender, EventArgs e)
+        private void Capture_ImageGrabbed(object sender, EventArgs e)
         {
             try
             {
