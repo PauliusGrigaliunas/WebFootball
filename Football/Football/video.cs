@@ -15,9 +15,11 @@ namespace Football
     class Video : Picture
     {
         private VideoCapture capture;
+        private Mat mat;
 
         public Video()
         {
+            mat = new Mat();
         }
 
         public VideoCapture GetVideo { get { return capture; } set { capture = value; } }
@@ -46,13 +48,29 @@ namespace Football
             return capture;
         }
 
-        public Image<Gray, Byte> ColorRange(Mat mat, int xBlue, int xGreen, int xRed, int yBlue, int yGreen, int yRed)
+        private void CreateMat()
         {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(xBlue, xGreen, xRed), new Bgr(yBlue, yGreen, yRed));
+            mat = null;
+            mat = new Mat();
+        }
+
+        public Image<Bgr, byte> PutAVideo()
+        {
+
+            CreateMat();
+            capture.Retrieve(mat);
+            return mat.ToImage<Bgr, byte>();
+        }
+
+        public Image<Gray, Byte> ColorRange( int xBlue, int xGreen, int xRed, int yBlue, int yGreen, int yRed)
+        {
+
+           Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(xBlue, xGreen, xRed), new Bgr(yBlue, yGreen, yRed));
 
             return imgRange;
         }
-        
+
+
 
     }
 }

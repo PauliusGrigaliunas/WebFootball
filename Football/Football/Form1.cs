@@ -120,9 +120,7 @@ namespace Football
         {
             try
             {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
+                pictureBox1.Image = video.PutAVideo().Bitmap;
             }
             catch (Exception)
             {
@@ -166,13 +164,12 @@ namespace Football
         {
             try
             {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
+
+                pictureBox1.Image = video.PutAVideo().Bitmap;
 
                 //pictureBox2.Image = video.ConvertToGray().Bitmap;
                 //pictureBox2.Image = mat.ToImage<Gray, byte>().Bitmap;
-                pictureBox2.Image = video.ColorRange(mat, 0, 0, 140, 80, 255, 255).Bitmap;
+                pictureBox2.Image = video.ColorRange( 0, 0, 140, 80, 255, 255).Bitmap;
 
                 Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
 
@@ -203,7 +200,7 @@ namespace Football
         }
 
 
-        //-----------------------------
+        //-----------------------------+
         // Ycc
         private void yccToolStripMenuItem_Click(object sender, EventArgs e)
         {
