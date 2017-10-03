@@ -61,11 +61,11 @@ namespace Football
             capture.Retrieve(mat);
             return mat.ToImage<Bgr, byte>();
         }
-
-        public Image<Gray, Byte> ColorRange( int xBlue, int xGreen, int xRed, int yBlue, int yGreen, int yRed)
+        
+        public override Image<Gray, Byte> ColorRange( int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
         {
 
-           Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(xBlue, xGreen, xRed), new Bgr(yBlue, yGreen, yRed));
+           Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
 
             return imgRange;
         }

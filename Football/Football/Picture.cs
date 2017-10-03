@@ -17,7 +17,8 @@ namespace Football
         private Image<Bgr, byte> imgInput;
         private Image<Gray, byte> imgGray;
 
-        public Image<Bgr, byte> GetImage {
+        public Image<Bgr, byte> GetImage
+        {
             get
             {
                 return imgInput;
@@ -73,6 +74,13 @@ namespace Football
             Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
             imgLaplasian = imgGray.Laplace(3);
             return imgLaplasian;
+        }
+
+        public virtual Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
+        {
+
+            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            return imgRange;
         }
     }
 }

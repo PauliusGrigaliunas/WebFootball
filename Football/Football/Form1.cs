@@ -234,7 +234,7 @@ namespace Football
 
             //imgRange.SmoothGaussian(9);
 
-            pictureBox2.Image = imgRange.Bitmap;
+            pictureBox2.Image = imageInput.ColorRange(0, 0, 187, 100, 255, 255).Bitmap;
 
         }
 
