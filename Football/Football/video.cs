@@ -35,6 +35,27 @@ namespace Football
             return capture;
         }
 
+        public VideoCapture TakeAVideo2()
+        {
+
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Video Files |*.mp4";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                }
+            }
+            catch (NullReferenceException excpt)
+            {
+                MessageBox.Show(excpt.Message);
+            }
+            return capture;
+        }
+
+
+
         public VideoCapture Camera()
         {
             try
@@ -50,7 +71,6 @@ namespace Football
 
         private void CreateMat()
         {
-            mat = null;
             mat = new Mat();
         }
 
@@ -60,6 +80,8 @@ namespace Football
             CreateMat();
             capture.Retrieve(mat);
             return mat.ToImage<Bgr, byte>();
+
+
         }
         
         public override Image<Gray, Byte> ColorRange( int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
