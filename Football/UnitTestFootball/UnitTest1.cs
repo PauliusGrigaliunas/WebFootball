@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Football;
 
-namespace TestFootball
+namespace UnitTestFootball
 {
     [TestClass]
     public class UnitTest1
