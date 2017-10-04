@@ -122,6 +122,7 @@
             this.label6.Size = new System.Drawing.Size(16, 17);
             this.label6.TabIndex = 25;
             this.label6.Text = "0";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -132,6 +133,7 @@
             this.label5.Size = new System.Drawing.Size(16, 17);
             this.label5.TabIndex = 24;
             this.label5.Text = "0";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -142,6 +144,7 @@
             this.label4.Size = new System.Drawing.Size(16, 17);
             this.label4.TabIndex = 23;
             this.label4.Text = "0";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -152,6 +155,7 @@
             this.label3.Size = new System.Drawing.Size(16, 17);
             this.label3.TabIndex = 22;
             this.label3.Text = "0";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -162,6 +166,7 @@
             this.label2.Size = new System.Drawing.Size(16, 17);
             this.label2.TabIndex = 21;
             this.label2.Text = "0";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -172,6 +177,7 @@
             this.label1.Size = new System.Drawing.Size(16, 17);
             this.label1.TabIndex = 20;
             this.label1.Text = "0";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // trackBar6
             // 
@@ -308,6 +314,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // menuStrip1
@@ -323,6 +330,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1328, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked_1);
             // 
             // fileToolStripMenuItem
             // 
@@ -485,6 +493,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();

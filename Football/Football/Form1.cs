@@ -75,6 +75,19 @@ namespace Football
                 MessageBox.Show(ex.Message);
             }
         }
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -89,6 +102,11 @@ namespace Football
         {
             takeAPicture( imgInput );
         }
+
+        private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
 //layers
         private void cannyToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -99,6 +117,8 @@ namespace Football
             Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
             imgCanny = imgInput.Canny(50, 20);
             pictureBox2.Image = imgCanny.Bitmap;
+
+
         }
 
         private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -250,6 +270,10 @@ namespace Football
 
         // colors:
         //low red
+        private void label1_Click(object sender, EventArgs e)
+        {
+           
+        }
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             trackBar1.Maximum = 255;         // max value
@@ -263,6 +287,10 @@ namespace Football
         }
 
         //low green
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             trackBar2.Maximum = 255;
@@ -276,6 +304,10 @@ namespace Football
         }
 
         //low blue
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             trackBar3.Maximum = 255;
@@ -289,6 +321,10 @@ namespace Football
         }
 
         //high red
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
             trackBar4.Maximum = 255;
@@ -302,6 +338,10 @@ namespace Football
         }
 
         //high green
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
             trackBar5.Maximum = 255;
@@ -315,6 +355,10 @@ namespace Football
         }
 
         //high red
+        private void label6_Click(object sender, EventArgs e)
+        {
+            
+        }
         private void trackBar6_Scroll(object sender, EventArgs e)
         {
             trackBar6.Maximum = 255;
