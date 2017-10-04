@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.trackBar6 = new System.Windows.Forms.TrackBar();
             this.trackBar5 = new System.Windows.Forms.TrackBar();
@@ -75,7 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();    
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -177,7 +178,6 @@
             // 
             this.lblMax.AutoSize = true;
             this.lblMax.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.lblMax.Location = new System.Drawing.Point(57, 75);
             this.lblMax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMax.Name = "lblMax";
             this.lblMax.Size = new System.Drawing.Size(42, 23);
@@ -188,7 +188,6 @@
             // 
             this.lblMin.AutoSize = true;
             this.lblMin.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.lblMin.Location = new System.Drawing.Point(57, 36);
             this.lblMin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMin.Name = "lblMin";
             this.lblMin.Size = new System.Drawing.Size(38, 23);
@@ -199,7 +198,6 @@
             // 
             this.lblRed.AutoSize = true;
             this.lblRed.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.lblRed.Location = new System.Drawing.Point(154, 4);
             this.lblRed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRed.Name = "lblRed";
             this.lblRed.Size = new System.Drawing.Size(38, 23);
@@ -210,7 +208,6 @@
             // 
             this.lblGreen.AutoSize = true;
             this.lblGreen.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.lblGreen.Location = new System.Drawing.Point(299, 4);
             this.lblGreen.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGreen.Name = "lblGreen";
             this.lblGreen.Size = new System.Drawing.Size(53, 23);
@@ -221,7 +218,6 @@
             // 
             this.lblBlue.AutoSize = true;
             this.lblBlue.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.lblBlue.Location = new System.Drawing.Point(468, 4);
             this.lblBlue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlue.Name = "lblBlue";
             this.lblBlue.Size = new System.Drawing.Size(41, 23);
@@ -489,6 +485,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
@@ -499,6 +496,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

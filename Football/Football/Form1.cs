@@ -13,31 +13,61 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
 using Emgu.CV.UI;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Cuda;
 
 namespace Football
 {
     public partial class Form1 : Form
     {
         VideoCapture capture;
-        bool captureInProgress = false;
-        Image<Bgr, byte> imgInput;
+        Image<Bgr, byte> imgInput = null;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
+        Image<Gray, byte> imgSmoothed;
+        Image<Bgr, byte> imgLines;
+        Gray grayCircle = new Gray(100);
+        Gray cannyThreshold = new Gray(160);
+        Image<Bgr, byte> imgCircles;
+        double lAccumRes = 2.0;
+        double minDistanceBtwCircles;
+        int minRadius = 10;
+        int maxRadius = 400;
+        CircleF[] circles;
+        Gray grayThresLinkings = new Gray(60);
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void takeAPicture()
+        private void takeAPicture(Image<Bgr, byte> imgInput )
         {
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    //searching for cirxle shapes
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
+                    imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
+                    imgSmoothed = imgSmoothed.PyrDown().PyrUp();
+                    imgSmoothed._SmoothGaussian(3);
+                    imgSmoothed = imgSmoothed.Convert<Gray, byte>();
+                    pictureBox3.Image = imgSmoothed.Bitmap;
+
+                    imgCircles = imgInput.CopyBlank();
+                    imgLines = imgInput.CopyBlank();
+
+                    minDistanceBtwCircles = imgSmoothed.Height / 4;
+                    circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
+
+                    foreach (CircleF circle in circles)
+                    {
+                        imgCircles.Draw(circle, new Bgr(Color.Red), 2);
+                    }
+                    pictureBox2.Image = imgCircles.Bitmap;
                 }
             }
             catch (Exception ex)
@@ -45,8 +75,6 @@ namespace Football
                 MessageBox.Show(ex.Message);
             }
         }
-
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -72,7 +100,7 @@ namespace Football
 //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            takeAPicture();
+            takeAPicture( imgInput );
         }
 
         private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
@@ -188,7 +216,8 @@ namespace Football
                 pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
                 Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
                 pictureBox2.Image = imgRange.Bitmap;
-                Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+                // Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+                Thread.Sleep(1);
 
             }
             catch (Exception ex)
