@@ -21,12 +21,10 @@ namespace Football
     public partial class Form1 : Form
     {
         VideoCapture capture;
-        bool captureInProgress = false;
-        Image<Bgr, byte> imgInput;
+        Image<Bgr, byte> imgInput = null;
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
         Image<Gray, byte> imgSmoothed;
-        Image<Gray, byte> imgCanny;
         Image<Bgr, byte> imgLines;
         Gray grayCircle = new Gray(100);
         Gray cannyThreshold = new Gray(160);
@@ -43,7 +41,7 @@ namespace Football
             InitializeComponent();
         }
 
-        private void takeAPicture()
+        private void takeAPicture(Image<Bgr, byte> imgInput )
         {
             try
             {
@@ -59,7 +57,6 @@ namespace Football
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
                     pictureBox3.Image = imgSmoothed.Bitmap;
 
-                    imgCanny = imgSmoothed.Canny(160.0, 60.0);
                     imgCircles = imgInput.CopyBlank();
                     imgLines = imgInput.CopyBlank();
 
@@ -71,21 +68,6 @@ namespace Football
                         imgCircles.Draw(circle, new Bgr(Color.Red), 2);
                     }
                     pictureBox2.Image = imgCircles.Bitmap;
-                    //end
-                   /* Double dblRhoRes = 1.0;
-                    Double dblThetaRes = 4.0 * (Math.PI / 180.0);
-                    int intThreshold = 20;
-                    Double dblMinLineWidth = 30.0;
-                    Double dblMinGapBetweenLines = 10.0;
-
-                    LineSegment2D[] lines = imgCanny.Clone().HoughLinesBinary(dblRhoRes, dblThetaRes, intThreshold, dblMinLineWidth, dblMinGapBetweenLines)[0];
-
-                    foreach (LineSegment2D line in lines)
-                    {
-                        imgLines.Draw(line, new Bgr(Color.DarkGreen), 2);
-                    }
-                    imageBox1.Image = imgLines;*/
-
                 }
             }
             catch (Exception ex)
@@ -93,8 +75,6 @@ namespace Football
                 MessageBox.Show(ex.Message);
             }
         }
-
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -120,7 +100,7 @@ namespace Football
 //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            takeAPicture();
+            takeAPicture( imgInput );
         }
 
         private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
@@ -236,7 +216,8 @@ namespace Football
                 pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
                 Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
                 pictureBox2.Image = imgRange.Bitmap;
-                Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+                // Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
+                Thread.Sleep(1);
 
             }
             catch (Exception ex)
