@@ -55,7 +55,7 @@ namespace Football
                     imgSmoothed = imgSmoothed.PyrDown().PyrUp();
                     imgSmoothed._SmoothGaussian(3);
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
-                    pictureBox3.Image = imgSmoothed.Bitmap;
+                    //pictureBox3.Image = imgSmoothed.Bitmap;
 
                     imgCircles = imgInput.CopyBlank();
                     imgLines = imgInput.CopyBlank();
