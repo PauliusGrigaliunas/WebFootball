@@ -55,7 +55,7 @@ namespace Football
                     imgSmoothed = imgSmoothed.PyrDown().PyrUp();
                     imgSmoothed._SmoothGaussian(3);
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
-                    //pictureBox3.Image = imgSmoothed.Bitmap;
+                    pictureBox3.Image = imgSmoothed.Bitmap;
 
                     imgCircles = imgInput.CopyBlank();
                     imgLines = imgInput.CopyBlank();
@@ -352,6 +352,69 @@ namespace Football
 
         private void ballColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void redToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            toolValues_Null(sender, e);
+            label1.Text = "245";
+            label2.Text = "13";
+            label3.Text = "0";
+            label4.Text = "255";
+            label5.Text = "17";
+            label6.Text = "7";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolValues_Null(sender, e);
+            label1.Text = "0";
+            label2.Text = "0";
+            label3.Text = "0229";
+            label4.Text = "10";
+            label5.Text = "7";
+            label6.Text = "255";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolValues_Null(sender, e);
+            label1.Text = "36";
+            label2.Text = "83";
+            label3.Text = "1";
+            label4.Text = "255";
+            label5.Text = "126";
+            label6.Text = "106";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolValues_Null(sender, e);
+            label1.Text = "0";
+            label2.Text = "199";
+            label3.Text = "0";
+            label4.Text = "23";
+            label5.Text = "252";
+            label6.Text = "7";
+            redToolStripMenuItem_Click(sender, e);
+        }
+
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void toolValues_Null(object sender, EventArgs e)
+        {
+            label1.Text = "0";
+            label2.Text = "0";
+            label3.Text = "0";
+            label4.Text = "0";
+            label5.Text = "0";
+            label6.Text = "0";
 
         }
     }
