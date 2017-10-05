@@ -349,5 +349,10 @@ namespace Football
             pictureBox2.Image = imgRange.Bitmap;
 
         }
+
+        private void ballColourToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
