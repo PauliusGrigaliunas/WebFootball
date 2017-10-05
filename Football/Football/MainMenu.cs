@@ -36,5 +36,13 @@ namespace Football
             TextBox textBox2_TextChange = (TextBox)sender;
             name2 = textBox2_TextChange.Text;
         }
+        public bool nameNotEmpty()
+        {
+            if((name1!=null)&&(name2!=null))
+                    {
+                return true;
+            }
+            else return false;
+        }
     }
 }

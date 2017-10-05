@@ -422,6 +422,7 @@ namespace Football
             label4.Text = "0";
             label5.Text = "0";
             label6.Text = "0";
+            
         }
         
 

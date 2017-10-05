@@ -1,23 +1,23 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace UnitTestProject1
+using Football;
+namespace UnitTesting1
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1 
     {
         [TestMethod]
         public void TestMethod1()
         {
             // Arrange
-            String namet1 = null;
-            String namet2;
-
-            namet2 = Football.MainMenu.name1;
-
-            Assert.AreNotEqual(namet1, namet2);
-
+            MainMenu menu = new MainMenu();
+            bool name = true;
+            bool namet1;
+          
+            namet1 = menu.nameNotEmpty();
+          
+            Assert.AreEqual(name, namet1);
 
         }
     }
