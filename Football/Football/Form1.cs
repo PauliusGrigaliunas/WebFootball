@@ -55,7 +55,7 @@ namespace Football
                     imgSmoothed = imgSmoothed.PyrDown().PyrUp();
                     imgSmoothed._SmoothGaussian(3);
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
-                    pictureBox3.Image = imgSmoothed.Bitmap;
+                   // pictureBox3.Image = imgSmoothed.Bitmap;
 
                     imgCircles = imgInput.CopyBlank();
                     imgLines = imgInput.CopyBlank();
@@ -357,7 +357,7 @@ namespace Football
 
         private void redToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            toolValues_Null(sender, e);
+            toolValues_Null();
             label1.Text = "245";
             label2.Text = "13";
             label3.Text = "0";
@@ -369,7 +369,7 @@ namespace Football
 
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolValues_Null(sender, e);
+            toolValues_Null();
             label1.Text = "0";
             label2.Text = "0";
             label3.Text = "0229";
@@ -381,7 +381,7 @@ namespace Football
 
         private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolValues_Null(sender, e);
+            toolValues_Null();
             label1.Text = "36";
             label2.Text = "83";
             label3.Text = "1";
@@ -393,7 +393,7 @@ namespace Football
 
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolValues_Null(sender, e);
+            toolValues_Null();
             label1.Text = "0";
             label2.Text = "199";
             label3.Text = "0";
@@ -405,9 +405,16 @@ namespace Football
 
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            toolValues_Null();
+            label1.Text = "222";
+            label2.Text = "235";
+            label3.Text = "0";
+            label4.Text = "255";
+            label5.Text = "255";
+            label6.Text = "30";
+            redToolStripMenuItem_Click(sender, e);
         }
-        private void toolValues_Null(object sender, EventArgs e)
+        private void toolValues_Null()
         {
             label1.Text = "0";
             label2.Text = "0";
