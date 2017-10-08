@@ -372,7 +372,7 @@ namespace Football
             toolValues_Null();
             label1.Text = "0";
             label2.Text = "0";
-            label3.Text = "0229";
+            label3.Text = "229";
             label4.Text = "10";
             label5.Text = "7";
             label6.Text = "255";
