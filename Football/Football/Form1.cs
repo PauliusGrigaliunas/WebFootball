@@ -25,7 +25,7 @@ namespace Football
         Image<Gray, byte> imgGray;
         Image<Ycc, byte> imgYcc;
         Image<Gray, byte> imgSmoothed;
-        Image<Bgr, byte> imgLines;
+        Image<Bgr, byte> imgOriginal;
         Gray grayCircle = new Gray(100);
         Gray cannyThreshold = new Gray(160);
         Image<Bgr, byte> imgCircles;
@@ -51,23 +51,31 @@ namespace Football
                     //searching for cirxle shapes
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
-                    imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
+                   /* imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
                     imgSmoothed = imgSmoothed.PyrDown().PyrUp();
                     imgSmoothed._SmoothGaussian(3);
                     imgSmoothed = imgSmoothed.Convert<Gray, byte>();
-                    //pictureBox3.Image = imgSmoothed.Bitmap;
 
                     imgCircles = imgInput.CopyBlank();
-                    imgLines = imgInput.CopyBlank();
 
                     minDistanceBtwCircles = imgSmoothed.Height / 4;
                     circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
 
                     foreach (CircleF circle in circles)
                     {
-                        imgCircles.Draw(circle, new Bgr(Color.Red), 2);
+                        if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
+                        textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                            circle.Radius.ToString("###,000").PadLeft(7));
+                        textXYradius.ScrollToCaret();
+
+                        CvInvoke.Circle(imgCircles,
+                            new Point(((int)circle.Center.X), (int)circle.Center.Y), 3, new MCvScalar(0, 255, 0),
+                            -1,
+                            LineType.AntiAlias,
+                            0);
+                        imgCircles.Draw(circle, new Bgr(Color.Aqua), 3);
                     }
-                    pictureBox2.Image = imgCircles.Bitmap;
+                    pictureBox2.Image = imgCircles.Bitmap;*/
                 }
             }
             catch (Exception ex)
@@ -193,9 +201,34 @@ namespace Football
             {
                 Mat mat = new Mat();
                 capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-                pictureBox2.Image = imgRange.Bitmap;
+                imgOriginal = mat.ToImage<Bgr, byte>();
+
+                Image<Gray, Byte> imgSmoothed = imgOriginal.InRange(new Bgr(0, 0, 135), new Bgr(80, 255, 255));
+                //imgSmoothed = imgRange;
+                imgSmoothed._SmoothGaussian(3);
+               // imgSmoothed = imgSmoothed.Convert<Gray, byte>();
+
+                imgCircles = imgOriginal.CopyBlank();
+
+                minDistanceBtwCircles = imgSmoothed.Height / 4;
+                circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
+
+                foreach (CircleF circle in circles)
+                {
+                    if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
+                    textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                        circle.Radius.ToString("###,000").PadLeft(7));
+                    textXYradius.ScrollToCaret();
+
+                    CvInvoke.Circle(imgCircles,
+                        new Point(((int)circle.Center.X), (int)circle.Center.Y), 3, new MCvScalar(0, 255, 0),
+                        -1,
+                        LineType.AntiAlias,
+                        0);
+                    imgCircles.Draw(circle, new Bgr(Color.Aqua), 3);
+                }
+                pictureBox1.Image = imgOriginal.Bitmap;
+                pictureBox2.Image = imgCircles.Bitmap;
                 // Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
                 Thread.Sleep(1);
 
