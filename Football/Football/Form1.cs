@@ -45,7 +45,27 @@ namespace Football
 
         private void TimeTick(object sender, EventArgs e)
         {
-                Mat mat = _capture.QueryFrame();
+            int temp;
+            //stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            _timeElapsed = ts.Seconds;
+            if (_timeElapsed >= 3 && isBTeamScored == true)
+            {
+                temp = int.Parse(bTeamLabel.Text);
+                temp = temp + 1;
+                bTeamLabel.Text = temp.ToString();
+                stopwatch.Reset();
+                isBTeamScored = false;
+            }
+            else if (_timeElapsed >= 3 && isATeamScored == true)
+            {
+                temp = int.Parse(aTeamLabel.Text);
+                temp = temp + 1;
+                aTeamLabel.Text = temp.ToString();
+                stopwatch.Reset();
+                isATeamScored = false;
+            }
+            Mat mat = _capture.QueryFrame();
                 if (mat == null) return;
                 //resize to picture box params
                 imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
@@ -69,14 +89,13 @@ namespace Football
                         circle.Radius.ToString("###,000").PadLeft(7));
                     textXYradius.ScrollToCaret();
                 _xBallPosition = (int)circle.Center.X;
-                AddPoint(_xBallPosition);
+                StartStopwatch(_xBallPosition);
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
                 pictureBox2.Image = imgCircles.Bitmap;
         }
-        private void AddPoint (int x)
+        private void StartStopwatch (int x)
         {
-            int temp = 0;
             if (x > 440)
             {
                 isATeamScored = false;
@@ -84,7 +103,7 @@ namespace Football
                 stopwatch.Reset();
                 stopwatch.Start();
             }
-            else if ( x < 45 )
+            else if (x < 45)
             {
                 isBTeamScored = false;
                 isATeamScored = true;
@@ -93,27 +112,11 @@ namespace Football
             }
             else
             {
-                stopwatch.Stop();
-                TimeSpan ts = stopwatch.Elapsed;
-                _timeElapsed = ts.Seconds;
-                if (_timeElapsed >= 3 && isBTeamScored == true )
-                {
-                    temp = int.Parse(bTeamLabel.Text);
-                    temp = temp + 1;
-                    bTeamLabel.Text = temp.ToString();
-                    stopwatch.Reset();
-                    isBTeamScored = false;
-                }
-                else if (_timeElapsed >= 3 && isATeamScored == true )
-                {
-                    temp = int.Parse(aTeamLabel.Text);
-                    temp = temp + 1;
-                    aTeamLabel.Text = temp.ToString();
-                    stopwatch.Reset();
-                    isATeamScored = false;
-                }
-                else return;
+                isBTeamScored = false;
+                isATeamScored = false;
+                stopwatch.Reset();
             }
+
         }
         private void takeAPicture(Image<Bgr, byte> imgInput )
         {

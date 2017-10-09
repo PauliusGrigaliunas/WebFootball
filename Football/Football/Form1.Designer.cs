@@ -76,7 +76,6 @@
             this.aTeamLabel = new System.Windows.Forms.Label();
             this.bTeamLabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -95,7 +94,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.bTeamLabel);
             this.panel1.Controls.Add(this.aTeamLabel);
@@ -549,15 +547,6 @@
             this.label11.TabIndex = 32;
             this.label11.Text = ":";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(62, 505);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "label9";
-            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -637,7 +626,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scoreLabel;
-        private System.Windows.Forms.Label label9;
     }
 }
 
