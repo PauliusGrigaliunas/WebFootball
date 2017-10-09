@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using Emgu;
 using Emgu.CV;
@@ -18,8 +19,14 @@ using Emgu.CV.Cuda;
 
 namespace Football
 {
+
     public partial class Form1 : Form
     {
+        bool isBTeamScored = false;
+        bool isATeamScored = false;
+        private Stopwatch stopwatch = new Stopwatch();
+        int _xBallPosition;
+        int _timeElapsed = 0;
         VideoCapture _capture;
         Image<Bgr, byte> imgInput = null;
         Image<Bgr, byte> imgOriginal;
@@ -32,7 +39,7 @@ namespace Football
             _timer.Interval = 1000 / 30;
             _timer.Tick += new EventHandler(TimeTick);
             _timer.Start();
-            _capture = new VideoCapture("C:\\Users\\Mode\\Videos\\TestFoos.mp4");
+            _capture = new VideoCapture("C:\\Users\\Mode\\Videos\\test.mp4");
 
         }
 
@@ -45,7 +52,7 @@ namespace Football
                 pictureBox1.Image = imgOriginal.Bitmap;
 
             //dilate and erode img, filter img
-            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 80), new Hsv(35, 255, 255));
+            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
             //pictureBox2.Image = imgSmoothed.Bitmap;
 
                 var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
@@ -61,11 +68,53 @@ namespace Football
                     textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
                         circle.Radius.ToString("###,000").PadLeft(7));
                     textXYradius.ScrollToCaret();
+                _xBallPosition = (int)circle.Center.X;
+                AddPoint(_xBallPosition);
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
                 pictureBox2.Image = imgCircles.Bitmap;
         }
-
+        private void AddPoint (int x)
+        {
+            int temp = 0;
+            if (x > 440)
+            {
+                isATeamScored = false;
+                isBTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else if ( x < 45 )
+            {
+                isBTeamScored = false;
+                isATeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                _timeElapsed = ts.Seconds;
+                if (_timeElapsed >= 3 && isBTeamScored == true )
+                {
+                    temp = int.Parse(bTeamLabel.Text);
+                    temp = temp + 1;
+                    bTeamLabel.Text = temp.ToString();
+                    stopwatch.Reset();
+                    isBTeamScored = false;
+                }
+                else if (_timeElapsed >= 3 && isATeamScored == true )
+                {
+                    temp = int.Parse(aTeamLabel.Text);
+                    temp = temp + 1;
+                    aTeamLabel.Text = temp.ToString();
+                    stopwatch.Reset();
+                    isATeamScored = false;
+                }
+                else return;
+            }
+        }
         private void takeAPicture(Image<Bgr, byte> imgInput )
         {
             try
@@ -372,6 +421,12 @@ namespace Football
 
             pictureBox2.Image = imgRange.Bitmap;
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            aTeamLabel.Text = "0";
+            bTeamLabel.Text = "0";
         }
     }
 }

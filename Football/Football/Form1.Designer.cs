@@ -70,6 +70,13 @@
             this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iccToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scoreLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.aTeamLabel = new System.Windows.Forms.Label();
+            this.bTeamLabel = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -88,6 +95,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.bTeamLabel);
+            this.panel1.Controls.Add(this.aTeamLabel);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.scoreLabel);
             this.panel1.Controls.Add(this.textXYradius);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
@@ -112,7 +126,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(997, 578);
+            this.panel1.Size = new System.Drawing.Size(997, 683);
             this.panel1.TabIndex = 2;
             // 
             // textXYradius
@@ -480,17 +494,82 @@
             this.redToolStripMenuItem.Text = "ColorFilter";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.scoreLabel.Location = new System.Drawing.Point(466, 499);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(61, 20);
+            this.scoreLabel.TabIndex = 27;
+            this.scoreLabel.Text = "Score:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(364, 555);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Team A:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(526, 555);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Team B:";
+            // 
+            // aTeamLabel
+            // 
+            this.aTeamLabel.AutoSize = true;
+            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
+            this.aTeamLabel.Name = "aTeamLabel";
+            this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
+            this.aTeamLabel.TabIndex = 30;
+            this.aTeamLabel.Text = "aTeamLabel";
+            // 
+            // bTeamLabel
+            // 
+            this.bTeamLabel.AutoSize = true;
+            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
+            this.bTeamLabel.Name = "bTeamLabel";
+            this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
+            this.bTeamLabel.TabIndex = 31;
+            this.bTeamLabel.Text = "bTeamLabel";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(492, 584);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = ":";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(62, 505);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "label9";
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 598);
+            this.ClientSize = new System.Drawing.Size(996, 703);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
@@ -552,6 +631,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textXYradius;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label bTeamLabel;
+        private System.Windows.Forms.Label aTeamLabel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.Label label9;
     }
 }
 
