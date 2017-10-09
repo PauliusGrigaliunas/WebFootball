@@ -73,25 +73,25 @@ namespace Football
 
             //dilate and erode img, filter img
             Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
-            //pictureBox2.Image = imgSmoothed.Bitmap;
+            //pictureBox2.Image = imgSmoothed.Bitmap;   //<-----for testing smoothed image
 
                 var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
                 CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
                 var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
                 CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
 
-                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();
+                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-                foreach (CircleF circle in GetCircles(imgSmoothed))
+                foreach (CircleF circle in GetCircles(imgSmoothed))          //searching circles
                 {
                     if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
                     textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
                         circle.Radius.ToString("###,000").PadLeft(7));
-                    textXYradius.ScrollToCaret();
-                _xBallPosition = (int)circle.Center.X;
-                StartStopwatch(_xBallPosition);
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);
-                }
+                    textXYradius.ScrollToCaret();                                     //write coordinates to textbox
+                _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
+                } 
                 pictureBox2.Image = imgCircles.Bitmap;
         }
         private void StartStopwatch (int x)
@@ -101,7 +101,7 @@ namespace Football
                 isATeamScored = false;
                 isBTeamScored = true;
                 stopwatch.Reset();
-                stopwatch.Start();
+                stopwatch.Start();                                          
             }
             else if (x < 45)
             {
@@ -319,7 +319,7 @@ namespace Football
         }
         
         //coordinates
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
             MessageBox.Show(e.X.ToString() + e.Y.ToString());
         }
