@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.bTeamLabel = new System.Windows.Forms.Label();
+            this.aTeamLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.scoreLabel = new System.Windows.Forms.Label();
             this.textXYradius = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -62,20 +68,8 @@
             this.pauseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cannyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.laplasianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iccToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scoreLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.aTeamLabel = new System.Windows.Forms.Label();
-            this.bTeamLabel = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -126,6 +120,61 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(997, 683);
             this.panel1.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(492, 584);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = ":";
+            // 
+            // bTeamLabel
+            // 
+            this.bTeamLabel.AutoSize = true;
+            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
+            this.bTeamLabel.Name = "bTeamLabel";
+            this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
+            this.bTeamLabel.TabIndex = 31;
+            this.bTeamLabel.Text = "bTeamLabel";
+            // 
+            // aTeamLabel
+            // 
+            this.aTeamLabel.AutoSize = true;
+            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
+            this.aTeamLabel.Name = "aTeamLabel";
+            this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
+            this.aTeamLabel.TabIndex = 30;
+            this.aTeamLabel.Text = "aTeamLabel";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(526, 555);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Team B:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(364, 555);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Team A:";
+            // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.scoreLabel.Location = new System.Drawing.Point(466, 499);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(61, 20);
+            this.scoreLabel.TabIndex = 27;
+            this.scoreLabel.Text = "Score:";
             // 
             // textXYradius
             // 
@@ -333,7 +382,6 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.edgeToolStripMenuItem,
             this.colourToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -430,122 +478,20 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // edgeToolStripMenuItem
-            // 
-            this.edgeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cannyToolStripMenuItem,
-            this.sobelToolStripMenuItem,
-            this.laplasianToolStripMenuItem});
-            this.edgeToolStripMenuItem.Name = "edgeToolStripMenuItem";
-            this.edgeToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.edgeToolStripMenuItem.Text = "Edge";
-            // 
-            // cannyToolStripMenuItem
-            // 
-            this.cannyToolStripMenuItem.Name = "cannyToolStripMenuItem";
-            this.cannyToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.cannyToolStripMenuItem.Text = "Canny";
-            this.cannyToolStripMenuItem.Click += new System.EventHandler(this.cannyToolStripMenuItem_Click);
-            // 
-            // sobelToolStripMenuItem
-            // 
-            this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
-            this.sobelToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.sobelToolStripMenuItem.Text = "Sobel";
-            this.sobelToolStripMenuItem.Click += new System.EventHandler(this.sobelToolStripMenuItem_Click);
-            // 
-            // laplasianToolStripMenuItem
-            // 
-            this.laplasianToolStripMenuItem.Name = "laplasianToolStripMenuItem";
-            this.laplasianToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.laplasianToolStripMenuItem.Text = "Laplasian";
-            this.laplasianToolStripMenuItem.Click += new System.EventHandler(this.laplasianToolStripMenuItem_Click);
-            // 
             // colourToolStripMenuItem
             // 
             this.colourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.grayToolStripMenuItem,
-            this.iccToolStripMenuItem,
             this.redToolStripMenuItem});
             this.colourToolStripMenuItem.Name = "colourToolStripMenuItem";
             this.colourToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.colourToolStripMenuItem.Text = "Colour";
             // 
-            // grayToolStripMenuItem
-            // 
-            this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
-            this.grayToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.grayToolStripMenuItem.Text = "Gray";
-            this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
-            // 
-            // iccToolStripMenuItem
-            // 
-            this.iccToolStripMenuItem.Name = "iccToolStripMenuItem";
-            this.iccToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.iccToolStripMenuItem.Text = "Icc";
-            this.iccToolStripMenuItem.Click += new System.EventHandler(this.iccToolStripMenuItem_Click);
-            // 
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redToolStripMenuItem.Text = "ColorFilter";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
-            // 
-            // scoreLabel
-            // 
-            this.scoreLabel.AutoSize = true;
-            this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.scoreLabel.Location = new System.Drawing.Point(466, 499);
-            this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(61, 20);
-            this.scoreLabel.TabIndex = 27;
-            this.scoreLabel.Text = "Score:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 555);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 13);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "Team A:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(526, 555);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 13);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Team B:";
-            // 
-            // aTeamLabel
-            // 
-            this.aTeamLabel.AutoSize = true;
-            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
-            this.aTeamLabel.Name = "aTeamLabel";
-            this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
-            this.aTeamLabel.TabIndex = 30;
-            this.aTeamLabel.Text = "aTeamLabel";
-            // 
-            // bTeamLabel
-            // 
-            this.bTeamLabel.AutoSize = true;
-            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
-            this.bTeamLabel.Name = "bTeamLabel";
-            this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
-            this.bTeamLabel.TabIndex = 31;
-            this.bTeamLabel.Text = "bTeamLabel";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(492, 584);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
-            this.label11.TabIndex = 32;
-            this.label11.Text = ":";
             // 
             // Form1
             // 
@@ -584,10 +530,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem edgeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cannyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem laplasianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
@@ -598,8 +540,6 @@
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripMenuItem colourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem grayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iccToolStripMenuItem;
         private System.Windows.Forms.Label lblBlue;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label lblMax;
