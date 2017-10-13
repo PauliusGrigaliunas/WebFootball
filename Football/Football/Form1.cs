@@ -266,82 +266,57 @@ namespace Football
             MessageBox.Show(e.X.ToString() + e.Y.ToString());
         }
 
+        private string TrackBarSetting(TrackBar trackBar)
+        {
+            trackBar.Maximum = 255;         // max value
+            trackBar.Minimum = 0;           // min value
+            trackBar.TickFrequency = 10;    // distance between tick-mark
+            trackBar.LargeChange = 5;       // when clicked on a side of a slider move by X
+            trackBar.SmallChange = 1;       // move using keyboard arrows
+
+             return trackBar.Value.ToString();
+
+        }
         // colors:
         //low red
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            trackBar1.Maximum = 255;         // max value
-            trackBar1.Minimum = 0;           // min value
-            trackBar1.TickFrequency = 10;    // distance between tick-mark
-            trackBar1.LargeChange = 5;       // when clicked on a side of a slider move by X
-            trackBar1.SmallChange = 1;       // move using keyboard arrows
-
-            label1.Text = trackBar1.Value.ToString();
+            label1.Text = TrackBarSetting(trackBar1);
             redToolStripMenuItem_Click(sender, e);
         }
 
         //low green
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            trackBar2.Maximum = 255;
-            trackBar2.Minimum = 0;
-            trackBar2.TickFrequency = 10;
-            trackBar2.LargeChange = 5;
-            trackBar2.SmallChange = 1;      
-
-            label2.Text = trackBar2.Value.ToString();
+            label2.Text = TrackBarSetting(trackBar2);
             redToolStripMenuItem_Click(sender, e);
         }
 
         //low blue
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
-            trackBar3.Maximum = 255;
-            trackBar3.Minimum = 0;
-            trackBar3.TickFrequency = 10;
-            trackBar3.LargeChange = 5;
-            trackBar3.SmallChange = 1;
-
-            label3.Text = trackBar3.Value.ToString();
+            label3.Text = TrackBarSetting(trackBar3);
             redToolStripMenuItem_Click(sender, e);
         }
 
         //high red
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
-            trackBar4.Maximum = 255;
-            trackBar4.Minimum = 0;
-            trackBar4.TickFrequency = 10;
-            trackBar4.LargeChange = 5;
-            trackBar4.SmallChange = 1;
-
-            label4.Text = trackBar4.Value.ToString();
+            label4.Text = TrackBarSetting(trackBar4);
             redToolStripMenuItem_Click(sender, e);
         }
 
         //high green
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
-            trackBar5.Maximum = 255;
-            trackBar5.Minimum = 0;
-            trackBar5.TickFrequency = 10;
-            trackBar5.LargeChange = 5;
-            trackBar5.SmallChange = 1;
-
-            label5.Text = trackBar5.Value.ToString();
+            label5.Text = TrackBarSetting(trackBar5);
             redToolStripMenuItem_Click(sender, e);
         }
 
         //high red
         private void trackBar6_Scroll(object sender, EventArgs e)
         {
-            trackBar6.Maximum = 255;
-            trackBar6.Minimum = 0;
-            trackBar6.TickFrequency = 10;
-            trackBar6.LargeChange = 5;
-            trackBar6.SmallChange = 1;
-
-            label6.Text = trackBar6.Value.ToString();
+            label6.Text = TrackBarSetting(trackBar6);
             redToolStripMenuItem_Click(sender, e);
         }
 
@@ -367,7 +342,6 @@ namespace Football
             pictureBox2.Image = imgRange.Bitmap;
 
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             aTeamLabel.Text = "0";
