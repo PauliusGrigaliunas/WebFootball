@@ -36,42 +36,85 @@ namespace Football
         public Form1()
         {
             InitializeComponent();
+        }
+
+
+        private void Video()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Video Files |*.mp4";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                _capture = new Emgu.CV.VideoCapture(ofd.FileName);
+            }
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000 / 30;
             _timer.Tick += new EventHandler(TimeTick);
             _timer.Start();
-            _capture = new VideoCapture("C:\\Users\\Mode\\Videos\\test.mp4");
 
         }
+
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Start();
+
+            }
+            else Video();
+
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+        }
+
 
         private void TimeTick(object sender, EventArgs e)
         {
             CheckForScore();
-               
+
             Mat mat = _capture.QueryFrame();       //getting frames            
-            if (mat == null) return;                         
+            if (mat == null) return;
 
-                imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
-                pictureBox1.Image = imgOriginal.Bitmap;
-                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+            imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
+            pictureBox1.Image = imgOriginal.Bitmap;
+            Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-                imgFiltered = GetFilteredImage(imgOriginal);
+            imgFiltered = GetFilteredImage(imgOriginal);
 
-                foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
-                {
-                    if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
-                    textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
-                    circle.Radius.ToString("###,000").PadLeft(7));
-                    textXYradius.ScrollToCaret();                                     //write coordinates to textbox
+            foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
+            {
+                if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
+                textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                circle.Radius.ToString("###,000").PadLeft(7));
+                textXYradius.ScrollToCaret();                                     //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
-                } 
-                pictureBox2.Image = imgCircles.Bitmap;
+            }
+            pictureBox2.Image = imgCircles.Bitmap;
         }
+
         //get filtered img with some corrections
-        public Image <Gray, byte> GetFilteredImage( Image<Bgr, byte> imgOriginal )
+        private Image<Gray, byte> GetFilteredImage(Image<Bgr, byte> imgOriginal)
         {
             Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
 
@@ -106,14 +149,14 @@ namespace Football
             }
         }
         //start stopwatch
-        private void StartStopwatch (int x)
+        private void StartStopwatch(int x)
         {
             if (x > 440)
             {
                 isATeamScored = false;
                 isBTeamScored = true;
                 stopwatch.Reset();
-                stopwatch.Start();                                          
+                stopwatch.Start();
             }
             else if (x < 45)
             {
@@ -131,7 +174,7 @@ namespace Football
 
         }
         //get a picture from local area
-        private void takeAPicture(Image<Bgr, byte> imgInput )
+        private void takeAPicture(Image<Bgr, byte> imgInput)
         {
             try
             {
@@ -160,25 +203,25 @@ namespace Football
             }
 
         }
-//Picture
+        //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            takeAPicture( imgInput );
+            takeAPicture(imgInput);
         }
-//layers
+        //layers
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
-//Camera
+        //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         if (_capture == null)
+            if (_capture == null)
             {
                 _capture = new Emgu.CV.VideoCapture(0);
             }
-           _capture.ImageGrabbed += Capture_ImageGrabbed;
+            _capture.ImageGrabbed += Capture_ImageGrabbed;
             _capture.Start();
         }
 
@@ -196,7 +239,7 @@ namespace Football
             }
 
         }
-// end camera
+        // end camera
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_capture != null)
@@ -213,10 +256,10 @@ namespace Football
                 _capture.Pause();
             }
         }
-// Video
+        // Video
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           /* if (_capture == null)
+            if (_capture == null)
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Video Files |*.mp4";
@@ -226,13 +269,13 @@ namespace Football
                 }
                 _capture.ImageGrabbed += Capture_ImageGrabbed1;
                 _capture.Start();
-            }*/
+            }
         }
 
-      /*  private void Capture_ImageGrabbed1(object sender, EventArgs e)
+        private void Capture_ImageGrabbed1(object sender, EventArgs e)
         {
 
-        }*/
+        }
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
             Gray grayCircle = new Gray(12);
@@ -274,7 +317,7 @@ namespace Football
             trackBar.LargeChange = 5;       // when clicked on a side of a slider move by X
             trackBar.SmallChange = 1;       // move using keyboard arrows
 
-             return trackBar.Value.ToString();
+            return trackBar.Value.ToString();
 
         }
         // colors:
@@ -328,7 +371,7 @@ namespace Football
             int lowGreen = Convert.ToInt32(label2.Text);
             int highGreen = Convert.ToInt32(label5.Text);
             int lowRed = Convert.ToInt32(label1.Text);
-            int highRed = Convert.ToInt32(label4.Text); 
+            int highRed = Convert.ToInt32(label4.Text);
 
 
             if (imgInput == null) return;
