@@ -46,11 +46,12 @@ namespace Football
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 _capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Interval = 1000 / 30;
+                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Start();
+                
             }
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 1000 / 30;
-            _timer.Tick += new EventHandler(TimeTick);
-            _timer.Start();
 
         }
 
@@ -82,6 +83,7 @@ namespace Football
             {
                 _timer.Tick -= new EventHandler(TimeTick);
                 _timer.Stop();
+                _timer = null;
             }
         }
 
@@ -98,19 +100,34 @@ namespace Football
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
             imgFiltered = GetFilteredImage(imgOriginal);
-
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
+
                 textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
                 circle.Radius.ToString("###,000").PadLeft(7));
-                textXYradius.ScrollToCaret();                                     //write coordinates to textbox
+                textXYradius.ScrollToCaret();
+
+                //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
+
+
             pictureBox2.Image = imgCircles.Bitmap;
+        }
+
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+            Application.Exit();
         }
 
         //get filtered img with some corrections
@@ -270,6 +287,7 @@ namespace Football
                 _capture.ImageGrabbed += Capture_ImageGrabbed1;
                 _capture.Start();
             }
+            MessageBox.Show("check");
         }
 
         private void Capture_ImageGrabbed1(object sender, EventArgs e)
@@ -292,7 +310,6 @@ namespace Football
             if (_capture != null)
             {
                 _capture.Stop();
-                _capture = null;
             }
         }
 
@@ -390,5 +407,7 @@ namespace Football
             aTeamLabel.Text = "0";
             bTeamLabel.Text = "0";
         }
+
+
     }
 }
