@@ -31,13 +31,13 @@ namespace Football
         Image<Bgr, byte> imgInput = null;
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
+
         System.Windows.Forms.Timer _timer;
 
         public Form1()
         {
             InitializeComponent();
         }
-
 
         private void Video()
         {
@@ -49,12 +49,9 @@ namespace Football
                 _timer = new System.Windows.Forms.Timer();
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
-                
+                _timer.Start();                
             }
-
         }
-
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
@@ -62,10 +59,8 @@ namespace Football
             {
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
-
             }
             else Video();
-
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -87,10 +82,8 @@ namespace Football
             }
         }
 
-
-        private void TimeTick(object sender, EventArgs e)
+        public void TimeTick(object sender, EventArgs e)
         {
-            CheckForScore();
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -98,8 +91,13 @@ namespace Football
             imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+            ImgFilter filter = new ImgFilter(imgOriginal);    imgFiltered = filter.GetFilteredImage();
 
-            imgFiltered = GetFilteredImage(imgOriginal);
+            GoalsChecker goals = new GoalsChecker(aTeamLabel.Text, bTeamLabel.Text);
+            goals.CheckForScore();
+            label1.Text = goals.aText;
+            label2.Text = goals.bText;
+            //GetFilteredImage(imgOriginal);
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
@@ -111,10 +109,9 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                goals.StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
-
 
             pictureBox2.Image = imgCircles.Bitmap;
         }
@@ -130,66 +127,6 @@ namespace Football
             Application.Exit();
         }
 
-        //get filtered img with some corrections
-        private Image<Gray, byte> GetFilteredImage(Image<Bgr, byte> imgOriginal)
-        {
-            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
-
-            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
-            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
-            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            return imgSmoothed;
-        }
-        //check for scoring and write in GUI
-        private void CheckForScore()
-        {
-            int temp;
-            //stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isBTeamScored == true)
-            {
-                temp = int.Parse(bTeamLabel.Text);
-                temp = temp + 1;
-                bTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isBTeamScored = false;
-            }
-            else if (_timeElapsed >= 3 && isATeamScored == true)
-            {
-                temp = int.Parse(aTeamLabel.Text);
-                temp = temp + 1;
-                aTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isATeamScored = false;
-            }
-        }
-        //start stopwatch
-        private void StartStopwatch(int x)
-        {
-            if (x > 440)
-            {
-                isATeamScored = false;
-                isBTeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else if (x < 45)
-            {
-                isBTeamScored = false;
-                isATeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else
-            {
-                isBTeamScored = false;
-                isATeamScored = false;
-                stopwatch.Reset();
-            }
-
-        }
         //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput)
         {
