@@ -455,10 +455,7 @@ namespace Football
             sa = new SqlDataAdapter(cmd);
             sa.Fill(dt);
             //koia info lentelej
-            if(name1=="a")
-            {
-                MessageBox.Show("it is a");
-            }
+
             victA = team.getVictories(dt, name1); 
             goalA = team.getGoals(dt, name1);
             victB = team.getVictories(dt, name2);
