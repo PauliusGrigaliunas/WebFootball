@@ -32,6 +32,7 @@ namespace Football
                 team.addToTable(name1,0,0);
             }
 
+
             if (team.name_CheckIfExsist(name2) == false)
             {
                 team.addToTable(name2, 0, 0);
