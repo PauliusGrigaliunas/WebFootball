@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -35,6 +36,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+          
+          
             this.SuspendLayout();
             // 
             // label1
@@ -103,12 +107,13 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Name your teams:";
             // 
+          
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(487, 338);
+            this.ClientSize = new System.Drawing.Size(496, 391);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -118,6 +123,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,5 +138,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.BindingSource dataSet1BindingSource;
+      
     }
 }
