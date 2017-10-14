@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using Emgu;
 using Emgu.CV;
@@ -18,29 +19,118 @@ using Emgu.CV.Cuda;
 
 namespace Football
 {
+
     public partial class Form1 : Form
     {
-        VideoCapture capture;
+        bool isBTeamScored = false;
+        bool isATeamScored = false;
+        private Stopwatch stopwatch = new Stopwatch();
+        int _xBallPosition { get; set; }
+        int _timeElapsed = 0;
+        VideoCapture _capture { get; set; }
         Image<Bgr, byte> imgInput = null;
-        Image<Gray, byte> imgGray;
-        Image<Ycc, byte> imgYcc;
-        Image<Gray, byte> imgSmoothed;
-        Image<Bgr, byte> imgLines;
-        Gray grayCircle = new Gray(100);
-        Gray cannyThreshold = new Gray(160);
-        Image<Bgr, byte> imgCircles;
-        double lAccumRes = 2.0;
-        double minDistanceBtwCircles;
-        int minRadius = 10;
-        int maxRadius = 400;
-        CircleF[] circles;
-        Gray grayThresLinkings = new Gray(60);
+        Image<Bgr, byte> imgOriginal { get; set; }
+        Image<Gray, byte> imgFiltered { get; set; }
+        System.Windows.Forms.Timer _timer;
 
         public Form1()
         {
             InitializeComponent();
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 1000 / 30;
+            _timer.Tick += new EventHandler(TimeTick);
+            _timer.Start();
+            _capture = new VideoCapture("C:\\Users\\Mode\\Videos\\test.mp4");
+
         }
 
+        private void TimeTick(object sender, EventArgs e)
+        {
+            CheckForScore();
+               
+            Mat mat = _capture.QueryFrame();       //getting frames            
+            if (mat == null) return;                         
+
+                imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
+                pictureBox1.Image = imgOriginal.Bitmap;
+                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+
+                imgFiltered = GetFilteredImage(imgOriginal);
+
+                foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
+                {
+                    if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
+                    textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                    circle.Radius.ToString("###,000").PadLeft(7));
+                    textXYradius.ScrollToCaret();                                     //write coordinates to textbox
+
+                _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
+                } 
+                pictureBox2.Image = imgCircles.Bitmap;
+        }
+        //get filtered img with some corrections
+        public Image <Gray, byte> GetFilteredImage( Image<Bgr, byte> imgOriginal )
+        {
+            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
+
+            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
+            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
+            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            return imgSmoothed;
+        }
+        //check for scoring and write in GUI
+        private void CheckForScore()
+        {
+            int temp;
+            //stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            _timeElapsed = ts.Seconds;
+            if (_timeElapsed >= 3 && isBTeamScored == true)
+            {
+                temp = int.Parse(bTeamLabel.Text);
+                temp = temp + 1;
+                bTeamLabel.Text = temp.ToString();
+                stopwatch.Reset();
+                isBTeamScored = false;
+            }
+            else if (_timeElapsed >= 3 && isATeamScored == true)
+            {
+                temp = int.Parse(aTeamLabel.Text);
+                temp = temp + 1;
+                aTeamLabel.Text = temp.ToString();
+                stopwatch.Reset();
+                isATeamScored = false;
+            }
+        }
+        //start stopwatch
+        private void StartStopwatch (int x)
+        {
+            if (x > 440)
+            {
+                isATeamScored = false;
+                isBTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();                                          
+            }
+            else if (x < 45)
+            {
+                isBTeamScored = false;
+                isATeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                isBTeamScored = false;
+                isATeamScored = false;
+                stopwatch.Reset();
+            }
+
+        }
+        //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput )
         {
             try
@@ -48,26 +138,8 @@ namespace Football
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    //searching for cirxle shapes
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
                     pictureBox1.Image = imgInput.Bitmap;
-                    imgSmoothed = imgInput.InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-                    imgSmoothed = imgSmoothed.PyrDown().PyrUp();
-                    imgSmoothed._SmoothGaussian(3);
-                    imgSmoothed = imgSmoothed.Convert<Gray, byte>();
-                    //pictureBox3.Image = imgSmoothed.Bitmap;
-
-                    imgCircles = imgInput.CopyBlank();
-                    imgLines = imgInput.CopyBlank();
-
-                    minDistanceBtwCircles = imgSmoothed.Height / 4;
-                    circles = imgSmoothed.HoughCircles(cannyThreshold, grayCircle, lAccumRes, minDistanceBtwCircles, minRadius, maxRadius)[0];
-
-                    foreach (CircleF circle in circles)
-                    {
-                        imgCircles.Draw(circle, new Bgr(Color.Red), 2);
-                    }
-                    pictureBox2.Image = imgCircles.Bitmap;
                 }
             }
             catch (Exception ex)
@@ -78,6 +150,10 @@ namespace Football
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_capture != null)
+            {
+                _capture = null;
+            }
             if (MessageBox.Show("Are you sure you want to close?", "System message", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.Close();
@@ -90,40 +166,6 @@ namespace Football
             takeAPicture( imgInput );
         }
 //layers
-        private void cannyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (imgInput == null)
-            {
-                return;
-            }
-            Image<Gray, byte> imgCanny = new Image<Gray, byte>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgCanny = imgInput.Canny(50, 20);
-            pictureBox2.Image = imgCanny.Bitmap;
-        }
-
-        private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (imgInput == null)
-            {
-                return;
-            }
-            Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
-            Image<Gray, float> imgSobel = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgSobel = imgGray.Sobel(1, 1, 3);
-            pictureBox2.Image = imgSobel.Bitmap;
-        }
-
-        private void laplasianToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (imgInput == null)
-            {
-                return;
-            }
-            Image<Gray, byte> imgGray = imgInput.Convert<Gray, byte>();
-            Image<Gray, float> imgLaplasian = new Image<Gray, float>(imgInput.Width, imgInput.Height, new Gray(0));
-            imgLaplasian = imgGray.Laplace(3);
-            pictureBox2.Image = imgLaplasian.Bitmap;
-        }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -132,12 +174,12 @@ namespace Football
 //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (capture == null)
+         if (_capture == null)
             {
-                capture = new Emgu.CV.VideoCapture(0);
+                _capture = new Emgu.CV.VideoCapture(0);
             }
-            capture.ImageGrabbed += Capture_ImageGrabbed;
-            capture.Start();
+           _capture.ImageGrabbed += Capture_ImageGrabbed;
+            _capture.Start();
         }
 
         private void Capture_ImageGrabbed(object sender, EventArgs e)
@@ -145,7 +187,7 @@ namespace Football
             try
             {
                 Mat mat = new Mat();
-                capture.Retrieve(mat);
+                _capture.Retrieve(mat);
                 pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
             }
             catch (Exception ex)
@@ -154,98 +196,74 @@ namespace Football
             }
 
         }
-
+// end camera
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (capture != null)
+            if (_capture != null)
             {
-                capture.Stop();
-                capture = null;
+                _capture.Stop();
+                _capture = null;
             }
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (capture != null)
+            if (_capture != null)
             {
-                capture.Pause();
+                _capture.Pause();
             }
         }
 // Video
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (capture == null)
+           /* if (_capture == null)
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Video Files |*.mp4";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                    _capture = new Emgu.CV.VideoCapture(ofd.FileName);
                 }
-                capture.ImageGrabbed += Capture_ImageGrabbed1;
-                capture.Start();
-            }
+                _capture.ImageGrabbed += Capture_ImageGrabbed1;
+                _capture.Start();
+            }*/
         }
 
-        private void Capture_ImageGrabbed1(object sender, EventArgs e)
+      /*  private void Capture_ImageGrabbed1(object sender, EventArgs e)
         {
-            try
-            {
-                Mat mat = new Mat();
-                capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-                Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(0, 0, 140), new Bgr(80, 255, 255));
-                pictureBox2.Image = imgRange.Bitmap;
-                // Thread.Sleep((int)capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-                Thread.Sleep(1);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace);
-            }
-
+        }*/
+        private CircleF[] GetCircles(Image<Gray, byte> imgGray)
+        {
+            Gray grayCircle = new Gray(12);
+            Gray cannyThreshold = new Gray(26);
+            double lAccumResolution = 2.0;
+            double minDistanceBtwCircles = 1.0;
+            int minRadius = 0;
+            int maxRadius = 10;
+            return imgGray.HoughCircles(grayCircle, cannyThreshold, lAccumResolution, minDistanceBtwCircles, minRadius, maxRadius)[0];
         }
 
         private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (capture != null)
+            if (_capture != null)
             {
-                capture.Stop();
-                capture = null;
+                _capture.Stop();
+                _capture = null;
             }
         }
 
         private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (capture != null)
+            if (_capture != null)
             {
-                capture.Pause();
+                _capture.Pause();
             }
         }
-
-        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (capture != null || imgInput != null)
-            {
-                imgGray = imgInput.Convert<Gray, byte>();
-                pictureBox2.Image = imgGray.Bitmap;
-            }
-
-        }
-
-        private void iccToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            imgYcc = imgInput.Convert<Ycc, byte>();
-            pictureBox2.Image = imgYcc.Bitmap;
-        }
-        
         //coordinates
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
-            Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            Color pixelColor = bitmap.GetPixel(e.X, e.Y);
-            MessageBox.Show(pixelColor.ToString());
+            MessageBox.Show(e.X.ToString() + e.Y.ToString());
         }
 
         private string TrackBarSetting(TrackBar trackBar)
@@ -324,78 +342,10 @@ namespace Football
             pictureBox2.Image = imgRange.Bitmap;
 
         }
-
-       
-
-        private void toolValues_Null()
+        private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "0";
-            label2.Text = "0";
-            label3.Text = "0";
-            label4.Text = "0";
-            label5.Text = "0";
-            label6.Text = "0";
-
-        }
-
-        private void redToolStripMenuItem1_Click_1(object sender, EventArgs e)
-        {
-            toolValues_Null();
-            label1.Text = "245";
-            label2.Text = "13";
-            label3.Text = "0";
-            label4.Text = "255";
-            label5.Text = "17";
-            label6.Text = "7";
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        private void orangeToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            toolValues_Null();
-            label1.Text = "36";
-            label2.Text = "83";
-            label3.Text = "1";
-            label4.Text = "255";
-            label5.Text = "126";
-            label6.Text = "106";
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        private void yellowToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            toolValues_Null();
-            label1.Text = "222";
-            label2.Text = "235";
-            label3.Text = "0";
-            label4.Text = "255";
-            label5.Text = "255";
-            label6.Text = "30";
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        private void greenToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            toolValues_Null();
-            label1.Text = "0";
-            label2.Text = "199";
-            label3.Text = "0";
-            label4.Text = "23";
-            label5.Text = "252";
-            label6.Text = "7";
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        private void blueToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            toolValues_Null();
-            label1.Text = "0";
-            label2.Text = "0";
-            label3.Text = "229";
-            label4.Text = "10";
-            label5.Text = "7";
-            label6.Text = "255";
-            redToolStripMenuItem_Click(sender, e);
+            aTeamLabel.Text = "0";
+            bTeamLabel.Text = "0";
         }
     }
 }
