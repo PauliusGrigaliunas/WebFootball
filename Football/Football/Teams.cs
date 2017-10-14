@@ -40,14 +40,15 @@ namespace Football
            
                 sa = new SqlDataAdapter(cmd);
                 sa.Fill(dt);
+                
                 cmd.CommandText = "INSERT INTO teamTable (Name,Victories,Goals) VALUES('" + name + "','" + victories + "','" + goals + "')";
                 cmd.ExecuteNonQuery();              //vykdom savo uzklausa virsuj parasyta
 
-                //MessageBox.Show("Teams successfully registered!");
+              //  MessageBox.Show("Teams successfully registered!");
                 
                 con.Close();
                 insertToTable("Namas", 2, 6);
-               
+                deleateTable();
             }
             catch (Exception ex)
             {
@@ -155,6 +156,14 @@ namespace Football
                 MessageBox.Show(ex.Message);
             }
            
+        }
+        public void deleateTable()
+        {
+            for (int i = 1; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[5].Delete();
+
+            }
         }
 
 
