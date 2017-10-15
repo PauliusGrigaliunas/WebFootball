@@ -19,10 +19,11 @@ namespace Football
     {
         int _xBallPosition { get; set; }
         int _timeElapsed;
-        private Stopwatch stopwatche = new Stopwatch();
         VideoCapture _capture { get; set; }
         public string aText;
         public string bText;
+
+
         private Stopwatch stopwatch = new Stopwatch();
 
         private bool isATeamScored = false;
@@ -47,13 +48,13 @@ namespace Football
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
-                stopwatche.Reset();
+                stopwatch.Reset();
                 isTeamScored = false;
             }
             return text;
         }
 
-/*
+
         public void StartStopwatch(int x)
         {
             if (x > 440)
@@ -79,6 +80,6 @@ namespace Football
 
 
 
-        }*/
+        }
     }
 }

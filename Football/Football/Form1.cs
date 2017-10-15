@@ -115,9 +115,6 @@ namespace Football
             gcheck = new GoalsChecker(stopwatch);
             aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
             bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
-            //CheckForScore();
-
-
 
 
             Mat mat = _capture.QueryFrame();       //getting frames            
@@ -165,32 +162,9 @@ namespace Football
             }
             Application.Exit();
         }
-        //check for scoring and write in GUI
-        private void CheckForScore()
-        {
-            int temp;
-            //stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isBTeamScored == true)
-            {
-                temp = int.Parse(bTeamLabel.Text);
-                temp = temp + 1;
-                bTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isBTeamScored = false;
-            }       
-            else if (_timeElapsed >= 3 && isATeamScored == true)
-            {
-                temp = int.Parse(aTeamLabel.Text);
-                temp = temp + 1;
-                aTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isATeamScored = false;
-            }
-            
-        }
+
         //start stopwatch
+        
         private void StartStopwatch(int x)
         {
             if (x > 440)
