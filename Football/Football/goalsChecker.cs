@@ -50,5 +50,23 @@ namespace Football
             return text;
 
         }
+
+        private void StartStopwatch(int x, int xLow, int xHigh, bool isTeamScored)
+        {
+            //A 0 , 45 ; B 440 500;
+
+            if ( xLow < x && x < xHigh)
+            {
+                isTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                isTeamScored = false;
+                stopwatch.Reset();
+            }
+
+        }
     }
 }
