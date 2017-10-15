@@ -18,15 +18,22 @@ namespace Football
     public class GoalsChecker
     {
         int _xBallPosition { get; set; }
-        int _timeElapsed = 0;
-        private Stopwatch stopwatch = new Stopwatch();
+        int _timeElapsed;
+        private Stopwatch stopwatche = new Stopwatch();
         VideoCapture _capture { get; set; }
         public string aText;
         public string bText;
+        private Stopwatch stopwatch = new Stopwatch();
 
-        public GoalsChecker()
+        private bool isATeamScored = false;
+        private bool isBTeamScored = false;
+
+        public GoalsChecker(Stopwatch stopwatch)
         {
+            this.stopwatch = stopwatch;
         }
+
+
 
 
         public string CheckForScore(string text, bool isTeamScored)
@@ -40,15 +47,38 @@ namespace Football
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
-                stopwatch.Reset();
+                stopwatche.Reset();
                 isTeamScored = false;
             }
             return text;
         }
 
+/*
+        public void StartStopwatch(int x)
+        {
+            if (x > 440)
+            {
+                isATeamScored = false;
+                isBTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else if (x < 45)
+            {
+                isBTeamScored = false;
+                isATeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                isBTeamScored = false;
+                isATeamScored = false;
+                stopwatch.Reset();
+            }
 
 
 
-
+        }*/
     }
 }

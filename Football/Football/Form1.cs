@@ -108,10 +108,17 @@ namespace Football
             }
         }
 
-
+        GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            CheckForScore();
+            
+            gcheck = new GoalsChecker(stopwatch);
+            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
+            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+            //CheckForScore();
+
+
+
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -141,6 +148,8 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+
+                //gcheck.StartStopwatch(_xBallPosition);
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
