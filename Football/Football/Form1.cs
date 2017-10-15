@@ -116,10 +116,14 @@ namespace Football
             }
         }
 
-
+        GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            CheckForScore();
+            
+            gcheck = new GoalsChecker(stopwatch);
+            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
+            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -128,7 +132,16 @@ namespace Football
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            imgFiltered = GetFilteredImage(imgOriginal);
+            var filter = new ImgFilter(imgOriginal);
+            imgFiltered = filter.GetFilteredImage();
+
+            BallPosition(imgCircles);
+
+            pictureBox2.Image = imgCircles.Bitmap;
+        }
+
+        private void BallPosition(Image<Bgr, byte> imgCircles) {
+
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
@@ -140,12 +153,10 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
-
-
-            pictureBox2.Image = imgCircles.Bitmap;
         }
 
 
@@ -159,43 +170,8 @@ namespace Football
             Application.Exit();
         }
 
-        //get filtered img with some corrections
-        private Image<Gray, byte> GetFilteredImage(Image<Bgr, byte> imgOriginal)
-        {
-            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
-
-            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
-            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
-            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            return imgSmoothed;
-        }
-        //check for scoring and write in GUI
-        private void CheckForScore()
-        {
-            int temp;
-            //stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isBTeamScored == true)
-            {
-                temp = int.Parse(bTeamLabel.Text);
-                temp = temp + 1;
-                bTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isBTeamScored = false;
-            }       
-            else if (_timeElapsed >= 3 && isATeamScored == true)
-            {
-                temp = int.Parse(aTeamLabel.Text);
-                temp = temp + 1;
-                aTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isATeamScored = false;
-            }
-            
-        }
         //start stopwatch
+        
         private void StartStopwatch(int x)
         {
             if (x > 440)
@@ -463,6 +439,7 @@ namespace Football
             sa = new SqlDataAdapter(cmd);
             sa.Fill(dt);
             //koia info lentelej
+
 
             VictA = team.getVictories(dt, name1); 
             GoalA = team.getGoals(dt, name1);
