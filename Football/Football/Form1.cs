@@ -429,7 +429,7 @@ namespace Football
              VictB=0;
              GoalB=0;
             
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
             con.Open();
 
             cmd = con.CreateCommand();

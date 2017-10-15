@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Zmones]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)
