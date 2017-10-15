@@ -16,7 +16,7 @@ using System.Threading;
 using Emgu.CV.UI;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Cuda;
-
+using System.Data.SqlClient;
 namespace Football
 {
 
@@ -24,6 +24,8 @@ namespace Football
     {
         bool isBTeamScored = false;
         bool isATeamScored = false;
+        int teamAScores;
+        int teamBScores;
         private Stopwatch stopwatch = new Stopwatch();
         int _xBallPosition { get; set; }
         int _yBallPosition { get; set; }
@@ -32,6 +34,14 @@ namespace Football
         Image<Bgr, byte> imgInput = null;
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
+
+        Teams team = new Teams();
+        SqlCommand cmd;
+        SqlDataAdapter sa;
+        DataTable dt = new DataTable();
+ 
+        String name1;
+        String name2;
         System.Windows.Forms.Timer _timer;
         int[] xCoords = new int[99999999];
         int i = 0;
@@ -42,6 +52,17 @@ namespace Football
             InitializeComponent();
         }
 
+        public int TeamAScores { get => teamAScores; set => teamAScores = value; }
+        public int TeamBScores { get => teamBScores; set => teamBScores = value; }
+        
+        public void setName1(String name)
+        {
+            this.name1 = name;
+        }
+        public void setName2(String name)
+        {
+            this.name2 = name;
+        }
 
         private void Video()
         {
@@ -89,10 +110,14 @@ namespace Football
             }
         }
 
-
+        GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            CheckForScore();
+            
+            gcheck = new GoalsChecker(stopwatch);
+            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
+            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -101,7 +126,18 @@ namespace Football
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            imgFiltered = GetFilteredImage(imgOriginal);
+            //imgFiltered = GetFilteredImage(imgOriginal);
+
+            var filter = new ImgFilter(imgOriginal);
+            imgFiltered = filter.GetFilteredImage();
+
+            BallPosition(imgCircles);
+
+            pictureBox2.Image = imgCircles.Bitmap;
+        }
+
+        private void BallPosition(Image<Bgr, byte> imgCircles) {
+
 
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
@@ -111,6 +147,7 @@ namespace Football
                  textXYradius.ScrollToCaret();          */                           //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
 
@@ -118,6 +155,7 @@ namespace Football
             }
             pictureBox2.Image = imgCircles.Bitmap;
         }
+
 
         //get filtered img with some corrections
         private Image<Gray, byte> GetFilteredImage(Image<Bgr, byte> imgOriginal)
@@ -158,6 +196,8 @@ namespace Football
                 isATeamScored = false;
             }
         }
+
+
         //start stopwatch
         private void StartStopwatch(int x)
         {
@@ -417,6 +457,60 @@ namespace Football
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine); // printf
                 textXYradius.AppendText("ball is going right:  " + ballGoingRight); // kamuolio kryptis
             }
+
+        private void scoreLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.TeamBScores = int.Parse(bTeamLabel.Text);
+            this.TeamAScores = int.Parse(aTeamLabel.Text);
+            
+            int victA=0;
+            int goalA=0;
+            int victB=0;
+            int goalB=0;
+            
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+            con.Open();
+
+            cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT * FROM teamTable";
+            cmd.ExecuteNonQuery();
+            sa = new SqlDataAdapter(cmd);
+            sa.Fill(dt);
+            //koia info lentelej
+           
+            victA = team.getVictories(dt, name1); 
+            goalA = team.getGoals(dt, name1);
+            victB = team.getVictories(dt, name2);
+            goalB = team.getGoals(dt, name2);
+
+            goalA = goalA + TeamAScores;
+            goalB = goalB + TeamBScores;
+            if(teamAScores>TeamBScores)
+            {
+                victA = victA + 1;
+            }
+            else if(teamAScores < TeamBScores)
+            {
+                victB = victB + 1;
+            }
+            con.Close();
+
+            team.insertToTable(name1, victA, goalA);
+            team.insertToTable(name2, victB, goalB);
+         
+            MessageBox.Show("Saved");
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

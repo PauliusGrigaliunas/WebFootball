@@ -73,6 +73,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -91,6 +92,7 @@
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnPause);
             this.panel1.Controls.Add(this.btnPlay);
@@ -133,6 +135,7 @@
             this.btnStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 41);
+
             this.btnStop.TabIndex = 35;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -144,6 +147,7 @@
             this.btnPause.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(75, 41);
+
             this.btnPause.TabIndex = 34;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = true;
@@ -195,6 +199,7 @@
             this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 29;
             this.label8.Text = "Team B:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
@@ -209,11 +214,14 @@
             // 
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+
             this.scoreLabel.Location = new System.Drawing.Point(12, 532);
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(265, 20);
             this.scoreLabel.TabIndex = 27;
             this.scoreLabel.Text = "Kiek kuri komanda imuse goal\'u:";
+            //this.scoreLabel.Click += new System.EventHandler(this.scoreLabel_Click);
+
             // 
             // textXYradius
             // 
@@ -532,6 +540,16 @@
             this.redToolStripMenuItem.Text = "ColorFilter";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(448, 635);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 36);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "Save ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -608,6 +626,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Button button1;
     }
 }
 
