@@ -38,7 +38,9 @@ namespace Football
         SqlCommand cmd;
         SqlDataAdapter sa;
         DataTable dt = new DataTable();
- 
+
+        GoalsChecker gcheck = new GoalsChecker();
+
         String name1;
         String name2;
         System.Windows.Forms.Timer _timer;
@@ -108,11 +110,10 @@ namespace Football
             }
         }
 
-        GoalsChecker gcheck;
+
         private void TimeTick(object sender, EventArgs e)
         {
-            
-            gcheck = new GoalsChecker();
+
             aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
             bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
 
@@ -144,7 +145,6 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-
 
 
                 isATeamScored = gcheck.StartStopwatch(_xBallPosition, 300, 480);

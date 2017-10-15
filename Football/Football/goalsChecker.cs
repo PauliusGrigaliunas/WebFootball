@@ -27,7 +27,7 @@ namespace Football
 
         public GoalsChecker()
         {
-            
+            stopwatch.Start();
         }
 
 
