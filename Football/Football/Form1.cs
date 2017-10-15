@@ -120,9 +120,15 @@ namespace Football
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            ImgFilter filter = new ImgFilter(imgOriginal);
+            var filter = new ImgFilter(imgOriginal);
             imgFiltered = filter.GetFilteredImage();
 
+            BallPosition(imgCircles);
+
+            pictureBox2.Image = imgCircles.Bitmap;
+        }
+
+        private void BallPosition(Image<Bgr, byte> imgCircles) {
 
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
@@ -138,9 +144,6 @@ namespace Football
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
-
-
-            pictureBox2.Image = imgCircles.Bitmap;
         }
 
 
