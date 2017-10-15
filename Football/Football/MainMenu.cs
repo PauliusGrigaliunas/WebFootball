@@ -30,7 +30,11 @@ namespace Football
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\bin\Debug\database121.mdf;Integrated Security=True");
+
+            //SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+
             con.Open();
 
             cmd = con.CreateCommand();
@@ -50,12 +54,11 @@ namespace Football
             {
                 team.addToTable(Name2, 0, 0);
             }
+          
+           
             con.Close();
 
-            if (Name1 == "a")
-            {
-                MessageBox.Show("it is a");
-            }
+            
             MessageBox.Show("Teams successfully registered!");
             form.Show();
             form.setName1(Name1);

@@ -83,6 +83,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAllTeams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAllTeams.Designer.cs">
+      <DependentUpon>FormAllTeams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsTeamB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsTeamB.Designer.cs">
+      <DependentUpon>FormsTeamB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTeamA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeamA.Designer.cs">
+      <DependentUpon>FormTeamA.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +115,15 @@
     <Compile Include="Video.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAllTeams.resx">
+      <DependentUpon>FormAllTeams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsTeamB.resx">
+      <DependentUpon>FormsTeamB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTeamA.resx">
+      <DependentUpon>FormTeamA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
