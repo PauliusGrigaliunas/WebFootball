@@ -17,8 +17,6 @@ namespace Football
 {
     public class GoalsChecker
     {
-        bool isBTeamScored = false;
-        bool isATeamScored = false;
         int _xBallPosition { get; set; }
         int _timeElapsed = 0;
         private Stopwatch stopwatch = new Stopwatch();
@@ -31,7 +29,7 @@ namespace Football
         }
 
 
-        public string CheckForScore(string text)
+        public string CheckForScore(string text, bool isTeamScored)
         {
             int temp;
             //stopwatch.Stop();
