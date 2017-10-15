@@ -15,6 +15,8 @@ namespace Football
     {
 
         private int rows;
+        Connector conector = new Connector();
+
         public FormAllTeams()
         {
             InitializeComponent();
@@ -30,11 +32,10 @@ namespace Football
         public void fillData()
         {
 
-             
-              SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+            SqlConnection con = conector.Connect();
 
-            
-             SqlCommand cmd;
+
+            SqlCommand cmd;
              SqlDataAdapter sa;
            
              con.Open();

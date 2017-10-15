@@ -47,6 +47,8 @@ namespace Football
         private int goalB ;
         System.Windows.Forms.Timer _timer;
 
+        Connector conector = new Connector();
+
         public Form1()
         {
             InitializeComponent();
@@ -428,8 +430,8 @@ namespace Football
              GoalA=0;
              VictB=0;
              GoalB=0;
-            
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+
+            SqlConnection con = conector.Connect();
             con.Open();
 
             cmd = con.CreateCommand();
