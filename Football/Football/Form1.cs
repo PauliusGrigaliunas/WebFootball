@@ -26,7 +26,6 @@ namespace Football
         bool isATeamScored = false;
         private Stopwatch stopwatch = new Stopwatch();
         int _xBallPosition { get; set; }
-        int _timeElapsed = 0;
         VideoCapture _capture { get; set; }
         Image<Bgr, byte> imgInput = null;
         Image<Bgr, byte> imgOriginal { get; set; }
@@ -91,12 +90,14 @@ namespace Football
             imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+
+
             ImgFilter filter = new ImgFilter(imgOriginal);    imgFiltered = filter.GetFilteredImage();
 
-            GoalsChecker goals = new GoalsChecker(aTeamLabel.Text, bTeamLabel.Text);
-            goals.CheckForScore();
-            label1.Text = goals.aText;
-            label2.Text = goals.bText;
+            GoalsChecker goals = new GoalsChecker();
+            aTeamLabel.Text = goals.CheckForScore(aTeamLabel.Text, isATeamScored);
+            bTeamLabel.Text = goals.CheckForScore(bTeamLabel.Text, isBTeamScored);
+
             //GetFilteredImage(imgOriginal);
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
@@ -109,7 +110,8 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-                goals.StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                StartStopwatch(x);
+                //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
 
@@ -126,6 +128,33 @@ namespace Football
             }
             Application.Exit();
         }
+
+        public void StartStopwatch(int x)
+        {
+            if (x > 440)
+            {
+                isATeamScored = false;
+                isBTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else if (x < 45)
+            {
+                isBTeamScored = false;
+                isATeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                isBTeamScored = false;
+                isATeamScored = false;
+                stopwatch.Reset();
+            }
+
+        }
+
+
 
         //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput)

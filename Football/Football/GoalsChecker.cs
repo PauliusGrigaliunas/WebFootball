@@ -23,65 +23,33 @@ namespace Football
         int _timeElapsed = 0;
         private Stopwatch stopwatch = new Stopwatch();
         VideoCapture _capture { get; set; }
-        Image<Bgr, byte> imgInput = null;
         public string aText;
         public string bText;
 
-        public GoalsChecker(string a, string b)
+        public GoalsChecker()
         {
-            aText = a;
-            bText = b;
         }
 
 
-        public void CheckForScore()
+        public string CheckForScore(string text)
         {
             int temp;
             //stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isBTeamScored == true)
+            if (_timeElapsed >= 3 && isTeamScored == true)
             {
-                temp = int.Parse(bText);
+                temp = int.Parse(text);
                 temp = temp + 1;
-                bText = temp.ToString();
+                text = temp.ToString();
                 stopwatch.Reset();
-                isBTeamScored = false;
+                isTeamScored = false;
             }
-            else if (_timeElapsed >= 3 && isATeamScored == true)
-            {
-                temp = int.Parse(aText);
-                temp = temp + 1;
-                aText = temp.ToString();
-                stopwatch.Reset();
-                isATeamScored = false;
-            }
+            return text;
         }
 
-        public void StartStopwatch(int x)
-        {
-            if (x > 440)
-            {
-                isATeamScored = false;
-                isBTeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else if (x < 45)
-            {
-                isBTeamScored = false;
-                isATeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else
-            {
-                isBTeamScored = false;
-                isATeamScored = false;
-                stopwatch.Reset();
-            }
 
-        }
+
 
 
     }
