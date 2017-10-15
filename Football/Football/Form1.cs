@@ -504,14 +504,14 @@ namespace Football
         private void button3_Click(object sender, EventArgs e)
         {
             FormsTeamB form = new FormsTeamB();
-            form.loadInfo(name2, VictB, GoalB);
+            form.loadInfo(name2, VictB, GoalB,teamBScores);
             form.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormTeamA form = new FormTeamA();
-            form.loadInfo(name1, VictA, GoalA);
+            form.loadInfo(name1, VictA, GoalA,teamAScores);
             form.Show();
         }
     }

@@ -26,14 +26,20 @@ namespace Football
         {
 
         }
-        public void loadInfo(String name, int victories, int goals)
+        public void loadInfo(String name, int victories, int goals, int goalsthis)
         {
             label4.Text = name;
             label5.Text = victories.ToString();
-            label6.Text = goals.ToString();
+            label6.Text = goals.ToString();    
+            label9.Text = goalsthis.ToString();
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
