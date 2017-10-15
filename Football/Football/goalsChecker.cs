@@ -39,7 +39,7 @@ namespace Football
             //stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isTeamScored == true)
+            if (_timeElapsed >= 3 /*&& isTeamScored == true*/)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
@@ -51,9 +51,10 @@ namespace Football
 
         }
 
-        private void StartStopwatch(int x, int xLow, int xHigh, bool isTeamScored)
+        public bool StartStopwatch(int x, int xLow, int xHigh)
         {
-            //A 0 , 45 ; B 440 500;
+            bool isTeamScored;
+            //A 0 , 45 ; B 440, 500;
 
             if ( xLow < x && x < xHigh)
             {
@@ -66,7 +67,7 @@ namespace Football
                 isTeamScored = false;
                 stopwatch.Reset();
             }
-
+            return isTeamScored;
         }
     }
 }

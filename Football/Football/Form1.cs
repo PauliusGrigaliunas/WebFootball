@@ -116,7 +116,6 @@ namespace Football
             aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
             bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
 
-
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
@@ -146,7 +145,13 @@ namespace Football
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
 
-                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+
+
+                isATeamScored = gcheck.StartStopwatch(_xBallPosition, 440, 500);
+                //isBTeamScored = gcheck.StartStopwatch(_xBallPosition, 0, 50 );
+
+
+                //StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
         }
