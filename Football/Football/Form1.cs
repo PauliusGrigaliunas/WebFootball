@@ -146,7 +146,6 @@ namespace Football
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
 
-                //gcheck.StartStopwatch(_xBallPosition);
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }

@@ -22,12 +22,8 @@ namespace Football
         VideoCapture _capture { get; set; }
         public string aText;
         public string bText;
-
-
         private Stopwatch stopwatch = new Stopwatch();
 
-        private bool isATeamScored = false;
-        private bool isBTeamScored = false;
 
         public GoalsChecker(Stopwatch stopwatch)
         {
@@ -52,33 +48,6 @@ namespace Football
                 isTeamScored = false;
             }
             return text;
-        }
-
-
-        public void StartStopwatch(int x)
-        {
-            if (x > 440)
-            {
-                isATeamScored = false;
-                isBTeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else if (x < 45)
-            {
-                isBTeamScored = false;
-                isATeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else
-            {
-                isBTeamScored = false;
-                isATeamScored = false;
-                stopwatch.Reset();
-            }
-
-
 
         }
     }
