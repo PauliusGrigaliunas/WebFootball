@@ -11,7 +11,7 @@ using Emgu.CV.UI;
 
 namespace Football
 {
-    class Filter
+    class ImgFilter
     {
 
     }
