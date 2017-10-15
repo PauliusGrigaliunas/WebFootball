@@ -50,6 +50,8 @@ namespace Football
             {
                 team.addToTable(Name2, 0, 0);
             }
+          
+           
             con.Close();
 
             

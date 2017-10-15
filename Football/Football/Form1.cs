@@ -41,6 +41,10 @@ namespace Football
  
         String name1;
         String name2;
+        private int victA ;
+        private int goalA ;
+        private int victB ;
+        private int goalB ;
         System.Windows.Forms.Timer _timer;
 
         public Form1()
@@ -50,7 +54,11 @@ namespace Football
 
         public int TeamAScores { get => teamAScores; set => teamAScores = value; }
         public int TeamBScores { get => teamBScores; set => teamBScores = value; }
-        
+        public int VictA { get => victA; set => victA = value; }
+        public int GoalA { get => goalA; set => goalA = value; }
+        public int VictB { get => victB; set => victB = value; }
+        public int GoalB { get => goalB; set => goalB = value; }
+
         public void setName1(String name)
         {
             this.name1 = name;
@@ -440,10 +448,10 @@ namespace Football
             this.TeamBScores = int.Parse(bTeamLabel.Text);
             this.TeamAScores = int.Parse(aTeamLabel.Text);
             
-            int victA=0;
-            int goalA=0;
-            int victB=0;
-            int goalB=0;
+             VictA=0;
+             GoalA=0;
+             VictB=0;
+             GoalB=0;
             
             SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
             con.Open();
@@ -456,25 +464,25 @@ namespace Football
             sa.Fill(dt);
             //koia info lentelej
 
-            victA = team.getVictories(dt, name1); 
-            goalA = team.getGoals(dt, name1);
-            victB = team.getVictories(dt, name2);
-            goalB = team.getGoals(dt, name2);
+            VictA = team.getVictories(dt, name1); 
+            GoalA = team.getGoals(dt, name1);
+            VictB = team.getVictories(dt, name2);
+            GoalB = team.getGoals(dt, name2);
 
-            goalA = goalA + TeamAScores;
-            goalB = goalB + TeamBScores;
+            GoalA = GoalA + TeamAScores;
+            GoalB = GoalB + TeamBScores;
             if(teamAScores>TeamBScores)
             {
-                victA = victA + 1;
+                VictA = VictA + 1;
             }
             else if(teamAScores < TeamBScores)
             {
-                victB = victB + 1;
+                VictB = VictB + 1;
             }
             con.Close();
 
-            team.insertToTable(name1, victA, goalA);
-            team.insertToTable(name2, victB, goalB);
+            team.insertToTable(name1, VictA, GoalA);
+            team.insertToTable(name2, VictB, GoalB);
          
             MessageBox.Show("Saved");
 
@@ -483,6 +491,28 @@ namespace Football
         private void label8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FormAllTeams form = new FormAllTeams();
+
+            form.Show();
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormsTeamB form = new FormsTeamB();
+            form.loadInfo(name2, VictB, GoalB);
+            form.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormTeamA form = new FormTeamA();
+            form.loadInfo(name1, VictA, GoalA);
+            form.Show();
         }
     }
 }
