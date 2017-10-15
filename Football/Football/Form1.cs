@@ -112,7 +112,7 @@ namespace Football
         private void TimeTick(object sender, EventArgs e)
         {
             
-            gcheck = new GoalsChecker(stopwatch);
+            gcheck = new GoalsChecker();
             aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
             bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
 
@@ -147,8 +147,8 @@ namespace Football
 
 
 
-                isATeamScored = gcheck.StartStopwatch(_xBallPosition, 440, 500);
-                //isBTeamScored = gcheck.StartStopwatch(_xBallPosition, 0, 50 );
+                isATeamScored = gcheck.StartStopwatch(_xBallPosition, 300, 480);
+                isBTeamScored = gcheck.StartStopwatch(_xBallPosition, 0, 180);
 
 
                 //StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
@@ -168,7 +168,7 @@ namespace Football
         }
 
         //start stopwatch
-        
+        /*
         private void StartStopwatch(int x)
         {
             if (x > 440)
@@ -192,7 +192,7 @@ namespace Football
                 stopwatch.Reset();
             }
 
-        }
+        }*/
         //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput)
         {

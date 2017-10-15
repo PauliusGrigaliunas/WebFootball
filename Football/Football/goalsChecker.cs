@@ -22,24 +22,24 @@ namespace Football
         VideoCapture _capture { get; set; }
         public string aText;
         public string bText;
-        private Stopwatch stopwatch = new Stopwatch();
 
+        public Stopwatch stopwatch = new Stopwatch();
 
-        public GoalsChecker(Stopwatch stopwatch)
+        public GoalsChecker()
         {
-            this.stopwatch = stopwatch;
+            
         }
 
 
-
-
-        public string CheckForScore(string text, bool isTeamScored)
+        public string CheckForScore(string text, bool isTeamScored )
         {
+
+            Console.WriteLine(stopwatch.ToString());
             int temp;
             //stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 /*&& isTeamScored == true*/)
+            if (_timeElapsed >= 3 && isTeamScored == true)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
