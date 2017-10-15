@@ -108,10 +108,14 @@ namespace Football
             }
         }
 
-
+        GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            CheckForScore();
+            
+            gcheck = new GoalsChecker(stopwatch);
+            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
+            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -120,9 +124,15 @@ namespace Football
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            ImgFilter filter = new ImgFilter(imgOriginal);
+            var filter = new ImgFilter(imgOriginal);
             imgFiltered = filter.GetFilteredImage();
 
+            BallPosition(imgCircles);
+
+            pictureBox2.Image = imgCircles.Bitmap;
+        }
+
+        private void BallPosition(Image<Bgr, byte> imgCircles) {
 
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
@@ -135,12 +145,10 @@ namespace Football
                 //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+
                 StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
-
-
-            pictureBox2.Image = imgCircles.Bitmap;
         }
 
 
@@ -153,32 +161,9 @@ namespace Football
             }
             Application.Exit();
         }
-        //check for scoring and write in GUI
-        private void CheckForScore()
-        {
-            int temp;
-            //stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && isBTeamScored == true)
-            {
-                temp = int.Parse(bTeamLabel.Text);
-                temp = temp + 1;
-                bTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isBTeamScored = false;
-            }       
-            else if (_timeElapsed >= 3 && isATeamScored == true)
-            {
-                temp = int.Parse(aTeamLabel.Text);
-                temp = temp + 1;
-                aTeamLabel.Text = temp.ToString();
-                stopwatch.Reset();
-                isATeamScored = false;
-            }
-            
-        }
+
         //start stopwatch
+        
         private void StartStopwatch(int x)
         {
             if (x > 440)
