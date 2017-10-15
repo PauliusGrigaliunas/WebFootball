@@ -120,7 +120,10 @@ namespace Football
             pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            imgFiltered = GetFilteredImage(imgOriginal);
+            ImgFilter filter = new ImgFilter(imgOriginal);
+            imgFiltered = filter.GetFilteredImage();
+
+
             foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
@@ -149,18 +152,6 @@ namespace Football
                 _timer.Stop();
             }
             Application.Exit();
-        }
-
-        //get filtered img with some corrections
-        private Image<Gray, byte> GetFilteredImage(Image<Bgr, byte> imgOriginal)
-        {
-            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
-
-            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
-            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
-            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            return imgSmoothed;
         }
         //check for scoring and write in GUI
         private void CheckForScore()
