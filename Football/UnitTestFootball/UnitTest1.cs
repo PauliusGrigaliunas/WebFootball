@@ -8,8 +8,17 @@ namespace UnitTestFootball
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void IsConnectionStringCorrect()
         {
+            //Access
+             
+            //Act
+            /*Calculator.Sum(2, 2);
+            int sum;
+            sum = Calculator.Sum(2, 2);
+
+            //Assert
+            Assert.AreEqual(sum, 4);*/
         }
     }
 }

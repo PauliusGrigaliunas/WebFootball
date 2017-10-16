@@ -8,12 +8,12 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 
 
-
 namespace Football
 {
 
     public class Teams
     {
+
         private int teamNumber;
         private string teamName;
         //  private int victories;
