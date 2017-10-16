@@ -34,7 +34,7 @@ namespace Football
         {
             Form1 form = new Form1();
 
-            SqlConnection con = connector.Connect();
+           /* SqlConnection con = connector.Connect();
 
             con.Open();
 
@@ -60,7 +60,7 @@ namespace Football
             con.Close();
 
             
-            MessageBox.Show("Teams successfully registered!");
+            MessageBox.Show("Teams successfully registered!");*/
             form.Show();
             form.setName1(Name1);
             form.setName2(Name2);

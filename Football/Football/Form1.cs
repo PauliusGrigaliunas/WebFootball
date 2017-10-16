@@ -22,11 +22,11 @@ namespace Football
 
     public partial class Form1 : Form
     {
-        bool isBTeamScored = false;
-        bool isATeamScored = false;
+        public bool isBTeamScored { set; get; }
+        public bool isATeamScored { set; get; }
         int teamAScores;
         int teamBScores;
-        private Stopwatch stopwatch = new Stopwatch();
+        public Stopwatch stopwatch = new Stopwatch();
         int _xBallPosition { get; set; }
         int _timeElapsed = 0;
         VideoCapture _capture { get; set; }
@@ -174,7 +174,7 @@ namespace Football
 
         //start stopwatch
         
-        private void StartStopwatch(int x)
+        public void StartStopwatch(int x)
         {
             if (x > 440)
             {
@@ -423,7 +423,7 @@ namespace Football
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.TeamBScores = int.Parse(bTeamLabel.Text);
+     /*       this.TeamBScores = int.Parse(bTeamLabel.Text);
             this.TeamAScores = int.Parse(aTeamLabel.Text);
             
              VictA=0;
@@ -463,7 +463,7 @@ namespace Football
             team.insertToTable(name1, VictA, GoalA);
             team.insertToTable(name2, VictB, GoalB);
          
-            MessageBox.Show("Saved");
+            MessageBox.Show("Saved");*/
 
         }
 
