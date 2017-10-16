@@ -32,6 +32,7 @@ namespace Football
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
         System.Windows.Forms.Timer _timer;
+        Image<Gray, byte> imgPlayersFilter { get; set; }
 
         public Form1()
         {
@@ -59,16 +60,14 @@ namespace Football
 
                 foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
                 {
-                    if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
-                    textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
-                    circle.Radius.ToString("###,000").PadLeft(7));
-                    textXYradius.ScrollToCaret();                                     //write coordinates to textbox
-
-                _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
+                    _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
+                    StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                    imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
                 } 
                 pictureBox2.Image = imgCircles.Bitmap;
+                imgPlayersFilter = GetFilteredImageForPlayers(imgOriginal);
+                pictureBox3.Image = imgPlayersFilter.Bitmap;
+
         }
         //get filtered img with some corrections
         public Image <Gray, byte> GetFilteredImage( Image<Bgr, byte> imgOriginal )
@@ -81,8 +80,14 @@ namespace Football
             CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
             return imgSmoothed;
         }
-        //check for scoring and write in GUI
-        private void CheckForScore()
+        public Image<Gray, byte> GetFilteredImageForPlayers (Image<Bgr, byte> imgOriginal)
+        {
+            Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 0, 0), new Hsv(40, 80, 255));
+
+            return imgSmoothed;
+        }
+            //check for scoring and write in GUI
+            private void CheckForScore()
         {
             int temp;
             //stopwatch.Stop();
@@ -335,7 +340,7 @@ namespace Football
             //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
 
             //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
-            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = imgInput.Convert<Hsv,byte>().InRange(new Hsv(lowBlue, lowGreen, lowRed), new Hsv(highBlue, highGreen, highRed));
 
             imgRange.SmoothGaussian(9);
 

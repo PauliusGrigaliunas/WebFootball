@@ -70,12 +70,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -86,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -94,6 +90,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.bTeamLabel);
             this.panel1.Controls.Add(this.aTeamLabel);
@@ -124,13 +121,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(997, 683);
+            this.panel1.Size = new System.Drawing.Size(997, 730);
             this.panel1.TabIndex = 2;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(492, 584);
+            this.label11.Location = new System.Drawing.Point(730, 606);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(10, 13);
             this.label11.TabIndex = 32;
@@ -139,7 +136,7 @@
             // bTeamLabel
             // 
             this.bTeamLabel.AutoSize = true;
-            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
+            this.bTeamLabel.Location = new System.Drawing.Point(774, 606);
             this.bTeamLabel.Name = "bTeamLabel";
             this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.bTeamLabel.TabIndex = 31;
@@ -148,7 +145,7 @@
             // aTeamLabel
             // 
             this.aTeamLabel.AutoSize = true;
-            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
+            this.aTeamLabel.Location = new System.Drawing.Point(618, 606);
             this.aTeamLabel.Name = "aTeamLabel";
             this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.aTeamLabel.TabIndex = 30;
@@ -157,7 +154,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(526, 555);
+            this.label8.Location = new System.Drawing.Point(764, 577);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 29;
@@ -166,7 +163,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 555);
+            this.label7.Location = new System.Drawing.Point(602, 577);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 28;
@@ -176,7 +173,7 @@
             // 
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.scoreLabel.Location = new System.Drawing.Point(466, 499);
+            this.scoreLabel.Location = new System.Drawing.Point(704, 521);
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(61, 20);
             this.scoreLabel.TabIndex = 27;
@@ -367,7 +364,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(504, 136);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(480, 320);
+            this.pictureBox2.Size = new System.Drawing.Size(480, 293);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -377,7 +374,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(11, 136);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(480, 320);
+            this.pictureBox1.Size = new System.Drawing.Size(480, 293);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -495,63 +492,26 @@
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.redToolStripMenuItem.Text = "ColorFilter";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
-            // ballColourToolStripMenuItem
+            // pictureBox3
             // 
-            this.ballColourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.redToolStripMenuItem1,
-            this.orangeToolStripMenuItem,
-            this.yellowToolStripMenuItem,
-            this.greenToolStripMenuItem,
-            this.blueToolStripMenuItem});
-            this.ballColourToolStripMenuItem.Name = "ballColourToolStripMenuItem";
-            this.ballColourToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.ballColourToolStripMenuItem.Text = "Ball Colour";
-            // 
-            // redToolStripMenuItem1
-            // 
-            this.redToolStripMenuItem1.Name = "redToolStripMenuItem1";
-            this.redToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.redToolStripMenuItem1.Text = "Red";
-            this.redToolStripMenuItem1.Click += new System.EventHandler(this.redToolStripMenuItem1_Click_1);
-            // 
-            // orangeToolStripMenuItem
-            // 
-            this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
-            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.orangeToolStripMenuItem.Text = "Orange";
-            this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click_1);
-            // 
-            // yellowToolStripMenuItem
-            // 
-            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.yellowToolStripMenuItem.Text = "Yellow";
-            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click_1);
-            // 
-            // greenToolStripMenuItem
-            // 
-            this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.greenToolStripMenuItem.Text = "Green";
-            this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click_1);
-            // 
-            // blueToolStripMenuItem
-            // 
-            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.blueToolStripMenuItem.Text = "Blue";
-            this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click_1);
+            this.pictureBox3.Location = new System.Drawing.Point(11, 433);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(480, 293);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 33;
+            this.pictureBox3.TabStop = false;
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 703);
+            this.ClientSize = new System.Drawing.Size(996, 750);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -570,6 +530,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,6 +580,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 
