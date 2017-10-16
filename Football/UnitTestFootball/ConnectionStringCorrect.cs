@@ -10,25 +10,23 @@ using System.Threading.Tasks;
 namespace UnitTestFootball
 {
     [TestClass]
-    public class UnitTest1
+    class ConnectionString
     {
         [TestMethod]
-        public void TestMethod1()
+        public void IsConnectionStringCorrect()
         {
             //Access
             Connector connector = new Connector();
-            //SqlConnection first = connector.Connect();
+            SqlConnection first = connector.Connect();
 
             //Act
             string constring = @"Server=tcp:paulius.database.windows.net,1433;Initial Catalog=Football;Persist Security Info=False;User ID=Kamikaze;Password=p0m1d0r4s.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
-            //SqlConnection second = new SqlConnection(constring);
-
-            int a = 0;
-
+            SqlConnection second = new SqlConnection(constring);
 
             //Assert
-            Assert.AreEqual(a, a);
+            Assert.AreEqual(first, second);
+
         }
     }
 }
