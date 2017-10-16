@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Football
 {
+
     public class Teams
     {
         private int teamNumber;
@@ -18,7 +19,8 @@ namespace Football
         //  private int victories;
         // private int goals;
 
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Emilija.DELL-EMILIJOS\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+  
+        SqlConnection con = new SqlConnection(@"Server=tcp:paulius.database.windows.net,1433;Initial Catalog=Football;Persist Security Info=False;User ID=Kamikaze;Password=p0m1d0r4s.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
         SqlCommand cmd;
         SqlDataAdapter sa;
         DataTable dt = new DataTable();
