@@ -25,19 +25,25 @@ namespace Football
         private Stopwatch stopwatch = new Stopwatch();
         public static bool ballGoingRight = false;
         int tempX;
+        //public Stopwatch stopwatch = new Stopwatch();
 
         public GoalsChecker(Stopwatch stopwatch)
         {
             this.stopwatch = stopwatch;
         }
-        
+
         // Note del goal'u skaiciavimu:
         // Designer'yje sukeisti vietoj aTeamLabel ir bTeamLabel, nes app'sas turi rodyt ivarcius, o ne kiek kas "praleido" ivarciu - Tom.
+
+        // public string CheckForScore(string text, bool isTeamScored )
         public string CheckForScoreA(string text)  // goal'as Team A  vartuose, A++
         {
+
+            Console.WriteLine(stopwatch.ToString());
             int temp;
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
+            //if (_timeElapsed >= 3 && isTeamScored == true)
             if (_timeElapsed >= 3 && Form1.isATeamScored && !ballGoingRight)
             {
                 temp = int.Parse(text);

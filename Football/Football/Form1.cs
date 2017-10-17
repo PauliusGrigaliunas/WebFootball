@@ -38,7 +38,9 @@ namespace Football
         SqlCommand cmd;
         SqlDataAdapter sa;
         DataTable dt = new DataTable();
- 
+
+        GoalsChecker gcheck;
+
         String name1;
         String name2;
         System.Windows.Forms.Timer _timer;
@@ -112,12 +114,15 @@ namespace Football
             }
         }
 
-        GoalsChecker gcheck;
+
         private void TimeTick(object sender, EventArgs e)
         {
             gcheck = new GoalsChecker(stopwatch);
             aTeamLabel.Text = gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = gcheck.CheckForScoreB(bTeamLabel.Text);
+
+           // aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
+           // bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -148,6 +153,11 @@ namespace Football
                 gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);       //start stopwatch to check if it is scored or not   
                 gcheck.Direction(_xBallPosition, i, xCoords); i++;              // 
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);                 //draw circles on smoothed image
+
+                //isATeamScored = gcheck.StartStopwatch(_xBallPosition, 300, 480);
+                //isBTeamScored = gcheck.StartStopwatch(_xBallPosition, 0, 180);
+                //StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
+                //imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
             }
         }
 
@@ -162,6 +172,34 @@ namespace Football
             Application.Exit();
         }
 
+
+
+        //start stopwatch
+        /*
+        private void StartStopwatch(int x)
+        {
+            if (x > 440)
+            {
+                isATeamScored = false;
+                isBTeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else if (x < 45)
+            {
+                isBTeamScored = false;
+                isATeamScored = true;
+                stopwatch.Reset();
+                stopwatch.Start();
+            }
+            else
+            {
+                isBTeamScored = false;
+                isATeamScored = false;
+                stopwatch.Reset();
+            }
+
+        }*/
 
         //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput)
