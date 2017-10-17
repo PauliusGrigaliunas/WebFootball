@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
@@ -124,15 +124,25 @@
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 20);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1007, 767);
             this.panel1.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(448, 635);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 36);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "Save ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnStop
             // 
             this.btnStop.Location = new System.Drawing.Point(159, 479);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(72, 28);
             this.btnStop.TabIndex = 35;
@@ -143,7 +153,7 @@
             // btnPause
             // 
             this.btnPause.Location = new System.Drawing.Point(91, 479);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(2);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(64, 27);
             this.btnPause.TabIndex = 34;
@@ -154,7 +164,7 @@
             // btnPlay
             // 
             this.btnPlay.Location = new System.Drawing.Point(11, 479);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(2);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(76, 27);
             this.btnPlay.TabIndex = 33;
@@ -174,7 +184,7 @@
             // bTeamLabel
             // 
             this.bTeamLabel.AutoSize = true;
-            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
+            this.bTeamLabel.Location = new System.Drawing.Point(454, 584);
             this.bTeamLabel.Name = "bTeamLabel";
             this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.bTeamLabel.TabIndex = 31;
@@ -183,7 +193,7 @@
             // aTeamLabel
             // 
             this.aTeamLabel.AutoSize = true;
-            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
+            this.aTeamLabel.Location = new System.Drawing.Point(526, 584);
             this.aTeamLabel.Name = "aTeamLabel";
             this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.aTeamLabel.TabIndex = 30;
@@ -202,7 +212,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 555);
+            this.label7.Location = new System.Drawing.Point(414, 555);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 28;
@@ -222,7 +232,7 @@
             // textXYradius
             // 
             this.textXYradius.Location = new System.Drawing.Point(579, 18);
-            this.textXYradius.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textXYradius.Margin = new System.Windows.Forms.Padding(2);
             this.textXYradius.Multiline = true;
             this.textXYradius.Name = "textXYradius";
             this.textXYradius.ReadOnly = true;
@@ -337,7 +347,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.checkBox1.Location = new System.Drawing.Point(11, 6);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(111, 27);
             this.checkBox1.TabIndex = 7;
@@ -402,7 +412,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(504, 136);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(480, 320);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -412,7 +422,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(11, 136);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(480, 320);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -536,16 +546,6 @@
             this.redToolStripMenuItem.Text = "ColorFilter";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(448, 635);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 36);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "Save ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -554,7 +554,7 @@
             this.ClientSize = new System.Drawing.Size(996, 703);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

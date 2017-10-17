@@ -22,8 +22,8 @@ namespace Football
 
     public partial class Form1 : Form
     {
-        bool isBTeamScored = false;
-        bool isATeamScored = false;
+        public static bool isBTeamScored = false;
+        public static bool isATeamScored = false;
         int teamAScores;
         int teamBScores;
         private Stopwatch stopwatch = new Stopwatch();
@@ -42,6 +42,10 @@ namespace Football
         String name1;
         String name2;
         System.Windows.Forms.Timer _timer;
+
+        bool isTeamScored = false;
+        int i = 0;
+        int[] xCoords = new int[99999999];
 
         public Form1()
         {
@@ -68,7 +72,7 @@ namespace Football
             {
                 _capture = new Emgu.CV.VideoCapture(ofd.FileName);
                 _timer = new System.Windows.Forms.Timer();
-                _timer.Interval = 1000 / 30;
+                _timer.Interval = 1000 / 45; //30
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
                 
@@ -111,10 +115,9 @@ namespace Football
         GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            
             gcheck = new GoalsChecker(stopwatch);
-            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
-            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+            aTeamLabel.Text = gcheck.CheckForScoreA(aTeamLabel.Text);
+            bTeamLabel.Text = gcheck.CheckForScoreB(bTeamLabel.Text);
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -137,22 +140,14 @@ namespace Football
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
 
-                textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                /*textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
                 circle.Radius.ToString("###,000").PadLeft(7));
-                textXYradius.ScrollToCaret();
-
-                //write coordinates to textbox
+                textXYradius.ScrollToCaret();*/  //write coordinates to textbox
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-
-
-
-                isATeamScored = gcheck.StartStopwatch(_xBallPosition, 440, 500);
-                //isBTeamScored = gcheck.StartStopwatch(_xBallPosition, 0, 50 );
-
-
-                //StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
+                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);       //start stopwatch to check if it is scored or not   
+                gcheck.Direction(_xBallPosition, i, xCoords); i++;              // 
+                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                 //draw circles on smoothed image
             }
         }
 
@@ -167,32 +162,7 @@ namespace Football
             Application.Exit();
         }
 
-        //start stopwatch
-        
-        private void StartStopwatch(int x)
-        {
-            if (x > 440)
-            {
-                isATeamScored = false;
-                isBTeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else if (x < 45)
-            {
-                isBTeamScored = false;
-                isATeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-            else
-            {
-                isBTeamScored = false;
-                isATeamScored = false;
-                stopwatch.Reset();
-            }
 
-        }
         //get a picture from local area
         private void takeAPicture(Image<Bgr, byte> imgInput)
         {

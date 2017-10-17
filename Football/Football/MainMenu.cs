@@ -30,7 +30,7 @@ namespace Football
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
+            /*SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Tomas\Documents\GitHub\FootBall\Football\Football\database121.mdf;Integrated Security=True");
             con.Open();
 
             cmd = con.CreateCommand();
@@ -59,7 +59,8 @@ namespace Football
             MessageBox.Show("Teams successfully registered!");
             form.Show();
             form.setName1(Name1);
-            form.setName2(Name2);
+            form.setName2(Name2);*/
+            form.Show();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
