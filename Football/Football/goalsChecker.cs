@@ -31,8 +31,6 @@ namespace Football
         }
 
 
-
-
         public string CheckForScore(string text, bool isTeamScored)
         {
             int temp;

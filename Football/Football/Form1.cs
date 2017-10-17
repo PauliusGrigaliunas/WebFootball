@@ -38,7 +38,9 @@ namespace Football
         SqlCommand cmd;
         SqlDataAdapter sa;
         DataTable dt = new DataTable();
- 
+        Picture picture = new Picture();
+
+
         String name1;
         String name2;
         private int victA ;
@@ -198,23 +200,6 @@ namespace Football
             }
 
         }
-        //get a picture from local area
-        private void takeAPicture(Image<Bgr, byte> imgInput)
-        {
-            try
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    imgInput = new Image<Bgr, byte>(ofd.FileName);
-                    pictureBox1.Image = imgInput.Bitmap;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -231,7 +216,7 @@ namespace Football
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            takeAPicture(imgInput);
+            pictureBox1.Image = picture.TakeAPicture().Bitmap;
         }
         //layers
 
@@ -464,11 +449,6 @@ namespace Football
             team.insertToTable(name2, VictB, GoalB);
          
             MessageBox.Show("Saved");
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
 
         }
 
