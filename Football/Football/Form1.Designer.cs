@@ -243,7 +243,6 @@
             this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 29;
             this.label8.Text = "Team B:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
