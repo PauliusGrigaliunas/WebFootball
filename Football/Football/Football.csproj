@@ -208,6 +208,10 @@
     <Content Include="database121.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="database121_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>database121.mdf</DependentUpon>
+    </Content>
     <Content Include="msvcp140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
