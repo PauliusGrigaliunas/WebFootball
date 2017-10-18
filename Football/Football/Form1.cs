@@ -76,164 +76,143 @@ namespace Football
         {
             this.name2 = name;
         }
+        /*
+                private void Camera()
+                {
 
-        private void Camera()
-        {
-
-            _capture = new Emgu.CV.VideoCapture(0);
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 1000 / 30;
-            _timer.Tick += new EventHandler(TimeTick);
-            _timer.Start();
+                    _capture = new Emgu.CV.VideoCapture(0);
+                    _timer = new System.Windows.Forms.Timer();
+                    _timer.Interval = 1000 / 30;
+                    _timer.Tick += new EventHandler(TimeTick);
+                    _timer.Start();
 
 
-        }
+                }
 
-        private void Video()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Video Files |*.mp4";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                _capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                _timer = new System.Windows.Forms.Timer();
-                _timer.Interval = 1000 / 30;
-                _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
+                private void Video()
+                {
+                    OpenFileDialog ofd = new OpenFileDialog();
+                    ofd.Filter = "Video Files |*.mp4";
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        _capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                        _timer = new System.Windows.Forms.Timer();
+                        _timer.Interval = 1000 / 30;
+                        _timer.Tick += new EventHandler(TimeTick);
+                        _timer.Start();
 
-            }
+                    }
 
-        }
+                }
 
+                private void StartVideo() {
+                    if (_timer != null)
+                    {
+                        _timer.Tick += new EventHandler(TimeTick);
+                        _timer.Start();
+
+                    }
+                    else Video();
+                }
+
+                private void StartCamera()
+                {
+                    if (_timer != null)
+                    {
+                        _timer.Tick += new EventHandler(TimeTick);
+                        _timer.Start();
+
+                    }
+                    Camera();
+                }
+
+                private void Pause() {
+                    if (_timer != null)
+                    {
+                        _timer.Tick -= new EventHandler(TimeTick);
+                        _timer.Stop();
+                    }
+                }
+
+                private void Stop()
+                {
+                    if (_timer != null)
+                    {
+                        _timer.Tick -= new EventHandler(TimeTick);
+                        _timer.Stop();
+                        _timer = null;
+                    }
+                }
+                */
         // Menu items------------
+
+        Video video = new Video();
         //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
-
-            }
-            Camera();
+            video.StartCamera();
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-            }
+            video.Pause();
         }
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-                _timer = null;
-            }
+            video.Stop();
         }
-
 
 
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
-
-            }
-            else Video();
+            video.StartVideo();
         }
 
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
-
-            }
-            else Video();
+            video.StartVideo();
         }
 
         private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-            }
+            video.Pause();
         }
 
         private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-                _timer = null;
-            }
+            video.Stop();
         }
 
         private void pauseToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-            }
+            video.Pause();
         }
 
         private void stopToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-                _timer = null;
-            }
+            video.Stop();
         }
         // End Menu items------------
         // Buttons------------
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(TimeTick);
-                _timer.Start();
-
-            }
-            else Video();
-
+            video.StartVideo();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-            }
+            video.Pause();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-                _timer = null;
-            }
+            video.Stop();
         }
         // End Buttons------------
-
+/*
         private void TimeTick(object sender, EventArgs e)
         {
 
@@ -258,14 +237,10 @@ namespace Football
             i = ball.i;  xCoords = ball.xCoords;  gcheck = ball.gcheck;
 
             pictureBox2.Image = imgCircles.Bitmap;
-        }
+        }*/
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(TimeTick);
-                _timer.Stop();
-            }
+            video.Pause();
             Application.Exit();
         }
     
