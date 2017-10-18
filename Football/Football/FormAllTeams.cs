@@ -32,11 +32,19 @@ namespace Football
         {
             
                 FootballEntities context = new FootballEntities();
+            var team = from i in context.teamTables
+                       orderby i.Victories descending
+                       select i;
+
                 BindingSource bi = new BindingSource();
-                bi.DataSource = context.teamTables.ToList();
-                dataGridView1.DataSource = bi;
+            //   bi.DataSource = context.teamTables.ToList();
+            bi.DataSource = team;
+            dataGridView1.DataSource = bi;
                 dataGridView1.Refresh();
-       
+
+           
+
+
         }
 
         private void FormAllTeams_Load(object sender, EventArgs e)
