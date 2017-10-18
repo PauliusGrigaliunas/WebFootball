@@ -16,46 +16,20 @@ namespace Football
     {
         public int _xBallPosition { get; set; }
 
-        public int blue { get; }
+        public GoalsChecker gcheck { get; set; }
 
-        public int green{ get; }
+        public int i { get; set; }
 
-        public int red { get; }
+        public int[] xCoords { get; set; }
 
-        public int x { get; }
-
-        public int y { get; }
-
-        int i = 0;
-        int[] xCoords = new int[99999999];
-
-        Image<Bgr, byte> imgOriginal { get; set; }
-        Image<Gray, byte> imgFiltered { get; set; }
+        public Image<Bgr, byte> imgOriginal { get; set; }
+        public Image<Gray, byte> imgFiltered { get; set; }
 
         public Ball()
         {
 
         }
-
-
- /*       public void BallPosition(Image<Bgr, byte> imgCircles,  textXYradius)
-        {
-
-            foreach (CircleF circle in GetCircles(imgFiltered))          //searching circles
-            {
-                if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
-
-                /*textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
-                circle.Radius.ToString("###,000").PadLeft(7));
-                textXYradius.ScrollToCaret();
-
-                _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);       //start stopwatch to check if it is scored or not   
-                gcheck.Direction(_xBallPosition, i, xCoords); i++;              // 
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                 //draw circles on smoothed image
-            }
-        }*/
-        public CircleF[] GetCircles(Image<Gray, byte> imgGray)
+        private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
             Gray grayCircle = new Gray(12);
             Gray cannyThreshold = new Gray(26);
@@ -64,6 +38,17 @@ namespace Football
             int minRadius = 0;
             int maxRadius = 10;
             return imgGray.HoughCircles(grayCircle, cannyThreshold, lAccumResolution, minDistanceBtwCircles, minRadius, maxRadius)[0];
+        }
+
+        internal void BallPositionDraw(Image<Bgr, byte> imgCircles)
+        {
+            foreach (CircleF circle in GetCircles(imgFiltered))
+            {
+                _xBallPosition = (int)circle.Center.X;
+                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);
+                gcheck.Direction(_xBallPosition, i, xCoords); i++;
+                imgCircles.Draw(circle, new Bgr(Color.Red), 3);
+            }
         }
     }
 }

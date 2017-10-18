@@ -252,30 +252,13 @@ namespace Football
             var filter = new ImgFilter(imgOriginal);
             imgFiltered = filter.GetFilteredImage();
 
-            BallPosition(imgCircles);
+            ball.imgFiltered = imgFiltered;  ball.imgOriginal = imgOriginal;
+            ball.gcheck = gcheck; ball.xCoords = xCoords; ball.i = i;      
+            ball.BallPositionDraw(imgCircles);
+            i = ball.i;  xCoords = ball.xCoords;  gcheck = ball.gcheck;
 
             pictureBox2.Image = imgCircles.Bitmap;
         }
-
-        private void BallPosition(Image<Bgr, byte> imgCircles)
-        {
-
-            foreach (CircleF circle in ball.GetCircles(imgFiltered))          //searching circles
-            {
-                if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
-
-                /*textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
-                circle.Radius.ToString("###,000").PadLeft(7));
-                textXYradius.ScrollToCaret();*/
-
-                _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);       //start stopwatch to check if it is scored or not   
-                gcheck.Direction(_xBallPosition, i, xCoords); i++;              // 
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                 //draw circles on smoothed image
-            }
-        }
-
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_timer != null)
@@ -291,88 +274,6 @@ namespace Football
         {
             pictureBox1.Image = picture.TakeAPicture().Bitmap;
         }
-        //layers
-
-        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pictureBox2.Image = picture.ConvertToGray().Bitmap;
-        }
-
-
-        private string TrackBarSetting(TrackBar trackBar)
-        {
-            trackBar.Maximum = 255;         // max value
-            trackBar.Minimum = 0;           // min value
-            trackBar.TickFrequency = 10;    // distance between tick-mark
-            trackBar.LargeChange = 5;       // when clicked on a side of a slider move by X
-            trackBar.SmallChange = 1;       // move using keyboard arrows
-
-            return trackBar.Value.ToString();
-
-        }
-        // colors:
-        //low red
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            label1.Text = TrackBarSetting(trackBar1);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //low green
-        private void trackBar2_Scroll(object sender, EventArgs e)
-        {
-            label2.Text = TrackBarSetting(trackBar2);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //low blue
-        private void trackBar3_Scroll(object sender, EventArgs e)
-        {
-            label3.Text = TrackBarSetting(trackBar3);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //high red
-        private void trackBar4_Scroll(object sender, EventArgs e)
-        {
-            label4.Text = TrackBarSetting(trackBar4);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //high green
-        private void trackBar5_Scroll(object sender, EventArgs e)
-        {
-            label5.Text = TrackBarSetting(trackBar5);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //high red
-        private void trackBar6_Scroll(object sender, EventArgs e)
-        {
-            label6.Text = TrackBarSetting(trackBar6);
-            redToolStripMenuItem_Click(sender, e);
-        }
-
-        //ColorFilter
-        private void redToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int lowBlue = Convert.ToInt32(label3.Text);
-            int highBlue = Convert.ToInt32(label6.Text);
-            int lowGreen = Convert.ToInt32(label2.Text);
-            int highGreen = Convert.ToInt32(label5.Text);
-            int lowRed = Convert.ToInt32(label1.Text);
-            int highRed = Convert.ToInt32(label4.Text);
-
-
-
-            Image<Gray, Byte> imgRange = picture.ColorRange(lowBlue, lowGreen, lowRed, highBlue, highGreen, highRed);
-
-            imgRange.SmoothGaussian(9);
-
-            pictureBox2.Image = imgRange.Bitmap;
-        }
-        // END colours;
-
         //coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
@@ -455,7 +356,7 @@ namespace Football
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }
