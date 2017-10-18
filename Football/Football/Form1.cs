@@ -289,7 +289,9 @@ namespace Football
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (picture.TakeAPicture()!=null) { 
             pictureBox1.Image = picture.TakeAPicture().Bitmap;
+            }
         }
         //layers
 
