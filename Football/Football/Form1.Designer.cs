@@ -88,7 +88,7 @@
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 20);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1007, 767);
             this.panel1.TabIndex = 2;
@@ -136,7 +136,7 @@
             // btnStop
             // 
             this.btnStop.Location = new System.Drawing.Point(158, 551);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(72, 28);
             this.btnStop.TabIndex = 35;
@@ -147,7 +147,7 @@
             // btnPause
             // 
             this.btnPause.Location = new System.Drawing.Point(90, 551);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(2);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(64, 27);
             this.btnPause.TabIndex = 34;
@@ -158,7 +158,7 @@
             // btnPlay
             // 
             this.btnPlay.Location = new System.Drawing.Point(10, 551);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(2);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(76, 27);
             this.btnPlay.TabIndex = 33;
@@ -224,7 +224,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(495, 176);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(480, 320);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -234,7 +234,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(11, 176);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(480, 320);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -273,7 +273,7 @@
             this.stopToolStripMenuItem,
             this.pauseToolStripMenuItem});
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cameraToolStripMenuItem.Text = "Camera";
             // 
             // startToolStripMenuItem
@@ -304,7 +304,7 @@
             this.stopToolStripMenuItem1,
             this.pauseToolStripMenuItem1});
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.videoToolStripMenuItem.Text = "Video";
             // 
             // startToolStripMenuItem1
@@ -331,14 +331,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.openToolStripMenuItem.Text = "Picture";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -381,7 +381,7 @@
             this.ClientSize = new System.Drawing.Size(996, 609);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -400,7 +400,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -413,10 +412,7 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label bTeamLabel;
-        private System.Windows.Forms.Label aTeamLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scoreLabel;
@@ -431,6 +427,10 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem2;
+        internal System.Windows.Forms.Label aTeamLabel;
+        internal System.Windows.Forms.PictureBox pictureBox1;
+        internal System.Windows.Forms.Label bTeamLabel;
+        internal System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -25,11 +25,17 @@ namespace Football
         Image<Gray, byte> imgFiltered { get; set; }
         Ball ball = new Ball();
         int i = 0;
-        int[] xCoords = new int[99999999];
+        int[] xCoords = new int[999999];
+        private Form1 _home;
 
         public Video()
         {
+
+        }
+        public Video( Form1 hm )
+        {
             mat = new Mat();
+            this._home = hm;
         }
 
         public void Camera()
@@ -61,27 +67,31 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            gcheck = new GoalsChecker(stopwatch);
-            aTeamLabel.Text = gcheck.CheckForScoreA(aTeamLabel.Text);
-            bTeamLabel.Text = gcheck.CheckForScoreB(bTeamLabel.Text);
+            // if (_home != null)
+            // {
+                gcheck = new GoalsChecker(stopwatch);
+                _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
+                _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
 
 
-            Mat mat = _capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
+                Mat mat = _capture.QueryFrame();       //getting frames            
+                if (mat == null) return;
 
-            imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
-            pictureBox1.Image = imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+                imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.pictureBox1.Width, _home.pictureBox1.Height, Inter.Linear); ;
+                _home.pictureBox1.Image = imgOriginal.Bitmap;
+                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            var filter = new ImgFilter(imgOriginal);
-            imgFiltered = filter.GetFilteredImage();
+                var filter = new ImgFilter(imgOriginal);
+                imgFiltered = filter.GetFilteredImage();
 
-            ball.imgFiltered = imgFiltered; ball.imgOriginal = imgOriginal;
-            ball.gcheck = gcheck; ball.xCoords = xCoords; ball.i = i;
-            ball.BallPositionDraw(imgCircles);
-            i = ball.i; xCoords = ball.xCoords; gcheck = ball.gcheck;
+                ball.imgFiltered = imgFiltered; ball.imgOriginal = imgOriginal;
+                ball.gcheck = gcheck; ball.xCoords = xCoords; ball.i = i;
+                ball.BallPositionDraw(imgCircles);
+                i = ball.i; xCoords = ball.xCoords; gcheck = ball.gcheck;
 
-            pictureBox2.Image = imgCircles.Bitmap;
+                _home.pictureBox2.Image = imgCircles.Bitmap;
+           // }
+           // else return;
         }
 
 

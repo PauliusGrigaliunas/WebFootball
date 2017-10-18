@@ -44,7 +44,7 @@ namespace Football
 
         bool isTeamScored = false;
         int i = 0;
-        int[] xCoords = new int[99999999];
+        //int[] xCoords = new int[999999];
 
         String name1;
         String name2;
@@ -56,9 +56,12 @@ namespace Football
 
         Connector conector = new Connector();
 
+        Video video;
+
         public Form1()
         {
             InitializeComponent();
+            video = new Video(this);
         }
 
         public int TeamAScores { get => teamAScores; set => teamAScores = value; }
@@ -146,7 +149,6 @@ namespace Football
                 */
         // Menu items------------
 
-        Video video = new Video();
         //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
