@@ -51,6 +51,7 @@ namespace Football
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     imgInput = new Image<Bgr, byte>(ofd.FileName);
