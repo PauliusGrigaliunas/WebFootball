@@ -272,14 +272,16 @@ namespace Football
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (picture != null) { 
             pictureBox1.Image = picture.TakeAPicture().Bitmap;
+            }
         }
         //coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
             MessageBox.Show("X= " + e.X.ToString() + ";  Y= " + e.Y.ToString() + ";");
         }
-
+        //+----------------------
         private void Form1_Load(object sender, EventArgs e)
         {
             aTeamLabel.Text = "0";
