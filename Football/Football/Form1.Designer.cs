@@ -220,7 +220,7 @@
             // bTeamLabel
             // 
             this.bTeamLabel.AutoSize = true;
-            this.bTeamLabel.Location = new System.Drawing.Point(536, 584);
+            this.bTeamLabel.Location = new System.Drawing.Point(450, 587);
             this.bTeamLabel.Name = "bTeamLabel";
             this.bTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.bTeamLabel.TabIndex = 31;
@@ -229,7 +229,7 @@
             // aTeamLabel
             // 
             this.aTeamLabel.AutoSize = true;
-            this.aTeamLabel.Location = new System.Drawing.Point(380, 584);
+            this.aTeamLabel.Location = new System.Drawing.Point(526, 587);
             this.aTeamLabel.Name = "aTeamLabel";
             this.aTeamLabel.Size = new System.Drawing.Size(66, 13);
             this.aTeamLabel.TabIndex = 30;
@@ -238,7 +238,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(526, 555);
+            this.label8.Location = new System.Drawing.Point(516, 555);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 29;
@@ -247,7 +247,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 555);
+            this.label7.Location = new System.Drawing.Point(428, 555);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 28;
