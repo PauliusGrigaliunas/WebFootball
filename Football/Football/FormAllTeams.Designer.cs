@@ -82,7 +82,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "FormAllTeams";
             this.Text = "FormAllTeams";
-            this.Load += new System.EventHandler(this.FormAllTeams_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();

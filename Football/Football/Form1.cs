@@ -34,7 +34,10 @@ namespace Football
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
 
-       
+        Teams team = new Teams();
+        SqlCommand cmd;
+        SqlDataAdapter sa;
+        DataTable dt = new DataTable();
         Picture picture = new Picture();
         GoalsChecker gcheck;
         Ball ball = new Ball();
@@ -293,16 +296,24 @@ namespace Football
             VictB = 0;
             GoalB = 0;
 
+            SqlConnection con = conector.Connect();
+            con.Open();
 
+            cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT * FROM teamTable";
+            cmd.ExecuteNonQuery();
+            sa = new SqlDataAdapter(cmd);
+            sa.Fill(dt);
             //kokia info lentelej
-            Teams team = new Teams();
 
-            VictA = team.GetVictories(name1);
-            GoalA = team.GetGoals(name1);
-            VictB = team.GetVictories( name2);
-            GoalB = team.GetGoals( name2);
 
-            GoalA = GoalA + TeamAScores;     
+            VictA = team.getVictories(dt, name1);
+            GoalA = team.getGoals(dt, name1);
+            VictB = team.getVictories(dt, name2);
+            GoalB = team.getGoals(dt, name2);
+
+            GoalA = GoalA + TeamAScores;
             GoalB = GoalB + TeamBScores;
             if (teamAScores > TeamBScores)
             {
@@ -312,9 +323,10 @@ namespace Football
             {
                 VictB = VictB + 1;
             }
-       
-           team.InsertToTable(name1, VictA, GoalA);
-           team.InsertToTable(name2, VictB, GoalB);
+            con.Close();
+
+            team.insertToTable(name1, VictA, GoalA);
+            team.insertToTable(name2, VictB, GoalB);
 
             MessageBox.Show("Saved");
 
@@ -345,11 +357,6 @@ namespace Football
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

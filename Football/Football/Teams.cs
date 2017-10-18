@@ -14,100 +14,165 @@ namespace Football
     public class Teams
     {
 
+        private int teamNumber;
+        private string teamName;
+        //  private int victories;
+        // private int goals;
+
+  
+        SqlConnection con = new SqlConnection(@"Server=tcp:paulius.database.windows.net,1433;Initial Catalog=Football;Persist Security Info=False;User ID=Kamikaze;Password=p0m1d0r4s.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
+        SqlCommand cmd;
+        SqlDataAdapter sa;
+        DataTable dt = new DataTable();
+
+
         public Teams() { }
 
 
-        public void AddToTable(String name, int victories, int goals)
+        public void addToTable(String name, int victories, int goals)
         {
             //prideti komandos informacija i lentele
-            using (FootballEntities contex = new FootballEntities())
-            {
-
-                teamTable team = new teamTable()
-                {
-                    Name = name,
-                    Victories = victories,
-                    Goals = goals,
-            };
-           
- 
-                contex.teamTables.Add(team);
-                contex.SaveChanges();
-            }
-        }
-
-       public bool NameCheckIfExsist(String data)
-        {//patikrinti ar tokia komanda jau yra zaidus
-            bool exsists = false;
             try
             {
+                con.Open();
+
+                cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT * FROM teamTable";
+                cmd.ExecuteNonQuery();
+
+                sa = new SqlDataAdapter(cmd);
+                sa.Fill(dt);
+
+                cmd.CommandText = "INSERT INTO teamTable (Name,Victories,Goals) VALUES('" + name + "','" + victories + "','" + goals + "')";
+                cmd.ExecuteNonQuery();              //vykdom savo uzklausa virsuj parasyta
+
               
-                using (FootballEntities contex = new FootballEntities())
+                con.Close();
+              //  insertToTable("Namas", 2, 6);
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public bool name_CheckIfExsist(DataTable dt, String data)
+        {//patikrinti ar tokia komanda jau yra zaidus
+            bool exsists = false;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                try
                 {
-
-                    teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-
-                    if (team.Name != null)
+                    if (data == dt.Rows[i][1].ToString())
                     {
                         exsists = true;
                     }
                 }
-                
-            }
-            catch (System.NullReferenceException ex)
-            {
+                catch (System.IndexOutOfRangeException ex)
+                {
 
-               ex.ToString();
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             return exsists;
 
         }
 
-       public int GetVictories(String data)
+        public int getVictories(DataTable dt, String name)
         {
-            int vict = 0;
-            using (FootballEntities contex = new FootballEntities())
+            int victories = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                try
                 {
-                
-                 teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-                 vict =(int) team.Victories;
-     
-                 }
-            return vict;
+                    if (0 != Int32.Parse(dt.Rows[i][2].ToString()) && (name == dt.Rows[i][1].ToString()))
+                    {
+                        victories = Int32.Parse(dt.Rows[i][2].ToString());
+                    }
+                }
+                catch (System.IndexOutOfRangeException ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+            return victories;
+
         }
 
-        public int GetGoals( String data)
+        public int getGoals(DataTable dt, String name)
         {
             int goals = 0;
-            using (FootballEntities contex = new FootballEntities())
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
+                try
+                {
+                    if (0 != Int32.Parse(dt.Rows[i][3].ToString())&&(name==dt.Rows[i][1].ToString()))
+                    {
+                        goals = Int32.Parse(dt.Rows[i][3].ToString());
+                    }
+                }
+                catch (System.IndexOutOfRangeException ex)
+                {
 
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-                goals = (int)team.Goals;
+                    MessageBox.Show(ex.Message);
+                }
 
             }
             return goals;
 
         }
 
-        public void InsertToTable(String data, int victories, int goals)
+        public void insertToTable(String name, int victories, int goals)
         {
             //irasyti rezultata
-            using (FootballEntities contex = new FootballEntities())
+            try
+            {
+                con.Open();
+
+                cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM teamTable";
+                cmd.ExecuteNonQuery();
+
+                sa = new SqlDataAdapter(cmd);
+                sa.Fill(dt);
+
+            
+                con.Close();
+                cmd.CommandText = "UPDATE teamTable SET [Victories] = @Victories,[Goals] = @Goals WHERE [Name] = @Name";
+                cmd.Parameters.AddWithValue("@Victories", victories);
+                cmd.Parameters.AddWithValue("@Goals", goals);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Connection = con;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
             {
 
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-                team.Victories = victories;
-                team.Goals = goals;
-         
-                contex.SaveChanges();
+                MessageBox.Show(ex.Message);
             }
 
         }
-      
-        
-   
-    
+        public void deleateTable()
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[5].Delete();
+
+            }
+        }
+
+
+
 
     }
 }

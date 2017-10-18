@@ -34,17 +34,36 @@ namespace Football
         {
             Form1 form = new Form1();
 
-            Teams team = new Teams();
-            if(team.NameCheckIfExsist(Name1)!=true)
-            {
-              team.AddToTable(Name1, 0, 0);
-            }
-            if (team.NameCheckIfExsist(Name2) != true)
-            {
-                team.AddToTable(Name2, 0, 0);
-            }
-            form.setName1(Name1);
-            form.setName2(Name2);
+            /* SqlConnection con = connector.Connect();
+
+             con.Open();
+
+             cmd = con.CreateCommand();
+             cmd.CommandType = CommandType.Text;
+             cmd.CommandText = "SELECT * FROM teamTable";
+             cmd.ExecuteNonQuery();
+             sa = new SqlDataAdapter(cmd);
+             sa.Fill(dt);
+
+             if (team.name_CheckIfExsist(dt,Name1) == false)
+             {
+                 team.addToTable(Name1, 0, 0);
+             }
+
+
+             if (team.name_CheckIfExsist(dt,Name2) == false)
+             {
+                 team.addToTable(Name2, 0, 0);
+             }
+
+
+             con.Close();
+
+
+             MessageBox.Show("Teams successfully registered!");
+             form.Show();
+             form.setName1(Name1);
+             form.setName2(Name2);*/
             form.Show();
         }
 
@@ -58,11 +77,6 @@ namespace Football
         {
             TextBox textBox2_TextChange = (TextBox)sender;
             Name2 = textBox2_TextChange.Text;
-        }
-
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
