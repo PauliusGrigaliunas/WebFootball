@@ -67,8 +67,6 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            // if (_home != null)
-            // {
                 gcheck = new GoalsChecker(stopwatch);
                 _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
                 _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
@@ -90,8 +88,6 @@ namespace Football
                 i = ball.i; xCoords = ball.xCoords; gcheck = ball.gcheck;
 
                 _home.pictureBox2.Image = imgCircles.Bitmap;
-           // }
-           // else return;
         }
 
 

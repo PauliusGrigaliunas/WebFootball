@@ -42,10 +42,6 @@ namespace Football
         GoalsChecker gcheck;
         Ball ball = new Ball();
 
-        bool isTeamScored = false;
-        int i = 0;
-        //int[] xCoords = new int[999999];
-
         String name1;
         String name2;
         private int victA;
@@ -79,74 +75,7 @@ namespace Football
         {
             this.name2 = name;
         }
-        /*
-                private void Camera()
-                {
-
-                    _capture = new Emgu.CV.VideoCapture(0);
-                    _timer = new System.Windows.Forms.Timer();
-                    _timer.Interval = 1000 / 30;
-                    _timer.Tick += new EventHandler(TimeTick);
-                    _timer.Start();
-
-
-                }
-
-                private void Video()
-                {
-                    OpenFileDialog ofd = new OpenFileDialog();
-                    ofd.Filter = "Video Files |*.mp4";
-                    if (ofd.ShowDialog() == DialogResult.OK)
-                    {
-                        _capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                        _timer = new System.Windows.Forms.Timer();
-                        _timer.Interval = 1000 / 30;
-                        _timer.Tick += new EventHandler(TimeTick);
-                        _timer.Start();
-
-                    }
-
-                }
-
-                private void StartVideo() {
-                    if (_timer != null)
-                    {
-                        _timer.Tick += new EventHandler(TimeTick);
-                        _timer.Start();
-
-                    }
-                    else Video();
-                }
-
-                private void StartCamera()
-                {
-                    if (_timer != null)
-                    {
-                        _timer.Tick += new EventHandler(TimeTick);
-                        _timer.Start();
-
-                    }
-                    Camera();
-                }
-
-                private void Pause() {
-                    if (_timer != null)
-                    {
-                        _timer.Tick -= new EventHandler(TimeTick);
-                        _timer.Stop();
-                    }
-                }
-
-                private void Stop()
-                {
-                    if (_timer != null)
-                    {
-                        _timer.Tick -= new EventHandler(TimeTick);
-                        _timer.Stop();
-                        _timer = null;
-                    }
-                }
-                */
+        
         // Menu items------------
 
         //Camera
@@ -214,32 +143,6 @@ namespace Football
             video.Stop();
         }
         // End Buttons------------
-/*
-        private void TimeTick(object sender, EventArgs e)
-        {
-
-            gcheck = new GoalsChecker(stopwatch);
-            aTeamLabel.Text = gcheck.CheckForScoreA(aTeamLabel.Text);
-            bTeamLabel.Text = gcheck.CheckForScoreB(bTeamLabel.Text);
-
-
-            Mat mat = _capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
-
-            imgOriginal = mat.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear); ;
-            pictureBox1.Image = imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
-
-            var filter = new ImgFilter(imgOriginal);
-            imgFiltered = filter.GetFilteredImage();
-
-            ball.imgFiltered = imgFiltered;  ball.imgOriginal = imgOriginal;
-            ball.gcheck = gcheck; ball.xCoords = xCoords; ball.i = i;      
-            ball.BallPositionDraw(imgCircles);
-            i = ball.i;  xCoords = ball.xCoords;  gcheck = ball.gcheck;
-
-            pictureBox2.Image = imgCircles.Bitmap;
-        }*/
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             video.Pause();
