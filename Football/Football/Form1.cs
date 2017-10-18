@@ -48,10 +48,10 @@ namespace Football
 
         String name1;
         String name2;
-        private int victA ;
-        private int goalA ;
-        private int victB ;
-        private int goalB ;
+        private int victA;
+        private int goalA;
+        private int victB;
+        private int goalB;
         System.Windows.Forms.Timer _timer;
 
         Connector conector = new Connector();
@@ -77,6 +77,18 @@ namespace Football
             this.name2 = name;
         }
 
+        private void Camera()
+        {
+
+            _capture = new Emgu.CV.VideoCapture(0);
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 1000 / 30;
+            _timer.Tick += new EventHandler(TimeTick);
+            _timer.Start();
+
+
+        }
+
         private void Video()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -88,11 +100,107 @@ namespace Football
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
-                
+
             }
 
         }
 
+        // Menu items------------
+        //Camera
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Start();
+
+            }
+            Camera();
+        }
+
+        private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+        }
+
+        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+                _timer = null;
+            }
+        }
+
+
+
+        private void startToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Start();
+
+            }
+            else Video();
+        }
+
+
+        private void startToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Start();
+
+            }
+            else Video();
+        }
+
+        private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+        }
+
+        private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+                _timer = null;
+            }
+        }
+
+        private void pauseToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+            }
+        }
+
+        private void stopToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Stop();
+                _timer = null;
+            }
+        }
+        // End Menu items------------
+        // Buttons------------
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
@@ -124,7 +232,7 @@ namespace Football
                 _timer = null;
             }
         }
-
+        // End Buttons------------
 
         private void TimeTick(object sender, EventArgs e)
         {
@@ -149,7 +257,8 @@ namespace Football
             pictureBox2.Image = imgCircles.Bitmap;
         }
 
-        private void BallPosition(Image<Bgr, byte> imgCircles) {
+        private void BallPosition(Image<Bgr, byte> imgCircles)
+        {
 
             foreach (CircleF circle in ball.GetCircles(imgFiltered))          //searching circles
             {
@@ -176,19 +285,7 @@ namespace Football
             }
             Application.Exit();
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_capture != null)
-            {
-                _capture = null;
-            }
-            if (MessageBox.Show("Are you sure you want to close?", "System message", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                this.Close();
-            }
-
-        }
+    
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -196,94 +293,11 @@ namespace Football
         }
         //layers
 
-        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-        //Camera
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_capture == null)
-            {
-                _capture = new Emgu.CV.VideoCapture(0);
-            }
-            _capture.ImageGrabbed += Capture_ImageGrabbed;
-            _capture.Start();
+            pictureBox2.Image = picture.ConvertToGray().Bitmap;
         }
 
-        private void Capture_ImageGrabbed(object sender, EventArgs e)
-        {
-            try
-            {
-                Mat mat = new Mat();
-                _capture.Retrieve(mat);
-                pictureBox1.Image = mat.ToImage<Bgr, byte>().Bitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-        // end camera
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_capture != null)
-            {
-                _capture.Stop();
-                _capture = null;
-            }
-        }
-
-        private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_capture != null)
-            {
-                _capture.Pause();
-            }
-        }
-        // Video
-        private void startToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (_capture == null)
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Video Files |*.mp4";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    _capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                }
-                _capture.ImageGrabbed += Capture_ImageGrabbed1;
-                _capture.Start();
-            }
-            MessageBox.Show("check");
-        }
-
-        private void Capture_ImageGrabbed1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (_capture != null)
-            {
-                _capture.Stop();
-            }
-        }
-
-        private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (_capture != null)
-            {
-                _capture.Pause();
-            }
-        }
-        //coordinates
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
-        {
-            MessageBox.Show(e.X.ToString() + e.Y.ToString());
-        }
 
         private string TrackBarSetting(TrackBar trackBar)
         {
@@ -350,37 +364,36 @@ namespace Football
             int highRed = Convert.ToInt32(label4.Text);
 
 
-            if (imgInput == null) return;
-            //Image<Gray, Byte> imgRange = new Image<Bgr, byte>(imgInput.Width, imgInput.Height, new Bgr(0,0,0)); 
 
-            //Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(0, 0, 187), new Bgr(100, 255, 255));
-            Image<Gray, Byte> imgRange = imgInput.InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = picture.ColorRange(lowBlue, lowGreen, lowRed, highBlue, highGreen, highRed);
 
             imgRange.SmoothGaussian(9);
 
             pictureBox2.Image = imgRange.Bitmap;
-
         }
+        // END colours;
+
+        //coordinates
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
+        {
+            MessageBox.Show("X= " + e.X.ToString() + ";  Y= " + e.Y.ToString() + ";");
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             aTeamLabel.Text = "0";
             bTeamLabel.Text = "0";
         }
 
-        private void scoreLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.TeamBScores = int.Parse(bTeamLabel.Text);
             this.TeamAScores = int.Parse(aTeamLabel.Text);
-            
-             VictA=0;
-             GoalA=0;
-             VictB=0;
-             GoalB=0;
+
+            VictA = 0;
+            GoalA = 0;
+            VictB = 0;
+            GoalB = 0;
 
             SqlConnection con = conector.Connect();
             con.Open();
@@ -394,18 +407,18 @@ namespace Football
             //kokia info lentelej
 
 
-            VictA = team.getVictories(dt, name1); 
+            VictA = team.getVictories(dt, name1);
             GoalA = team.getGoals(dt, name1);
             VictB = team.getVictories(dt, name2);
             GoalB = team.getGoals(dt, name2);
 
             GoalA = GoalA + TeamAScores;
             GoalB = GoalB + TeamBScores;
-            if(teamAScores>TeamBScores)
+            if (teamAScores > TeamBScores)
             {
                 VictA = VictA + 1;
             }
-            else if(teamAScores < TeamBScores)
+            else if (teamAScores < TeamBScores)
             {
                 VictB = VictB + 1;
             }
@@ -413,7 +426,7 @@ namespace Football
 
             team.insertToTable(name1, VictA, GoalA);
             team.insertToTable(name2, VictB, GoalB);
-         
+
             MessageBox.Show("Saved");
 
         }
@@ -423,21 +436,26 @@ namespace Football
             FormAllTeams form = new FormAllTeams();
 
             form.Show();
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             FormsTeamB form = new FormsTeamB();
-            form.loadInfo(name2, VictB, GoalB,teamBScores);
+            form.loadInfo(name2, VictB, GoalB, teamBScores);
             form.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormTeamA form = new FormTeamA();
-            form.loadInfo(name1, VictA, GoalA,teamAScores);
+            form.loadInfo(name1, VictA, GoalA, teamAScores);
             form.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
