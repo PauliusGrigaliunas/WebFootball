@@ -22,8 +22,8 @@ namespace Football
 
     public partial class Form1 : Form
     {
-        bool isBTeamScored = false;
-        bool isATeamScored = false;
+        public static bool isBTeamScored = false;
+        public static bool isATeamScored = false;
         int teamAScores;
         int teamBScores;
         private Stopwatch stopwatch = new Stopwatch();
@@ -40,6 +40,9 @@ namespace Football
         DataTable dt = new DataTable();
         Picture picture = new Picture();
 
+        bool isTeamScored = false;
+        int i = 0;
+        int[] xCoords = new int[99999999];
 
         String name1;
         String name2;
@@ -123,10 +126,10 @@ namespace Football
         GoalsChecker gcheck;
         private void TimeTick(object sender, EventArgs e)
         {
-            
+
             gcheck = new GoalsChecker(stopwatch);
-            aTeamLabel.Text = gcheck.CheckForScore(aTeamLabel.Text,  isATeamScored);
-            bTeamLabel.Text = gcheck.CheckForScore(bTeamLabel.Text, isBTeamScored);
+            aTeamLabel.Text = gcheck.CheckForScoreA(aTeamLabel.Text);
+            bTeamLabel.Text = gcheck.CheckForScoreB(bTeamLabel.Text);
 
 
             Mat mat = _capture.QueryFrame();       //getting frames            
@@ -150,16 +153,14 @@ namespace Football
             {
                 if (textXYradius.Text != "") textXYradius.AppendText(Environment.NewLine);
 
-                textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
+                /*textXYradius.AppendText("ball position = x" + circle.Center.X.ToString().PadLeft(4) + ", y" + circle.Center.Y.ToString().PadLeft(4) + ", radius =" +
                 circle.Radius.ToString("###,000").PadLeft(7));
-                textXYradius.ScrollToCaret();
-
-                //write coordinates to textbox
+                textXYradius.ScrollToCaret();*/
 
                 _xBallPosition = (int)circle.Center.X;                          // get x coordinate(center of a ball)
-
-                StartStopwatch(_xBallPosition);                                     //start stopwatch to check or it is scored or not
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                        //draw circles on smoothed image
+                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);       //start stopwatch to check if it is scored or not   
+                gcheck.Direction(_xBallPosition, i, xCoords); i++;              // 
+                imgCircles.Draw(circle, new Bgr(Color.Red), 3);                 //draw circles on smoothed image
             }
         }
 
@@ -175,7 +176,7 @@ namespace Football
         }
 
         //start stopwatch
-        
+        /*
         private void StartStopwatch(int x)
         {
             if (x > 440)
@@ -199,7 +200,7 @@ namespace Football
                 stopwatch.Reset();
             }
 
-        }
+        }*/
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -425,7 +426,7 @@ namespace Football
             cmd.ExecuteNonQuery();
             sa = new SqlDataAdapter(cmd);
             sa.Fill(dt);
-            //koia info lentelej
+            //kokia info lentelej
 
 
             VictA = team.getVictories(dt, name1); 

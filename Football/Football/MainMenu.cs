@@ -34,36 +34,37 @@ namespace Football
         {
             Form1 form = new Form1();
 
-            SqlConnection con = connector.Connect();
+            /* SqlConnection con = connector.Connect();
 
-            con.Open();
+             con.Open();
 
-            cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM teamTable";
-            cmd.ExecuteNonQuery();
-            sa = new SqlDataAdapter(cmd);
-            sa.Fill(dt);
-           
-            if (team.name_CheckIfExsist(dt,Name1) == false)
-            {
-                team.addToTable(Name1, 0, 0);
-            }
+             cmd = con.CreateCommand();
+             cmd.CommandType = CommandType.Text;
+             cmd.CommandText = "SELECT * FROM teamTable";
+             cmd.ExecuteNonQuery();
+             sa = new SqlDataAdapter(cmd);
+             sa.Fill(dt);
 
-     
-            if (team.name_CheckIfExsist(dt,Name2) == false)
-            {
-                team.addToTable(Name2, 0, 0);
-            }
-          
-           
-            con.Close();
+             if (team.name_CheckIfExsist(dt,Name1) == false)
+             {
+                 team.addToTable(Name1, 0, 0);
+             }
 
-            
-            MessageBox.Show("Teams successfully registered!");
+
+             if (team.name_CheckIfExsist(dt,Name2) == false)
+             {
+                 team.addToTable(Name2, 0, 0);
+             }
+
+
+             con.Close();
+
+
+             MessageBox.Show("Teams successfully registered!");
+             form.Show();
+             form.setName1(Name1);
+             form.setName2(Name2);*/
             form.Show();
-            form.setName1(Name1);
-            form.setName2(Name2);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
