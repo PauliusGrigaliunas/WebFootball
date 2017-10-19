@@ -74,7 +74,7 @@ namespace Football
             FootballEntities context = new FootballEntities();
 
             var team = from i in context.teamTables
-                       orderby i.Victories descending
+                       orderby i.Goals descending
                        select new { i.Name, i.Goals };
 
 
