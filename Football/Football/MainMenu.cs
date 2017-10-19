@@ -34,18 +34,26 @@ namespace Football
             {
                 if ((IfMatch(Name1)) && (IfMatch(Name2)))
                 {
-                    if (team.NameCheckIfExsist(Name1) != true)
+                    if(Name1!=Name2)
                     {
-                        team.AddToTable(Name1, 0, 0);
-                    }
+                        if (team.NameCheckIfExsist(Name1) != true)
+                        {
+                            team.AddToTable(Name1, 0, 0);
+                        }
 
-                    if (team.NameCheckIfExsist(Name2) != true)
-                    {
-                        team.AddToTable(Name2, 0, 0);
+                        if (team.NameCheckIfExsist(Name2) != true)
+                        {
+                            team.AddToTable(Name2, 0, 0);
+                        }
+                        form.setName1(Name1);
+                        form.setName2(Name2);
+                        form.Show();
                     }
-                    form.setName1(Name1);
-                    form.setName2(Name2);
-                    form.Show();
+                    else
+                    {
+                        MessageBox.Show("Team names must be different ");
+                    }
+                    
 
                 }
                 else
