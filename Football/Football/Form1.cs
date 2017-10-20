@@ -24,8 +24,6 @@ namespace Football
     {
         public static bool isBTeamScored = false;
         public static bool isATeamScored = false;
-        int teamAScores;
-        int teamBScores;
         private Stopwatch stopwatch = new Stopwatch();
         int _xBallPosition { get; set; }
         int _timeElapsed = 0;
@@ -45,10 +43,7 @@ namespace Football
 
         String name1;
         String name2;
-        private int victA;
-        private int goalA;
-        private int victB;
-        private int goalB;
+        
         System.Windows.Forms.Timer _timer;
 
         Connector conector = new Connector();
@@ -58,12 +53,12 @@ namespace Football
             InitializeComponent();
         }
 
-        public int TeamAScores { get => teamAScores; set => teamAScores = value; }
-        public int TeamBScores { get => teamBScores; set => teamBScores = value; }
-        public int VictA { get => victA; set => victA = value; }
-        public int GoalA { get => goalA; set => goalA = value; }
-        public int VictB { get => victB; set => victB = value; }
-        public int GoalB { get => goalB; set => goalB = value; }
+        public int TeamAScores { get; set; }
+        public int TeamBScores { get; set; }
+        public int VictA { get; set; }
+        public int GoalA { get; set; }
+        public int VictB { get; set; }
+        public int GoalB { get; set; }
 
         public void setName1(String name)
         {
@@ -292,8 +287,6 @@ namespace Football
             GoalA = 0;
             VictB = 0;
             GoalB = 0;
-
-
             //kokia info lentelej
             Teams team = new Teams();
 
@@ -304,11 +297,11 @@ namespace Football
 
             GoalA = GoalA + TeamAScores;     
             GoalB = GoalB + TeamBScores;
-            if (teamAScores > TeamBScores)
+            if (TeamAScores > TeamBScores)
             {
                 VictA = VictA + 1;
             }
-            else if (teamAScores < TeamBScores)
+            else if (TeamAScores < TeamBScores)
             {
                 VictB = VictB + 1;
             }
@@ -331,14 +324,14 @@ namespace Football
         private void button3_Click(object sender, EventArgs e)
         {
             FormsTeamB form = new FormsTeamB();
-            form.loadInfo(name2, VictB, GoalB, teamBScores);
+            form.loadInfo(name2, VictB, GoalB, TeamBScores);
             form.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormTeamA form = new FormTeamA();
-            form.loadInfo(name1, VictA, GoalA, teamAScores);
+            form.loadInfo(name1, VictA, GoalA, TeamAScores);
             form.Show();
         }
 

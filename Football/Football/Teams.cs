@@ -28,7 +28,7 @@ namespace Football
                     Name = name,
                     Victories = victories,
                     Goals = goals,
-            };
+                };
            
  
                 contex.teamTables.Add(team);
@@ -38,27 +38,29 @@ namespace Football
 
        public bool NameCheckIfExsist(String data)
         {//patikrinti ar tokia komanda jau yra zaidus
+
+
             bool exsists = false;
             try
             {
-              
                 using (FootballEntities contex = new FootballEntities())
                 {
 
                     teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
 
-                    if (team.Name != null)
+                    if (team.Name == data)
                     {
                         exsists = true;
                     }
                 }
-                
             }
             catch (System.NullReferenceException ex)
             {
 
-               ex.ToString();
+                ex.ToString();
             }
+               
+        
             return exsists;
 
         }
@@ -66,6 +68,7 @@ namespace Football
        public int GetVictories(String data)
         {
             int vict = 0;
+
             using (FootballEntities contex = new FootballEntities())
                 {
                 
