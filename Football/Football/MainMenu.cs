@@ -14,62 +14,45 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-        String name1;
-        String name2;
-       
+        //String name1;
+        // String name2;
+        public string Name1 { get; set; }
+        public string Name2 { get; set; }
+
         public MainMenu()
         {
             InitializeComponent();
         }
 
-        public string Name1 { get => name1; set => name1 = value; }
-        public string Name2 { get => name2; set => name2 = value; }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
-
-            Teams team = new Teams();
-            if((Name1!=null)&&(Name2!=null))
+           
+            if ((IfMatch(Name1)) && (IfMatch(Name2)))
             {
-                if ((IfMatch(Name1)) && (IfMatch(Name2)))
+                if (Name1 != Name2)
                 {
-                    if(Name1!=Name2)
-                    {
-                        if (team.NameCheckIfExsist(Name1) != true)
-                        {
-                            team.AddToTable(Name1, 0, 0);
-                        }
-
-                        if (team.NameCheckIfExsist(Name2) != true)
-                        {
-                            team.AddToTable(Name2, 0, 0);
-                        }
-                        form.setName1(Name1);
-                        form.setName2(Name2);
-                        form.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Team names must be different ");
-                    }
-                    
-
+                    ToTable(Name1);
+                    ToTable(Name2);
+                    form.setName1(Name1);
+                    form.setName2(Name2);
+                    form.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Team names must be at least 4 charachters long ");
-
+                    MessageBox.Show("Team names must be different ");
                 }
             }
             else
             {
-                MessageBox.Show("Insert team names ");
-            }
-        
-            
-        }
+                MessageBox.Show("Team names must be at least 4 charachters long ");
 
+            }
+
+
+        }
+  
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox1_TextChange = (TextBox)sender;
@@ -90,11 +73,13 @@ namespace Football
         private bool IfMatch(String data)
         {
             bool mtch = false;
-            String pattern1 = @"([a-zA-Z]{4,50})";
+
+            String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
+
             Match match = Regex.Match(data, pattern1);
         
             
-            if (match.Success)
+            if ((match.Success)&&(data!=null))
             {
                 mtch = true;
             }
@@ -106,6 +91,15 @@ namespace Football
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ToTable(String data)
+        {         
+            Teams team = new Teams();
+            if (team.NameCheckIfExsist(data) != true)
+            {
+                team.AddToTable(data, 0, 0);
+            }
         }
     }
 }
