@@ -401,7 +401,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -414,10 +413,7 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label bTeamLabel;
-        private System.Windows.Forms.Label aTeamLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scoreLabel;
@@ -432,6 +428,10 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem2;
+        internal System.Windows.Forms.Label aTeamLabel;
+        internal System.Windows.Forms.PictureBox pictureBox1;
+        internal System.Windows.Forms.Label bTeamLabel;
+        internal System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
