@@ -24,26 +24,22 @@ namespace Football
         public string bText;
         private Stopwatch stopwatch = new Stopwatch();
         public static bool ballGoingRight = false;
-        int tempX;
+        private int tempX;
 
         public GoalsChecker(Stopwatch stopwatch)
         {
             this.stopwatch = stopwatch;
         }
 
-
         // Note del goal'u skaiciavimu:
         // Designer'yje sukeisti vietoj aTeamLabel ir bTeamLabel, nes app'sas turi rodyt ivarcius, o ne kiek kas "praleido" ivarciu - Tom.
 
-        // public string CheckForScore(string text, bool isTeamScored )
         public string CheckForScoreA(string text)  // goal'as Team A  vartuose, A++
         {
-
             Console.WriteLine(stopwatch.ToString());
             int temp;
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            //if (_timeElapsed >= 3 && isTeamScored == true)
             if (_timeElapsed >= 3 && Form1.isATeamScored && !ballGoingRight)
             {
                 temp = int.Parse(text);
@@ -97,9 +93,10 @@ namespace Football
             }
         }
 
-        public void Direction(int x, int i, int[] xCoords)
+        //public void Direction(int x, int i, int[] xCoords)
+        public void Direction(int x, int i, List<int> xCoords)
         {
-            xCoords[i] = x;
+            xCoords.Add(x);
 
             if (i >= 2)
             {
@@ -107,11 +104,11 @@ namespace Football
 
                 if (tempX >= 0)
                 {
-                    ballGoingRight = true;    // B prasileido
+                    ballGoingRight = true;    // kamuolys juda link B vartu
                 }
                 else
                 {
-                    ballGoingRight = false;   // A prasileido
+                    ballGoingRight = false;   // kamuolys juda link A vartu
                 }
             }
             else
@@ -120,5 +117,4 @@ namespace Football
             }
         }
     }
-
 }

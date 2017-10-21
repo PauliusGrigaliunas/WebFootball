@@ -14,8 +14,6 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-        //String name1;
-        // String name2;
         public string Name1 { get; set; }
         public string Name2 { get; set; }
 
@@ -23,7 +21,6 @@ namespace Football
         {
             InitializeComponent();
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -49,8 +46,6 @@ namespace Football
                 MessageBox.Show("Team names must be at least 4 charachters long ");
 
             }
-
-
         }
   
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -76,8 +71,9 @@ namespace Football
 
             String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
 
-      
-            if (data != null)
+            Match match = Regex.Match(data, pattern1);
+            //if (data != null)
+            if ((match.Success)&&(data!=null))
             {
                 if (Regex.IsMatch(data, pattern1))
                 {
@@ -85,7 +81,6 @@ namespace Football
                 }
 
             }
-
 
             return mtch;
         }

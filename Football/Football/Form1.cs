@@ -31,7 +31,6 @@ namespace Football
         Image<Bgr, byte> imgInput = null;
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
-
        
         Picture picture = new Picture();
         GoalsChecker gcheck;
@@ -91,7 +90,6 @@ namespace Football
         {
             video.StartVideo();
         }
-
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -192,7 +190,6 @@ namespace Football
            team.InsertToTable(name2, VictB, GoalB);
 
             MessageBox.Show("Saved");
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -200,7 +197,6 @@ namespace Football
             FormAllTeams form = new FormAllTeams();
 
             form.Show();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
