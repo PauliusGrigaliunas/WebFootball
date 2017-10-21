@@ -107,6 +107,16 @@ namespace Football
             }
 
         }
+        public void DeleateTableRow(String data)
+        {
+            using (FootballEntities contex = new FootballEntities())
+            {
+
+                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
+              
+                contex.teamTables.Remove(team);
+            }
+        }
       
         
    
