@@ -66,6 +66,13 @@ namespace Football
             gcheck = new GoalsChecker(stopwatch);
             _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
             _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
+            Process();
+        }
+
+        private void Process() {
+           // gcheck = new GoalsChecker(stopwatch);
+           // _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
+           // _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
 
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -130,7 +137,17 @@ namespace Football
             }
         }
 
-        public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
+        /*
+        public override Image<Gray, byte> ConvertToGray()
+        {
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
+
+            return imgRange;
+
+        }
+        */
+
+        public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed,int highBlue, int highGreen, int highRed)
         {
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
