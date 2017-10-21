@@ -24,9 +24,9 @@ namespace Football
         Image<Bgr, byte> imgOriginal { get; set; }
         Image<Gray, byte> imgFiltered { get; set; }
         Ball ball = new Ball();
-        int i = 0;
-        int[] xCoords = new int[999999];
+        private int i = 0;
         private Form1 _home;
+        public List<int> xCoordList = new List<int>();
 
         public Video()
         {
@@ -40,13 +40,11 @@ namespace Football
 
         public void Camera()
         {
-
             _capture = new Emgu.CV.VideoCapture(0);
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000 / 30;
             _timer.Tick += new EventHandler(TimeTick);
             _timer.Start();
-
         }
 
         public void TakeAVideo()
@@ -60,36 +58,38 @@ namespace Football
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
-
             }
-
         }
 
         public void TimeTick(object sender, EventArgs e)
         {
-                gcheck = new GoalsChecker(stopwatch);
-                _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
-                _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
+            gcheck = new GoalsChecker(stopwatch);
+            _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
+            _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
 
+            Mat mat = _capture.QueryFrame();       //getting frames            
+            if (mat == null) return;
 
-                Mat mat = _capture.QueryFrame();       //getting frames            
-                if (mat == null) return;
+            imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.pictureBox1.Width, _home.pictureBox1.Height, Inter.Linear); ;
+            _home.pictureBox1.Image = imgOriginal.Bitmap;
+            Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-                imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.pictureBox1.Width, _home.pictureBox1.Height, Inter.Linear); ;
-                _home.pictureBox1.Image = imgOriginal.Bitmap;
-                Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+            var filter = new ImgFilter(imgOriginal);
+            imgFiltered = filter.GetFilteredImage();
 
-                var filter = new ImgFilter(imgOriginal);
-                imgFiltered = filter.GetFilteredImage();
+            ball.imgFiltered = imgFiltered;
+            ball.imgOriginal = imgOriginal;
+            ball.gcheck = gcheck;
 
-                ball.imgFiltered = imgFiltered; ball.imgOriginal = imgOriginal;
-                ball.gcheck = gcheck; ball.xCoords = xCoords; ball.i = i;
-                ball.BallPositionDraw(imgCircles);
-                i = ball.i; xCoords = ball.xCoords; gcheck = ball.gcheck;
+            ball.xCoordList = xCoordList;
+            ball.i = i;
+            ball.BallPositionDraw(imgCircles);
+            i = ball.i;
+            xCoordList = ball.xCoordList;
+            gcheck = ball.gcheck;
 
-                _home.pictureBox2.Image = imgCircles.Bitmap;
+             _home.pictureBox2.Image = imgCircles.Bitmap;
         }
-
 
         public void StartVideo()
         {
@@ -97,7 +97,6 @@ namespace Football
             {
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
-
             }
             else TakeAVideo();
         }
@@ -108,7 +107,6 @@ namespace Football
             {
                 _timer.Tick += new EventHandler(TimeTick);
                 _timer.Start();
-
             }
             Camera();
         }
@@ -132,15 +130,10 @@ namespace Football
             }
         }
 
-
-
         public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
         {
-
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
-
             return imgRange;
         }
-
     }
 }

@@ -15,12 +15,10 @@ namespace Football
     class Ball
     {
         public int _xBallPosition { get; set; }
-
         public GoalsChecker gcheck { get; set; }
-
         public int i { get; set; }
-
-        public int[] xCoords { get; set; }
+        public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
+        private int ix2, z;
 
         public Image<Bgr, byte> imgOriginal { get; set; }
         public Image<Gray, byte> imgFiltered { get; set; }
@@ -29,6 +27,7 @@ namespace Football
         {
 
         }
+
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
             Gray grayCircle = new Gray(12);
@@ -46,8 +45,23 @@ namespace Football
             {
                 _xBallPosition = (int)circle.Center.X;
                 gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);
-                gcheck.Direction(_xBallPosition, i, xCoords); i++;
+                gcheck.Direction(_xBallPosition, i, xCoordList); i++;
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
+            }
+            
+            if(i >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
+            {
+                ix2 = i - 4;
+                for(z = 0; z < ix2; z++)
+                {
+                    xCoordList.RemoveAt(0);
+                }
+                i -= ix2;
+            }
+
+            foreach (var coord in xCoordList)   // iterating through generic list
+            {
+                Console.WriteLine(coord);       // output ball's last 4 positions on the X axis
             }
         }
     }
