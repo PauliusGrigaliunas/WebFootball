@@ -14,18 +14,10 @@ using System.Drawing;
 
 namespace Football
 {
-    class ImgFilter
+    public static class ImgFilter
     {
-        Image<Bgr, byte> imgOriginal;
 
-        public ImgFilter(Image<Bgr, byte> imgOriginal)
-        {
-            this.imgOriginal = imgOriginal;
-
-        }
-
-
-        public Image<Gray, byte> GetFilteredImage()
+        public static Image<Gray, byte> GetFilteredImage(this Image<Bgr, byte> imgOriginal)
         {
             Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));
 

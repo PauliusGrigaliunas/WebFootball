@@ -81,8 +81,9 @@ namespace Football
             _home.pictureBox1.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            var filter = new ImgFilter(imgOriginal);
-            imgFiltered = filter.GetFilteredImage();
+            //var filter = new ImgFilter(imgOriginal);
+            //imgFiltered = filter.GetFilteredImage();
+            imgFiltered = imgOriginal.GetFilteredImage(); // Method Extension
 
             ball.imgFiltered = imgFiltered;
             ball.imgOriginal = imgOriginal;
