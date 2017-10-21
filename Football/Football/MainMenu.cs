@@ -76,12 +76,14 @@ namespace Football
 
             String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
 
-            Match match = Regex.Match(data, pattern1);
-        
-            
-            if ((match.Success)&&(data!=null))
+         
+            if(data != null)
             {
-                mtch = true;
+                if (Regex.IsMatch(data, pattern1))
+                {
+                    mtch = true;
+                }
+
             }
 
 
