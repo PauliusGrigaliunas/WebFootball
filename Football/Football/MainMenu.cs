@@ -25,7 +25,7 @@ namespace Football
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
-           
+
             if ((IfMatch(Name1)) && (IfMatch(Name2)))
             {
                 if (Name1 != Name2)
@@ -47,7 +47,16 @@ namespace Football
 
             }
         }
-  
+
+        private void ToTable(string data)
+        {
+            Teams team = new Teams();
+            if (team.NameCheckIfExsist(data) != true)
+            {
+                team.AddToTable(data, 0, 0);
+            }
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox1_TextChange = (TextBox)sender;
@@ -72,10 +81,10 @@ namespace Football
             String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
 
 
-         
-            if(data != null)
 
-        
+            if (data != null)
+
+
             {
                 if (Regex.IsMatch(data, pattern1))
                 {
@@ -84,10 +93,6 @@ namespace Football
 
 
             }
-
-
-            }
-
             return mtch;
         }
 
@@ -96,13 +101,5 @@ namespace Football
 
         }
 
-        private void ToTable(String data)
-        {         
-            Teams team = new Teams();
-            if (team.NameCheckIfExsist(data) != true)
-            {
-                team.AddToTable(data, 0, 0);
-            }
-        }
     }
 }
