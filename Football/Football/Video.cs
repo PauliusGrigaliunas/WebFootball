@@ -96,7 +96,7 @@ namespace Football
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
 
-             _home.FilteredPictureBox.Image = imgCircles.Bitmap;
+             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
         public void StartVideo()
