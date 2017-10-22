@@ -124,7 +124,7 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Picture.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="StartThread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GoalsChecker.cs" />
     <Compile Include="TeamModel.Context.cs">

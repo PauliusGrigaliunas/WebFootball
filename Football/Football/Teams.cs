@@ -10,26 +10,19 @@ using System.Windows.Forms;
 
 namespace Football
 {
-
     public class Teams
     {
-
-        public Teams() { }
-
-
         public void AddToTable(String name, int victories, int goals)
         {
             //prideti komandos informacija i lentele
             using (FootballEntities contex = new FootballEntities())
             {
-
                 teamTable team = new teamTable()
                 {
                     Name = name,
                     Victories = victories,
                     Goals = goals,
-                };
-           
+                };         
  
                 contex.teamTables.Add(team);
                 contex.SaveChanges();
@@ -37,15 +30,13 @@ namespace Football
         }
 
        public bool NameCheckIfExsist(String data)
-        {//patikrinti ar tokia komanda jau yra zaidus
-
+       {//patikrinti ar tokia komanda jau yra zaidus
 
             bool exsists = false;
             try
             {
                 using (FootballEntities contex = new FootballEntities())
                 {
-
                     teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
 
                     if (team.Name == data)
@@ -56,28 +47,23 @@ namespace Football
             }
             catch (System.NullReferenceException ex)
             {
-
                 ex.ToString();
-            }
-               
-        
+            }         
             return exsists;
-
-        }
+       }
 
        public int GetVictories(String data)
-        {
+       {
             int vict = 0;
 
             using (FootballEntities contex = new FootballEntities())
-                {
+            {
                 
                  teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-                 vict =(int) team.Victories;
-     
-                 }
+                vict = (int)team.Victories;
+            }
             return vict;
-        }
+       }
 
         public int GetGoals( String data)
         {
@@ -90,7 +76,6 @@ namespace Football
 
             }
             return goals;
-
         }
 
         public void InsertToTable(String data, int victories, int goals)
@@ -117,10 +102,6 @@ namespace Football
                 contex.teamTables.Remove(team);
             }
         }
-      
-        
-   
-    
 
     }
 }

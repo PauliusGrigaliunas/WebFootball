@@ -13,21 +13,15 @@ namespace Football
 
         public string ConnectionString {
             get {
-                return _conectionString;
-            }
+                    return _conectionString;
+                }
         }
-
-        public Connector() { }
-
 
         public SqlConnection Connect()
         {
             SqlConnection con = new SqlConnection(ConnectionString);
             return con;
         }
-
-
-
 
     }
 }

@@ -17,35 +17,35 @@ namespace Football
 {
     public class GoalsChecker
     {
-        int _xBallPosition { get; set; }
-        int _timeElapsed;
         VideoCapture _capture { get; set; }
-        public string aText;
-        public string bText;
-        private Stopwatch stopwatch = new Stopwatch();
+        private Stopwatch _stopwatch = new Stopwatch();
+
+        int _xBallPosition { get; set; }
+        int _timeElapsed { get; set; }
+        private int _tempX;
+
+        public string _aText { get; set; }
+        public string _bText { get; set; }
+
         public static bool ballGoingRight = false;
-        private int tempX;
 
         public GoalsChecker(Stopwatch stopwatch)
         {
-            this.stopwatch = stopwatch;
+            this._stopwatch = stopwatch;
         }
-
-        // Note del goal'u skaiciavimu:
-        // Designer'yje sukeisti vietoj aTeamLabel ir bTeamLabel, nes app'sas turi rodyt ivarcius, o ne kiek kas "praleido" ivarciu - Tom.
 
         public string CheckForScoreA(string text)  // goal'as Team A  vartuose, A++
         {
-            Console.WriteLine(stopwatch.ToString());
+            Console.WriteLine(_stopwatch.ToString());
             int temp;
-            TimeSpan ts = stopwatch.Elapsed;
+            TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
             if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
-                stopwatch.Reset();
+                _stopwatch.Reset();
                 VideoScreen.isATeamScored = false;
                 VideoScreen.isBTeamScored = false;
             }
@@ -55,14 +55,14 @@ namespace Football
         public string CheckForScoreB(string text)  // goal'as Team B vartuose, B++
         {
             int temp;
-            TimeSpan ts = stopwatch.Elapsed;
+            TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
             if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && ballGoingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
-                stopwatch.Reset();
+                _stopwatch.Reset();
                 VideoScreen.isATeamScored = false;
                 VideoScreen.isBTeamScored = false;
             }
@@ -75,21 +75,21 @@ namespace Football
             {
                 VideoScreen.isATeamScored = false;
                 VideoScreen.isBTeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
+                _stopwatch.Reset();
+                _stopwatch.Start();
             }
             else if (0 < x && x < width * 3 / 8)
             {
                 VideoScreen.isBTeamScored = false;
                 VideoScreen.isATeamScored = true;
-                stopwatch.Reset();
-                stopwatch.Start();
+                _stopwatch.Reset();
+                _stopwatch.Start();
             }
             else
             {
                 VideoScreen.isBTeamScored = false;
                 VideoScreen.isATeamScored = false;
-                stopwatch.Reset();
+                _stopwatch.Reset();
             }
         }
 
@@ -100,9 +100,9 @@ namespace Football
 
             if (i >= 2)
             {
-                tempX = xCoords[i - 1] - xCoords[i - 2]; // kamuoliuko greitis X-asimi (px/frame)
+                _tempX = xCoords[i - 1] - xCoords[i - 2]; // kamuoliuko greitis X-asimi (px/frame)
 
-                if (tempX >= 0)
+                if (_tempX >= 0)
                 {
                     ballGoingRight = true;    // kamuolys juda link B vartu
                 }

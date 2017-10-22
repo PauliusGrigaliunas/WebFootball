@@ -14,19 +14,17 @@ namespace Football
 {
     class Ball
     {
-        public int _xBallPosition { get; set; }
+        //objects
         public GoalsChecker gcheck { get; set; }
+
+        //variables
+        public int _xBallPosition { get; set; }      
         public int i { get; set; }
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
-        private int ix2, z;
+        private int _ix2, _z;
 
         public Image<Bgr, byte> imgOriginal { get; set; }
         public Image<Gray, byte> imgFiltered { get; set; }
-
-        public Ball()
-        {
-
-        }
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
@@ -49,14 +47,14 @@ namespace Football
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
             }
             
-            if(i >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
+            if (i >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
             {
-                ix2 = i - 4;
-                for(z = 0; z < ix2; z++)
+                _ix2 = i - 4;
+                for(_z = 0; _z < _ix2; _z++)
                 {
                     xCoordList.RemoveAt(0);
                 }
-                i -= ix2;
+                i -= _ix2;
             }
 
             foreach (var coord in xCoordList)   // iterating through generic list

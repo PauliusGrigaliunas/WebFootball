@@ -16,7 +16,6 @@ namespace Football
 {
     public static class ImgFilter
     {
-
         public static Image<Gray, byte> GetFilteredImage(this Image<Bgr, byte> imgOriginal)
         {
             Image<Gray, byte> imgSmoothed = imgOriginal.Convert<Hsv, byte>().InRange(new Hsv(0, 140, 150), new Hsv(180, 255, 255));

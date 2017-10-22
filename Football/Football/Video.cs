@@ -16,17 +16,22 @@ namespace Football
 {
     class Video : Picture
     {
+        //objects
         private VideoCapture _capture;
-        private Mat mat;
-        private Stopwatch stopwatch = new Stopwatch();
+        private Mat _mat;
+        private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
-        GoalsChecker gcheck;
-        Image<Bgr, byte> imgOriginal { get; set; }
-        Image<Gray, byte> imgFiltered { get; set; }
-        Ball ball = new Ball();
-        private int i = 0;
+        GoalsChecker _gcheck;
+        Ball _ball = new Ball();
         private VideoScreen _home;
-        public List<int> xCoordList = new List<int>();
+
+        //picture variables
+        Image<Bgr, byte> _imgOriginal { get; set; }
+        Image<Gray, byte> _imgFiltered { get; set; }
+
+        //variables
+        private int _i = 0;
+        public List<int> _xCoordList = new List<int>();
 
         public Video()
         {
@@ -34,7 +39,7 @@ namespace Football
         }
         public Video( VideoScreen hm )
         {
-            mat = new Mat();
+            _mat = new Mat();
             this._home = hm;
         }
 
@@ -63,38 +68,34 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            gcheck = new GoalsChecker(stopwatch);
-            _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
-            _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
+            _gcheck = new GoalsChecker(_stopwatch);
+            _home.aTeamLabel.Text = _gcheck.CheckForScoreA(_home.aTeamLabel.Text);
+            _home.bTeamLabel.Text = _gcheck.CheckForScoreB(_home.bTeamLabel.Text);
             Process();
         }
 
-        private void Process() {
-           // gcheck = new GoalsChecker(stopwatch);
-           // _home.aTeamLabel.Text = gcheck.CheckForScoreA(_home.aTeamLabel.Text);
-           // _home.bTeamLabel.Text = gcheck.CheckForScoreB(_home.bTeamLabel.Text);
-
+        private void Process()
+        {
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
-            imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
-            _home.OriginalPictureBox.Image = imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
+            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
+            _home.OriginalPictureBox.Image = _imgOriginal.Bitmap;
+            Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
 
-            //var filter = new ImgFilter(imgOriginal);
-            //imgFiltered = filter.GetFilteredImage();
-            imgFiltered = imgOriginal.GetFilteredImage(); // Method Extension
 
-            ball.imgFiltered = imgFiltered;
-            ball.imgOriginal = imgOriginal;
-            ball.gcheck = gcheck;
+            _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
 
-            ball.xCoordList = xCoordList;
-            ball.i = i;
-            ball.BallPositionDraw(imgCircles);
-            i = ball.i;
-            xCoordList = ball.xCoordList;
-            gcheck = ball.gcheck;
+            _ball.imgFiltered = _imgFiltered;
+            _ball.imgOriginal = _imgOriginal;
+            _ball.gcheck = _gcheck;
+
+            _ball.xCoordList = _xCoordList;
+            _ball.i = _i;
+            _ball.BallPositionDraw(imgCircles);
+            _i = _ball.i;
+            _xCoordList = _ball.xCoordList;
+            _gcheck = _ball.gcheck;
 
              _home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
@@ -141,7 +142,7 @@ namespace Football
         
         public override Image<Gray, byte> ConvertToGray()
         {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
+            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
             return imgRange;
 
@@ -149,7 +150,7 @@ namespace Football
 
         public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed,int highBlue, int highGreen, int highRed)
         {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
         }
     }

@@ -46,7 +46,7 @@ namespace Football
             InitializeComponent();
             _video = new Video(this);
         }
-        //Camera
+        //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _video.StartCamera();
@@ -93,8 +93,8 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
-        // Buttons------------
 
+        // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
             _video.StartVideo();
@@ -110,6 +110,8 @@ namespace Football
             _video.Stop();
         }
         // End Buttons------------
+
+        //closing form
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _video.Pause();
@@ -123,11 +125,13 @@ namespace Football
             OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
             }
         }
-        //coordinates
+
+        //Coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
             MessageBox.Show("X= " + e.X.ToString() + ";  Y= " + e.Y.ToString() + ";");
         }
+
         //+----------------------
         private void Form1_Load(object sender, EventArgs e)
         {
