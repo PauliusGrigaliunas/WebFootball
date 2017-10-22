@@ -20,7 +20,7 @@ using System.Data.SqlClient;
 namespace Football
 {
 
-    public partial class Form1 : Form
+    public partial class VideoScreen : Form
     {
         //objects
         Picture _picture = new Picture();
@@ -41,7 +41,7 @@ namespace Football
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
-        public Form1()
+        public VideoScreen()
         {
             InitializeComponent();
             _video = new Video(this);
@@ -120,7 +120,7 @@ namespace Football
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_picture != null) { 
-            pictureBox1.Image = _picture.TakeAPicture().Bitmap;
+            OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
             }
         }
         //coordinates

@@ -25,14 +25,14 @@ namespace Football
         Image<Gray, byte> imgFiltered { get; set; }
         Ball ball = new Ball();
         private int i = 0;
-        private Form1 _home;
+        private VideoScreen _home;
         public List<int> xCoordList = new List<int>();
 
         public Video()
         {
 
         }
-        public Video( Form1 hm )
+        public Video( VideoScreen hm )
         {
             mat = new Mat();
             this._home = hm;
@@ -77,8 +77,8 @@ namespace Football
             Mat mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
-            imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.pictureBox1.Width, _home.pictureBox1.Height, Inter.Linear); ;
-            _home.pictureBox1.Image = imgOriginal.Bitmap;
+            imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
+            _home.OriginalPictureBox.Image = imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = imgOriginal.CopyBlank();     //copy parameters of original frame image
 
             //var filter = new ImgFilter(imgOriginal);
@@ -96,7 +96,7 @@ namespace Football
             xCoordList = ball.xCoordList;
             gcheck = ball.gcheck;
 
-             _home.pictureBox2.Image = imgCircles.Bitmap;
+             _home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
         public void StartVideo()

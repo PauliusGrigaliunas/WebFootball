@@ -40,14 +40,14 @@ namespace Football
             int temp;
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && Form1.isATeamScored && !ballGoingRight)
+            if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
                 stopwatch.Reset();
-                Form1.isATeamScored = false;
-                Form1.isBTeamScored = false;
+                VideoScreen.isATeamScored = false;
+                VideoScreen.isBTeamScored = false;
             }
             return text;
         }
@@ -57,14 +57,14 @@ namespace Football
             int temp;
             TimeSpan ts = stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && Form1.isBTeamScored && ballGoingRight)
+            if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && ballGoingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
                 stopwatch.Reset();
-                Form1.isATeamScored = false;
-                Form1.isBTeamScored = false;
+                VideoScreen.isATeamScored = false;
+                VideoScreen.isBTeamScored = false;
             }
             return text;
         }
@@ -73,22 +73,22 @@ namespace Football
         {
             if (width * 5 / 8 < x && x < width)
             {
-                Form1.isATeamScored = false;
-                Form1.isBTeamScored = true;
+                VideoScreen.isATeamScored = false;
+                VideoScreen.isBTeamScored = true;
                 stopwatch.Reset();
                 stopwatch.Start();
             }
             else if (0 < x && x < width * 3 / 8)
             {
-                Form1.isBTeamScored = false;
-                Form1.isATeamScored = true;
+                VideoScreen.isBTeamScored = false;
+                VideoScreen.isATeamScored = true;
                 stopwatch.Reset();
                 stopwatch.Start();
             }
             else
             {
-                Form1.isBTeamScored = false;
-                Form1.isATeamScored = false;
+                VideoScreen.isBTeamScored = false;
+                VideoScreen.isATeamScored = false;
                 stopwatch.Reset();
             }
         }

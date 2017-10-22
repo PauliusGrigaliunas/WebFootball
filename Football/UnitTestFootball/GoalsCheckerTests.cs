@@ -24,7 +24,7 @@ namespace UnitTestFootball
             //act
             gcheck.StartStopwatch(390, 480);
             //assert
-            Assert.IsTrue(Form1.isBTeamScored);
+            Assert.IsTrue(VideoScreen.isBTeamScored);
         }
 
         [TestMethod()]
@@ -35,8 +35,8 @@ namespace UnitTestFootball
             //act
             gcheck.StartStopwatch(250, 500);
             //assert
-            Assert.IsFalse(Form1.isATeamScored);
-            Assert.IsFalse(Form1.isBTeamScored);
+            Assert.IsFalse(VideoScreen.isATeamScored);
+            Assert.IsFalse(VideoScreen.isBTeamScored);
         }
 
         [TestMethod()]
@@ -47,7 +47,7 @@ namespace UnitTestFootball
             System.Threading.Thread.Sleep(3500);
             gcheck = new GoalsChecker(stopwatch);
             GoalsChecker.ballGoingRight = false;
-            Form1.isATeamScored = true;
+            VideoScreen.isATeamScored = true;
             string text = "1";
             //act
             text = gcheck.CheckForScoreA(text);
@@ -63,7 +63,7 @@ namespace UnitTestFootball
             System.Threading.Thread.Sleep(3500);
             gcheck = new GoalsChecker(stopwatch);
             GoalsChecker.ballGoingRight = true;
-            Form1.isBTeamScored = true;
+            VideoScreen.isBTeamScored = true;
             string text = "199";
             //act
             text = gcheck.CheckForScoreB(text);

@@ -93,11 +93,11 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ImgFilter.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="VideoScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="VideoScreen.Designer.cs">
+      <DependentUpon>VideoScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAllTeams.cs">
       <SubType>Form</SubType>
@@ -148,8 +148,8 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Video.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="VideoScreen.resx">
+      <DependentUpon>VideoScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAllTeams.resx">
       <DependentUpon>FormAllTeams.cs</DependentUpon>

@@ -24,7 +24,7 @@ namespace Football
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
+            VideoScreen form = new VideoScreen();
            
             if ((IfMatch(_nameFirstTeam)) && (IfMatch(_nameSecondTeam)))
             {
