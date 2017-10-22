@@ -85,8 +85,8 @@ namespace Football
 
             _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
 
-            _ball.imgFiltered = _imgFiltered;
-            _ball.imgOriginal = _imgOriginal;
+            _ball.ImgFiltered = _imgFiltered;
+            _ball.ImgOriginal = _imgOriginal;
             _ball.gcheck = _gcheck;
 
             _ball.xCoordList = _xCoordList;

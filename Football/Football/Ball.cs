@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace Football
 {
-    class Ball
+    public class Ball
     {
         //objects
         public GoalsChecker gcheck { get; set; }
@@ -23,8 +23,8 @@ namespace Football
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
         private int _ix2, _z, _j;
 
-        public Image<Bgr, byte> imgOriginal { get; set; }
-        public Image<Gray, byte> imgFiltered { get; set; }
+        public Image<Bgr, byte> ImgOriginal { get; set; }
+        public Image<Gray, byte> ImgFiltered { get; set; }
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
@@ -39,10 +39,10 @@ namespace Football
 
         internal void BallPositionDraw(Image<Bgr, byte> imgCircles)
         {
-            foreach (CircleF circle in GetCircles(imgFiltered))
+            foreach (CircleF circle in GetCircles(ImgFiltered))
             {
                 _xBallPosition = (int)circle.Center.X;
-                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);
+                gcheck.StartStopwatch(_xBallPosition, ImgOriginal.Width);
                 gcheck.Direction(_xBallPosition, i, xCoordList); i++;
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
             }
