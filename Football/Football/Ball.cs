@@ -21,7 +21,7 @@ namespace Football
         public int XBallPosition { get; set; }      
         public int Index { get; set; }
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
-        private int _ix2, _z, _j;
+        private int _ix2, _z;
 
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
