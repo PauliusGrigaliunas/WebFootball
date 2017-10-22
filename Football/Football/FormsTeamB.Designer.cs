@@ -28,108 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.victLabel = new System.Windows.Forms.Label();
+            this.goalsLabel = new System.Windows.Forms.Label();
+            this.TeamNameLabel = new System.Windows.Forms.Label();
+            this.allVictLabel = new System.Windows.Forms.Label();
+            this.allGoalsLabel = new System.Windows.Forms.Label();
+            this.allLabel = new System.Windows.Forms.Label();
+            this.thisGameLabel = new System.Windows.Forms.Label();
+            this.thisGameGoalsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label2
+            // victLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Victories";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.victLabel.AutoSize = true;
+            this.victLabel.Location = new System.Drawing.Point(49, 103);
+            this.victLabel.Name = "victLabel";
+            this.victLabel.Size = new System.Drawing.Size(47, 13);
+            this.victLabel.TabIndex = 1;
+            this.victLabel.Text = "Victories";
+            this.victLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // label3
+            // goalsLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 159);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Goals";
+            this.goalsLabel.AutoSize = true;
+            this.goalsLabel.Location = new System.Drawing.Point(50, 159);
+            this.goalsLabel.Name = "goalsLabel";
+            this.goalsLabel.Size = new System.Drawing.Size(34, 13);
+            this.goalsLabel.TabIndex = 2;
+            this.goalsLabel.Text = "Goals";
             // 
-            // label4
+            // TeamNameLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(177, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.TeamNameLabel.AutoSize = true;
+            this.TeamNameLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.TeamNameLabel.Location = new System.Drawing.Point(177, 20);
+            this.TeamNameLabel.Name = "TeamNameLabel";
+            this.TeamNameLabel.Size = new System.Drawing.Size(35, 13);
+            this.TeamNameLabel.TabIndex = 3;
+            this.TeamNameLabel.Text = "label4";
+            this.TeamNameLabel.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label5
+            // allVictLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Location = new System.Drawing.Point(163, 103);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "label5";
+            this.allVictLabel.AutoSize = true;
+            this.allVictLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.allVictLabel.Location = new System.Drawing.Point(163, 103);
+            this.allVictLabel.Name = "allVictLabel";
+            this.allVictLabel.Size = new System.Drawing.Size(35, 13);
+            this.allVictLabel.TabIndex = 4;
+            this.allVictLabel.Text = "label5";
             // 
-            // label6
+            // allGoalsLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(163, 159);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "label6";
+            this.allGoalsLabel.AutoSize = true;
+            this.allGoalsLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.allGoalsLabel.Location = new System.Drawing.Point(163, 159);
+            this.allGoalsLabel.Name = "allGoalsLabel";
+            this.allGoalsLabel.Size = new System.Drawing.Size(35, 13);
+            this.allGoalsLabel.TabIndex = 5;
+            this.allGoalsLabel.Text = "label6";
             // 
-            // label7
+            // allLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(163, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(18, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "All";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+            this.allLabel.AutoSize = true;
+            this.allLabel.Location = new System.Drawing.Point(163, 77);
+            this.allLabel.Name = "allLabel";
+            this.allLabel.Size = new System.Drawing.Size(18, 13);
+            this.allLabel.TabIndex = 6;
+            this.allLabel.Text = "All";
+            this.allLabel.Click += new System.EventHandler(this.label7_Click);
             // 
-            // label1
+            // thisGameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(241, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "This Game";
+            this.thisGameLabel.AutoSize = true;
+            this.thisGameLabel.Location = new System.Drawing.Point(241, 77);
+            this.thisGameLabel.Name = "thisGameLabel";
+            this.thisGameLabel.Size = new System.Drawing.Size(58, 13);
+            this.thisGameLabel.TabIndex = 7;
+            this.thisGameLabel.Text = "This Game";
             // 
-            // label9
+            // thisGameGoalsLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label9.Location = new System.Drawing.Point(241, 159);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "label9";
+            this.thisGameGoalsLabel.AutoSize = true;
+            this.thisGameGoalsLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.thisGameGoalsLabel.Location = new System.Drawing.Point(241, 159);
+            this.thisGameGoalsLabel.Name = "thisGameGoalsLabel";
+            this.thisGameGoalsLabel.Size = new System.Drawing.Size(35, 13);
+            this.thisGameGoalsLabel.TabIndex = 9;
+            this.thisGameGoalsLabel.Text = "label9";
             // 
             // FormsTeamB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 250);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.thisGameGoalsLabel);
+            this.Controls.Add(this.thisGameLabel);
+            this.Controls.Add(this.allLabel);
+            this.Controls.Add(this.allGoalsLabel);
+            this.Controls.Add(this.allVictLabel);
+            this.Controls.Add(this.TeamNameLabel);
+            this.Controls.Add(this.goalsLabel);
+            this.Controls.Add(this.victLabel);
             this.Name = "FormsTeamB";
             this.Text = "Team B";
             this.Load += new System.EventHandler(this.FormsTeamB_Load);
@@ -139,13 +139,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label victLabel;
+        private System.Windows.Forms.Label goalsLabel;
+        private System.Windows.Forms.Label TeamNameLabel;
+        private System.Windows.Forms.Label allVictLabel;
+        private System.Windows.Forms.Label allGoalsLabel;
+        private System.Windows.Forms.Label allLabel;
+        private System.Windows.Forms.Label thisGameLabel;
+        private System.Windows.Forms.Label thisGameGoalsLabel;
     }
 }

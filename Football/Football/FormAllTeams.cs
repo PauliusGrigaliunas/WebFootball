@@ -13,13 +13,9 @@ namespace Football
 {
     public partial class FormAllTeams : Form
     {
-
-        
-
         public FormAllTeams()
         {
-            InitializeComponent();
-         
+            InitializeComponent();       
         }
       
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -28,7 +24,7 @@ namespace Football
           
         }
         
-        public void fillData()
+        public void FillData()
         {
            
             FootballEntities context = new FootballEntities();
@@ -37,14 +33,12 @@ namespace Football
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
 
-
-            dataGridView1.DataSource = team.ToList();
- 
+            dataAllTeamsGrid.DataSource = team.ToList(); 
         }
 
         private void FormAllTeams_Load(object sender, EventArgs e)
         {
-            fillData();
+            FillData();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,7 +59,7 @@ namespace Football
                        orderby i.Victories descending
                        select new{i.Name, i.Victories};
                        
-            dataGridView1.DataSource = team.ToList();
+            dataAllTeamsGrid.DataSource = team.ToList();
 
         }
 
@@ -78,7 +72,7 @@ namespace Football
                        select new { i.Name, i.Goals };
 
 
-            dataGridView1.DataSource = team.ToList();
+            dataAllTeamsGrid.DataSource = team.ToList();
 
         }
 
@@ -92,12 +86,12 @@ namespace Football
                        orderby i.Victories descending
                        select new { i.Name, i.Victories, i.Goals };
 
-            dataGridView1.DataSource = team.ToList();
+            dataAllTeamsGrid.DataSource = team.ToList();
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fillData();
+            FillData();
         }
 
        
