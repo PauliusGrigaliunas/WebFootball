@@ -63,6 +63,7 @@
     <Compile Include="CheckVictoriescs.cs" />
     <Compile Include="GoalsCheckerTests.cs" />
     <Compile Include="NameExsists.cs" />
+    <Compile Include="PictureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConnectionStringChecker.cs" />
   </ItemGroup>
