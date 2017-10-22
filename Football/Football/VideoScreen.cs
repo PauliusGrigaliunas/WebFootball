@@ -182,7 +182,7 @@ namespace Football
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormsTeamB form = new FormsTeamB();
+            FormTeamB form = new FormTeamB();
             form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
             form.Show();
         }

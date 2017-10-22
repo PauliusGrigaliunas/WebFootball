@@ -1,6 +1,6 @@
 ﻿namespace Football
 {
-    partial class FormsTeamB
+    partial class FormTeamB
     {
         /// <summary>
         /// Required designer variable.

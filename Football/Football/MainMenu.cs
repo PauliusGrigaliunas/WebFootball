@@ -44,7 +44,6 @@ namespace Football
             else
             {
                 MessageBox.Show("Team names must be at least 4 charachters long ");
-
             }
         }
   
@@ -70,8 +69,6 @@ namespace Football
             bool mtch = false;
 
             String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
-
-
          
             if(data != null)
 
@@ -81,7 +78,6 @@ namespace Football
                 {
                     mtch = true;
                 }
-
             }
 
             return mtch;

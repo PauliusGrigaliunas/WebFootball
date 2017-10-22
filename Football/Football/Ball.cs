@@ -12,19 +12,19 @@ using System.Drawing;
 
 namespace Football
 {
-    class Ball
+    public class Ball
     {
         //objects
-        public GoalsChecker gcheck { get; set; }
+        public GoalsChecker Gcheck { get; set; }
 
         //variables
-        public int _xBallPosition { get; set; }      
-        public int i { get; set; }
+        public int XBallPosition { get; set; }      
+        public int Index { get; set; }
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
         private int _ix2, _z, _j;
 
-        public Image<Bgr, byte> imgOriginal { get; set; }
-        public Image<Gray, byte> imgFiltered { get; set; }
+        public Image<Bgr, byte> ImgOriginal { get; set; }
+        public Image<Gray, byte> ImgFiltered { get; set; }
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
@@ -37,33 +37,44 @@ namespace Football
             return imgGray.HoughCircles(grayCircle, cannyThreshold, lAccumResolution, minDistanceBtwCircles, minRadius, maxRadius)[0];
         }
 
-        internal void BallPositionDraw(Image<Bgr, byte> imgCircles)
+        public void BallPositionDraw(Image<Bgr, byte> imgCircles)
         {
-            foreach (CircleF circle in GetCircles(imgFiltered))
+            try
             {
-                _xBallPosition = (int)circle.Center.X;
-                gcheck.StartStopwatch(_xBallPosition, imgOriginal.Width);
-                gcheck.Direction(_xBallPosition, i, xCoordList); i++;
-                imgCircles.Draw(circle, new Bgr(Color.Red), 3);
-            }
-            
-            if (i >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
-            {
-                _ix2 = i - 4;
-                for(_z = 0; _z < _ix2; _z++)
+                foreach (CircleF circle in GetCircles(ImgFiltered))
                 {
-                    xCoordList.RemoveAt(0);
+                    XBallPosition = (int)circle.Center.X;
+                    Gcheck.StartStopwatch(XBallPosition, ImgOriginal.Width);
+                    Gcheck.Direction(XBallPosition, Index, xCoordList); Index++;
+                    imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
-                i -= _ix2;
+
+                if (Index >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
+                {
+                    _ix2 = Index - 4;
+                    for (_z = 0; _z < _ix2; _z++)
+                    {
+                        xCoordList.RemoveAt(0);
+                    }
+                    Index -= _ix2;
+                }
+
+                Display(xCoordList);
+            }
+            catch (Exception)
+            {
+
+                return;
             }
             
-            Display(xCoordList);
 
             /* foreach (var coord in xCoordList)   // iterating through generic list   // paprastas foreach
              {
                  Console.WriteLine(coord);       // output ball's last 4 positions on the X axis
              }*/
             //Display(xCoordList);
+  
+            
         }
         /*
         private void Display(IEnumerable<int> argument) // https://www.dotnetperls.com/ienumerable 2nd example // ienumerable

@@ -14,11 +14,11 @@ using Emgu.CV.CvEnum;
 
 namespace Football
 {
-    class Video : Picture
+    public class Video : Picture
     {
         //objects
         private VideoCapture _capture;
-        private Mat _mat;
+        private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
         GoalsChecker _gcheck;
@@ -39,7 +39,6 @@ namespace Football
         }
         public Video( VideoScreen hm )
         {
-            _mat = new Mat();
             this._home = hm;
         }
 
@@ -76,26 +75,26 @@ namespace Football
 
         private void Process()
         {
-            Mat mat = _capture.QueryFrame();       //getting frames            
+            mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
-            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
+            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); 
             _home.OriginalPictureBox.Image = _imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
 
 
             _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
 
-            _ball.imgFiltered = _imgFiltered;
-            _ball.imgOriginal = _imgOriginal;
-            _ball.gcheck = _gcheck;
+            _ball.ImgFiltered = _imgFiltered;
+            _ball.ImgOriginal = _imgOriginal;
+            _ball.Gcheck = _gcheck;
 
             _ball.xCoordList = _xCoordList;
-            _ball.i = _i;
+            _ball.Index = _i;
             _ball.BallPositionDraw(imgCircles);
-            _i = _ball.i;
+            _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.gcheck;
+            _gcheck = _ball.Gcheck;
 
              _home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
@@ -142,7 +141,7 @@ namespace Football
         
         public override Image<Gray, byte> ConvertToGray()
         {
-            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
             return imgRange;
 
@@ -150,7 +149,7 @@ namespace Football
 
         public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed,int highBlue, int highGreen, int highRed)
         {
-            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
         }
     }

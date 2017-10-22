@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Football
 {
-    public partial class FormsTeamB : Form
+    public partial class FormTeamB : Form
     {
-        public FormsTeamB()
+        public FormTeamB()
         {
             InitializeComponent();
         }
