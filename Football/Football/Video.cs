@@ -18,7 +18,7 @@ namespace Football
     {
         //objects
         private VideoCapture _capture;
-        private Mat _mat;
+        private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
         GoalsChecker _gcheck;
@@ -39,7 +39,6 @@ namespace Football
         }
         public Video( VideoScreen hm )
         {
-            _mat = new Mat();
             this._home = hm;
         }
 
@@ -76,7 +75,7 @@ namespace Football
 
         private void Process()
         {
-            Mat mat = _capture.QueryFrame();       //getting frames            
+            mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
             _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
@@ -142,7 +141,7 @@ namespace Football
         
         public override Image<Gray, byte> ConvertToGray()
         {
-            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
             return imgRange;
 
@@ -150,7 +149,7 @@ namespace Football
 
         public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed,int highBlue, int highGreen, int highRed)
         {
-            Image<Gray, Byte> imgRange = _mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
         }
     }

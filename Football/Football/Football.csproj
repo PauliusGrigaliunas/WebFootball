@@ -105,11 +105,11 @@
     <Compile Include="FormAllTeams.Designer.cs">
       <DependentUpon>FormAllTeams.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsTeamB.cs">
+    <Compile Include="FormTeamB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsTeamB.Designer.cs">
-      <DependentUpon>FormsTeamB.cs</DependentUpon>
+    <Compile Include="FormTeamB.Designer.cs">
+      <DependentUpon>FormTeamB.cs</DependentUpon>
     </Compile>
     <Compile Include="FormTeamA.cs">
       <SubType>Form</SubType>
@@ -154,8 +154,8 @@
     <EmbeddedResource Include="FormAllTeams.resx">
       <DependentUpon>FormAllTeams.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsTeamB.resx">
-      <DependentUpon>FormsTeamB.cs</DependentUpon>
+    <EmbeddedResource Include="FormTeamB.resx">
+      <DependentUpon>FormTeamB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTeamA.resx">
       <DependentUpon>FormTeamA.cs</DependentUpon>
