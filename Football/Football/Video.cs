@@ -87,14 +87,14 @@ namespace Football
 
             _ball.ImgFiltered = _imgFiltered;
             _ball.ImgOriginal = _imgOriginal;
-            _ball.gcheck = _gcheck;
+            _ball.Gcheck = _gcheck;
 
             _ball.xCoordList = _xCoordList;
-            _ball.i = _i;
+            _ball.Index = _i;
             _ball.BallPositionDraw(imgCircles);
-            _i = _ball.i;
+            _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.gcheck;
+            _gcheck = _ball.Gcheck;
 
              _home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }

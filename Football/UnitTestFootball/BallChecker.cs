@@ -8,16 +8,12 @@ namespace UnitTestFootball
     public class BallChecker
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestVideoAndPictureHierarchy()
         {
-            Picture picture = new Picture();
-            Video video = new Video();
+            Ball ball = new Ball();
 
+            Assert.Equals(ball.Index, ball.Index);
 
-            var first = picture.TakeAPicture();
-            var second = video.TakeAPicture();
-
-            Assert.ReferenceEquals(first, second);
         }
     }
 }

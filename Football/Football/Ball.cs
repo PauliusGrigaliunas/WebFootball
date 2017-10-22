@@ -15,11 +15,11 @@ namespace Football
     public class Ball
     {
         //objects
-        public GoalsChecker gcheck { get; set; }
+        public GoalsChecker Gcheck { get; set; }
 
         //variables
-        public int _xBallPosition { get; set; }      
-        public int i { get; set; }
+        public int XBallPosition { get; set; }      
+        public int Index { get; set; }
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
         private int _ix2, _z, _j;
 
@@ -41,20 +41,20 @@ namespace Football
         {
             foreach (CircleF circle in GetCircles(ImgFiltered))
             {
-                _xBallPosition = (int)circle.Center.X;
-                gcheck.StartStopwatch(_xBallPosition, ImgOriginal.Width);
-                gcheck.Direction(_xBallPosition, i, xCoordList); i++;
+                XBallPosition = (int)circle.Center.X;
+                Gcheck.StartStopwatch(XBallPosition, ImgOriginal.Width);
+                Gcheck.Direction(XBallPosition, Index, xCoordList); Index++;
                 imgCircles.Draw(circle, new Bgr(Color.Red), 3);
             }
             
-            if (i >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
+            if (Index >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
             {
-                _ix2 = i - 4;
+                _ix2 = Index - 4;
                 for(_z = 0; _z < _ix2; _z++)
                 {
                     xCoordList.RemoveAt(0);
                 }
-                i -= _ix2;
+                Index -= _ix2;
             }
             
             Display(xCoordList);
