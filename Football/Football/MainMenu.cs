@@ -82,10 +82,6 @@ namespace Football
                     mtch = true;
                 }
 
-
-            }
-
-
             }
 
             return mtch;
