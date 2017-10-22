@@ -14,7 +14,7 @@ using Emgu.CV.CvEnum;
 
 namespace Football
 {
-    class Video : Picture
+    public class Video : Picture
     {
         //objects
         private VideoCapture _capture;

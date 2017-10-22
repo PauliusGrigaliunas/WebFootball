@@ -10,8 +10,14 @@ namespace UnitTestFootball
         [TestMethod]
         public void TestMethod1()
         {
-            ball
+            Picture picture = new Picture();
+            Video video = new Video();
 
+
+            var first = picture.TakeAPicture();
+            var second = video.TakeAPicture();
+
+            Assert.ReferenceEquals(first, second);
         }
     }
 }
