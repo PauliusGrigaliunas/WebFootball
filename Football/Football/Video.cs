@@ -78,7 +78,7 @@ namespace Football
             mat = _capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
-            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); ;
+            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); 
             _home.OriginalPictureBox.Image = _imgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
 
