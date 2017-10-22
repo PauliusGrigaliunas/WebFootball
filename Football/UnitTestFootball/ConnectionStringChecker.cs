@@ -1,4 +1,4 @@
-﻿using Football;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -6,16 +6,16 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Football;
 
 namespace UnitTestFootball
 {
     [TestClass]
-    class ConnectionString
+    public class ConnectionStringChecker
     {
         [TestMethod]
-        public void IsConnectionStringCorrect()
+        public void ConnectionString()
         {
-            /*
             //Access
             Connector connector = new Connector();
             SqlConnection first = connector.Connect();
@@ -26,8 +26,7 @@ namespace UnitTestFootball
             SqlConnection second = new SqlConnection(constring);
 
             //Assert
-            Assert.AreEqual(first, second);
-            */
+            Assert.ReferenceEquals(first, second);
         }
     }
 }
