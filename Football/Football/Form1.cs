@@ -22,128 +22,105 @@ namespace Football
 
     public partial class Form1 : Form
     {
-        public static bool isBTeamScored = false;
+        //objects
+        Picture _picture = new Picture();
+        Ball _ball = new Ball();
+        Video _video;
+
+        //variables
+        public String _nameFirstTeam { get; set; }
+        public String _nameSecondTeam { get; set; }
+
+        public int _TeamAScores { get; set; }
+        public int _TeamBScores { get; set; }
+        public int _VictA { get; set; }
+        public int _GoalA { get; set; }
+        public int _VictB { get; set; }
+        public int _GoalB { get; set; }
+
         public static bool isATeamScored = false;
-        private Stopwatch stopwatch = new Stopwatch();
-        int _xBallPosition { get; set; }
-        int _timeElapsed = 0;
-        VideoCapture _capture { get; set; }
-        Image<Bgr, byte> imgInput = null;
-        Image<Bgr, byte> imgOriginal { get; set; }
-        Image<Gray, byte> imgFiltered { get; set; }
-       
-        Picture picture = new Picture();
-        GoalsChecker gcheck;
-        Ball ball = new Ball();
-
-        String name1;
-        String name2;
-        
-        System.Windows.Forms.Timer _timer;
-
-        Connector conector = new Connector();
-
-        Video video;
+        public static bool isBTeamScored = false;
 
         public Form1()
         {
             InitializeComponent();
-            video = new Video(this);
+            _video = new Video(this);
         }
-
-        public int TeamAScores { get; set; }
-        public int TeamBScores { get; set; }
-        public int VictA { get; set; }
-        public int GoalA { get; set; }
-        public int VictB { get; set; }
-        public int GoalB { get; set; }
-
-        public void setName1(String name)
-        {
-            this.name1 = name;
-        }
-        public void setName2(String name)
-        {
-            this.name2 = name;
-        }
-        
-        // Menu items------------
-
         //Camera
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            video.StartCamera();
+            _video.StartCamera();
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            video.Pause();
+            _video.Pause();
         }
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            video.Stop();
+            _video.Stop();
         }
 
 
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            video.StartVideo();
+            _video.StartVideo();
         }
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            video.StartVideo();
+            _video.StartVideo();
         }
 
         private void pauseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            video.Pause();
+            _video.Pause();
         }
 
         private void stopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            video.Stop();
+            _video.Stop();
         }
 
         private void pauseToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            video.Pause();
+            _video.Pause();
         }
 
         private void stopToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            video.Stop();
+            _video.Stop();
         }
         // End Menu items------------
         // Buttons------------
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            video.StartVideo();
+            _video.StartVideo();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            video.Pause();
+            _video.Pause();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            video.Stop();
+            _video.Stop();
         }
         // End Buttons------------
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            video.Pause();
+            _video.Pause();
             Application.Exit();
         }
     
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (picture != null) { 
-            pictureBox1.Image = picture.TakeAPicture().Bitmap;
+            if (_picture != null) { 
+            pictureBox1.Image = _picture.TakeAPicture().Bitmap;
             }
         }
         //coordinates
@@ -160,34 +137,34 @@ namespace Football
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.TeamBScores = int.Parse(bTeamLabel.Text);
-            this.TeamAScores = int.Parse(aTeamLabel.Text);
+            this._TeamBScores = int.Parse(bTeamLabel.Text);
+            this._TeamAScores = int.Parse(aTeamLabel.Text);
 
-            VictA = 0;
-            GoalA = 0;
-            VictB = 0;
-            GoalB = 0;
+            _VictA = 0;
+            _GoalA = 0;
+            _VictB = 0;
+            _GoalB = 0;
             //kokia info lentelej
             Teams team = new Teams();
 
-            VictA = team.GetVictories(name1);
-            GoalA = team.GetGoals(name1);
-            VictB = team.GetVictories( name2);
-            GoalB = team.GetGoals( name2);
+            _VictA = team.GetVictories(_nameFirstTeam);
+            _GoalA = team.GetGoals(_nameFirstTeam);
+            _VictB = team.GetVictories(_nameSecondTeam);
+            _GoalB = team.GetGoals(_nameSecondTeam);
 
-            GoalA = GoalA + TeamAScores;     
-            GoalB = GoalB + TeamBScores;
-            if (TeamAScores > TeamBScores)
+            _GoalA = _GoalA + _TeamAScores;     
+            _GoalB = _GoalB + _TeamBScores;
+            if (_TeamAScores > _TeamBScores)
             {
-                VictA = VictA + 1;
+                _VictA = _VictA + 1;
             }
-            else if (TeamAScores < TeamBScores)
+            else if (_TeamAScores < _TeamBScores)
             {
-                VictB = VictB + 1;
+                _VictB = _VictB + 1;
             }
        
-           team.InsertToTable(name1, VictA, GoalA);
-           team.InsertToTable(name2, VictB, GoalB);
+           team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
+           team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
 
             MessageBox.Show("Saved");
         }
@@ -202,14 +179,14 @@ namespace Football
         private void button3_Click(object sender, EventArgs e)
         {
             FormsTeamB form = new FormsTeamB();
-            form.loadInfo(name2, VictB, GoalB, TeamBScores);
+            form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
             form.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormTeamA form = new FormTeamA();
-            form.loadInfo(name1, VictA, GoalA, TeamAScores);
+            form.loadInfo(_nameFirstTeam, _VictA, _GoalA, _TeamAScores);
             form.Show();
         }
 

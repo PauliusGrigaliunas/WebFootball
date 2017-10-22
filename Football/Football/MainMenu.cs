@@ -14,8 +14,8 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-        public string Name1 { get; set; }
-        public string Name2 { get; set; }
+        public string _nameFirstTeam { get; set; }
+        public string _nameSecondTeam { get; set; }
 
         public MainMenu()
         {
@@ -26,14 +26,14 @@ namespace Football
         {
             Form1 form = new Form1();
            
-            if ((IfMatch(Name1)) && (IfMatch(Name2)))
+            if ((IfMatch(_nameFirstTeam)) && (IfMatch(_nameSecondTeam)))
             {
-                if (Name1 != Name2)
+                if (_nameFirstTeam != _nameSecondTeam)
                 {
-                    ToTable(Name1);
-                    ToTable(Name2);
-                    form.setName1(Name1);
-                    form.setName2(Name2);
+                    ToTable(_nameFirstTeam);
+                    ToTable(_nameSecondTeam);
+                    form._nameFirstTeam = _nameFirstTeam;
+                    form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
                 }
                 else
@@ -51,13 +51,13 @@ namespace Football
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox1_TextChange = (TextBox)sender;
-            Name1 = textBox1_TextChange.Text;
+            _nameFirstTeam = textBox1_TextChange.Text;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox2_TextChange = (TextBox)sender;
-            Name2 = textBox2_TextChange.Text;
+            _nameSecondTeam = textBox2_TextChange.Text;
         }
 
         private void MainMenu_Load(object sender, EventArgs e)

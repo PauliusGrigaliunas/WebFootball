@@ -39,11 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2017">
+      <HintPath>D:\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2017.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>D:\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.UI.GL">
-      <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.UI.GL.dll</HintPath>
+      <HintPath>D:\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.UI.GL.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.World">
-      <HintPath>..\..\..\..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.World.dll</HintPath>
+      <HintPath>D:\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.World.dll</HintPath>
     </Reference>
     <Reference Include="Football">
       <HintPath>..\Football\obj\Debug\Football.exe</HintPath>
