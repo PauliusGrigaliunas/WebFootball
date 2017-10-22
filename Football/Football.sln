@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestFootball", "UnitTes
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DatabaseFootball", "..\..\..\Visual Studio 2017\Projects\DatabaseFootball\DatabaseFootball.sqlproj", "{73602E76-1284-4336-B540-2D22F3FB1E45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "ClassLibrary1\Logic.csproj", "{22B96483-C227-40D7-BC25-3E0ADF8F42FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{73602E76-1284-4336-B540-2D22F3FB1E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73602E76-1284-4336-B540-2D22F3FB1E45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73602E76-1284-4336-B540-2D22F3FB1E45}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{22B96483-C227-40D7-BC25-3E0ADF8F42FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B96483-C227-40D7-BC25-3E0ADF8F42FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B96483-C227-40D7-BC25-3E0ADF8F42FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B96483-C227-40D7-BC25-3E0ADF8F42FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
