@@ -14,11 +14,18 @@ namespace Football
 {
     public class Ball
     {
+
+        public  struct BallPosition
+        {
+            public static int X { get; set; }
+            public static int Y { get; set; }
+
+        }
         //objects
         public GoalsChecker Gcheck { get; set; }
 
         //variables
-        public int XBallPosition { get; set; }      
+        //public int XBallPosition { get; set; }      
         public int Index { get; set; }
         public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
         private int _ix2, _z;
@@ -43,9 +50,9 @@ namespace Football
             {
                 foreach (CircleF circle in GetCircles(ImgFiltered))
                 {
-                    XBallPosition = (int)circle.Center.X;
-                    Gcheck.StartStopwatch(XBallPosition, ImgOriginal.Width);
-                    Gcheck.Direction(XBallPosition, Index, xCoordList); Index++;
+                    BallPosition.X = (int)circle.Center.X;
+                    Gcheck.StartStopwatch(BallPosition.X, ImgOriginal.Width);
+                    Gcheck.Direction(BallPosition.X, Index, xCoordList); Index++;
                     imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
 
