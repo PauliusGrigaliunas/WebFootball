@@ -46,6 +46,15 @@ namespace Football
             InitializeComponent();
             _video = new Video(this);
         }
+
+        public VideoScreen(String teamA, String teamB)
+        {
+            InitializeComponent();
+            _video = new Video(this);
+            this.TeamALabel.Text = teamA;
+            this.TeamBLabel.Text = teamB;
+
+        }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
