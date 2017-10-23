@@ -19,7 +19,7 @@ namespace UnitTestFootball
 
             rezult = team1.GetVictories("unit");
         
-            Assert.Equals(rezult, 2);
+            Assert.AreEqual(rezult, 2);
 
             
         }
