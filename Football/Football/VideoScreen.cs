@@ -41,6 +41,26 @@ namespace Football
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
+        //picture variables
+        Image<Bgr, byte> _imgOriginal { get; set; }
+        Image<Gray, byte> _imgFiltered { get; set; }
+
+        //variables
+        private int _i = 0;
+        public List<int> _xCoordList = new List<int>();
+        GoalsChecker _gcheck;
+        private Mat mat;
+        private Stopwatch _stopwatch = new Stopwatch();
+
+
+        public void TimeTick(object sender, EventArgs e)
+        {
+            _gcheck = new GoalsChecker(_stopwatch);
+            aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
+            bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
+            Process();
+        }
+
         public VideoScreen()
         {
             InitializeComponent();
@@ -102,6 +122,33 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
+
+        private void Process()
+        {
+            mat = _video.Capture.QueryFrame();       //getting frames            
+            if (mat == null) return;
+
+            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+            OriginalPictureBox.Image = _imgOriginal.Bitmap;
+            Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
+
+
+            _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
+
+            _ball.ImgFiltered = _imgFiltered;
+            _ball.ImgOriginal = _imgOriginal;
+            _ball.Gcheck = _gcheck;
+
+            _ball.xCoordList = _xCoordList;
+            _ball.Index = _i;
+            _ball.BallPositionDraw(imgCircles);
+            _i = _ball.Index;
+            _xCoordList = _ball.xCoordList;
+            _gcheck = _ball.Gcheck;
+
+            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
+        }
+
 
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
