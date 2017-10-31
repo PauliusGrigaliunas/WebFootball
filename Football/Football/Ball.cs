@@ -56,10 +56,7 @@ namespace Football
                 }
 
                 xCoordList = xCoordList.Skip(Index - 4).ToList();
-            
-
-
-
+                // ar čia tas pats?
 
                 if (Index >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
                 {
@@ -74,8 +71,7 @@ namespace Football
                 Display(xCoordList);
             }
             catch (Exception)
-            {
-
+            {      
                 return;
             }
             
