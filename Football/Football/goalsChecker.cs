@@ -27,8 +27,6 @@ namespace Football
         public string _aText { get; set; }
         public string _bText { get; set; }
 
-        public static bool ballGoingRight = false;
-
         public GoalsChecker(Stopwatch stopwatch)
         {
             this._stopwatch = stopwatch;
@@ -40,7 +38,8 @@ namespace Football
             int temp;
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
+            //if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
+            if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
@@ -57,7 +56,7 @@ namespace Football
             int temp;
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && ballGoingRight)
+            if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
             {
                 temp = int.Parse(text);
                 temp = temp + 1;
@@ -93,28 +92,24 @@ namespace Football
             }
         }
 
-        //public void Direction(int x, int i, int[] xCoords)
         public void Direction(int x, int i, List<int> xCoords)
         {
             xCoords.Add(x);
 
             if (i >= 2)
             {
-                _tempX = xCoords[i - 1] - xCoords[i - 2]; // kamuoliuko greitis X-asimi (px/frame)
+                _tempX = xCoords[i - 1] - xCoords[i - 2]; 
 
                 if (_tempX >= 0)
                 {
-                    ballGoingRight = true;    // kamuolys juda link B vartu
+                    Ball.BallPosition.goingRight = true;  // o -> B
                 }
                 else
                 {
-                    ballGoingRight = false;   // kamuolys juda link A vartu
+                    Ball.BallPosition.goingRight = false; // o -> A
                 }
             }
-            else
-            {
-                // else detect more balls to work with and do ^
-            }
+            else { /* else detect more balls to work with and do ^*/ }
         }
     }
 }
