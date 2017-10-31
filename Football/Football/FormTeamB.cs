@@ -17,15 +17,6 @@ namespace Football
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormsTeamB_Load(object sender, EventArgs e)
-        {
-
-        }
         public void loadInfo(String name, int victories, int goals, int goalsthis)
         {
             TeamNameLabel.Text = name;
@@ -34,14 +25,5 @@ namespace Football
             thisGameGoalsLabel.Text = goalsthis.ToString();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

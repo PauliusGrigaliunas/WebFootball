@@ -17,7 +17,7 @@ namespace Football
     public class Video : Picture
     {
         //objects
-        private VideoCapture _capture;
+        public VideoCapture Capture { get; set; }
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
@@ -44,10 +44,10 @@ namespace Football
 
         public void Camera()
         {
-            _capture = new Emgu.CV.VideoCapture(0);
+            Capture = new Emgu.CV.VideoCapture(0);
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000 / 30;
-            _timer.Tick += new EventHandler(TimeTick);
+            _timer.Tick += new EventHandler(_home.TimeTick);
             _timer.Start();
         }
 
@@ -57,53 +57,19 @@ namespace Football
             ofd.Filter = "Video Files |*.mp4";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                _capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                Capture = new Emgu.CV.VideoCapture(ofd.FileName);
                 _timer = new System.Windows.Forms.Timer();
                 _timer.Interval = 1000 / 30;
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
-        }
-
-        public void TimeTick(object sender, EventArgs e)
-        {
-            _gcheck = new GoalsChecker(_stopwatch);
-            _home.aTeamLabel.Text = _gcheck.CheckForScoreA(_home.aTeamLabel.Text);
-            _home.bTeamLabel.Text = _gcheck.CheckForScoreB(_home.bTeamLabel.Text);
-            Process();
-        }
-
-        private void Process()
-        {
-            mat = _capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
-
-            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); 
-            _home.OriginalPictureBox.Image = _imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
-
-
-            _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
-
-            _ball.ImgFiltered = _imgFiltered;
-            _ball.ImgOriginal = _imgOriginal;
-            _ball.Gcheck = _gcheck;
-
-            _ball.xCoordList = _xCoordList;
-            _ball.Index = _i;
-            _ball.BallPositionDraw(imgCircles);
-            _i = _ball.Index;
-            _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.Gcheck;
-
-             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
         public void StartVideo()
         {
             if (_timer != null)
             {
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
             else TakeAVideo();
@@ -113,7 +79,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
             Camera();
@@ -123,7 +89,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
             }
         }
@@ -132,7 +98,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
                 _timer = null;
             }

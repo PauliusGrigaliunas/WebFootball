@@ -94,7 +94,6 @@
             this.allLabel.Size = new System.Drawing.Size(18, 13);
             this.allLabel.TabIndex = 6;
             this.allLabel.Text = "All";
-            this.allLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // thisGameLabel
             // 
@@ -130,7 +129,6 @@
             this.Controls.Add(this.victLabel);
             this.Name = "FormTeamA";
             this.Text = "Team A";
-            this.Load += new System.EventHandler(this.FormTeamA_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
