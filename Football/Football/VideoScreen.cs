@@ -42,7 +42,6 @@ namespace Football
         public static bool isBTeamScored = false;
 
         //picture variables
-        Image<Bgr, byte> _imgOriginal { get; set; }
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
@@ -128,15 +127,16 @@ namespace Football
             mat = _video.Capture.QueryFrame();       //getting frames            
             if (mat == null) return;
 
-            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
-            OriginalPictureBox.Image = _imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
+            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
 
 
-            _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
+            //_imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
+            _imgFiltered = _video.GetFilteredImage();
 
             _ball.ImgFiltered = _imgFiltered;
-            _ball.ImgOriginal = _imgOriginal;
+            _ball.ImgOriginal = _video.ImgOriginal;
             _ball.Gcheck = _gcheck;
 
             _ball.xCoordList = _xCoordList;
