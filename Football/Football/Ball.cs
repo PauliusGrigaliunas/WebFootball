@@ -44,7 +44,6 @@ namespace Football
         public List<int> xCoordList = new List<int>();
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
-        Image<Bgr, byte> imgCircles;
         public Colour[] colour;
 
         public Ball() {
@@ -85,6 +84,8 @@ namespace Football
             }
             else
                 _colour = colour.First(x => x.Number == colorNumber);
+
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
 
             ImgFiltered = _video.GetFilteredImage(_colour);
             ImgOriginal = _video.ImgOriginal;
