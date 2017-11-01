@@ -45,17 +45,16 @@ namespace Football
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
-        private int _i = 0;
         public List<int> _xCoordList = new List<int>();
-        GoalsChecker _gcheck;
+        //GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
 
         public void TimeTick(object sender, EventArgs e)
         {
-            _gcheck = new GoalsChecker(_stopwatch);
-            aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
-            bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
+            _ball.Gcheck = new GoalsChecker(_stopwatch);
+            aTeamLabel.Text = _ball.Gcheck.CheckForScoreA(aTeamLabel.Text);
+            bTeamLabel.Text = _ball.Gcheck.CheckForScoreB(bTeamLabel.Text);
 
             mat = _video.Capture.QueryFrame();       //getting frames            
             if (mat == null) return;
@@ -64,8 +63,8 @@ namespace Football
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
 
 
-            //_ball.BallDetection(_video, _gcheck, "Orange");
-            BallDetection("Orange");
+            _ball.BallDetection(_video, "Orange");
+            //BallDetection("Orange");
 
             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
@@ -147,13 +146,9 @@ namespace Football
             _ball.ImgFiltered = _video.GetFilteredImage(colour); 
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            _ball.Gcheck = _gcheck;
-            _ball.xCoordList = _xCoordList;
-            _ball.Index = _i;
+            //_ball.Gcheck = _gcheck;
             _ball.BallPositionDraw(imgCircles);
-            _i = _ball.Index;
-            _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.Gcheck;
+            //_gcheck = _ball.Gcheck;
         }
 
         // Buttons------------

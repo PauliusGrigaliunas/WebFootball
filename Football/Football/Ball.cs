@@ -74,7 +74,7 @@ namespace Football
         }
 
 
-        public void BallDetection(Video _video, GoalsChecker goalscheck, string colourName = "Default", int colorNumber = 0)
+        public void BallDetection(Video _video, string colourName = "Default", int colourNumber = 0)
         {
             Colour _colour;
             //! pritaikyti protingai galime Enum
@@ -83,7 +83,7 @@ namespace Football
                 _colour = colour.First(x => x.Name == colourName);
             }
             else
-                _colour = colour.First(x => x.Number == colorNumber);
+                _colour = colour.First(x => x.Number == colourNumber);
 
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
 
