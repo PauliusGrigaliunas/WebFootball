@@ -44,6 +44,7 @@ namespace Football
         public List<int> xCoordList = new List<int>();
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
+        Image<Bgr, byte> imgCircles;
         public Colour[] colour;
 
         public Ball() {
@@ -55,6 +56,7 @@ namespace Football
             colour = new[] {
                 new Colour
                 {
+                    Number = 0,
                     Name = "Default",
                     Low = new Hsv(0, 0, 0),
                     High = new Hsv(10, 10, 10),
@@ -62,6 +64,7 @@ namespace Football
 
                 new Colour
                 {
+                    Number = 1,
                     Name = "Orange",
                     Low = new Hsv(0, 140, 150),
                     High = new Hsv(180, 255, 255),
@@ -71,6 +74,23 @@ namespace Football
 
         }
 
+
+        public void BallDetection(Video _video, GoalsChecker goalscheck, string colourName = "Default", int colorNumber = 0)
+        {
+            Colour _colour;
+            //! pritaikyti protingai galime Enum
+            if (colourName != "Default")
+            {
+                _colour = colour.First(x => x.Name == colourName);
+            }
+            else
+                _colour = colour.First(x => x.Number == colorNumber);
+
+            ImgFiltered = _video.GetFilteredImage(_colour);
+            ImgOriginal = _video.ImgOriginal;
+
+            BallPositionDraw(imgCircles);
+        }
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {

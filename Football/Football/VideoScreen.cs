@@ -51,13 +51,23 @@ namespace Football
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
 
-
         public void TimeTick(object sender, EventArgs e)
         {
             _gcheck = new GoalsChecker(_stopwatch);
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
-            Process();
+
+            mat = _video.Capture.QueryFrame();       //getting frames            
+            if (mat == null) return;
+
+            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
+
+
+            //_ball.BallDetection(_video, _gcheck, "Orange");
+            BallDetection("Orange");
+
+            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
         public VideoScreen()
@@ -121,38 +131,30 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
+        
+        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
+            Colour colour; 
+            //! pritaikyti protingai galime Enum
+            if (colourName != "Default")
+            {
+                colour = _ball.colour.First(x => x.Name == colourName);
+            }
+            else
+                colour = _ball.colour.First(x => x.Number == colorNumber);
 
-        private void Process()
-        {
-            mat = _video.Capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
 
-            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
-            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-
-
-            //_imgFiltered = _video.ImgOriginal.GetFilteredImage(); // Method Extension
-
-            Colour orange = _ball.colour.First(x => x.Name == "Orange");
-
-            _imgFiltered = _video.GetFilteredImage(orange);
-
-
-            _ball.ImgFiltered = _imgFiltered;
+            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
             _ball.ImgOriginal = _video.ImgOriginal;
-            _ball.Gcheck = _gcheck;
 
+            _ball.Gcheck = _gcheck;
             _ball.xCoordList = _xCoordList;
             _ball.Index = _i;
             _ball.BallPositionDraw(imgCircles);
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
-
-            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
-
 
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)

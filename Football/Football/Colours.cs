@@ -9,6 +9,7 @@ namespace Football
 {
     public struct Colour
     {
+        public int Number { get; set; }
         public string Name { get; set; }
         public Hsv Low { get; set; }
         public Hsv High { get; set; }
