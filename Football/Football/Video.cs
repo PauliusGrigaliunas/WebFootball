@@ -11,6 +11,7 @@ using System.Threading;
 using Emgu.CV.UI;
 using System.Diagnostics;
 using Emgu.CV.CvEnum;
+using System.Drawing;
 
 namespace Football
 {
@@ -26,7 +27,7 @@ namespace Football
         private VideoScreen _home;
 
         //picture variables
-        Image<Bgr, byte> _imgOriginal { get; set; }
+        public Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
@@ -117,6 +118,17 @@ namespace Football
         {
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
+        }
+
+        public Image<Gray, byte> GetFilteredImage(Colour colour) 
+        {
+            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
+
+            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
+            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
+            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            return imgSmoothed;
         }
     }
 }

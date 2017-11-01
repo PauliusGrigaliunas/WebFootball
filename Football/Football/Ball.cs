@@ -15,23 +15,83 @@ namespace Football
 {
     public class Ball
     {
+        /* public struct BallColor
+         {
+             public string Name { get; set; }
+             public int LowBlue { get; set; }
+             public int LowGreen { get; set; }
+             public int LowRed { get; set; }
+             public int HighBlue { get; set; }
+             public int HighGreen { get; set; }
+             public int HighRed { get; set; }
 
-        public  struct BallPosition
+         }*/
+
+
+        public struct BallPosition
         {
             public static int X { get; set; }
             public static int Y { get; set; }
             public static bool goingRight { get; set; }
         }
+
+
         //objects
         public GoalsChecker Gcheck { get; set; }
 
         //variables   
         public int Index { get; set; }
-        public List<int> xCoordList = new List<int>(); 
-        private int _ix2, _z;
-
+        public List<int> xCoordList = new List<int>();
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
+        public Colour[] colour;
+
+        public Ball() {
+            BallColorQuery();
+        }
+
+        private void BallColorQuery()
+        {
+            colour = new[] {
+                new Colour
+                {
+                    Number = 0,
+                    Name = "Default",
+                    Low = new Hsv(0, 0, 0),
+                    High = new Hsv(10, 10, 10),
+                },
+
+                new Colour
+                {
+                    Number = 1,
+                    Name = "Orange",
+                    Low = new Hsv(0, 140, 150),
+                    High = new Hsv(180, 255, 255),
+                }
+            };
+
+
+        }
+
+
+        public void BallDetection(Video _video, GoalsChecker goalscheck, string colourName = "Default", int colorNumber = 0)
+        {
+            Colour _colour;
+            //! pritaikyti protingai galime Enum
+            if (colourName != "Default")
+            {
+                _colour = colour.First(x => x.Name == colourName);
+            }
+            else
+                _colour = colour.First(x => x.Number == colorNumber);
+
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
+
+            ImgFiltered = _video.GetFilteredImage(_colour);
+            ImgOriginal = _video.ImgOriginal;
+
+            BallPositionDraw(imgCircles);
+        }
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
@@ -56,7 +116,7 @@ namespace Football
                     imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
 
-                if (Index >= 5)   
+                if (Index >= 5)
                 {
                     xCoordList = xCoordList.Skip(Index - 4).ToList();
                     Index = 4;
@@ -67,10 +127,10 @@ namespace Football
             catch (Exception)
             {
                 return;
-            }          
+            }
         }
 
-        private void Display(List<int> list)  
+        private void Display(List<int> list)
         {
             IEnumerator<int> enumerator = list.GetEnumerator();
             while (enumerator.MoveNext())
