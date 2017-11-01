@@ -153,6 +153,18 @@ namespace Football
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int temp = int.Parse(aTeamLabel.Text);
+                temp = 0;
+                aTeamLabel.Text = temp.ToString();
+
+                temp = int.Parse(bTeamLabel.Text);
+                temp = 0;
+                bTeamLabel.Text = temp.ToString();
+            }
+
             _video.StartVideo();
         }
 

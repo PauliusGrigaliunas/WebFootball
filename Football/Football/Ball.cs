@@ -9,6 +9,7 @@ using Emgu.CV.Structure;
 using System.Threading;
 using Emgu.CV.UI;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Football
 {
@@ -19,15 +20,14 @@ namespace Football
         {
             public static int X { get; set; }
             public static int Y { get; set; }
-
+            public static bool goingRight { get; set; }
         }
         //objects
         public GoalsChecker Gcheck { get; set; }
 
-        //variables
-        //public int XBallPosition { get; set; }      
+        //variables   
         public int Index { get; set; }
-        public List<int> xCoordList = new List<int>();   // "List<T> is a generic collection"
+        public List<int> xCoordList = new List<int>(); 
         private int _ix2, _z;
 
         public Image<Bgr, byte> ImgOriginal { get; set; }
@@ -56,50 +56,27 @@ namespace Football
                     imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
 
-                if (Index >= 5)   // sarase saugomos paskutines 4 pozicijos, kad taupyt RAM
+                if (Index >= 5)   
                 {
-                    _ix2 = Index - 4;
-                    for (_z = 0; _z < _ix2; _z++)
-                    {
-                        xCoordList.RemoveAt(0);
-                    }
-                    Index -= _ix2;
+                    xCoordList = xCoordList.Skip(Index - 4).ToList();
+                    Index = 4;
                 }
 
                 Display(xCoordList);
             }
             catch (Exception)
             {
-
                 return;
-            }
-            
-
-            /* foreach (var coord in xCoordList)   // iterating through generic list   // paprastas foreach
-             {
-                 Console.WriteLine(coord);       // output ball's last 4 positions on the X axis
-             }*/
-            //Display(xCoordList);
-  
-            
+            }          
         }
-        /*
-        private void Display(IEnumerable<int> argument) // https://www.dotnetperls.com/ienumerable 2nd example // ienumerable
-        {
-            foreach (int value in argument)
-            {
-                Console.WriteLine(value);
-            }
-            argument.GetEnumerator();
-        }*/
 
-        private void Display(List<int> list)          //ienumerator
+        private void Display(List<int> list)  
         {
             IEnumerator<int> enumerator = list.GetEnumerator();
             while (enumerator.MoveNext())
             {
                 int item = enumerator.Current;
-                Console.WriteLine(item);
+                Debug.WriteLine(item);
             }
         }
     }
