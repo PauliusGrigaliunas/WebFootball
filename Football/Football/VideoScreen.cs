@@ -63,10 +63,7 @@ namespace Football
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
 
 
-            _ball.BallDetection(_video, "Orange");
-            //BallDetection("Orange");
-
-            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
+            _ball.Detection(_video, colourNumber: 1 );
         }
 
         public VideoScreen()
@@ -129,27 +126,7 @@ namespace Football
         {
             _video.Stop();
         }
-        // End Menu items------------
-        
-        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
-            Colour colour; 
-            //! pritaikyti protingai galime Enum
-            if (colourName != "Default")
-            {
-                colour = _ball.colour.First(x => x.Name == colourName);
-            }
-            else
-                colour = _ball.colour.First(x => x.Number == colorNumber);
-
-
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
-            _ball.ImgOriginal = _video.ImgOriginal;
-
-            //_ball.Gcheck = _gcheck;
-            _ball.BallPositionDraw(imgCircles);
-            //_gcheck = _ball.Gcheck;
-        }
+        // End Menu items------------      
 
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
