@@ -12,11 +12,14 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Cuda;
 using System.Drawing;
 using System.Diagnostics;
+using System.Media;
 
 namespace Football
 {
     public class GoalsChecker
     {
+        SoundPlayer _multiKillSound = new SoundPlayer(@"C:\Users\Mode\Documents\GitHub\FootBall\Football\Football\Sounds\multikill.wav");
+
         VideoCapture _capture { get; set; }
         private Stopwatch _stopwatch = new Stopwatch();
 
@@ -41,6 +44,7 @@ namespace Football
             //if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
             if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
             {
+                _multiKillSound.Play();
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
@@ -58,6 +62,7 @@ namespace Football
             _timeElapsed = ts.Seconds;
             if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
             {
+                _multiKillSound.Play();
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
