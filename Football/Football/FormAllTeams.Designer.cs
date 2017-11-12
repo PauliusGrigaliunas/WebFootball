@@ -51,7 +51,6 @@
             this.dataAllTeamsGrid.Name = "dataAllTeamsGrid";
             this.dataAllTeamsGrid.Size = new System.Drawing.Size(503, 386);
             this.dataAllTeamsGrid.TabIndex = 0;
-            this.dataAllTeamsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // menuStrip1
             // 
@@ -80,21 +79,21 @@
             this.victoriesToolStripMenuItem.Name = "victoriesToolStripMenuItem";
             this.victoriesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.victoriesToolStripMenuItem.Text = "Victories";
-            this.victoriesToolStripMenuItem.Click += new System.EventHandler(this.victoriesToolStripMenuItem_Click);
+            this.victoriesToolStripMenuItem.Click += new System.EventHandler(this.VictoriesToolStripMenuItem_Click);
             // 
             // goalsToolStripMenuItem
             // 
             this.goalsToolStripMenuItem.Name = "goalsToolStripMenuItem";
             this.goalsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.goalsToolStripMenuItem.Text = "Goals";
-            this.goalsToolStripMenuItem.Click += new System.EventHandler(this.goalsToolStripMenuItem_Click);
+            this.goalsToolStripMenuItem.Click += new System.EventHandler(this.GoalsToolStripMenuItem_Click);
             // 
             // victoriesGoals0ToolStripMenuItem
             // 
             this.victoriesGoals0ToolStripMenuItem.Name = "victoriesGoals0ToolStripMenuItem";
             this.victoriesGoals0ToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.victoriesGoals0ToolStripMenuItem.Text = "Victories and Goals>0";
-            this.victoriesGoals0ToolStripMenuItem.Click += new System.EventHandler(this.victoriesGoals0ToolStripMenuItem_Click);
+            this.victoriesGoals0ToolStripMenuItem.Click += new System.EventHandler(this.VictoriesGoals0ToolStripMenuItem_Click);
             // 
             // allToolStripMenuItem
             // 

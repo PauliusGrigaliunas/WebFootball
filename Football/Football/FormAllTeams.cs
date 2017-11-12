@@ -17,12 +17,7 @@ namespace Football
         {
             InitializeComponent();       
         }
-      
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-         
-          
-        }
+     
         
         public void FillData()
         {
@@ -41,17 +36,7 @@ namespace Football
             FillData();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Statistics_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void victoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FootballEntities context = new FootballEntities();
 
@@ -63,7 +48,7 @@ namespace Football
 
         }
 
-        private void goalsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GoalsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FootballEntities context = new FootballEntities();
 
@@ -76,7 +61,7 @@ namespace Football
 
         }
 
-        private void victoriesGoals0ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VictoriesGoals0ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FootballEntities context = new FootballEntities();
 

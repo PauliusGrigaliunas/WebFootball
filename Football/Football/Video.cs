@@ -11,13 +11,14 @@ using System.Threading;
 using Emgu.CV.UI;
 using System.Diagnostics;
 using Emgu.CV.CvEnum;
+using System.Drawing;
 
 namespace Football
 {
     public class Video : Picture
     {
         //objects
-        private VideoCapture _capture;
+        public VideoCapture Capture { get; set; }
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
@@ -26,7 +27,7 @@ namespace Football
         private VideoScreen _home;
 
         //picture variables
-        Image<Bgr, byte> _imgOriginal { get; set; }
+        public Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
@@ -44,10 +45,10 @@ namespace Football
 
         public void Camera()
         {
-            _capture = new Emgu.CV.VideoCapture(0);
+            Capture = new Emgu.CV.VideoCapture(0);
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000 / 30;
-            _timer.Tick += new EventHandler(TimeTick);
+            _timer.Tick += new EventHandler(_home.TimeTick);
             _timer.Start();
         }
 
@@ -57,53 +58,19 @@ namespace Football
             ofd.Filter = "Video Files |*.mp4";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                _capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                Capture = new Emgu.CV.VideoCapture(ofd.FileName);
                 _timer = new System.Windows.Forms.Timer();
                 _timer.Interval = 1000 / 30;
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
-        }
-
-        public void TimeTick(object sender, EventArgs e)
-        {
-            _gcheck = new GoalsChecker(_stopwatch);
-            _home.aTeamLabel.Text = _gcheck.CheckForScoreA(_home.aTeamLabel.Text);
-            _home.bTeamLabel.Text = _gcheck.CheckForScoreB(_home.bTeamLabel.Text);
-            Process();
-        }
-
-        private void Process()
-        {
-            mat = _capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
-
-            _imgOriginal = mat.ToImage<Bgr, byte>().Resize(_home.OriginalPictureBox.Width, _home.OriginalPictureBox.Height, Inter.Linear); 
-            _home.OriginalPictureBox.Image = _imgOriginal.Bitmap;
-            Image<Bgr, byte> imgCircles = _imgOriginal.CopyBlank();     //copy parameters of original frame image
-
-
-            _imgFiltered = _imgOriginal.GetFilteredImage(); // Method Extension
-
-            _ball.ImgFiltered = _imgFiltered;
-            _ball.ImgOriginal = _imgOriginal;
-            _ball.Gcheck = _gcheck;
-
-            _ball.xCoordList = _xCoordList;
-            _ball.Index = _i;
-            _ball.BallPositionDraw(imgCircles);
-            _i = _ball.Index;
-            _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.Gcheck;
-
-             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
         public void StartVideo()
         {
             if (_timer != null)
             {
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
             else TakeAVideo();
@@ -113,7 +80,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick += new EventHandler(TimeTick);
+                _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
             }
             Camera();
@@ -123,7 +90,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
             }
         }
@@ -132,7 +99,7 @@ namespace Football
         {
             if (_timer != null)
             {
-                _timer.Tick -= new EventHandler(TimeTick);
+                _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
                 _timer = null;
             }
@@ -151,6 +118,17 @@ namespace Football
         {
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
+        }
+
+        public Image<Gray, byte> GetFilteredImage(Colour colour) 
+        {
+            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
+
+            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
+            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
+            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            return imgSmoothed;
         }
     }
 }

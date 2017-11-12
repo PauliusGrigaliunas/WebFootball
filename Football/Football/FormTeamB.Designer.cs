@@ -46,7 +46,6 @@
             this.victLabel.Size = new System.Drawing.Size(47, 13);
             this.victLabel.TabIndex = 1;
             this.victLabel.Text = "Victories";
-            this.victLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // goalsLabel
             // 
@@ -66,7 +65,6 @@
             this.TeamNameLabel.Size = new System.Drawing.Size(35, 13);
             this.TeamNameLabel.TabIndex = 3;
             this.TeamNameLabel.Text = "label4";
-            this.TeamNameLabel.Click += new System.EventHandler(this.label4_Click);
             // 
             // allVictLabel
             // 
@@ -96,7 +94,6 @@
             this.allLabel.Size = new System.Drawing.Size(18, 13);
             this.allLabel.TabIndex = 6;
             this.allLabel.Text = "All";
-            this.allLabel.Click += new System.EventHandler(this.label7_Click);
             // 
             // thisGameLabel
             // 
@@ -132,7 +129,6 @@
             this.Controls.Add(this.victLabel);
             this.Name = "FormsTeamB";
             this.Text = "Team B";
-            this.Load += new System.EventHandler(this.FormsTeamB_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

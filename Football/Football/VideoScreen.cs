@@ -41,6 +41,35 @@ namespace Football
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
+        //picture variables
+        Image<Gray, byte> _imgFiltered { get; set; }
+
+        //variables
+        private int _i = 0;
+        public List<int> _xCoordList = new List<int>();
+        GoalsChecker _gcheck;
+        private Mat mat;
+        private Stopwatch _stopwatch = new Stopwatch();
+
+        public void TimeTick(object sender, EventArgs e)
+        {
+            _gcheck = new GoalsChecker(_stopwatch);
+            aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
+            bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
+
+            mat = _video.Capture.QueryFrame();       //getting frames            
+            if (mat == null) return;
+
+            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
+
+
+            //_ball.BallDetection(_video, _gcheck, "Orange");
+            BallDetection("Orange");
+
+            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
+        }
+
         public VideoScreen()
         {
             InitializeComponent();
@@ -102,10 +131,46 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
+        
+        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
+            Colour colour; 
+            //! pritaikyti protingai galime Enum
+            if (colourName != "Default")
+            {
+                colour = _ball.colour.First(x => x.Name == colourName);
+            }
+            else
+                colour = _ball.colour.First(x => x.Number == colorNumber);
+
+
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
+            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
+            _ball.ImgOriginal = _video.ImgOriginal;
+
+            _ball.Gcheck = _gcheck;
+            _ball.xCoordList = _xCoordList;
+            _ball.Index = _i;
+            _ball.BallPositionDraw(imgCircles);
+            _i = _ball.Index;
+            _xCoordList = _ball.xCoordList;
+            _gcheck = _ball.Gcheck;
+        }
 
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int temp = int.Parse(aTeamLabel.Text);
+                temp = 0;
+                aTeamLabel.Text = temp.ToString();
+
+                temp = int.Parse(bTeamLabel.Text);
+                temp = 0;
+                bTeamLabel.Text = temp.ToString();
+            }
+
             _video.StartVideo();
         }
 
