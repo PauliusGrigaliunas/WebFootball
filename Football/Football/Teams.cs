@@ -59,7 +59,7 @@ namespace Football
             using (FootballEntities contex = new FootballEntities())
             {
                 
-                 teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
+                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
                 vict = (int)team.Victories;
             }
             return vict;

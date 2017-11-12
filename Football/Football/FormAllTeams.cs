@@ -94,7 +94,10 @@ namespace Football
             FillData();
         }
 
-       
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -16,6 +16,7 @@ namespace Football
     {
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
+       
 
         public MainMenu()
         {
@@ -25,13 +26,25 @@ namespace Football
         private void button1_Click(object sender, EventArgs e)
         {
             VideoScreen form = new VideoScreen(_nameFirstTeam, _nameSecondTeam);
-           
-            if ((IfMatch(_nameFirstTeam)) && (IfMatch(_nameSecondTeam)))
+            Teams team = new Teams();
+
+            Action<String> table = (data) =>
+            {
+                if (team.NameCheckIfExsist(data) != true)
+                {
+                   team.AddToTable(data, 0, 0);
+                }
+               
+            };
+    
+            Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
+
+            if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
                 if (_nameFirstTeam != _nameSecondTeam)
                 {
-                    ToTable(_nameFirstTeam);
-                    ToTable(_nameSecondTeam);
+                    table(_nameFirstTeam);
+                    table(_nameSecondTeam);         
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
@@ -64,37 +77,12 @@ namespace Football
 
         }
 
-        private bool IfMatch(String data)
-        {
-            bool mtch = false;
-
-            String pattern1 = @"([a-zA-Z0-9]{4,50})";  //gali buti skaiciai arba raides, bet 4 simboliai butinai
-         
-            if(data != null)
-
-        
-            {
-                if (Regex.IsMatch(data, pattern1))
-                {
-                    mtch = true;
-                }
-            }
-
-            return mtch;
-        }
-
+      
         private void label4_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void ToTable(String data)
-        {         
-            Teams team = new Teams();
-            if (team.NameCheckIfExsist(data) != true)
-            {
-                team.AddToTable(data, 0, 0);
-            }
-        }
+
     }
 }
