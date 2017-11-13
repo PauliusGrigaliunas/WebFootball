@@ -94,6 +94,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ImgFilter.cs" />
+    <Compile Include="SoundMaker.cs" />
     <Compile Include="VideoScreen.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -16,7 +16,7 @@ namespace Football
     {
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
-       
+        SoundMaker play = new SoundMaker();
 
         public MainMenu()
         {
@@ -47,6 +47,7 @@ namespace Football
                     table(_nameSecondTeam);         
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
+                    play.StopAllTracks();
                     form.Show();
                 }
                 else
@@ -74,7 +75,7 @@ namespace Football
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            play.PlayIndexedSound(10);
         }
 
       
@@ -83,6 +84,9 @@ namespace Football
 
         }
 
-
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            play.StopAllTracks();
+        }
     }
 }

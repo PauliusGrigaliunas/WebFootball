@@ -22,6 +22,7 @@ namespace Football
 
     public partial class VideoScreen : Form
     {
+        SoundMaker play = new SoundMaker();
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();
@@ -162,16 +163,20 @@ namespace Football
             DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                int temp = int.Parse(aTeamLabel.Text);
-                temp = 0;
-                aTeamLabel.Text = temp.ToString();
-
-                temp = int.Parse(bTeamLabel.Text);
-                temp = 0;
-                bTeamLabel.Text = temp.ToString();
+                ResetScore();
             }
-
             _video.StartVideo();
+            play.StopAllTracks();
+        }
+        private void ResetScore()
+        {
+            int temp = int.Parse(aTeamLabel.Text);
+            temp = 0;
+            aTeamLabel.Text = temp.ToString();
+
+            temp = int.Parse(bTeamLabel.Text);
+            temp = 0;
+            bTeamLabel.Text = temp.ToString();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -209,12 +214,14 @@ namespace Football
         //+----------------------
         private void Form1_Load(object sender, EventArgs e)
         {
+            play.PlayIndexedSound(11);
             aTeamLabel.Text = "0";
             bTeamLabel.Text = "0";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _video.Stop();
             this._TeamBScores = int.Parse(bTeamLabel.Text);
             this._TeamAScores = int.Parse(aTeamLabel.Text);
 
@@ -235,16 +242,35 @@ namespace Football
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA = _VictA + 1;
+                play.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " +_nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores );
+                if ( result == DialogResult.Cancel ||  result == DialogResult.OK)
+                {
+                    play.StopAllTracks();
+                }
             }
             else if (_TeamAScores < _TeamBScores)
             {
                 _VictB = _VictB + 1;
+                play.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    play.StopAllTracks();
+                }
             }
-       
+            else
+            {
+                play.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Draw!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    play.StopAllTracks();
+                }
+            }
            team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
            team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
-
-            MessageBox.Show("Saved");
+           play.PlayIndexedSound(11);
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -18,8 +18,7 @@ namespace Football
 {
     public class GoalsChecker
     {
-        SoundPlayer _multiKillSound = new SoundPlayer(@"C:\Users\Mode\Documents\GitHub\FootBall\Football\Football\Sounds\multikill.wav");
-
+        SoundMaker MakeSound = new SoundMaker();
         VideoCapture _capture { get; set; }
         private Stopwatch _stopwatch = new Stopwatch();
 
@@ -42,9 +41,10 @@ namespace Football
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
             //if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
-            if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
+            if (_timeElapsed >= 2 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
             {
-                _multiKillSound.Play();
+                MakeSound.StopAllTracks();
+                MakeSound.PlayIndexedSound(5);
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
@@ -60,9 +60,10 @@ namespace Football
             int temp;
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
+            if (_timeElapsed >= 2 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
             {
-                _multiKillSound.Play();
+                MakeSound.StopAllTracks();
+                MakeSound.PlayIndexedSound(5);
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
