@@ -243,7 +243,7 @@ namespace Football
             {
                 _VictA = _VictA + 1;
                 play.PlayIndexedSound(9);
-                DialogResult result = MessageBox.Show("Winner: " +_nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores );
+                DialogResult result = MessageBox.Show("Winner: " +_nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores );
                 if ( result == DialogResult.Cancel ||  result == DialogResult.OK)
                 {
                     play.StopAllTracks();
@@ -253,7 +253,7 @@ namespace Football
             {
                 _VictB = _VictB + 1;
                 play.PlayIndexedSound(9);
-                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
                 if (result == DialogResult.Cancel || result == DialogResult.OK)
                 {
                     play.StopAllTracks();
