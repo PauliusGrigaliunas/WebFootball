@@ -13,6 +13,7 @@ namespace Football
 {
     public partial class FormAllTeams : Form
     {
+        FootballEntities context = new FootballEntities();
         public FormAllTeams()
         {
             InitializeComponent();       
@@ -21,9 +22,7 @@ namespace Football
         
         public void FillData()
         {
-           
-            FootballEntities context = new FootballEntities();
-
+               
               var team = from i in context.teamTables
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
@@ -38,8 +37,7 @@ namespace Football
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
+           
             var team = from i in context.teamTables
                        orderby i.Victories descending
                        select new{i.Name, i.Victories};
@@ -50,8 +48,6 @@ namespace Football
 
         private void GoalsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
             var team = from i in context.teamTables
                        orderby i.Goals descending
                        select new { i.Name, i.Goals };
@@ -63,8 +59,6 @@ namespace Football
 
         private void VictoriesGoals0ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
             var team = from i in context.teamTables
                        where i.Victories != 0
                        where i.Goals != 0

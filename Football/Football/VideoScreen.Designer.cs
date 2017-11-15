@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BallImgBox = new System.Windows.Forms.PictureBox();
+            this.PlayerImgBox = new System.Windows.Forms.PictureBox();
+            this.playGroundLabel = new System.Windows.Forms.Label();
             this.btnAllTeamStatistics = new System.Windows.Forms.Button();
             this.teamBButton = new System.Windows.Forms.Button();
             this.teamAButton = new System.Windows.Forms.Button();
@@ -60,14 +63,11 @@
             this.StartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.playGroundLabel = new System.Windows.Forms.Label();
-            this.PlayerImgBox = new System.Windows.Forms.PictureBox();
-            this.BallImgBox = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -99,6 +99,37 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(501, 669);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // BallImgBox
+            // 
+            this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
+            this.BallImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BallImgBox.Location = new System.Drawing.Point(319, 7);
+            this.BallImgBox.Name = "BallImgBox";
+            this.BallImgBox.Size = new System.Drawing.Size(60, 57);
+            this.BallImgBox.TabIndex = 41;
+            this.BallImgBox.TabStop = false;
+            // 
+            // PlayerImgBox
+            // 
+            this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
+            this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PlayerImgBox.Location = new System.Drawing.Point(102, 7);
+            this.PlayerImgBox.Name = "PlayerImgBox";
+            this.PlayerImgBox.Size = new System.Drawing.Size(66, 57);
+            this.PlayerImgBox.TabIndex = 41;
+            this.PlayerImgBox.TabStop = false;
+            // 
+            // playGroundLabel
+            // 
+            this.playGroundLabel.AutoSize = true;
+            this.playGroundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playGroundLabel.Location = new System.Drawing.Point(182, 103);
+            this.playGroundLabel.Name = "playGroundLabel";
+            this.playGroundLabel.Size = new System.Drawing.Size(102, 20);
+            this.playGroundLabel.TabIndex = 40;
+            this.playGroundLabel.Text = "PlayGround";
             // 
             // btnAllTeamStatistics
             // 
@@ -112,21 +143,21 @@
             // 
             // teamBButton
             // 
-            this.teamBButton.Location = new System.Drawing.Point(406, 3);
+            this.teamBButton.Location = new System.Drawing.Point(10, 9);
             this.teamBButton.Name = "teamBButton";
             this.teamBButton.Size = new System.Drawing.Size(84, 35);
             this.teamBButton.TabIndex = 38;
-            this.teamBButton.Text = "Team B stats";
+            this.teamBButton.Text = "Team A stats";
             this.teamBButton.UseVisualStyleBackColor = true;
             this.teamBButton.Click += new System.EventHandler(this.button3_Click);
             // 
             // teamAButton
             // 
-            this.teamAButton.Location = new System.Drawing.Point(0, 3);
+            this.teamAButton.Location = new System.Drawing.Point(393, 7);
             this.teamAButton.Name = "teamAButton";
             this.teamAButton.Size = new System.Drawing.Size(85, 35);
             this.teamAButton.TabIndex = 37;
-            this.teamAButton.Text = "Team A stats";
+            this.teamAButton.Text = "Team B stats";
             this.teamAButton.UseVisualStyleBackColor = true;
             this.teamAButton.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -273,7 +304,7 @@
             this.StopCameraToolStripMenuItem,
             this.PauseCameraToolStripMenuItem});
             this.CameraToolStripMenuItem.Name = "CameraToolStripMenuItem";
-            this.CameraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CameraToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.CameraToolStripMenuItem.Text = "Camera";
             // 
             // StartCameraToolStripMenuItem
@@ -304,7 +335,7 @@
             this.StopVideoToolStripMenuItem,
             this.PauseVideoToolStripMenuItem});
             this.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem";
-            this.VideoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.VideoToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.VideoToolStripMenuItem.Text = "Video";
             // 
             // StartVideoToolStripMenuItem
@@ -331,14 +362,14 @@
             // PictureToolStripMenuItem
             // 
             this.PictureToolStripMenuItem.Name = "PictureToolStripMenuItem";
-            this.PictureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.PictureToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.PictureToolStripMenuItem.Text = "Picture";
             this.PictureToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -355,53 +386,23 @@
             // StartToolStripMenuItem
             // 
             this.StartToolStripMenuItem.Name = "StartToolStripMenuItem";
-            this.StartToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.StartToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.StartToolStripMenuItem.Text = "Start";
             this.StartToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem2_Click);
             // 
             // PauseToolStripMenuItem
             // 
             this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
-            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.PauseToolStripMenuItem.Text = "Pause";
             this.PauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem2_Click);
             // 
             // StopToolStripMenuItem
             // 
             this.StopToolStripMenuItem.Name = "StopToolStripMenuItem";
-            this.StopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.StopToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.StopToolStripMenuItem.Text = "Stop";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem2_Click);
-            // 
-            // playGroundLabel
-            // 
-            this.playGroundLabel.AutoSize = true;
-            this.playGroundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playGroundLabel.Location = new System.Drawing.Point(182, 103);
-            this.playGroundLabel.Name = "playGroundLabel";
-            this.playGroundLabel.Size = new System.Drawing.Size(102, 20);
-            this.playGroundLabel.TabIndex = 40;
-            this.playGroundLabel.Text = "PlayGround";
-            // 
-            // PlayerImgBox
-            // 
-            this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
-            this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerImgBox.Location = new System.Drawing.Point(102, 7);
-            this.PlayerImgBox.Name = "PlayerImgBox";
-            this.PlayerImgBox.Size = new System.Drawing.Size(66, 57);
-            this.PlayerImgBox.TabIndex = 41;
-            this.PlayerImgBox.TabStop = false;
-            // 
-            // BallImgBox
-            // 
-            this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
-            this.BallImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BallImgBox.Location = new System.Drawing.Point(319, 7);
-            this.BallImgBox.Name = "BallImgBox";
-            this.BallImgBox.Size = new System.Drawing.Size(60, 57);
-            this.BallImgBox.TabIndex = 41;
-            this.BallImgBox.TabStop = false;
             // 
             // VideoScreen
             // 
@@ -419,11 +420,11 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

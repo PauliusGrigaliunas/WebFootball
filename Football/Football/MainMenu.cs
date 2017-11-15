@@ -16,7 +16,7 @@ namespace Football
     {
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
-       
+
 
         public MainMenu()
         {

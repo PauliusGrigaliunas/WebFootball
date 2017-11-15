@@ -10,20 +10,24 @@ using System.Windows.Forms;
 
 namespace Football
 {
-    public partial class FormTeamB : Form
+    public partial class FormTeamA : Form
     {
-        public FormTeamB()
+        public FormTeamA()
         {
             InitializeComponent();
         }
 
         public void loadInfo(String name, int victories, int goals, int goalsthis)
         {
-            TeamNameLabel.Text = name;
-            allVictLabel.Text = victories.ToString();
-            allGoalsLabel.Text = goals.ToString();    
+            TeamName.Text = name;
+            victAllLabel.Text = victories.ToString();
+            allGoalsLabel.Text = goals.ToString();
             thisGameGoalsLabel.Text = goalsthis.ToString();
         }
 
+        private void FormTeamA_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
