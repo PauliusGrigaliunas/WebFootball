@@ -45,6 +45,7 @@ namespace Football
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
         public Colour[] colour;
+<<<<<<< HEAD
         //Lazy<Colour[]> lazy = new Lazy<Colour[]>();
 =======
 >>>>>>> master
@@ -75,6 +76,19 @@ namespace Football
                 }
             };
 
+=======
+                },
+                new Colour
+                {
+                    Number = 2,
+                    Name = "Yellow",
+                    Low = new Hsv(23, 41, 133),
+                    High = new Hsv(40, 150, 255),
+                }
+            };
+
+
+>>>>>>> master
         }
 
 
