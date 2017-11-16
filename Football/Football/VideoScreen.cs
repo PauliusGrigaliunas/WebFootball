@@ -46,7 +46,11 @@ namespace Football
 
         //variables
         private int _i = 0;
+
+        //
         public List<int> _xCoordList = new List<int>();
+        //
+
         GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();

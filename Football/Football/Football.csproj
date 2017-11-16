@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
-    <Compile Include="Colours.cs" />
+    <Compile Include="Colour.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>

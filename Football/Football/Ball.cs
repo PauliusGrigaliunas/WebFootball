@@ -45,6 +45,7 @@ namespace Football
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
         public Colour[] colour;
+        //Lazy<Colour[]> lazy = new Lazy<Colour[]>();
 
         public Ball() {
             BallColorQuery();
@@ -52,6 +53,7 @@ namespace Football
 
         private void BallColorQuery()
         {
+            //colour = lazy.Value;
             colour = new[] {
                 new Colour
                 {
@@ -69,7 +71,6 @@ namespace Football
                     High = new Hsv(180, 255, 255),
                 }
             };
-
 
         }
 
