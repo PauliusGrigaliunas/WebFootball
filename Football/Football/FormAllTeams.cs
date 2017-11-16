@@ -33,6 +33,8 @@ namespace Football
         private void FormAllTeams_Load(object sender, EventArgs e)
         {
             FillData();
+            colour();
+
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,6 +45,7 @@ namespace Football
                        select new{i.Name, i.Victories};
                        
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
 
         }
 
@@ -54,6 +57,7 @@ namespace Football
 
 
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
 
         }
 
@@ -66,15 +70,29 @@ namespace Football
                        select new { i.Name, i.Victories, i.Goals };
 
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
+
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FillData();
+            colour();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+
+        }
+
+        private void colour()
+        {
+           
+            for(int i=0; i<3;i++)
+            {
+                dataAllTeamsGrid.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
+            }
+
 
         }
     }

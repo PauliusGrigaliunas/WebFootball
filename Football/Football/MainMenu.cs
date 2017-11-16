@@ -83,6 +83,11 @@ namespace Football
 
         }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormAllTeams form = new FormAllTeams();
+        
+            form.ShowDialog();
+        }
     }
 }

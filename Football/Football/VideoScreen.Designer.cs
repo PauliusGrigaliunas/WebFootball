@@ -33,9 +33,6 @@
             this.BallImgBox = new System.Windows.Forms.PictureBox();
             this.PlayerImgBox = new System.Windows.Forms.PictureBox();
             this.playGroundLabel = new System.Windows.Forms.Label();
-            this.btnAllTeamStatistics = new System.Windows.Forms.Button();
-            this.teamBButton = new System.Windows.Forms.Button();
-            this.teamAButton = new System.Windows.Forms.Button();
             this.saveScoreButton = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -63,11 +60,17 @@
             this.StartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -80,9 +83,6 @@
             this.panel1.Controls.Add(this.BallImgBox);
             this.panel1.Controls.Add(this.PlayerImgBox);
             this.panel1.Controls.Add(this.playGroundLabel);
-            this.panel1.Controls.Add(this.btnAllTeamStatistics);
-            this.panel1.Controls.Add(this.teamBButton);
-            this.panel1.Controls.Add(this.teamAButton);
             this.panel1.Controls.Add(this.saveScoreButton);
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnPause);
@@ -94,10 +94,11 @@
             this.panel1.Controls.Add(this.TeamALabel);
             this.panel1.Controls.Add(this.scoreLabel);
             this.panel1.Controls.Add(this.OriginalPictureBox);
+            this.panel1.Controls.Add(this.menuStrip2);
             this.panel1.Location = new System.Drawing.Point(0, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(501, 669);
+            this.panel1.Size = new System.Drawing.Size(490, 669);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -130,36 +131,6 @@
             this.playGroundLabel.Size = new System.Drawing.Size(102, 20);
             this.playGroundLabel.TabIndex = 40;
             this.playGroundLabel.Text = "PlayGround";
-            // 
-            // btnAllTeamStatistics
-            // 
-            this.btnAllTeamStatistics.Location = new System.Drawing.Point(186, 459);
-            this.btnAllTeamStatistics.Name = "btnAllTeamStatistics";
-            this.btnAllTeamStatistics.Size = new System.Drawing.Size(114, 29);
-            this.btnAllTeamStatistics.TabIndex = 39;
-            this.btnAllTeamStatistics.Text = "All Teams Statistics";
-            this.btnAllTeamStatistics.UseVisualStyleBackColor = true;
-            this.btnAllTeamStatistics.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // teamBButton
-            // 
-            this.teamBButton.Location = new System.Drawing.Point(10, 9);
-            this.teamBButton.Name = "teamBButton";
-            this.teamBButton.Size = new System.Drawing.Size(84, 35);
-            this.teamBButton.TabIndex = 38;
-            this.teamBButton.Text = "Team A stats";
-            this.teamBButton.UseVisualStyleBackColor = true;
-            this.teamBButton.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // teamAButton
-            // 
-            this.teamAButton.Location = new System.Drawing.Point(393, 7);
-            this.teamAButton.Name = "teamAButton";
-            this.teamAButton.Size = new System.Drawing.Size(85, 35);
-            this.teamAButton.TabIndex = 37;
-            this.teamAButton.Text = "Team B stats";
-            this.teamAButton.UseVisualStyleBackColor = true;
-            this.teamAButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // saveScoreButton
             // 
@@ -404,6 +375,49 @@
             this.StopToolStripMenuItem.Text = "Stop";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem2_Click);
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statisticsToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(71, 669);
+            this.menuStrip2.TabIndex = 42;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // statisticsToolStripMenuItem
+            // 
+            this.statisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem,
+            this.teamAToolStripMenuItem,
+            this.teamBToolStripMenuItem});
+            this.statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
+            this.statisticsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
+            this.statisticsToolStripMenuItem.Text = "Statistics";
+            this.statisticsToolStripMenuItem.Click += new System.EventHandler(this.statisticsToolStripMenuItem_Click);
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.allToolStripMenuItem.Text = "All";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // teamAToolStripMenuItem
+            // 
+            this.teamAToolStripMenuItem.Name = "teamAToolStripMenuItem";
+            this.teamAToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.teamAToolStripMenuItem.Text = "TeamA";
+            this.teamAToolStripMenuItem.Click += new System.EventHandler(this.teamAToolStripMenuItem_Click);
+            // 
+            // teamBToolStripMenuItem
+            // 
+            this.teamBToolStripMenuItem.Name = "teamBToolStripMenuItem";
+            this.teamBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.teamBToolStripMenuItem.Text = "TeamB";
+            this.teamBToolStripMenuItem.Click += new System.EventHandler(this.teamBToolStripMenuItem_Click);
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
@@ -425,6 +439,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,9 +469,6 @@
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button saveScoreButton;
-        private System.Windows.Forms.Button btnAllTeamStatistics;
-        private System.Windows.Forms.Button teamBButton;
-        private System.Windows.Forms.Button teamAButton;
         private System.Windows.Forms.ToolStripMenuItem startPauseStopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PauseToolStripMenuItem;
@@ -466,6 +479,11 @@
         private System.Windows.Forms.Label playGroundLabel;
         private System.Windows.Forms.PictureBox BallImgBox;
         private System.Windows.Forms.PictureBox PlayerImgBox;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem statisticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamBToolStripMenuItem;
     }
 }
 

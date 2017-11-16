@@ -247,26 +247,7 @@ namespace Football
             MessageBox.Show("Saved");
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            FormAllTeams form = new FormAllTeams();
-
-            form.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            FormTeamB form = new FormTeamB();
-            form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
-            form.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FormTeamA form = new FormTeamA();
-            form.loadInfo(_nameFirstTeam, _VictA, _GoalA, _TeamAScores);
-            form.Show();
-        }
+      
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -276,6 +257,32 @@ namespace Football
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void statisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAllTeams form = new FormAllTeams();
+
+            form.Show();
+        }
+
+        private void teamAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTeamA form = new FormTeamA();
+            form.loadInfo(_nameFirstTeam, _VictA, _GoalA, _TeamAScores);
+            form.Show();
+        }
+
+        private void teamBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTeamB form = new FormTeamB();
+            form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
+            form.Show();
         }
     }
 }
