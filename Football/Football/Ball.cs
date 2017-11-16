@@ -52,6 +52,7 @@ namespace Football
 
         private void BallColorQuery()
         {
+            //colour = lazy.Value;
             colour = new[] {
                 new Colour
                 {
@@ -76,7 +77,6 @@ namespace Football
                     High = new Hsv(40, 150, 255),
                 }
             };
-
 
         }
 

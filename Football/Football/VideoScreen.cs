@@ -38,7 +38,7 @@ namespace Football
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
         private string _ballColour = "Orange";
-       
+
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
@@ -49,7 +49,11 @@ namespace Football
 
         //variables
         private int _i = 0;
+
+        //
         public List<int> _xCoordList = new List<int>();
+        //
+
         GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
@@ -134,9 +138,10 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
-        
-        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
-            Colour colour; 
+
+        public void BallDetection(string colourName = "Default", int colorNumber = 0)
+        {
+            Colour colour;
             //! pritaikyti protingai galime Enum
             if (colourName != "Default")
             {
@@ -147,7 +152,7 @@ namespace Football
 
 
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
+            _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
             _ball.Gcheck = _gcheck;
@@ -162,19 +167,27 @@ namespace Football
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (btnPlay.Text == "Start")
             {
-                int temp = int.Parse(aTeamLabel.Text);
-                temp = 0;
-                aTeamLabel.Text = temp.ToString();
+                if (_video.Check())
+                {
+                    int temp = int.Parse(aTeamLabel.Text);
+                    temp = 0;
+                    aTeamLabel.Text = temp.ToString();
 
-                temp = int.Parse(bTeamLabel.Text);
-                temp = 0;
-                bTeamLabel.Text = temp.ToString();
+                    temp = int.Parse(bTeamLabel.Text);
+                    temp = 0;
+                    bTeamLabel.Text = temp.ToString();
+
+                }
+                _video.StartVideo();
+                btnPlay.Text = "Pause";
             }
-
-            _video.StartVideo();
+            else
+            {
+                _video.Pause();
+                btnPlay.Text = "Start";
+            }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -185,6 +198,7 @@ namespace Football
         private void btnStop_Click(object sender, EventArgs e)
         {
             _video.Stop();
+            btnPlay.Text = "Start";
         }
         // End Buttons------------
 
@@ -194,12 +208,13 @@ namespace Football
             _video.Pause();
             Application.Exit();
         }
-    
+
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_picture != null) { 
-            OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
+            if (_picture != null)
+            {
+                OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
             }
         }
 
@@ -231,8 +246,8 @@ namespace Football
             Teams team = new Teams();
 
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
-        
-           
+
+
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA = _VictA + 1;
@@ -242,12 +257,12 @@ namespace Football
                 _VictB = _VictB + 1;
             }
 
-   
-            _GoalA = _GoalA + _TeamAScores;     
+
+            _GoalA = _GoalA + _TeamAScores;
             _GoalB = _GoalB + _TeamBScores;
 
-      
-           if(!compare(_nameFirstTeam))
+
+            if (!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
             }
@@ -258,7 +273,7 @@ namespace Football
                 team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
             }
 
-           if(!compare(_nameSecondTeam))
+            if (!compare(_nameSecondTeam))
             {
                 team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
             }
@@ -268,12 +283,12 @@ namespace Football
                 _GoalB = team.GetGoals(_nameSecondTeam);
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
-      
+
 
             MessageBox.Show("Saved");
         }
 
-      
+
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {

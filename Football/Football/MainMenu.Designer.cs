@@ -114,7 +114,6 @@
             this.label4.Size = new System.Drawing.Size(133, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Name your teams:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // pictureBox1
             // 
@@ -198,7 +197,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainMenu";
             this.Text = "MainMenu";
-            this.Load += new System.EventHandler(this.MainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).EndInit();

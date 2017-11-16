@@ -94,6 +94,16 @@ namespace Football
                 _timer.Stop();
             }
         }
+        public bool Check() {
+            if (_timer == null)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to reset" +
+                    "points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes) return true;
+                else return false;
+            }
+            return false;
+        }
 
         public void Stop()
         {
