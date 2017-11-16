@@ -67,6 +67,13 @@ namespace Football
                     Name = "Orange",
                     Low = new Hsv(0, 140, 150),
                     High = new Hsv(180, 255, 255),
+                },
+                new Colour
+                {
+                    Number = 2,
+                    Name = "Yellow",
+                    Low = new Hsv(23, 41, 133),
+                    High = new Hsv(40, 150, 255),
                 }
             };
 

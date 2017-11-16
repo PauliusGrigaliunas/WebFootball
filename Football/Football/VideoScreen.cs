@@ -37,9 +37,12 @@ namespace Football
         public int _GoalA { get; set; }
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
+        private string _ballColour = "Orange";
+       
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
+
 
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
@@ -65,7 +68,7 @@ namespace Football
 
 
             //_ball.BallDetection(_video, _gcheck, "Orange");
-            BallDetection("Orange");
+            BallDetection(_ballColour);
 
             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
@@ -213,6 +216,8 @@ namespace Football
             bTeamLabel.Text = "0";
         }
 
+        delegate int del(int x);
+        del add;
         private void button1_Click(object sender, EventArgs e)
         {
             this._TeamBScores = int.Parse(bTeamLabel.Text);
@@ -222,16 +227,12 @@ namespace Football
             _GoalA = 0;
             _VictB = 0;
             _GoalB = 0;
-            //kokia info lentelej
+
             Teams team = new Teams();
 
-            _VictA = team.GetVictories(_nameFirstTeam);
-            _GoalA = team.GetGoals(_nameFirstTeam);
-            _VictB = team.GetVictories(_nameSecondTeam);
-            _GoalB = team.GetGoals(_nameSecondTeam);
-
-            _GoalA = _GoalA + _TeamAScores;     
-            _GoalB = _GoalB + _TeamBScores;
+            Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
+        
+           
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA = _VictA + 1;
@@ -240,9 +241,34 @@ namespace Football
             {
                 _VictB = _VictB + 1;
             }
-       
-           team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
-           team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+
+   
+            _GoalA = _GoalA + _TeamAScores;     
+            _GoalB = _GoalB + _TeamBScores;
+
+      
+           if(!compare(_nameFirstTeam))
+            {
+                team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
+            }
+            else
+            {
+                _VictA = team.GetVictories(_nameFirstTeam);
+                _GoalA = team.GetGoals(_nameFirstTeam);
+                team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
+            }
+
+           if(!compare(_nameSecondTeam))
+            {
+                team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
+            }
+            else
+            {
+                _VictB = team.GetVictories(_nameSecondTeam);
+                _GoalB = team.GetGoals(_nameSecondTeam);
+                team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+            }
+      
 
             MessageBox.Show("Saved");
         }
@@ -283,6 +309,16 @@ namespace Football
             FormTeamB form = new FormTeamB();
             form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
             form.Show();
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ballColour = "Orange";
+        }
+
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ballColour = "Yellow";
         }
     }
 }
