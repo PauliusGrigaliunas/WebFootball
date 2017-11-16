@@ -14,7 +14,6 @@ namespace Football
     {
         public void AddToTable(String name, int victories, int goals)
         {
-            //prideti komandos informacija i lentele
             using (FootballEntities contex = new FootballEntities())
             {
                 teamTable team = new teamTable()
@@ -30,8 +29,7 @@ namespace Football
         }
 
        public bool NameCheckIfExsist(String data)
-       {//patikrinti ar tokia komanda jau yra zaidus
-
+       {
             bool exsists = false;
             try
             {
@@ -48,8 +46,11 @@ namespace Football
             catch (System.NullReferenceException ex)
             {
                 ex.ToString();
-            }         
-            return exsists;
+            }  
+           
+               return exsists;
+            
+            
        }
 
        public int GetVictories(String data)

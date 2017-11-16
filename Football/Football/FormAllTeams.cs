@@ -13,6 +13,7 @@ namespace Football
 {
     public partial class FormAllTeams : Form
     {
+        FootballEntities context = new FootballEntities();
         public FormAllTeams()
         {
             InitializeComponent();       
@@ -21,9 +22,7 @@ namespace Football
         
         public void FillData()
         {
-           
-            FootballEntities context = new FootballEntities();
-
+               
               var team = from i in context.teamTables
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
@@ -34,37 +33,36 @@ namespace Football
         private void FormAllTeams_Load(object sender, EventArgs e)
         {
             FillData();
+            colour();
+
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
+           
             var team = from i in context.teamTables
                        orderby i.Victories descending
                        select new{i.Name, i.Victories};
                        
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
 
         }
 
         private void GoalsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
             var team = from i in context.teamTables
                        orderby i.Goals descending
                        select new { i.Name, i.Goals };
 
 
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
 
         }
 
         private void VictoriesGoals0ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FootballEntities context = new FootballEntities();
-
             var team = from i in context.teamTables
                        where i.Victories != 0
                        where i.Goals != 0
@@ -72,15 +70,29 @@ namespace Football
                        select new { i.Name, i.Victories, i.Goals };
 
             dataAllTeamsGrid.DataSource = team.ToList();
+            colour();
+
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FillData();
+            colour();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+
+        }
+
+        private void colour()
+        {
+           
+            for(int i=0; i<3;i++)
+            {
+                dataAllTeamsGrid.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
+            }
+
 
         }
     }
