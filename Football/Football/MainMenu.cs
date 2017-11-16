@@ -17,7 +17,6 @@ namespace Football
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
 
-
         public MainMenu()
         {
             InitializeComponent();
@@ -63,21 +62,10 @@ namespace Football
             _nameSecondTeam = textBox2_TextChange.Text;
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
-      
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormAllTeams form = new FormAllTeams();
-        
+            FormAllTeams form = new FormAllTeams();        
             form.ShowDialog();
         }
     }
