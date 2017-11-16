@@ -17,6 +17,7 @@ namespace Football
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
 
+        Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
 
         public MainMenu()
         {
@@ -26,16 +27,12 @@ namespace Football
         private void button1_Click(object sender, EventArgs e)
         {
             VideoScreen form = new VideoScreen(_nameFirstTeam, _nameSecondTeam);
-            Teams team = new Teams();
-           
-            Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
+            Teams team = new Teams();        
 
             if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
                 if (_nameFirstTeam != _nameSecondTeam)
-                {
-                   // table(_nameFirstTeam);
-                   // table(_nameSecondTeam);         
+                {                
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();

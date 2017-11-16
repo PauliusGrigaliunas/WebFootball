@@ -216,8 +216,8 @@ namespace Football
             bTeamLabel.Text = "0";
         }
 
-        delegate int del(int x);
-        del add;
+       private Action<int , int > add = (x,y) => { x = x + y; };
+        
         private void button1_Click(object sender, EventArgs e)
         {
             this._TeamBScores = int.Parse(bTeamLabel.Text);
@@ -229,24 +229,20 @@ namespace Football
             _GoalB = 0;
 
             Teams team = new Teams();
-
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
-        
-           
+
             if (_TeamAScores > _TeamBScores)
-            {
-                _VictA = _VictA + 1;
+            {           
+                add(_VictA,1);
             }
             else if (_TeamAScores < _TeamBScores)
             {
-                _VictB = _VictB + 1;
+                add(_VictB,1);
             }
 
-   
-            _GoalA = _GoalA + _TeamAScores;     
-            _GoalB = _GoalB + _TeamBScores;
-
-      
+            add(_GoalA, _TeamAScores);
+            add(_GoalB, _TeamBScores);
+     
            if(!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
