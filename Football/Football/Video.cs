@@ -30,8 +30,6 @@ namespace Football
         public Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> _imgFiltered { get; set; }
 
-        public Image<Bgr, byte> ImgZones { get; set; }
-
         //variables
         private int _i = 0;
         public List<int> _xCoordList = new List<int>();
@@ -130,12 +128,6 @@ namespace Football
             CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
             var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
             CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            return imgSmoothed;
-        }
-
-        public Image<Gray, byte> GetFilteredImageZones(Colour colour)
-        {
-            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
             return imgSmoothed;
         }
     }

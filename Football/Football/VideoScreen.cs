@@ -46,7 +46,6 @@ namespace Football
 
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
-        Image<Gray, byte> _ImgZones { get; set; }
 
         //variables
         private int _i = 0;
@@ -54,7 +53,6 @@ namespace Football
         GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
-        public string ATeam, BTeam;
 
         public void TimeTick(object sender, EventArgs e)
         {
@@ -69,21 +67,9 @@ namespace Football
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
 
 
-            //_video.ImgZones = mat.ToImage<Bgr, byte>().Resize(PlayerZones.Width, PlayerZones.Height, Inter.Linear);  // testinimui, vartu filtered image 1/2
-
-            Colour colour;
-            colour = _ball.colour.First(x => x.Name == "BlackDarkGates");
-            colour = _ball.colour.First(x => x.Number == 101);
-            _ImgZones = _video.GetFilteredImageZones(colour);
-            _ball.ImgGates = _ImgZones;
-            _ball.at = ATeam;
-            _ball.bt = BTeam;
-            //PlayerZones.Image = _ImgZones.Bitmap; // testinimui, vartu filtered image 2/2
-
             //_ball.BallDetection(_video, _gcheck, "Orange");
             BallDetection(_ballColour);
 
-            BallPos.Text = _ball.PositionComment;
             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
@@ -99,8 +85,7 @@ namespace Football
             _video = new Video(this);
             this.TeamALabel.Text = teamA;
             this.TeamBLabel.Text = teamB;
-            ATeam = this.TeamALabel.Text;
-            BTeam = this.TeamBLabel.Text;
+
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,6 +162,18 @@ namespace Football
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int temp = int.Parse(aTeamLabel.Text);
+                temp = 0;
+                aTeamLabel.Text = temp.ToString();
+
+                temp = int.Parse(bTeamLabel.Text);
+                temp = 0;
+                bTeamLabel.Text = temp.ToString();
+            }
+
             _video.StartVideo();
         }
 
@@ -319,25 +316,9 @@ namespace Football
             _ballColour = "Orange";
         }
 
-<<<<<<< HEAD
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ballColour = "Yellow";
-=======
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Reset points", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                int temp = int.Parse(aTeamLabel.Text);
-                temp = 0;
-                aTeamLabel.Text = temp.ToString();
-
-                temp = int.Parse(bTeamLabel.Text);
-                temp = 0;
-                bTeamLabel.Text = temp.ToString();
-            }
->>>>>>> master
         }
     }
 }
