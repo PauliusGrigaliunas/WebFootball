@@ -30,9 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+<<<<<<< HEAD
             this.BallImgBox = new System.Windows.Forms.PictureBox();
             this.PlayerImgBox = new System.Windows.Forms.PictureBox();
             this.playGroundLabel = new System.Windows.Forms.Label();
+=======
+            this.BallPos = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.BallImgBox = new System.Windows.Forms.PictureBox();
+            this.PlayerImgBox = new System.Windows.Forms.PictureBox();
+            this.playGroundLabel = new System.Windows.Forms.Label();
+            this.btnAllTeamStatistics = new System.Windows.Forms.Button();
+            this.teamBButton = new System.Windows.Forms.Button();
+            this.teamAButton = new System.Windows.Forms.Button();
+>>>>>>> master
             this.saveScoreButton = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -65,9 +77,12 @@
             this.StartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+<<<<<<< HEAD
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+=======
+>>>>>>> master
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -83,6 +98,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.BallPos);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.BallImgBox);
             this.panel1.Controls.Add(this.PlayerImgBox);
             this.panel1.Controls.Add(this.playGroundLabel);
@@ -97,14 +115,22 @@
             this.panel1.Controls.Add(this.TeamALabel);
             this.panel1.Controls.Add(this.scoreLabel);
             this.panel1.Controls.Add(this.OriginalPictureBox);
+<<<<<<< HEAD
             this.panel1.Controls.Add(this.menuStrip2);
             this.panel1.Location = new System.Drawing.Point(0, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(490, 669);
+=======
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(669, 885);
+>>>>>>> master
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+<<<<<<< HEAD
             // BallImgBox
             // 
             this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
@@ -114,14 +140,54 @@
             this.BallImgBox.Size = new System.Drawing.Size(60, 57);
             this.BallImgBox.TabIndex = 41;
             this.BallImgBox.TabStop = false;
+=======
+            // BallPos
+            // 
+            this.BallPos.AutoSize = true;
+            this.BallPos.Location = new System.Drawing.Point(261, 498);
+            this.BallPos.Name = "BallPos";
+            this.BallPos.Size = new System.Drawing.Size(42, 17);
+            this.BallPos.TabIndex = 45;
+            this.BallPos.Text = "None";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(95, 498);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(160, 17);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Ball is controlled by -->  ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(259, 551);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 54);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Reset Score";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // BallImgBox
+            // 
+            this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
+            this.BallImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BallImgBox.Location = new System.Drawing.Point(425, 9);
+            this.BallImgBox.Margin = new System.Windows.Forms.Padding(4);
+            this.BallImgBox.Name = "BallImgBox";
+            this.BallImgBox.Size = new System.Drawing.Size(80, 70);
+            this.BallImgBox.TabIndex = 41;
+            this.BallImgBox.TabStop = false;
             // 
             // PlayerImgBox
             // 
             this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
             this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerImgBox.Location = new System.Drawing.Point(102, 7);
+            this.PlayerImgBox.Location = new System.Drawing.Point(136, 9);
+            this.PlayerImgBox.Margin = new System.Windows.Forms.Padding(4);
             this.PlayerImgBox.Name = "PlayerImgBox";
-            this.PlayerImgBox.Size = new System.Drawing.Size(66, 57);
+            this.PlayerImgBox.Size = new System.Drawing.Size(88, 70);
             this.PlayerImgBox.TabIndex = 41;
             this.PlayerImgBox.TabStop = false;
             // 
@@ -129,17 +195,73 @@
             // 
             this.playGroundLabel.AutoSize = true;
             this.playGroundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playGroundLabel.Location = new System.Drawing.Point(243, 127);
+            this.playGroundLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.playGroundLabel.Name = "playGroundLabel";
+            this.playGroundLabel.Size = new System.Drawing.Size(125, 25);
+            this.playGroundLabel.TabIndex = 40;
+            this.playGroundLabel.Text = "PlayGround";
+            // 
+            // btnAllTeamStatistics
+            // 
+            this.btnAllTeamStatistics.Location = new System.Drawing.Point(248, 617);
+            this.btnAllTeamStatistics.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAllTeamStatistics.Name = "btnAllTeamStatistics";
+            this.btnAllTeamStatistics.Size = new System.Drawing.Size(152, 36);
+            this.btnAllTeamStatistics.TabIndex = 39;
+            this.btnAllTeamStatistics.Text = "All Teams Statistics";
+            this.btnAllTeamStatistics.UseVisualStyleBackColor = true;
+            this.btnAllTeamStatistics.Click += new System.EventHandler(this.button4_Click);
+>>>>>>> master
+            // 
+            // PlayerImgBox
+            // 
+<<<<<<< HEAD
+            this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
+            this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PlayerImgBox.Location = new System.Drawing.Point(102, 7);
+            this.PlayerImgBox.Name = "PlayerImgBox";
+            this.PlayerImgBox.Size = new System.Drawing.Size(66, 57);
+            this.PlayerImgBox.TabIndex = 41;
+            this.PlayerImgBox.TabStop = false;
+=======
+            this.teamBButton.Location = new System.Drawing.Point(541, 4);
+            this.teamBButton.Margin = new System.Windows.Forms.Padding(4);
+            this.teamBButton.Name = "teamBButton";
+            this.teamBButton.Size = new System.Drawing.Size(112, 43);
+            this.teamBButton.TabIndex = 38;
+            this.teamBButton.Text = "Team B stats";
+            this.teamBButton.UseVisualStyleBackColor = true;
+            this.teamBButton.Click += new System.EventHandler(this.button3_Click);
+>>>>>>> master
+            // 
+            // playGroundLabel
+            // 
+<<<<<<< HEAD
+            this.playGroundLabel.AutoSize = true;
+            this.playGroundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playGroundLabel.Location = new System.Drawing.Point(182, 103);
             this.playGroundLabel.Name = "playGroundLabel";
             this.playGroundLabel.Size = new System.Drawing.Size(102, 20);
             this.playGroundLabel.TabIndex = 40;
             this.playGroundLabel.Text = "PlayGround";
+=======
+            this.teamAButton.Location = new System.Drawing.Point(0, 4);
+            this.teamAButton.Margin = new System.Windows.Forms.Padding(4);
+            this.teamAButton.Name = "teamAButton";
+            this.teamAButton.Size = new System.Drawing.Size(113, 43);
+            this.teamAButton.TabIndex = 37;
+            this.teamAButton.Text = "Team A stats";
+            this.teamAButton.UseVisualStyleBackColor = true;
+            this.teamAButton.Click += new System.EventHandler(this.button2_Click);
+>>>>>>> master
             // 
             // saveScoreButton
             // 
-            this.saveScoreButton.Location = new System.Drawing.Point(294, 400);
+            this.saveScoreButton.Location = new System.Drawing.Point(425, 551);
+            this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveScoreButton.Name = "saveScoreButton";
-            this.saveScoreButton.Size = new System.Drawing.Size(108, 44);
+            this.saveScoreButton.Size = new System.Drawing.Size(144, 54);
             this.saveScoreButton.TabIndex = 36;
             this.saveScoreButton.Text = "Save Score";
             this.saveScoreButton.UseVisualStyleBackColor = true;
@@ -147,10 +269,10 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(409, 95);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStop.Location = new System.Drawing.Point(545, 117);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(72, 28);
+            this.btnStop.Size = new System.Drawing.Size(96, 34);
             this.btnStop.TabIndex = 35;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -158,10 +280,10 @@
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(10, 96);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPause.Location = new System.Drawing.Point(13, 118);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(64, 27);
+            this.btnPause.Size = new System.Drawing.Size(85, 33);
             this.btnPause.TabIndex = 34;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = true;
@@ -169,10 +291,10 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(88, 400);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPlay.Location = new System.Drawing.Point(77, 551);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(110, 44);
+            this.btnPlay.Size = new System.Drawing.Size(147, 54);
             this.btnPlay.TabIndex = 33;
             this.btnPlay.Text = "Start";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -181,9 +303,10 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(238, 70);
+            this.label11.Location = new System.Drawing.Point(317, 86);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.Size = new System.Drawing.Size(12, 17);
             this.label11.TabIndex = 32;
             this.label11.Text = ":";
             // 
@@ -191,9 +314,10 @@
             // 
             this.bTeamLabel.AutoSize = true;
             this.bTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bTeamLabel.Location = new System.Drawing.Point(191, 67);
+            this.bTeamLabel.Location = new System.Drawing.Point(255, 82);
+            this.bTeamLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bTeamLabel.Name = "bTeamLabel";
-            this.bTeamLabel.Size = new System.Drawing.Size(86, 16);
+            this.bTeamLabel.Size = new System.Drawing.Size(101, 20);
             this.bTeamLabel.TabIndex = 31;
             this.bTeamLabel.Text = "bTeamLabel";
             // 
@@ -201,18 +325,20 @@
             // 
             this.aTeamLabel.AutoSize = true;
             this.aTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aTeamLabel.Location = new System.Drawing.Point(263, 67);
+            this.aTeamLabel.Location = new System.Drawing.Point(351, 82);
+            this.aTeamLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.aTeamLabel.Name = "aTeamLabel";
-            this.aTeamLabel.Size = new System.Drawing.Size(86, 16);
+            this.aTeamLabel.Size = new System.Drawing.Size(101, 20);
             this.aTeamLabel.TabIndex = 30;
             this.aTeamLabel.Text = "aTeamLabel";
             // 
             // TeamBLabel
             // 
             this.TeamBLabel.AutoSize = true;
-            this.TeamBLabel.Location = new System.Drawing.Point(252, 41);
+            this.TeamBLabel.Location = new System.Drawing.Point(336, 50);
+            this.TeamBLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TeamBLabel.Name = "TeamBLabel";
-            this.TeamBLabel.Size = new System.Drawing.Size(47, 13);
+            this.TeamBLabel.Size = new System.Drawing.Size(61, 17);
             this.TeamBLabel.TabIndex = 29;
             this.TeamBLabel.Text = "Team B:";
             // 
@@ -220,9 +346,10 @@
             // 
             this.TeamALabel.AutoSize = true;
             this.TeamALabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TeamALabel.Location = new System.Drawing.Point(183, 41);
+            this.TeamALabel.Location = new System.Drawing.Point(244, 50);
+            this.TeamALabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TeamALabel.Name = "TeamALabel";
-            this.TeamALabel.Size = new System.Drawing.Size(47, 13);
+            this.TeamALabel.Size = new System.Drawing.Size(61, 17);
             this.TeamALabel.TabIndex = 28;
             this.TeamALabel.Text = "Team A:";
             // 
@@ -230,18 +357,19 @@
             // 
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.scoreLabel.Location = new System.Drawing.Point(206, 9);
+            this.scoreLabel.Location = new System.Drawing.Point(275, 11);
+            this.scoreLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(61, 20);
+            this.scoreLabel.Size = new System.Drawing.Size(76, 25);
             this.scoreLabel.TabIndex = 27;
             this.scoreLabel.Text = "Score:";
             // 
             // OriginalPictureBox
             // 
-            this.OriginalPictureBox.Location = new System.Drawing.Point(10, 125);
-            this.OriginalPictureBox.Margin = new System.Windows.Forms.Padding(2);
+            this.OriginalPictureBox.Location = new System.Drawing.Point(13, 154);
+            this.OriginalPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OriginalPictureBox.Name = "OriginalPictureBox";
-            this.OriginalPictureBox.Size = new System.Drawing.Size(471, 260);
+            this.OriginalPictureBox.Size = new System.Drawing.Size(628, 320);
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
@@ -299,8 +427,8 @@
             this.ballColourToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(490, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(654, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -312,7 +440,7 @@
             this.PictureToolStripMenuItem,
             this.ExitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // CameraToolStripMenuItem
@@ -322,27 +450,31 @@
             this.StopCameraToolStripMenuItem,
             this.PauseCameraToolStripMenuItem});
             this.CameraToolStripMenuItem.Name = "CameraToolStripMenuItem";
+<<<<<<< HEAD
             this.CameraToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+=======
+            this.CameraToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+>>>>>>> master
             this.CameraToolStripMenuItem.Text = "Camera";
             // 
             // StartCameraToolStripMenuItem
             // 
             this.StartCameraToolStripMenuItem.Name = "StartCameraToolStripMenuItem";
-            this.StartCameraToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.StartCameraToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.StartCameraToolStripMenuItem.Text = "Start";
             this.StartCameraToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
             // StopCameraToolStripMenuItem
             // 
             this.StopCameraToolStripMenuItem.Name = "StopCameraToolStripMenuItem";
-            this.StopCameraToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.StopCameraToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.StopCameraToolStripMenuItem.Text = "Stop";
             this.StopCameraToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // PauseCameraToolStripMenuItem
             // 
             this.PauseCameraToolStripMenuItem.Name = "PauseCameraToolStripMenuItem";
-            this.PauseCameraToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.PauseCameraToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.PauseCameraToolStripMenuItem.Text = "Pause";
             this.PauseCameraToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
@@ -353,41 +485,53 @@
             this.StopVideoToolStripMenuItem,
             this.PauseVideoToolStripMenuItem});
             this.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem";
+<<<<<<< HEAD
             this.VideoToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+=======
+            this.VideoToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+>>>>>>> master
             this.VideoToolStripMenuItem.Text = "Video";
             // 
             // StartVideoToolStripMenuItem
             // 
             this.StartVideoToolStripMenuItem.Name = "StartVideoToolStripMenuItem";
-            this.StartVideoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.StartVideoToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.StartVideoToolStripMenuItem.Text = "Start";
             this.StartVideoToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem1_Click);
             // 
             // StopVideoToolStripMenuItem
             // 
             this.StopVideoToolStripMenuItem.Name = "StopVideoToolStripMenuItem";
-            this.StopVideoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.StopVideoToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.StopVideoToolStripMenuItem.Text = "Stop";
             this.StopVideoToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem1_Click);
             // 
             // PauseVideoToolStripMenuItem
             // 
             this.PauseVideoToolStripMenuItem.Name = "PauseVideoToolStripMenuItem";
-            this.PauseVideoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.PauseVideoToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.PauseVideoToolStripMenuItem.Text = "Pause";
             this.PauseVideoToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem1_Click);
             // 
             // PictureToolStripMenuItem
             // 
             this.PictureToolStripMenuItem.Name = "PictureToolStripMenuItem";
+<<<<<<< HEAD
             this.PictureToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+=======
+            this.PictureToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+>>>>>>> master
             this.PictureToolStripMenuItem.Text = "Picture";
             this.PictureToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+<<<<<<< HEAD
             this.ExitToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+=======
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+>>>>>>> master
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -398,26 +542,35 @@
             this.PauseToolStripMenuItem,
             this.StopToolStripMenuItem});
             this.startPauseStopToolStripMenuItem.Name = "startPauseStopToolStripMenuItem";
-            this.startPauseStopToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.startPauseStopToolStripMenuItem.Size = new System.Drawing.Size(132, 24);
             this.startPauseStopToolStripMenuItem.Text = "Start/Pause/Stop";
             // 
             // StartToolStripMenuItem
             // 
             this.StartToolStripMenuItem.Name = "StartToolStripMenuItem";
+<<<<<<< HEAD
             this.StartToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+=======
+            this.StartToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
+>>>>>>> master
             this.StartToolStripMenuItem.Text = "Start";
             this.StartToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem2_Click);
             // 
             // PauseToolStripMenuItem
             // 
             this.PauseToolStripMenuItem.Name = "PauseToolStripMenuItem";
+<<<<<<< HEAD
             this.PauseToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+=======
+            this.PauseToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
+>>>>>>> master
             this.PauseToolStripMenuItem.Text = "Pause";
             this.PauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem2_Click);
             // 
             // StopToolStripMenuItem
             // 
             this.StopToolStripMenuItem.Name = "StopToolStripMenuItem";
+<<<<<<< HEAD
             this.StopToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.StopToolStripMenuItem.Text = "Stop";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem2_Click);
@@ -445,16 +598,22 @@
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
+=======
+            this.StopToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
+            this.StopToolStripMenuItem.Text = "Stop";
+            this.StopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem2_Click);
+            // 
+>>>>>>> master
             // VideoScreen
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(490, 511);
+            this.ClientSize = new System.Drawing.Size(654, 691);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VideoScreen";
             this.Text = "Let\'s play Foosball!!!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -506,6 +665,7 @@
         private System.Windows.Forms.Label playGroundLabel;
         private System.Windows.Forms.PictureBox BallImgBox;
         private System.Windows.Forms.PictureBox PlayerImgBox;
+<<<<<<< HEAD
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem statisticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
@@ -514,6 +674,11 @@
         private System.Windows.Forms.ToolStripMenuItem ballColourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
+=======
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label BallPos;
+        private System.Windows.Forms.Label label1;
+>>>>>>> master
     }
 }
 
