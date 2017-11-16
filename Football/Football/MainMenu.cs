@@ -16,7 +16,7 @@ namespace Football
     {
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
-       
+
 
         public MainMenu()
         {
@@ -27,24 +27,15 @@ namespace Football
         {
             VideoScreen form = new VideoScreen(_nameFirstTeam, _nameSecondTeam);
             Teams team = new Teams();
-
-            Action<String> table = (data) =>
-            {
-                if (team.NameCheckIfExsist(data) != true)
-                {
-                   team.AddToTable(data, 0, 0);
-                }
-               
-            };
-    
+           
             Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
 
             if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
                 if (_nameFirstTeam != _nameSecondTeam)
                 {
-                    table(_nameFirstTeam);
-                    table(_nameSecondTeam);         
+                   // table(_nameFirstTeam);
+                   // table(_nameSecondTeam);         
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
@@ -83,6 +74,11 @@ namespace Football
 
         }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormAllTeams form = new FormAllTeams();
+        
+            form.ShowDialog();
+        }
     }
 }
