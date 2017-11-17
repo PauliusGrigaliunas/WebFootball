@@ -14,6 +14,7 @@ namespace Football
     public partial class FormAllTeams : Form
     {
         FootballEntities context = new FootballEntities();
+        Teams teams = new Teams();
         public FormAllTeams()
         {
             InitializeComponent();       
@@ -22,12 +23,13 @@ namespace Football
         
         public void FillData()
         {
-               
-              var team = from i in context.teamTables
+            FootballEntities context = new FootballEntities();
+            var team = from i in context.teamTables
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
 
-            dataAllTeamsGrid.DataSource = team.ToList(); 
+            dataAllTeamsGrid.DataSource = team.ToList();
+
         }
 
         private void FormAllTeams_Load(object sender, EventArgs e)

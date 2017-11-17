@@ -27,6 +27,8 @@ namespace Football
         Ball _ball = new Ball();
         Video _video;
 
+        public bool isTournament = false;
+
         //variables
         public String _nameFirstTeam { get; set; }
         public String _nameSecondTeam { get; set; }
@@ -192,7 +194,8 @@ namespace Football
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _video.Pause();
-            Application.Exit();
+            if(!isTournament) Application.Exit();
+
         }
     
         //Picture
@@ -216,12 +219,12 @@ namespace Football
             bTeamLabel.Text = "0";
         }
 
-       private Action<int , int > add = (x,y) => { x = x + y; };
-        
+   
+
         private void button1_Click(object sender, EventArgs e)
         {
-            this._TeamBScores = int.Parse(bTeamLabel.Text);
-            this._TeamAScores = int.Parse(aTeamLabel.Text);
+            this._TeamBScores = int.Parse(aTeamLabel.Text);
+            this._TeamAScores = int.Parse(bTeamLabel.Text);
 
             _VictA = 0;
             _GoalA = 0;
@@ -232,44 +235,43 @@ namespace Football
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
 
             if (_TeamAScores > _TeamBScores)
-            {           
-                add(_VictA,1);
+            {
+                _VictA=_VictA+1;
             }
             else if (_TeamAScores < _TeamBScores)
             {
-                add(_VictB,1);
+                _VictB= _VictB +1;
             }
-
-            add(_GoalA, _TeamAScores);
-            add(_GoalB, _TeamBScores);
+       
      
            if(!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
+                _GoalA = _TeamAScores;
             }
             else
             {
-                _VictA = team.GetVictories(_nameFirstTeam);
-                _GoalA = team.GetGoals(_nameFirstTeam);
+                _VictA = _VictA + team.GetVictories(_nameFirstTeam);
+                _GoalA = team.GetGoals(_nameFirstTeam) + _TeamAScores;
                 team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
             }
 
            if(!compare(_nameSecondTeam))
             {
                 team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
+                _GoalB= _TeamBScores;
             }
             else
             {
-                _VictB = team.GetVictories(_nameSecondTeam);
-                _GoalB = team.GetGoals(_nameSecondTeam);
+                _VictB = _VictB + team.GetVictories(_nameSecondTeam);
+                _GoalB = team.GetGoals(_nameSecondTeam) + _TeamBScores;
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
-      
+
 
             MessageBox.Show("Saved");
-        }
-
-      
+            
+        }      
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -77,5 +77,12 @@ namespace Football
         
             form.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TeamNames names = new TeamNames();
+            names.Show();
+            
+        }
     }
 }

@@ -104,5 +104,22 @@ namespace Football
             }
         }
 
+      /*  public List<teamTable> getAllData ()
+        {
+            FootballEntities context = new FootballEntities();
+            List<teamTable> list = new List<teamTable>();
+            var teams = context.teamTables.OrderBy(i => i.Victories).Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+            list = teams;
+            foreach(var i in teams)
+            {
+                teamTable team = context.teamTables.FirstOrDefault(r => r.Name == i.Name);
+                list.Add(team);
+            }
+            list.OrderByDescending(i => i.Victories).OrderByDescending(i => i.Goals);
+            { i.Name, i.Victories, i.Goals })
+            return teams;
+        }
+    */
+
     }
 }
