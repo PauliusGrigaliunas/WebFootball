@@ -36,17 +36,20 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxArrowLeft = new System.Windows.Forms.PictureBox();
-            this.pictureBoxArrowRight = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBallLeft = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBallRight = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallLeft)).BeginInit();
+            this.button3 = new System.Windows.Forms.Button();
+            this.pictureBoxBallRight = new System.Windows.Forms.PictureBox();
+            this.pictureBoxBallLeft = new System.Windows.Forms.PictureBox();
+            this.pictureBoxArrowRight = new System.Windows.Forms.PictureBox();
+            this.pictureBoxArrowLeft = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -115,45 +118,25 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Name your teams:";
             // 
-            // pictureBox1
+            // button2
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(31, 46);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(322, 178);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.button2.Location = new System.Drawing.Point(276, 405);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 28);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Statistics";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // pictureBoxArrowLeft
+            // button3
             // 
-            this.pictureBoxArrowLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxArrowLeft.BackgroundImage")));
-            this.pictureBoxArrowLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxArrowLeft.Location = new System.Drawing.Point(276, 280);
-            this.pictureBoxArrowLeft.Name = "pictureBoxArrowLeft";
-            this.pictureBoxArrowLeft.Size = new System.Drawing.Size(54, 39);
-            this.pictureBoxArrowLeft.TabIndex = 8;
-            this.pictureBoxArrowLeft.TabStop = false;
-            // 
-            // pictureBoxArrowRight
-            // 
-            this.pictureBoxArrowRight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxArrowRight.BackgroundImage")));
-            this.pictureBoxArrowRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxArrowRight.Location = new System.Drawing.Point(276, 336);
-            this.pictureBoxArrowRight.Name = "pictureBoxArrowRight";
-            this.pictureBoxArrowRight.Size = new System.Drawing.Size(54, 39);
-            this.pictureBoxArrowRight.TabIndex = 8;
-            this.pictureBoxArrowRight.TabStop = false;
-            // 
-            // pictureBoxBallLeft
-            // 
-            this.pictureBoxBallLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxBallLeft.BackgroundImage")));
-            this.pictureBoxBallLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBallLeft.Location = new System.Drawing.Point(327, 280);
-            this.pictureBoxBallLeft.Name = "pictureBoxBallLeft";
-            this.pictureBoxBallLeft.Size = new System.Drawing.Size(42, 39);
-            this.pictureBoxBallLeft.TabIndex = 8;
-            this.pictureBoxBallLeft.TabStop = false;
+            this.button3.Location = new System.Drawing.Point(42, 400);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(90, 38);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Tournament";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // pictureBoxBallRight
             // 
@@ -165,15 +148,55 @@
             this.pictureBoxBallRight.TabIndex = 8;
             this.pictureBoxBallRight.TabStop = false;
             // 
-            // button2
+            // pictureBoxBallLeft
             // 
-            this.button2.Location = new System.Drawing.Point(270, 410);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 28);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Statistics";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.pictureBoxBallLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxBallLeft.BackgroundImage")));
+            this.pictureBoxBallLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxBallLeft.Location = new System.Drawing.Point(327, 280);
+            this.pictureBoxBallLeft.Name = "pictureBoxBallLeft";
+            this.pictureBoxBallLeft.Size = new System.Drawing.Size(42, 39);
+            this.pictureBoxBallLeft.TabIndex = 8;
+            this.pictureBoxBallLeft.TabStop = false;
+            // 
+            // pictureBoxArrowRight
+            // 
+            this.pictureBoxArrowRight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxArrowRight.BackgroundImage")));
+            this.pictureBoxArrowRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxArrowRight.Location = new System.Drawing.Point(276, 336);
+            this.pictureBoxArrowRight.Name = "pictureBoxArrowRight";
+            this.pictureBoxArrowRight.Size = new System.Drawing.Size(54, 39);
+            this.pictureBoxArrowRight.TabIndex = 8;
+            this.pictureBoxArrowRight.TabStop = false;
+            // 
+            // pictureBoxArrowLeft
+            // 
+            this.pictureBoxArrowLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxArrowLeft.BackgroundImage")));
+            this.pictureBoxArrowLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxArrowLeft.Location = new System.Drawing.Point(276, 280);
+            this.pictureBoxArrowLeft.Name = "pictureBoxArrowLeft";
+            this.pictureBoxArrowLeft.Size = new System.Drawing.Size(54, 39);
+            this.pictureBoxArrowLeft.TabIndex = 8;
+            this.pictureBoxArrowLeft.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(31, 46);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(322, 178);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Football.Properties.Resources.imagescup;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 400);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(36, 37);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
             // 
             // MainMenu
             // 
@@ -181,6 +204,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(381, 450);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBoxBallRight);
             this.Controls.Add(this.pictureBoxBallLeft);
@@ -197,11 +222,15 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainMenu";
             this.Text = "MainMenu";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallLeft)).EndInit();
+
+            this.Load += new System.EventHandler(this.MainMenu_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,5 +251,7 @@
         private System.Windows.Forms.PictureBox pictureBoxBallLeft;
         private System.Windows.Forms.PictureBox pictureBoxBallRight;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

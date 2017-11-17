@@ -14,9 +14,11 @@ namespace Football
 {
     public partial class FormAllTeams : Form
     {
+
         Lazy<FootballEntities> lazy = new Lazy<Football.FootballEntities>();
         FootballEntities context;
         InputThread inputThread;
+
 
         public FormAllTeams()
         {           
@@ -27,12 +29,15 @@ namespace Football
         
         public void FillData()
         {           
+
             var team = from i in context.teamTables
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
 
             dataAllTeamsGrid.DataSource = team.ToList();
+
             Colour();
+
         }
 
         private void FormAllTeams_Load(object sender, EventArgs e)

@@ -76,8 +76,9 @@ namespace Football
                 {
                     Number = 2,
                     Name = "Yellow",
-                    Low = new Hsv(23, 41, 133),
-                    High = new Hsv(40, 150, 255),
+                    Low = new Hsv(0, 93, 0),
+                    High = new Hsv(255, 255, 89),
+
                 },
                 new Colour
                 {
@@ -85,6 +86,7 @@ namespace Football
                     Name = "BlackDarkGates",
                     Low = new Hsv(0, 0, 0),
                     High = new Hsv(255, 255, 10),
+
                 }
             };
 
@@ -132,6 +134,7 @@ namespace Football
                     Gcheck.Direction(BallPosition.X, Index, xCoordList); Index++;
                     imgCircles.Draw(circle, new Bgr(Color.Red), 3);
                 }
+
 
                 if (Index >= 5)
                 {
