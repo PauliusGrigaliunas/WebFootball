@@ -15,16 +15,6 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-        //Lazy<int> number = new Lazy<int>(() => Thread.CurrentThread.ManagedThreadId);
-        public Thread TakeData ;
-
-        void DoSomething()
-        {
-            FormAllTeams a = new FormAllTeams();
-            TakeData = new Thread(() => a.FillData());
-            TakeData.Start();
-        }
-
 
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
@@ -32,7 +22,7 @@ namespace Football
         public MainMenu()
         {
             InitializeComponent();
-            DoSomething();
+            InputThread inputThread = InputThread.Instance;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,9 +35,7 @@ namespace Football
             if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
                 if (_nameFirstTeam != _nameSecondTeam)
-                {
-                    // table(_nameFirstTeam);
-                    // table(_nameSecondTeam);         
+                {     
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
@@ -78,8 +66,7 @@ namespace Football
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            FormAllTeams form = new FormAllTeams(TakeData);
+            FormAllTeams form = new FormAllTeams(/*TakeData*/);
             //TakeData.Join();//
             form.ShowDialog();
         }

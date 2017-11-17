@@ -307,8 +307,9 @@ namespace Football
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
+ //           MainMenu a = new MainMenu();
+ //           a.
             FormAllTeams form = new FormAllTeams();
-
             form.Show();
         }
 

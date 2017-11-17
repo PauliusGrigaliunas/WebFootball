@@ -149,6 +149,7 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Video.cs" />
+    <Compile Include="InputThread.cs" />
     <EmbeddedResource Include="VideoScreen.resx">
       <DependentUpon>VideoScreen.cs</DependentUpon>
     </EmbeddedResource>

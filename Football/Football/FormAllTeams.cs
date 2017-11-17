@@ -16,13 +16,12 @@ namespace Football
     {
         Lazy<FootballEntities> lazy = new Lazy<Football.FootballEntities>();
         FootballEntities context;
+        InputThread inputThread;
 
         Thread _takeData;
 
         public FormAllTeams(Thread takeData = null)
-        {
-            _takeData = takeData;
-            //_takeData.Join();
+        {           
             context = lazy.Value;
             InitializeComponent();       
         }
@@ -38,12 +37,10 @@ namespace Football
             Colour();
         }
 
-        private /*async*/ void FormAllTeams_Load(object sender, EventArgs e)
+        private void FormAllTeams_Load(object sender, EventArgs e)
         {
-
-            //Task.Run(() => FillData(), CancellationToken.None);
-            //FillData();
-            _takeData.Join();
+            inputThread = InputThread.Instance;
+            inputThread.Start();
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
