@@ -129,13 +129,7 @@ namespace Football
                     Index = 4;
                 }
 
-                //Display(xCoordList);
-
-                int AGATES = FindAGates(); // O <--
-                int BGATES = FindBGates(); // --> O
-                int ABdistance = DistanceBetweenGates(AGATES, BGATES);
-                //Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: "+ BallPosition.X);
-                PositionComment = getBallStatus(ABdistance, AGATES);
+                Display(xCoordList);
             }
             catch (Exception)
             {
