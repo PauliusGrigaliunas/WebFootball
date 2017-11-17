@@ -94,6 +94,16 @@ namespace Football
                 _timer.Stop();
             }
         }
+        public bool Check() {
+            if (_timer == null)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to reset" +
+                    "points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes) return true;
+                else return false;
+            }
+            return false;
+        }
 
         public void Stop()
         {
@@ -128,6 +138,11 @@ namespace Football
             CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
             var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
             CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+            return imgSmoothed;
+        }
+        public Image<Gray, byte> GetFilteredImageZones(Colour colour)
+        {
+            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
             return imgSmoothed;
         }
     }

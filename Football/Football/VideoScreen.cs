@@ -40,7 +40,7 @@ namespace Football
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
         private string _ballColour = "Orange";
-       
+
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
@@ -48,10 +48,15 @@ namespace Football
 
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
+        Image<Gray, byte> _ImgZones { get; set; }
 
         //variables
         private int _i = 0;
+        public string ATeam, BTeam;
+        //
         public List<int> _xCoordList = new List<int>();
+        //
+
         GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
@@ -88,6 +93,8 @@ namespace Football
             this.TeamALabel.Text = teamA;
             this.TeamBLabel.Text = teamB;
 
+            ATeam = this.TeamALabel.Text;
+            BTeam = this.TeamBLabel.Text;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,9 +143,10 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
-        
-        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
-            Colour colour; 
+
+        public void BallDetection(string colourName = "Default", int colorNumber = 0)
+        {
+            Colour colour;
             //! pritaikyti protingai galime Enum
             if (colourName != "Default")
             {
@@ -148,8 +156,17 @@ namespace Football
                 colour = _ball.colour.First(x => x.Number == colorNumber);
 
 
+            Colour clr;
+            clr = _ball.colour.First(x => x.Name == "BlackDarkGates");
+            clr = _ball.colour.First(x => x.Number == 101);
+            _ImgZones = _video.GetFilteredImageZones(clr);
+            _ball.ImgGates = _ImgZones;
+            _ball.at = ATeam;
+            _ball.bt = BTeam;
+
+
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
+            _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
             _ball.Gcheck = _gcheck;
@@ -159,24 +176,23 @@ namespace Football
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
+
+            BallPos.Text = _ball.PositionComment;
         }
 
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (btnPlay.Text == "Start")
             {
-                int temp = int.Parse(aTeamLabel.Text);
-                temp = 0;
-                aTeamLabel.Text = temp.ToString();
-
-                temp = int.Parse(bTeamLabel.Text);
-                temp = 0;
-                bTeamLabel.Text = temp.ToString();
+                _video.StartVideo();
+                btnPlay.Text = "Pause";
             }
-
-            _video.StartVideo();
+            else
+            {
+                _video.Pause();
+                btnPlay.Text = "Start";
+            }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -187,6 +203,7 @@ namespace Football
         private void btnStop_Click(object sender, EventArgs e)
         {
             _video.Stop();
+            btnPlay.Text = "Start";
         }
         // End Buttons------------
 
@@ -197,12 +214,13 @@ namespace Football
             if(!isTournament) Application.Exit();
 
         }
-    
+
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_picture != null) { 
-            OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
+            if (_picture != null)
+            {
+                OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
             }
         }
 
@@ -234,6 +252,7 @@ namespace Football
             Teams team = new Teams();
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
 
+
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA=_VictA+1;
@@ -242,8 +261,7 @@ namespace Football
             {
                 _VictB= _VictB +1;
             }
-       
-     
+
            if(!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
@@ -256,7 +274,7 @@ namespace Football
                 team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
             }
 
-           if(!compare(_nameSecondTeam))
+            if (!compare(_nameSecondTeam))
             {
                 team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
                 _GoalB= _TeamBScores;
@@ -268,10 +286,10 @@ namespace Football
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
 
-
             MessageBox.Show("Saved");
             
         }      
+
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -290,8 +308,9 @@ namespace Football
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
+ //           MainMenu a = new MainMenu();
+ //           a.
             FormAllTeams form = new FormAllTeams();
-
             form.Show();
         }
 
@@ -317,6 +336,20 @@ namespace Football
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ballColour = "Yellow";
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (_video.Check())
+            {
+                int temp = int.Parse(aTeamLabel.Text);
+                temp = 0;
+                aTeamLabel.Text = temp.ToString();
+
+                temp = int.Parse(bTeamLabel.Text);
+                temp = 0;
+                bTeamLabel.Text = temp.ToString();
+            }
         }
     }
 }
