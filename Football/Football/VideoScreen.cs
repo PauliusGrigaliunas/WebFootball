@@ -46,10 +46,11 @@ namespace Football
 
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
+        Image<Gray, byte> _ImgZones { get; set; }
 
         //variables
         private int _i = 0;
-
+        public string ATeam, BTeam;
         //
         public List<int> _xCoordList = new List<int>();
         //
@@ -90,6 +91,8 @@ namespace Football
             this.TeamALabel.Text = teamA;
             this.TeamBLabel.Text = teamB;
 
+            ATeam = this.TeamALabel.Text;
+            BTeam = this.TeamBLabel.Text;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,6 +154,15 @@ namespace Football
                 colour = _ball.colour.First(x => x.Number == colorNumber);
 
 
+            Colour clr;
+            clr = _ball.colour.First(x => x.Name == "BlackDarkGates");
+            clr = _ball.colour.First(x => x.Number == 101);
+            _ImgZones = _video.GetFilteredImageZones(clr);
+            _ball.ImgGates = _ImgZones;
+            _ball.at = ATeam;
+            _ball.bt = BTeam;
+
+
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
@@ -162,6 +174,8 @@ namespace Football
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
+
+            BallPos.Text = _ball.PositionComment;
         }
 
         // Buttons------------
@@ -169,17 +183,6 @@ namespace Football
         {
             if (btnPlay.Text == "Start")
             {
-                if (_video.Check())
-                {
-                    int temp = int.Parse(aTeamLabel.Text);
-                    temp = 0;
-                    aTeamLabel.Text = temp.ToString();
-
-                    temp = int.Parse(bTeamLabel.Text);
-                    temp = 0;
-                    bTeamLabel.Text = temp.ToString();
-
-                }
                 _video.StartVideo();
                 btnPlay.Text = "Pause";
             }
@@ -334,6 +337,20 @@ namespace Football
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ballColour = "Yellow";
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (_video.Check())
+            {
+                int temp = int.Parse(aTeamLabel.Text);
+                temp = 0;
+                aTeamLabel.Text = temp.ToString();
+
+                temp = int.Parse(bTeamLabel.Text);
+                temp = 0;
+                bTeamLabel.Text = temp.ToString();
+            }
         }
     }
 }

@@ -68,6 +68,9 @@
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BallPos = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -83,6 +86,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.BallPos);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.BallImgBox);
             this.panel1.Controls.Add(this.PlayerImgBox);
             this.panel1.Controls.Add(this.playGroundLabel);
@@ -101,7 +107,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(653, 823);
+            this.panel1.Size = new System.Drawing.Size(653, 851);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -110,7 +116,7 @@
             this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
             this.BallImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BallImgBox.Location = new System.Drawing.Point(425, 9);
-            this.BallImgBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BallImgBox.Margin = new System.Windows.Forms.Padding(4);
             this.BallImgBox.Name = "BallImgBox";
             this.BallImgBox.Size = new System.Drawing.Size(80, 70);
             this.BallImgBox.TabIndex = 41;
@@ -121,7 +127,7 @@
             this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
             this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PlayerImgBox.Location = new System.Drawing.Point(136, 9);
-            this.PlayerImgBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PlayerImgBox.Margin = new System.Windows.Forms.Padding(4);
             this.PlayerImgBox.Name = "PlayerImgBox";
             this.PlayerImgBox.Size = new System.Drawing.Size(88, 70);
             this.PlayerImgBox.TabIndex = 41;
@@ -140,10 +146,10 @@
             // 
             // saveScoreButton
             // 
-            this.saveScoreButton.Location = new System.Drawing.Point(425, 492);
-            this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveScoreButton.Location = new System.Drawing.Point(484, 544);
+            this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveScoreButton.Name = "saveScoreButton";
-            this.saveScoreButton.Size = new System.Drawing.Size(144, 54);
+            this.saveScoreButton.Size = new System.Drawing.Size(128, 54);
             this.saveScoreButton.TabIndex = 36;
             this.saveScoreButton.Text = "Save Score";
             this.saveScoreButton.UseVisualStyleBackColor = true;
@@ -151,10 +157,10 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(259, 492);
+            this.btnStop.Location = new System.Drawing.Point(190, 544);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(147, 54);
+            this.btnStop.Size = new System.Drawing.Size(129, 54);
             this.btnStop.TabIndex = 35;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -173,10 +179,10 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(90, 492);
+            this.btnPlay.Location = new System.Drawing.Point(47, 544);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(147, 54);
+            this.btnPlay.Size = new System.Drawing.Size(126, 54);
             this.btnPlay.TabIndex = 33;
             this.btnPlay.Text = "Start";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -266,7 +272,7 @@
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip2.Size = new System.Drawing.Size(87, 823);
+            this.menuStrip2.Size = new System.Drawing.Size(87, 851);
             this.menuStrip2.TabIndex = 42;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -457,13 +463,41 @@
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 544);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 54);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "Reset Score";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(76, 496);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 17);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Who is controlling the ball? -->";
+            // 
+            // BallPos
+            // 
+            this.BallPos.AutoSize = true;
+            this.BallPos.Location = new System.Drawing.Point(282, 496);
+            this.BallPos.Name = "BallPos";
+            this.BallPos.Size = new System.Drawing.Size(61, 17);
+            this.BallPos.TabIndex = 45;
+            this.BallPos.Text = "Nobody.";
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(653, 629);
+            this.ClientSize = new System.Drawing.Size(653, 657);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -526,6 +560,9 @@
         private System.Windows.Forms.ToolStripMenuItem ballColourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label BallPos;
+        private System.Windows.Forms.Label label1;
     }
 }
 

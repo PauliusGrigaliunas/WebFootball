@@ -140,5 +140,10 @@ namespace Football
             CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
             return imgSmoothed;
         }
+        public Image<Gray, byte> GetFilteredImageZones(Colour colour)
+        {
+            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
+            return imgSmoothed;
+        }
     }
 }
