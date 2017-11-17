@@ -15,7 +15,7 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-        Lazy<int> number = new Lazy<int>(() => Thread.CurrentThread.ManagedThreadId);
+        //Lazy<int> number = new Lazy<int>(() => Thread.CurrentThread.ManagedThreadId);
         public Thread TakeData ;
 
         void DoSomething()
@@ -79,7 +79,7 @@ namespace Football
         private void button2_Click(object sender, EventArgs e)
         {
 
-            FormAllTeams form = new FormAllTeams();
+            FormAllTeams form = new FormAllTeams(TakeData);
             //TakeData.Join();//
             form.ShowDialog();
         }

@@ -17,8 +17,12 @@ namespace Football
         Lazy<FootballEntities> lazy = new Lazy<Football.FootballEntities>();
         FootballEntities context;
 
-        public FormAllTeams()
+        Thread _takeData;
+
+        public FormAllTeams(Thread takeData = null)
         {
+            _takeData = takeData;
+            //_takeData.Join();
             context = lazy.Value;
             InitializeComponent();       
         }
@@ -30,15 +34,16 @@ namespace Football
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
 
-            //dataAllTeamsGrid.DataSource = team.ToList();
-            //Colour();
+            dataAllTeamsGrid.DataSource = team.ToList();
+            Colour();
         }
 
         private /*async*/ void FormAllTeams_Load(object sender, EventArgs e)
         {
-            
+
             //Task.Run(() => FillData(), CancellationToken.None);
-            FillData();
+            //FillData();
+            _takeData.Join();
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
