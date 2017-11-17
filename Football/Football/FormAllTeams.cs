@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Threading;
 
 namespace Football
 {
@@ -15,28 +16,30 @@ namespace Football
     {
         Lazy<FootballEntities> lazy = new Lazy<Football.FootballEntities>();
         FootballEntities context;
+        InputThread inputThread;
+
         public FormAllTeams()
-        {
+        {           
+            context = lazy.Value;
             InitializeComponent();       
         }
      
         
         public void FillData()
-        {
-            
+        {           
             var team = from i in context.teamTables
                          orderby i.Victories descending
                          select new { i.Name, i.Victories, i.Goals };
 
-            dataAllTeamsGrid.DataSource = team.ToList(); 
+            dataAllTeamsGrid.DataSource = team.ToList();
+            Colour();
         }
 
         private void FormAllTeams_Load(object sender, EventArgs e)
         {
-            context = lazy.Value;
+            inputThread = InputThread.Instance;
+            inputThread.Start();
             FillData();
-            colour();
-
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,7 +50,7 @@ namespace Football
                        select new{i.Name, i.Victories};
                        
             dataAllTeamsGrid.DataSource = team.ToList();
-            colour();
+            Colour();
 
         }
 
@@ -59,7 +62,7 @@ namespace Football
 
 
             dataAllTeamsGrid.DataSource = team.ToList();
-            colour();
+            Colour();
 
         }
 
@@ -72,14 +75,14 @@ namespace Football
                        select new { i.Name, i.Victories, i.Goals };
 
             dataAllTeamsGrid.DataSource = team.ToList();
-            colour();
+            Colour();
 
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FillData();
-            colour();
+            Colour();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -87,7 +90,7 @@ namespace Football
 
         }
 
-        private void colour()
+        private void Colour()
         {
            
             for(int i=0; i<3;i++)
