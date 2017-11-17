@@ -18,9 +18,7 @@ namespace Football
         FootballEntities context;
         InputThread inputThread;
 
-        Thread _takeData;
-
-        public FormAllTeams(Thread takeData = null)
+        public FormAllTeams()
         {           
             context = lazy.Value;
             InitializeComponent();       
@@ -41,6 +39,7 @@ namespace Football
         {
             inputThread = InputThread.Instance;
             inputThread.Start();
+            FillData();
         }
 
         private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)

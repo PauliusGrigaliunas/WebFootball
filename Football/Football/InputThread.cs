@@ -36,6 +36,7 @@ namespace Football
         }
 
         public void Start() {
+
             TakeData.Join();
         }
     }
