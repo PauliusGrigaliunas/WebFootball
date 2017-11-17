@@ -9,32 +9,45 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Football
 {
     public partial class MainMenu : Form
     {
+        Lazy<int> number = new Lazy<int>(() => Thread.CurrentThread.ManagedThreadId);
+        public Thread TakeData ;
+
+        void DoSomething()
+        {
+            FormAllTeams a = new FormAllTeams();
+            TakeData = new Thread(() => a.FillData());
+            TakeData.Start();
+        }
+
+
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
 
         public MainMenu()
         {
             InitializeComponent();
+            DoSomething();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             VideoScreen form = new VideoScreen(_nameFirstTeam, _nameSecondTeam);
             Teams team = new Teams();
-           
+
             Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
 
             if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
                 if (_nameFirstTeam != _nameSecondTeam)
                 {
-                   // table(_nameFirstTeam);
-                   // table(_nameSecondTeam);         
+                    // table(_nameFirstTeam);
+                    // table(_nameSecondTeam);         
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
@@ -49,7 +62,7 @@ namespace Football
                 MessageBox.Show("Team names must be at least 4 charachters long ");
             }
         }
-  
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox1_TextChange = (TextBox)sender;
@@ -65,7 +78,9 @@ namespace Football
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormAllTeams form = new FormAllTeams();        
+
+            FormAllTeams form = new FormAllTeams();
+            //TakeData.Join();//
             form.ShowDialog();
         }
     }

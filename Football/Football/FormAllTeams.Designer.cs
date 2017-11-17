@@ -48,7 +48,7 @@
             // 
             this.dataAllTeamsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataAllTeamsGrid.Location = new System.Drawing.Point(3, 70);
-            this.dataAllTeamsGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataAllTeamsGrid.Margin = new System.Windows.Forms.Padding(4);
             this.dataAllTeamsGrid.Name = "dataAllTeamsGrid";
             this.dataAllTeamsGrid.Size = new System.Drawing.Size(671, 475);
             this.dataAllTeamsGrid.TabIndex = 0;
@@ -113,7 +113,7 @@
             this.Controls.Add(this.dataAllTeamsGrid);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormAllTeams";
             this.Text = "FormAllTeams";
             this.Load += new System.EventHandler(this.FormAllTeams_Load);
