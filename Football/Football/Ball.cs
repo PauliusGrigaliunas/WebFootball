@@ -44,17 +44,15 @@ namespace Football
         public List<int> xCoordList = new List<int>();
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
-        public Image<Gray, byte> ImgGates { get; set; }
         public Colour[] colour;
-        public string PositionComment;
-        public string at, bt;
 
         public Ball() {
             BallColorQuery();
         }
 
-        private void BallColorQuery()   // http://imagecolorpicker.com/ H / 2; S & V * % / 100;
+        private void BallColorQuery()
         {
+            //colour = lazy.Value;
             colour = new[] {
                 new Colour
                 {
@@ -71,18 +69,17 @@ namespace Football
                     Low = new Hsv(0, 140, 150),
                     High = new Hsv(180, 255, 255),
                 },
-
                 new Colour
                 {
-                    Number = 101,
-                    Name = "BlackDarkGates",
-                    //Low = new Hsv(7, 90, 90),    // middle value 80/100
-                    //High = new Hsv(12, 150, 150),  // <-- jeigu detectint raudonas linijas (not always works)
-                    Low = new Hsv(0, 0, 0),
-                    High = new Hsv(255, 255, 10),
+                    Number = 2,
+                    Name = "Yellow",
+                    Low = new Hsv(23, 41, 133),
+                    High = new Hsv(40, 150, 255),
                 }
             };
+
         }
+
 
         public void BallDetection(Video _video, GoalsChecker goalscheck, string colourName = "Default", int colorNumber = 0)
         {
@@ -95,7 +92,7 @@ namespace Football
             else
                 _colour = colour.First(x => x.Number == colorNumber);
 
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();    
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
 
             ImgFiltered = _video.GetFilteredImage(_colour);
             ImgOriginal = _video.ImgOriginal;
@@ -153,113 +150,6 @@ namespace Football
             {
                 int item = enumerator.Current;
                 Debug.WriteLine(item);
-            }
-        }
-
-        private int DistanceBetweenGates(int AGates, int BGates)
-        {
-            int result = BGates - AGates;
-            if (result <= 0)
-                return ImgOriginal.Width * 5 / 6;
-            else
-                return result;
-        }
-
-        private int FindAGates()
-        {
-            int i, j, red = 0, green = 0, blue = 0,  counter = 0, X = 0;
-            Color clr;
-            int width = ImgGates.Width * 1 / 4;                      // 1/4  | 3/4
-            int sheight = ImgGates.Height * 2 / 5;                   // 2/5  | 2/5
-            int height = ImgGates.Height * 4 / 5;                    // 4/5  | 4/5
-            Bitmap bmp = new Bitmap(ImgGates.Bitmap);
-
-            for (i = 0; i < width; ++i)
-            {
-                for(j = sheight; j < height; j++)
-                {
-                    clr = bmp.GetPixel(i, j);
-                    red = clr.R;
-                    green = clr.G;
-                    blue = clr.B;
-
-                    if (red >= 245 && green >= 245 && blue >= 245)
-                        counter++;
-                    else
-                        counter = 0;
-
-                    if(counter >= 5)
-                    {
-                        X = i - 1;
-                        return X;
-                    }
-                }
-            }
-            return X;
-        }
-
-        private int FindBGates()
-        {
-            int i, j, red = 0, green = 0, blue = 0, counter = 0, X = 0;
-            Color clr;
-            int width = ImgGates.Width * 3 / 4;         
-            int sheight = ImgGates.Height * 2 / 5;                  
-            int height = ImgGates.Height * 4 / 5;                   
-            Bitmap bmp = new Bitmap(ImgGates.Bitmap);
-
-            for (i = width; i < ImgGates.Width; ++i)
-            {
-                for (j = sheight; j < height; j++)
-                {
-                    clr = bmp.GetPixel(i, j);
-                    red = clr.R;
-                    green = clr.G;
-                    blue = clr.B;
-
-                    if (red >= 245 && green >= 245 && blue >= 245)
-                        counter++;
-                    else
-                        counter = 0;
-
-                    if (counter >= 5)
-                    {
-                        X = i - 1;
-                        return X;
-                    }
-                }
-            }
-            return X;
-        }
-
-        private string getBallStatus(int dist, int diff)
-        {
-            if (BallPosition.X <= (dist * 4 / 20 + diff))
-            {
-                return at + " Team Defenders";
-            }
-            else if (BallPosition.X >= (dist * 4 / 20 + diff) && BallPosition.X < (dist * 7 / 20 + diff))
-            {
-                return bt + " Team Attackers";
-            }
-            else if (BallPosition.X >= (dist * 7 / 20 + diff) && BallPosition.X < (dist * 10 / 20 + diff))
-            {
-                return at + " Team Middle 5";
-            }
-            else if (BallPosition.X >= (dist * 10 / 20 + diff) && BallPosition.X < (dist * 13 / 20 + diff))
-            {
-                return bt + " Team Middle 5";
-            }
-            else if (BallPosition.X >= (dist * 13 / 20 + diff) && BallPosition.X < (dist * 16 / 20 + diff))
-            {
-                return at + " Team Attackers";
-            }
-            else if (BallPosition.X >= (dist * 16 / 20 + diff) && BallPosition.X < (dist + diff))
-            {
-                return bt + " Team Defenders";
-            }
-            else
-            {
-                return "Unknown";
             }
         }
     }

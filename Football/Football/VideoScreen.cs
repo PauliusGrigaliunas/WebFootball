@@ -37,21 +37,26 @@ namespace Football
         public int _GoalA { get; set; }
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
+        private string _ballColour = "Orange";
+
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
+
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
-        Image<Gray, byte> _ImgZones { get; set; }
 
         //variables
         private int _i = 0;
+
+        //
         public List<int> _xCoordList = new List<int>();
+        //
+
         GoalsChecker _gcheck;
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
-        public string ATeam, BTeam;
 
         public void TimeTick(object sender, EventArgs e)
         {
@@ -66,21 +71,9 @@ namespace Football
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
 
 
-            //_video.ImgZones = mat.ToImage<Bgr, byte>().Resize(PlayerZones.Width, PlayerZones.Height, Inter.Linear);  // testinimui, vartu filtered image 1/2
-
-            Colour colour;
-            colour = _ball.colour.First(x => x.Name == "BlackDarkGates");
-            colour = _ball.colour.First(x => x.Number == 101);
-            _ImgZones = _video.GetFilteredImageZones(colour);
-            _ball.ImgGates = _ImgZones;
-            _ball.at = ATeam;
-            _ball.bt = BTeam;
-            //PlayerZones.Image = _ImgZones.Bitmap; // testinimui, vartu filtered image 2/2
-
             //_ball.BallDetection(_video, _gcheck, "Orange");
-            BallDetection("Orange");
+            BallDetection(_ballColour);
 
-            BallPos.Text = _ball.PositionComment;
             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
 
@@ -96,8 +89,7 @@ namespace Football
             _video = new Video(this);
             this.TeamALabel.Text = teamA;
             this.TeamBLabel.Text = teamB;
-            ATeam = this.TeamALabel.Text;
-            BTeam = this.TeamBLabel.Text;
+
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,9 +138,10 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
-        
-        public void BallDetection( string colourName = "Default", int colorNumber = 0) {
-            Colour colour; 
+
+        public void BallDetection(string colourName = "Default", int colorNumber = 0)
+        {
+            Colour colour;
             //! pritaikyti protingai galime Enum
             if (colourName != "Default")
             {
@@ -159,7 +152,7 @@ namespace Football
 
 
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-            _ball.ImgFiltered = _video.GetFilteredImage(colour); 
+            _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
             _ball.Gcheck = _gcheck;
@@ -174,7 +167,27 @@ namespace Football
         // Buttons------------
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            _video.StartVideo();
+            if (btnPlay.Text == "Start")
+            {
+                if (_video.Check())
+                {
+                    int temp = int.Parse(aTeamLabel.Text);
+                    temp = 0;
+                    aTeamLabel.Text = temp.ToString();
+
+                    temp = int.Parse(bTeamLabel.Text);
+                    temp = 0;
+                    bTeamLabel.Text = temp.ToString();
+
+                }
+                _video.StartVideo();
+                btnPlay.Text = "Pause";
+            }
+            else
+            {
+                _video.Pause();
+                btnPlay.Text = "Start";
+            }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -185,6 +198,7 @@ namespace Football
         private void btnStop_Click(object sender, EventArgs e)
         {
             _video.Stop();
+            btnPlay.Text = "Start";
         }
         // End Buttons------------
 
@@ -194,12 +208,13 @@ namespace Football
             _video.Pause();
             Application.Exit();
         }
-    
+
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_picture != null) { 
-            OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
+            if (_picture != null)
+            {
+                OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
             }
         }
 
@@ -216,6 +231,8 @@ namespace Football
             bTeamLabel.Text = "0";
         }
 
+        delegate int del(int x);
+        del add;
         private void button1_Click(object sender, EventArgs e)
         {
             this._TeamBScores = int.Parse(bTeamLabel.Text);
@@ -225,16 +242,12 @@ namespace Football
             _GoalA = 0;
             _VictB = 0;
             _GoalB = 0;
-            //kokia info lentelej
+
             Teams team = new Teams();
 
-            _VictA = team.GetVictories(_nameFirstTeam);
-            _GoalA = team.GetGoals(_nameFirstTeam);
-            _VictB = team.GetVictories(_nameSecondTeam);
-            _GoalB = team.GetGoals(_nameSecondTeam);
+            Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
 
-            _GoalA = _GoalA + _TeamAScores;     
-            _GoalB = _GoalB + _TeamBScores;
+
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA = _VictA + 1;
@@ -243,52 +256,84 @@ namespace Football
             {
                 _VictB = _VictB + 1;
             }
-       
-           team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
-           team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+
+
+            _GoalA = _GoalA + _TeamAScores;
+            _GoalB = _GoalB + _TeamBScores;
+
+
+            if (!compare(_nameFirstTeam))
+            {
+                team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
+            }
+            else
+            {
+                _VictA = team.GetVictories(_nameFirstTeam);
+                _GoalA = team.GetGoals(_nameFirstTeam);
+                team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
+            }
+
+            if (!compare(_nameSecondTeam))
+            {
+                team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
+            }
+            else
+            {
+                _VictB = team.GetVictories(_nameSecondTeam);
+                _GoalB = team.GetGoals(_nameSecondTeam);
+                team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+            }
+
 
             MessageBox.Show("Saved");
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            FormAllTeams form = new FormAllTeams();
 
-            form.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            FormTeamB form = new FormTeamB();
-            form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
-            form.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FormTeamA form = new FormTeamA();
-            form.loadInfo(_nameFirstTeam, _VictA, _GoalA, _TeamAScores);
-            form.Show();
-        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Would you like to reset points to 0 : 0?", "Reset points", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                int temp = int.Parse(aTeamLabel.Text);
-                temp = 0;
-                aTeamLabel.Text = temp.ToString();
 
-                temp = int.Parse(bTeamLabel.Text);
-                temp = 0;
-                bTeamLabel.Text = temp.ToString();
-            }
+        }
+
+        private void statisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAllTeams form = new FormAllTeams();
+
+            form.Show();
+        }
+
+        private void teamAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTeamA form = new FormTeamA();
+            form.loadInfo(_nameFirstTeam, _VictA, _GoalA, _TeamAScores);
+            form.Show();
+        }
+
+        private void teamBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTeamB form = new FormTeamB();
+            form.loadInfo(_nameSecondTeam, _VictB, _GoalB, _TeamBScores);
+            form.Show();
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ballColour = "Orange";
+        }
+
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ballColour = "Yellow";
         }
     }
 }

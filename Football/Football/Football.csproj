@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
-    <Compile Include="Colours.cs" />
+    <Compile Include="Colour.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -106,17 +106,17 @@
     <Compile Include="FormAllTeams.Designer.cs">
       <DependentUpon>FormAllTeams.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormTeamB.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormTeamB.Designer.cs">
-      <DependentUpon>FormTeamB.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormTeamA.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormTeamA.Designer.cs">
       <DependentUpon>FormTeamA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTeamB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeamB.Designer.cs">
+      <DependentUpon>FormTeamB.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
@@ -155,11 +155,11 @@
     <EmbeddedResource Include="FormAllTeams.resx">
       <DependentUpon>FormAllTeams.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormTeamB.resx">
-      <DependentUpon>FormTeamB.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormTeamA.resx">
       <DependentUpon>FormTeamA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTeamB.resx">
+      <DependentUpon>FormTeamB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

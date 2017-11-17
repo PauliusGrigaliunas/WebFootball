@@ -30,15 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BallPos = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.BallImgBox = new System.Windows.Forms.PictureBox();
             this.PlayerImgBox = new System.Windows.Forms.PictureBox();
             this.playGroundLabel = new System.Windows.Forms.Label();
-            this.btnAllTeamStatistics = new System.Windows.Forms.Button();
-            this.teamBButton = new System.Windows.Forms.Button();
-            this.teamAButton = new System.Windows.Forms.Button();
             this.saveScoreButton = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -50,6 +44,11 @@
             this.TeamALabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.OriginalPictureBox = new System.Windows.Forms.PictureBox();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +65,14 @@
             this.StartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).BeginInit();
+            this.menuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,15 +83,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.BallPos);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.BallImgBox);
             this.panel1.Controls.Add(this.PlayerImgBox);
             this.panel1.Controls.Add(this.playGroundLabel);
-            this.panel1.Controls.Add(this.btnAllTeamStatistics);
-            this.panel1.Controls.Add(this.teamBButton);
-            this.panel1.Controls.Add(this.teamAButton);
             this.panel1.Controls.Add(this.saveScoreButton);
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnPause);
@@ -100,46 +97,20 @@
             this.panel1.Controls.Add(this.TeamALabel);
             this.panel1.Controls.Add(this.scoreLabel);
             this.panel1.Controls.Add(this.OriginalPictureBox);
+            this.panel1.Controls.Add(this.menuStrip2);
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(669, 885);
+            this.panel1.Size = new System.Drawing.Size(653, 823);
             this.panel1.TabIndex = 2;
-            // 
-            // BallPos
-            // 
-            this.BallPos.AutoSize = true;
-            this.BallPos.Location = new System.Drawing.Point(261, 498);
-            this.BallPos.Name = "BallPos";
-            this.BallPos.Size = new System.Drawing.Size(42, 17);
-            this.BallPos.TabIndex = 45;
-            this.BallPos.Text = "None";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 498);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 17);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Ball is controlled by -->  ";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(259, 551);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 54);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Reset Score";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // BallImgBox
             // 
             this.BallImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BallImgBox.BackgroundImage")));
             this.BallImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BallImgBox.Location = new System.Drawing.Point(425, 9);
-            this.BallImgBox.Margin = new System.Windows.Forms.Padding(4);
+            this.BallImgBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BallImgBox.Name = "BallImgBox";
             this.BallImgBox.Size = new System.Drawing.Size(80, 70);
             this.BallImgBox.TabIndex = 41;
@@ -150,7 +121,7 @@
             this.PlayerImgBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerImgBox.BackgroundImage")));
             this.PlayerImgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PlayerImgBox.Location = new System.Drawing.Point(136, 9);
-            this.PlayerImgBox.Margin = new System.Windows.Forms.Padding(4);
+            this.PlayerImgBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PlayerImgBox.Name = "PlayerImgBox";
             this.PlayerImgBox.Size = new System.Drawing.Size(88, 70);
             this.PlayerImgBox.TabIndex = 41;
@@ -167,43 +138,10 @@
             this.playGroundLabel.TabIndex = 40;
             this.playGroundLabel.Text = "PlayGround";
             // 
-            // btnAllTeamStatistics
-            // 
-            this.btnAllTeamStatistics.Location = new System.Drawing.Point(248, 617);
-            this.btnAllTeamStatistics.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAllTeamStatistics.Name = "btnAllTeamStatistics";
-            this.btnAllTeamStatistics.Size = new System.Drawing.Size(152, 36);
-            this.btnAllTeamStatistics.TabIndex = 39;
-            this.btnAllTeamStatistics.Text = "All Teams Statistics";
-            this.btnAllTeamStatistics.UseVisualStyleBackColor = true;
-            this.btnAllTeamStatistics.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // teamBButton
-            // 
-            this.teamBButton.Location = new System.Drawing.Point(541, 4);
-            this.teamBButton.Margin = new System.Windows.Forms.Padding(4);
-            this.teamBButton.Name = "teamBButton";
-            this.teamBButton.Size = new System.Drawing.Size(112, 43);
-            this.teamBButton.TabIndex = 38;
-            this.teamBButton.Text = "Team B stats";
-            this.teamBButton.UseVisualStyleBackColor = true;
-            this.teamBButton.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // teamAButton
-            // 
-            this.teamAButton.Location = new System.Drawing.Point(0, 4);
-            this.teamAButton.Margin = new System.Windows.Forms.Padding(4);
-            this.teamAButton.Name = "teamAButton";
-            this.teamAButton.Size = new System.Drawing.Size(113, 43);
-            this.teamAButton.TabIndex = 37;
-            this.teamAButton.Text = "Team A stats";
-            this.teamAButton.UseVisualStyleBackColor = true;
-            this.teamAButton.Click += new System.EventHandler(this.button2_Click);
-            // 
             // saveScoreButton
             // 
-            this.saveScoreButton.Location = new System.Drawing.Point(425, 551);
-            this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveScoreButton.Location = new System.Drawing.Point(425, 492);
+            this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.saveScoreButton.Name = "saveScoreButton";
             this.saveScoreButton.Size = new System.Drawing.Size(144, 54);
             this.saveScoreButton.TabIndex = 36;
@@ -213,10 +151,10 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(545, 117);
+            this.btnStop.Location = new System.Drawing.Point(259, 492);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(96, 34);
+            this.btnStop.Size = new System.Drawing.Size(147, 54);
             this.btnStop.TabIndex = 35;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -235,7 +173,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(77, 551);
+            this.btnPlay.Location = new System.Drawing.Point(90, 492);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(147, 54);
@@ -319,16 +257,62 @@
             this.OriginalPictureBox.TabStop = false;
             this.OriginalPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statisticsToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip2.Size = new System.Drawing.Size(87, 823);
+            this.menuStrip2.TabIndex = 42;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // statisticsToolStripMenuItem
+            // 
+            this.statisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem,
+            this.teamAToolStripMenuItem,
+            this.teamBToolStripMenuItem});
+            this.statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
+            this.statisticsToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
+            this.statisticsToolStripMenuItem.Text = "Statistics";
+            this.statisticsToolStripMenuItem.Click += new System.EventHandler(this.statisticsToolStripMenuItem_Click);
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.allToolStripMenuItem.Text = "All";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // teamAToolStripMenuItem
+            // 
+            this.teamAToolStripMenuItem.Name = "teamAToolStripMenuItem";
+            this.teamAToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.teamAToolStripMenuItem.Text = "TeamA";
+            this.teamAToolStripMenuItem.Click += new System.EventHandler(this.teamAToolStripMenuItem_Click);
+            // 
+            // teamBToolStripMenuItem
+            // 
+            this.teamBToolStripMenuItem.Name = "teamBToolStripMenuItem";
+            this.teamBToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.teamBToolStripMenuItem.Text = "TeamB";
+            this.teamBToolStripMenuItem.Click += new System.EventHandler(this.teamBToolStripMenuItem_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.startPauseStopToolStripMenuItem});
+            this.startPauseStopToolStripMenuItem,
+            this.ballColourToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(654, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(653, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -450,13 +434,36 @@
             this.StopToolStripMenuItem.Text = "Stop";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem2_Click);
             // 
+            // ballColourToolStripMenuItem
+            // 
+            this.ballColourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.orangeToolStripMenuItem,
+            this.yellowToolStripMenuItem});
+            this.ballColourToolStripMenuItem.Name = "ballColourToolStripMenuItem";
+            this.ballColourToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.ballColourToolStripMenuItem.Text = "Ball Colour";
+            // 
+            // orangeToolStripMenuItem
+            // 
+            this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
+            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.orangeToolStripMenuItem.Text = "Orange";
+            this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
+            // 
+            // yellowToolStripMenuItem
+            // 
+            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.yellowToolStripMenuItem.Text = "Yellow";
+            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(654, 691);
+            this.ClientSize = new System.Drawing.Size(653, 629);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -469,6 +476,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).EndInit();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -499,9 +508,6 @@
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button saveScoreButton;
-        private System.Windows.Forms.Button btnAllTeamStatistics;
-        private System.Windows.Forms.Button teamBButton;
-        private System.Windows.Forms.Button teamAButton;
         private System.Windows.Forms.ToolStripMenuItem startPauseStopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PauseToolStripMenuItem;
@@ -512,9 +518,14 @@
         private System.Windows.Forms.Label playGroundLabel;
         private System.Windows.Forms.PictureBox BallImgBox;
         private System.Windows.Forms.PictureBox PlayerImgBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label BallPos;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem statisticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ballColourToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
     }
 }
 

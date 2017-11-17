@@ -41,6 +41,7 @@
             this.pictureBoxArrowRight = new System.Windows.Forms.PictureBox();
             this.pictureBoxBallLeft = new System.Windows.Forms.PictureBox();
             this.pictureBoxBallRight = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).BeginInit();
@@ -113,7 +114,6 @@
             this.label4.Size = new System.Drawing.Size(133, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Name your teams:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // pictureBox1
             // 
@@ -165,12 +165,23 @@
             this.pictureBoxBallRight.TabIndex = 8;
             this.pictureBoxBallRight.TabStop = false;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(270, 410);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 28);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Statistics";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(381, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBoxBallRight);
             this.Controls.Add(this.pictureBoxBallLeft);
             this.Controls.Add(this.pictureBoxArrowRight);
@@ -186,7 +197,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainMenu";
             this.Text = "MainMenu";
-            this.Load += new System.EventHandler(this.MainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).EndInit();
@@ -211,5 +221,6 @@
         private System.Windows.Forms.PictureBox pictureBoxArrowRight;
         private System.Windows.Forms.PictureBox pictureBoxBallLeft;
         private System.Windows.Forms.PictureBox pictureBoxBallRight;
+        private System.Windows.Forms.Button button2;
     }
 }
