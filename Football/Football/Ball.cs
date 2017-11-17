@@ -137,7 +137,7 @@ namespace Football
                 int AGATES = FindAGates(); // O <--
                 int BGATES = FindBGates(); // --> O
                 int ABdistance = DistanceBetweenGates(AGATES, BGATES);
-                Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: "+ BallPosition.X);
+                //Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: "+ BallPosition.X);
                 PositionComment = getBallStatus(ABdistance, AGATES);
             }
             catch (Exception)
