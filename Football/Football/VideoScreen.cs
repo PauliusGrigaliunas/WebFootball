@@ -26,6 +26,7 @@ namespace Football
         Picture _picture = new Picture();
         Ball _ball = new Ball();
         Video _video;
+        Commentator comment = new Commentator();
 
         public bool isTournament = false;
 
@@ -90,11 +91,11 @@ namespace Football
         {
             InitializeComponent();
             _video = new Video(this);
-            this.TeamALabel.Text = teamA;
-            this.TeamBLabel.Text = teamB;
+            TeamALabel.Text = teamA;
+            TeamBLabel.Text = teamB;
 
-            ATeam = this.TeamALabel.Text;
-            BTeam = this.TeamBLabel.Text;
+            ATeam = TeamALabel.Text;
+            BTeam = TeamBLabel.Text;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,6 +194,7 @@ namespace Football
                 _video.Pause();
                 btnPlay.Text = "Start";
             }
+            comment.StopAllTracks();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -233,8 +235,10 @@ namespace Football
         //+----------------------
         private void Form1_Load(object sender, EventArgs e)
         {
+            comment.StopAllTracks();
             aTeamLabel.Text = "0";
             bTeamLabel.Text = "0";
+            comment.PlayIndexedSoundWithLoop(11);
         }
 
    
