@@ -22,7 +22,6 @@ namespace Football
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
-        GoalsChecker _gcheck;
         Ball _ball = new Ball();
         private VideoScreen _home;
 
@@ -31,7 +30,6 @@ namespace Football
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
-        private int _i = 0;
         public List<int> _xCoordList = new List<int>();
 
         public Video()

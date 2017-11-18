@@ -66,9 +66,10 @@
             this.label1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(7, 118);
+            this.label1.Location = new System.Drawing.Point(9, 145);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
+            this.label1.Size = new System.Drawing.Size(42, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "        ";
             // 
@@ -78,9 +79,10 @@
             this.label2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(105, 118);
+            this.label2.Location = new System.Drawing.Point(140, 145);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 15);
+            this.label2.Size = new System.Drawing.Size(42, 19);
             this.label2.TabIndex = 1;
             this.label2.Text = "        ";
             // 
@@ -90,9 +92,10 @@
             this.label3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(157, 118);
+            this.label3.Location = new System.Drawing.Point(209, 145);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 15);
+            this.label3.Size = new System.Drawing.Size(38, 19);
             this.label3.TabIndex = 2;
             this.label3.Text = "       ";
             // 
@@ -102,9 +105,10 @@
             this.label4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(273, 118);
+            this.label4.Location = new System.Drawing.Point(364, 145);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 15);
+            this.label4.Size = new System.Drawing.Size(42, 19);
             this.label4.TabIndex = 3;
             this.label4.Text = "        ";
             // 
@@ -114,9 +118,10 @@
             this.winer12.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.winer12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.winer12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.winer12.Location = new System.Drawing.Point(81, 61);
+            this.winer12.Location = new System.Drawing.Point(108, 75);
+            this.winer12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.winer12.Name = "winer12";
-            this.winer12.Size = new System.Drawing.Size(30, 15);
+            this.winer12.Size = new System.Drawing.Size(38, 19);
             this.winer12.TabIndex = 4;
             this.winer12.Text = "       ";
             // 
@@ -126,9 +131,10 @@
             this.winer34.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.winer34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.winer34.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.winer34.Location = new System.Drawing.Point(184, 61);
+            this.winer34.Location = new System.Drawing.Point(245, 75);
+            this.winer34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.winer34.Name = "winer34";
-            this.winer34.Size = new System.Drawing.Size(33, 15);
+            this.winer34.Size = new System.Drawing.Size(42, 19);
             this.winer34.TabIndex = 5;
             this.winer34.Text = "        ";
             // 
@@ -137,9 +143,10 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Location = new System.Drawing.Point(18, 207);
+            this.label7.Location = new System.Drawing.Point(24, 255);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.Size = new System.Drawing.Size(54, 17);
             this.label7.TabIndex = 6;
             this.label7.Text = "1 place";
             // 
@@ -148,9 +155,10 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label8.Location = new System.Drawing.Point(18, 239);
+            this.label8.Location = new System.Drawing.Point(24, 294);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(42, 13);
+            this.label8.Size = new System.Drawing.Size(54, 17);
             this.label8.TabIndex = 7;
             this.label8.Text = "2 place";
             // 
@@ -159,9 +167,10 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label9.Location = new System.Drawing.Point(18, 269);
+            this.label9.Location = new System.Drawing.Point(24, 331);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 13);
+            this.label9.Size = new System.Drawing.Size(54, 17);
             this.label9.TabIndex = 8;
             this.label9.Text = "3 place";
             this.label9.Click += new System.EventHandler(this.label9_Click);
@@ -171,17 +180,19 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label10.Location = new System.Drawing.Point(18, 295);
+            this.label10.Location = new System.Drawing.Point(24, 363);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 13);
+            this.label10.Size = new System.Drawing.Size(54, 17);
             this.label10.TabIndex = 9;
             this.label10.Text = "4 place";
             // 
             // button1vs2
             // 
-            this.button1vs2.Location = new System.Drawing.Point(56, 111);
+            this.button1vs2.Location = new System.Drawing.Point(75, 137);
+            this.button1vs2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1vs2.Name = "button1vs2";
-            this.button1vs2.Size = new System.Drawing.Size(37, 22);
+            this.button1vs2.Size = new System.Drawing.Size(49, 27);
             this.button1vs2.TabIndex = 10;
             this.button1vs2.Text = "VS";
             this.button1vs2.UseVisualStyleBackColor = true;
@@ -189,9 +200,10 @@
             // 
             // button3vs4
             // 
-            this.button3vs4.Location = new System.Drawing.Point(211, 113);
+            this.button3vs4.Location = new System.Drawing.Point(281, 139);
+            this.button3vs4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3vs4.Name = "button3vs4";
-            this.button3vs4.Size = new System.Drawing.Size(37, 22);
+            this.button3vs4.Size = new System.Drawing.Size(49, 27);
             this.button3vs4.TabIndex = 11;
             this.button3vs4.Text = "VS";
             this.button3vs4.UseVisualStyleBackColor = true;
@@ -199,9 +211,10 @@
             // 
             // buttonw1vsw2
             // 
-            this.buttonw1vsw2.Location = new System.Drawing.Point(132, 56);
+            this.buttonw1vsw2.Location = new System.Drawing.Point(176, 69);
+            this.buttonw1vsw2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonw1vsw2.Name = "buttonw1vsw2";
-            this.buttonw1vsw2.Size = new System.Drawing.Size(37, 22);
+            this.buttonw1vsw2.Size = new System.Drawing.Size(49, 27);
             this.buttonw1vsw2.TabIndex = 12;
             this.buttonw1vsw2.Text = "VS";
             this.buttonw1vsw2.UseVisualStyleBackColor = true;
@@ -213,9 +226,10 @@
             this.winer1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.winer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.winer1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.winer1.Location = new System.Drawing.Point(132, 24);
+            this.winer1.Location = new System.Drawing.Point(176, 30);
+            this.winer1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.winer1.Name = "winer1";
-            this.winer1.Size = new System.Drawing.Size(30, 15);
+            this.winer1.Size = new System.Drawing.Size(38, 19);
             this.winer1.TabIndex = 13;
             this.winer1.Text = "       ";
             // 
@@ -225,9 +239,10 @@
             this.loser12.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.loser12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loser12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.loser12.Location = new System.Drawing.Point(105, 163);
+            this.loser12.Location = new System.Drawing.Point(140, 201);
+            this.loser12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.loser12.Name = "loser12";
-            this.loser12.Size = new System.Drawing.Size(36, 15);
+            this.loser12.Size = new System.Drawing.Size(46, 19);
             this.loser12.TabIndex = 14;
             this.loser12.Text = "         ";
             // 
@@ -237,17 +252,19 @@
             this.loser34.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.loser34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loser34.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.loser34.Location = new System.Drawing.Point(211, 163);
+            this.loser34.Location = new System.Drawing.Point(281, 201);
+            this.loser34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.loser34.Name = "loser34";
-            this.loser34.Size = new System.Drawing.Size(33, 15);
+            this.loser34.Size = new System.Drawing.Size(42, 19);
             this.loser34.TabIndex = 15;
             this.loser34.Text = "        ";
             // 
             // buttonloser34
             // 
-            this.buttonloser34.Location = new System.Drawing.Point(157, 158);
+            this.buttonloser34.Location = new System.Drawing.Point(209, 194);
+            this.buttonloser34.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonloser34.Name = "buttonloser34";
-            this.buttonloser34.Size = new System.Drawing.Size(37, 22);
+            this.buttonloser34.Size = new System.Drawing.Size(49, 27);
             this.buttonloser34.TabIndex = 16;
             this.buttonloser34.Text = "VS";
             this.buttonloser34.UseVisualStyleBackColor = true;
@@ -255,18 +272,21 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(313, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(417, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // place1
             // 
             this.place1.AutoSize = true;
-            this.place1.Location = new System.Drawing.Point(83, 207);
+            this.place1.Location = new System.Drawing.Point(111, 255);
+            this.place1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.place1.Name = "place1";
-            this.place1.Size = new System.Drawing.Size(10, 13);
+            this.place1.Size = new System.Drawing.Size(12, 17);
             this.place1.TabIndex = 18;
             this.place1.Text = " ";
             this.place1.Click += new System.EventHandler(this.place1_Click);
@@ -274,9 +294,10 @@
             // place2
             // 
             this.place2.AutoSize = true;
-            this.place2.Location = new System.Drawing.Point(83, 239);
+            this.place2.Location = new System.Drawing.Point(111, 294);
+            this.place2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.place2.Name = "place2";
-            this.place2.Size = new System.Drawing.Size(10, 13);
+            this.place2.Size = new System.Drawing.Size(12, 17);
             this.place2.TabIndex = 19;
             this.place2.Text = " ";
             this.place2.Click += new System.EventHandler(this.place2_Click);
@@ -284,27 +305,30 @@
             // place3
             // 
             this.place3.AutoSize = true;
-            this.place3.Location = new System.Drawing.Point(83, 269);
+            this.place3.Location = new System.Drawing.Point(111, 331);
+            this.place3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.place3.Name = "place3";
-            this.place3.Size = new System.Drawing.Size(10, 13);
+            this.place3.Size = new System.Drawing.Size(12, 17);
             this.place3.TabIndex = 20;
             this.place3.Text = " ";
             // 
             // place4
             // 
             this.place4.AutoSize = true;
-            this.place4.Location = new System.Drawing.Point(83, 295);
+            this.place4.Location = new System.Drawing.Point(111, 363);
+            this.place4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.place4.Name = "place4";
-            this.place4.Size = new System.Drawing.Size(10, 13);
+            this.place4.Size = new System.Drawing.Size(12, 17);
             this.place4.TabIndex = 21;
             this.place4.Text = " ";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1, 163);
+            this.label5.Location = new System.Drawing.Point(1, 201);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 13);
+            this.label5.Size = new System.Drawing.Size(123, 17);
             this.label5.TabIndex = 22;
             this.label5.Text = "For the third place";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -312,9 +336,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Football.Properties.Resources.imagescup;
-            this.pictureBox1.Location = new System.Drawing.Point(161, 199);
+            this.pictureBox1.Location = new System.Drawing.Point(215, 245);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(140, 131);
+            this.pictureBox1.Size = new System.Drawing.Size(187, 161);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 24;
             this.pictureBox1.TabStop = false;
@@ -323,53 +348,58 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label6.Location = new System.Drawing.Point(4, 24);
+            this.label6.Location = new System.Drawing.Point(5, 30);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 16);
+            this.label6.Size = new System.Drawing.Size(128, 20);
             this.label6.TabIndex = 25;
             this.label6.Text = "The Winner Is : ";
             // 
             // labelgoal1
             // 
             this.labelgoal1.AutoSize = true;
-            this.labelgoal1.Location = new System.Drawing.Point(52, 139);
+            this.labelgoal1.Location = new System.Drawing.Point(69, 171);
+            this.labelgoal1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelgoal1.Name = "labelgoal1";
-            this.labelgoal1.Size = new System.Drawing.Size(10, 13);
+            this.labelgoal1.Size = new System.Drawing.Size(12, 17);
             this.labelgoal1.TabIndex = 26;
             this.labelgoal1.Text = " ";
             // 
             // labelgoal2
             // 
             this.labelgoal2.AutoSize = true;
-            this.labelgoal2.Location = new System.Drawing.Point(208, 139);
+            this.labelgoal2.Location = new System.Drawing.Point(277, 171);
+            this.labelgoal2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelgoal2.Name = "labelgoal2";
-            this.labelgoal2.Size = new System.Drawing.Size(10, 13);
+            this.labelgoal2.Size = new System.Drawing.Size(12, 17);
             this.labelgoal2.TabIndex = 27;
             this.labelgoal2.Text = " ";
             // 
             // labelgoal4
             // 
             this.labelgoal4.AutoSize = true;
-            this.labelgoal4.Location = new System.Drawing.Point(129, 81);
+            this.labelgoal4.Location = new System.Drawing.Point(172, 100);
+            this.labelgoal4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelgoal4.Name = "labelgoal4";
-            this.labelgoal4.Size = new System.Drawing.Size(10, 13);
+            this.labelgoal4.Size = new System.Drawing.Size(12, 17);
             this.labelgoal4.TabIndex = 28;
             this.labelgoal4.Text = " ";
             // 
             // labelgoal3
             // 
             this.labelgoal3.AutoSize = true;
-            this.labelgoal3.Location = new System.Drawing.Point(154, 183);
+            this.labelgoal3.Location = new System.Drawing.Point(205, 225);
+            this.labelgoal3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelgoal3.Name = "labelgoal3";
-            this.labelgoal3.Size = new System.Drawing.Size(10, 13);
+            this.labelgoal3.Size = new System.Drawing.Size(12, 17);
             this.labelgoal3.TabIndex = 29;
             this.labelgoal3.Text = " ";
             // 
             // Tournament
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 350);
+            this.ClientSize = new System.Drawing.Size(417, 431);
             this.Controls.Add(this.labelgoal3);
             this.Controls.Add(this.labelgoal4);
             this.Controls.Add(this.labelgoal2);
@@ -400,6 +430,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Tournament";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

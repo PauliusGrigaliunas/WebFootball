@@ -223,8 +223,6 @@
             this.Name = "MainMenu";
             this.Text = "MainMenu";
 
-            this.Load += new System.EventHandler(this.MainMenu_Load);
-
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBallLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowRight)).EndInit();
