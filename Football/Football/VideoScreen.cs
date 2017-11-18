@@ -245,8 +245,9 @@ namespace Football
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this._TeamBScores = int.Parse(aTeamLabel.Text);
-            this._TeamAScores = int.Parse(bTeamLabel.Text);
+            _video.Stop();
+            _TeamBScores = int.Parse(aTeamLabel.Text);
+            _TeamAScores = int.Parse(bTeamLabel.Text);
 
             _VictA = 0;
             _GoalA = 0;
@@ -260,13 +261,34 @@ namespace Football
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA=_VictA+1;
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
             }
             else if (_TeamAScores < _TeamBScores)
             {
                 _VictB= _VictB +1;
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
+            }
+            else
+            {
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Draw!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
             }
 
-           if(!compare(_nameFirstTeam))
+            if (!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
                 _GoalA = _TeamAScores;
@@ -289,8 +311,7 @@ namespace Football
                 _GoalB = team.GetGoals(_nameSecondTeam) + _TeamBScores;
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
-
-            MessageBox.Show("Saved");
+            comment.PlayIndexedSound(11);
             
         }      
 
