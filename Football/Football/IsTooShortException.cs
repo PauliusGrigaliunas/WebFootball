@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Football
 {
+    [Serializable()]
     class IsTooShortException: Exception
     {
 
@@ -13,8 +14,6 @@ namespace Football
         : base("Team names must be at least 4 charachters long ")
         {
         }
-
-
 
         public IsTooShortException(string message)
         : base("name is too short of " + message + ". Team names must be at least 4 charachters long ")
@@ -25,5 +24,9 @@ namespace Football
         : base("name is too short of " + message + ". Team names must be at least 4 charachters long ", inner)
         {
         }
+
+        protected IsTooShortException(System.Runtime.Serialization.SerializationInfo info,
+    System.Runtime.Serialization.StreamingContext context)
+        { }
     }
 }

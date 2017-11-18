@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Football
 {
+    [Serializable()]
     class IsEqualException : Exception
     {
         //private string text = "Team names must be different ";

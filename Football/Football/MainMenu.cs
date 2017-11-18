@@ -36,6 +36,8 @@ namespace Football
 
             try
             {
+                if (!compare(_nameFirstTeam) && !compare(_nameFirstTeam))
+                    throw new IsTooShortException("First Team & Second Team");
                 if (!compare(_nameFirstTeam))
                     throw new IsTooShortException("First Team");
                 if (!compare(_nameSecondTeam))
