@@ -33,6 +33,7 @@ namespace Football
         //variables
         public String _nameFirstTeam { get; set; }
         public String _nameSecondTeam { get; set; }
+        private string _ballColour = "Orange";
 
         public int _TeamAScores { get; set; }
         public int _TeamBScores { get; set; }
@@ -40,8 +41,7 @@ namespace Football
         public int _GoalA { get; set; }
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
-        private string _ballColour = "Orange";
-
+        public bool isRinged = false;
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
@@ -177,8 +177,49 @@ namespace Football
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
-
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
             BallPos.Text = _ball.PositionComment;
+            Comment();
+        }
+
+        private void Comment()
+        {
+            if (_ball.PositionComment == ATeam + " Team Defenders" || _ball.PositionComment == BTeam + " Team Defenders")
+            {
+                if ( isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayRandomSound(16, 17);
+                    isRinged = true;
+                }
+            }
+            else if (_ball.PositionComment == ATeam + " Team Attackers" || _ball.PositionComment == BTeam + " Team Attackers")
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayIndexedSound(14);
+                    isRinged = true;
+                }
+            }
+            else if (_ball.PositionComment == ATeam + " Team Middle 5" || _ball.PositionComment == BTeam + " Team Middle 5")
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayIndexedSound(14);
+                    isRinged = true;
+                }
+            }
+            else
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayIndexedSound(12);
+                    isRinged = true;
+                }
+            }
         }
 
         // Buttons------------
@@ -262,7 +303,7 @@ namespace Football
             {
                 _VictA=_VictA+1;
                 comment.PlayIndexedSound(9);
-                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
                 if (result == DialogResult.Cancel || result == DialogResult.OK)
                 {
                     comment.StopAllTracks();
@@ -272,7 +313,7 @@ namespace Football
             {
                 _VictB= _VictB +1;
                 comment.PlayIndexedSound(9);
-                DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
                 if (result == DialogResult.Cancel || result == DialogResult.OK)
                 {
                     comment.StopAllTracks();
