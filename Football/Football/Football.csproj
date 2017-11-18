@@ -94,6 +94,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="IsEqualException.cs" />
     <Compile Include="TeamNames.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,16 +163,13 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Video.cs" />
-
     <EmbeddedResource Include="TeamNames.resx">
       <DependentUpon>TeamNames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tournament.resx">
       <DependentUpon>Tournament.cs</DependentUpon>
     </EmbeddedResource>
-
     <Compile Include="InputThread.cs" />
-
     <EmbeddedResource Include="VideoScreen.resx">
       <DependentUpon>VideoScreen.cs</DependentUpon>
     </EmbeddedResource>

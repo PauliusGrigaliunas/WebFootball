@@ -37,18 +37,25 @@ namespace Football
 
             if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
             {
-                if (_nameFirstTeam != _nameSecondTeam)
-
+                //if (_nameFirstTeam != _nameSecondTeam)
+                try
                 {                
 
                     form._nameFirstTeam = _nameFirstTeam;
                     form._nameSecondTeam = _nameSecondTeam;
                     form.Show();
+                
+                if (_nameFirstTeam == _nameSecondTeam)
+                    throw new IsEqualException();
                 }
-                else
+                catch(IsEqualException iee)
                 {
-                    MessageBox.Show("Team names must be different ");
+                    MessageBox.Show(iee.Message);
                 }
+                //else
+                //{
+                //    MessageBox.Show("Team names must be different ");
+                //}
             }
             else
             {
