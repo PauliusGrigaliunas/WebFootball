@@ -43,7 +43,7 @@ namespace Football
             if (_timeElapsed >= 2 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
             {
                 com.StopAllTracks();
-                com.PlayRandomSound(0, 8);
+                com.PlayRandomSound(0, 9);
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();

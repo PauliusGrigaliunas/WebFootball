@@ -189,7 +189,7 @@ namespace Football
                 if ( isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(16, 17);
+                    comment.PlayRandomSound(16, 18);
                     isRinged = true;
                 }
             }
@@ -198,7 +198,7 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayIndexedSound(14);
+                    comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -207,7 +207,7 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayIndexedSound(14);
+                    comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -216,7 +216,7 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayIndexedSound(12);
+                    comment.PlayRandomSound(12, 14);
                     isRinged = true;
                 }
             }
