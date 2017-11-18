@@ -10,19 +10,19 @@ namespace Football
     {
 
         public IsTooShortException()
-        : base("Team name is too short ")
+        : base("Team names must be at least 4 charachters long ")
         {
         }
 
 
 
         public IsTooShortException(string message)
-        : base("Team name is too short ")
+        : base("name is too short of " + message + ". Team names must be at least 4 charachters long ")
         {
         }
 
         public IsTooShortException(string message, Exception inner)
-        : base("Team name is too short ", inner)
+        : base("name is too short of " + message + ". Team names must be at least 4 charachters long ", inner)
         {
         }
     }

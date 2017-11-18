@@ -95,6 +95,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="IsEqualException.cs" />
+    <Compile Include="IsTooShortException.cs" />
     <Compile Include="TeamNames.cs">
       <SubType>Form</SubType>
     </Compile>

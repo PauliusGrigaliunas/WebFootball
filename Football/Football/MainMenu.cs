@@ -32,61 +32,57 @@ namespace Football
         {
             VideoScreen form = new VideoScreen(_nameFirstTeam, _nameSecondTeam);
 
-            Teams team = new Teams();        
+            Teams team = new Teams();
 
-
-            if ((compare(_nameFirstTeam)) && (compare(_nameSecondTeam)))
+            try
             {
-                //if (_nameFirstTeam != _nameSecondTeam)
-                try
-                {                
-
-                    form._nameFirstTeam = _nameFirstTeam;
-                    form._nameSecondTeam = _nameSecondTeam;
-                    form.Show();
-                
+                if (!compare(_nameFirstTeam))
+                    throw new IsTooShortException("First Team");
+                if (!compare(_nameSecondTeam))
+                    throw new IsTooShortException("Second Team");
                 if (_nameFirstTeam == _nameSecondTeam)
                     throw new IsEqualException();
-                }
-                catch(IsEqualException iee)
-                {
-                    MessageBox.Show(iee.Message);
-                }
-                //else
-                //{
-                //    MessageBox.Show("Team names must be different ");
-                //}
+
+                form._nameFirstTeam = _nameFirstTeam;
+                form._nameSecondTeam = _nameSecondTeam;
+                form.Show();
+
+
             }
-            else
+            catch (IsTooShortException itse)
             {
-                MessageBox.Show("Team names must be at least 4 charachters long ");
+                MessageBox.Show(itse.Message);
+            }
+            catch (IsEqualException iee)
+            {
+                MessageBox.Show(iee.Message);
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox1_TextChange = (TextBox)sender;
-            _nameFirstTeam = textBox1_TextChange.Text;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox2_TextChange = (TextBox)sender;
-            _nameSecondTeam = textBox2_TextChange.Text;
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FormAllTeams form = new FormAllTeams();
-            form.ShowDialog();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            TeamNames names = new TeamNames();
-            names.Show();
-            
-        }
+    private void textBox1_TextChanged(object sender, EventArgs e)
+    {
+        TextBox textBox1_TextChange = (TextBox)sender;
+        _nameFirstTeam = textBox1_TextChange.Text;
     }
+
+    private void textBox2_TextChanged(object sender, EventArgs e)
+    {
+        TextBox textBox2_TextChange = (TextBox)sender;
+        _nameSecondTeam = textBox2_TextChange.Text;
+    }
+
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+        FormAllTeams form = new FormAllTeams();
+        form.ShowDialog();
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+        TeamNames names = new TeamNames();
+        names.Show();
+
+    }
+}
 }
