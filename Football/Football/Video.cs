@@ -15,6 +15,7 @@ using System.Drawing;
 
 namespace Football
 {
+
     public class Video : Picture
     {
         //objects
@@ -51,7 +52,7 @@ namespace Football
             return true;
         }
 
-        public bool TakeAVideo()
+        public override bool TakeASource()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Video Files |*.mp4";
@@ -76,7 +77,7 @@ namespace Football
                 return true;
             }
             
-             else return TakeAVideo();
+             else return TakeASource();
         }
 
         public bool StartCamera()

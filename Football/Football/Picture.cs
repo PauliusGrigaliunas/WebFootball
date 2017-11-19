@@ -28,25 +28,23 @@ namespace Football
                 return _imgInput;
             }
         }
-  
         //--------------------------------------
-        public Image<Bgr, byte> TakeAPicture()
+        public double Square(double a)
         {
-            try
+            return a * a;
+        }
+        //***
+        public virtual bool TakeASource()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    _imgInput = new Image<Bgr, byte>(ofd.FileName);
-                }
+                _imgInput = new Image<Bgr, byte>(ofd.FileName);
+                return true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else return false;
 
-            return _imgInput;
         }
         //--------------------------------------------------
         public virtual Image<Gray, byte> ConvertToGray()
