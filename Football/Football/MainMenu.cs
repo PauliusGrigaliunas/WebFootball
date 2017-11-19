@@ -15,7 +15,7 @@ namespace Football
 {
     public partial class MainMenu : Form
     {
-
+        Commentator player = new Commentator();
         public string _nameFirstTeam { get; set; }
         public string _nameSecondTeam { get; set; }
 
@@ -85,6 +85,22 @@ namespace Football
         TeamNames names = new TeamNames();
         names.Show();
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TeamNames names = new TeamNames();
+            names.Show();
+            
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            player.PlayIndexedSoundWithLoop(10);
+        }
+
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            player.StopAllTracks();
+        }
     }
 }
 }
