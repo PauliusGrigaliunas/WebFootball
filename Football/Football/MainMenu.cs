@@ -84,7 +84,6 @@ namespace Football
         {
             TeamNames names = new TeamNames();
             names.Show();
-
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
