@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\database121.mdf;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="lastfilepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Here is stored the path to the lastest user's used video file</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

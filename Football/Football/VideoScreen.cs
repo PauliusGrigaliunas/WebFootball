@@ -234,12 +234,35 @@ namespace Football
             if (btnPlay.Text == "Start")
             {
                 if(_video.StartVideo())
+                {
                     btnPlay.Text = "Pause";
+                    btnPlaylast.Text = "Pause";
+                }
             }
             else
             {
                 _video.Pause();
                 btnPlay.Text = "Start";
+                btnPlaylast.Text = "Load last used video";
+            }
+            comment.StopAllTracks();
+        }
+
+        private void btnPlaylast_Click(object sender, EventArgs e)
+        {
+            if (btnPlaylast.Text == "Load last used video")
+            {
+                if (_video.StartLastUsedVideo())
+                {
+                    btnPlay.Text = "Pause";
+                    btnPlaylast.Text = "Pause";
+                }
+            }
+            else
+            {
+                _video.Pause();
+                btnPlay.Text = "Start";
+                btnPlaylast.Text = "Load last used video";
             }
             comment.StopAllTracks();
         }
@@ -253,6 +276,7 @@ namespace Football
         {
             _video.Stop();
             btnPlay.Text = "Start";
+            btnPlaylast.Text = "Load last used video";
         }
         // End Buttons------------
 

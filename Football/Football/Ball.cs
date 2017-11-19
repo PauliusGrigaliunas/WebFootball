@@ -48,8 +48,11 @@ namespace Football
         public Colour[] colour;
         public string PositionComment;
         public string at, bt;
+        delegate int Distance(int A, int B);
+        delegate void Print(List<int> list);
 
-        public Ball() {
+        public Ball()
+        {
             BallColorQuery();
         }
 
@@ -142,12 +145,31 @@ namespace Football
                     Index = 4;
                 }
 
-                //Display(xCoordList);
-
                 int AGATES = FindAGates(); // O <--
                 int BGATES = FindBGates(); // --> O
-                int ABdistance = DistanceBetweenGates(AGATES, BGATES);
-                //Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: "+ BallPosition.X);
+
+                Distance dist = delegate (int AG, int BG) // anonymous | distance between gates
+                {
+                    int result = AG - BG;
+                    if (result <= 0)
+                        return ImgOriginal.Width * 5 / 6;
+                    else
+                        return result;
+                };
+                int ABdistance = dist(AGATES, BGATES);
+
+                Print print = delegate (List<int> list)   // delegate with generics
+                {
+                    IEnumerator<int> enumerator = list.GetEnumerator();
+                    while (enumerator.MoveNext())
+                    {
+                        int item = enumerator.Current;
+                        Debug.WriteLine(item);
+                    }
+                    Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: " + BallPosition.X);
+                };
+                //print(xCoordList);
+
                 PositionComment = getBallStatus(ABdistance, AGATES);
             }
             catch (Exception)
@@ -156,16 +178,7 @@ namespace Football
             }
         }
 
-        private void Display(List<int> list)
-        {
-            IEnumerator<int> enumerator = list.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                int item = enumerator.Current;
-                Debug.WriteLine(item);
-            }
-        }
-
+        /*
         private int DistanceBetweenGates(int AGates, int BGates)
         {
             int result = BGates - AGates;
@@ -173,7 +186,7 @@ namespace Football
                 return ImgOriginal.Width * 5 / 6;
             else
                 return result;
-        }
+        }*/
 
         private int FindAGates()
         {
@@ -270,6 +283,16 @@ namespace Football
             else
             {
                 return "Unknown";
+            }
+        }
+
+        private void Display(List<int> list)
+        {
+            IEnumerator<int> enumerator = list.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                int item = enumerator.Current;
+                Debug.WriteLine(item);
             }
         }
     }
