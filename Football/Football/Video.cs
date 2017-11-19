@@ -12,6 +12,7 @@ using Emgu.CV.UI;
 using System.Diagnostics;
 using Emgu.CV.CvEnum;
 using System.Drawing;
+using System.Configuration;
 
 namespace Football
 {
@@ -51,20 +52,34 @@ namespace Football
             return true;
         }
 
-        public bool TakeAVideo()
+        public bool TakeAVideo(bool filepath_exists)  // user config -> saves last used file-path)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Video Files |*.mp4";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (!filepath_exists)
             {
-                Capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Video Files |*.mp4";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    SaveUserSettings(ofd.FileName);
+                    Capture = new Emgu.CV.VideoCapture(ofd.FileName);
+                    _timer = new System.Windows.Forms.Timer();
+                    _timer.Interval = 1000 / 30;
+                    _timer.Tick += new EventHandler(_home.TimeTick);
+                    _timer.Start();
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                Capture = new Emgu.CV.VideoCapture(Properties.Settings.Default.lastfilepath);
                 _timer = new System.Windows.Forms.Timer();
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
                 return true;
             }
-            else return false;
         }
 
         public bool StartVideo()
@@ -75,8 +90,18 @@ namespace Football
                 _timer.Start();
                 return true;
             }
-            
-             else return TakeAVideo();
+             else return TakeAVideo(false);
+        }
+
+        public bool StartLastUsedVideo()
+        {
+            if (_timer != null)
+            {
+                _timer.Tick += new EventHandler(_home.TimeTick);
+                _timer.Start();
+                return true;
+            }
+            else return TakeAVideo(true);
         }
 
         public bool StartCamera()
@@ -148,6 +173,13 @@ namespace Football
         {
             Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
             return imgSmoothed;
+        }
+
+        public void SaveUserSettings(String filename)
+        {
+            //https://msdn.microsoft.com/en-us/library/a65txexh.aspx
+            Properties.Settings.Default.lastfilepath = filename;
+            Properties.Settings.Default.Save();
         }
     }
 }
