@@ -56,26 +56,51 @@ namespace Football
         {
             Predicate<String> compare = x => (x != null) && (Regex.IsMatch(x, @"([a-zA-Z0-9]{4,50})"));
 
-            if ((compare(_name1)) && (compare(_name2))&& (compare(_name3)) && (compare(_name4)))
+          try
             {
-                if ((_name1 != _name2) && (_name4 != _name3))   //pridet
-                {
-                    Tournament names = new Tournament(_name1, _name2, _name3, _name4);
-                    names.Show();
-                    this.Close();
+                if (!(compare(_name1)) && !(compare(_name2)) && !(compare(_name3)) && !(compare(_name4)))
+                    throw new IsTooShortException("First Team & Second Team & Third Team & Fourth Team");
+                if (!compare(_name1))
+                    throw new IsTooShortException("First Team ");
+                if (!compare(_name2))
+                    throw new IsTooShortException("Second Team ");
+                if (!compare(_name3))
+                    throw new IsTooShortException("Third Team ");
+                if (!compare(_name4))
+                    throw new IsTooShortException("Fourth Team ");
+                if (_name1 == _name2)
+                    throw new IsEqualException("First & Second ");
+                if (_name1 == _name3)
+                    throw new IsEqualException("First & Third ");
+                if (_name1 == _name4)
+                    throw new IsEqualException("First & Fourth ");
+                if (_name2 == _name3)
+                    throw new IsEqualException("Second & Third ");
+                if (_name2 == _name4)
+                    throw new IsEqualException("Second & TFourth ");
+                if (_name3 == _name4)
+                    throw new IsEqualException("Third & Fourth ");
 
-                }
-                else
-                {
-                    MessageBox.Show("Team names must be different ");
-                }
+                Tournament names = new Tournament(_name1, _name2, _name3, _name4);
+                names.Show();
+                this.Close();
+
+
             }
-            else
+            catch (IsTooShortException itse)
             {
-                MessageBox.Show("Team names must be at least 4 charachters long ");
+                MessageBox.Show(itse.Message);
             }
+            catch (IsEqualException iee)
+            {
+                MessageBox.Show(iee.Message);
+            }
+
         }
 
+        private void TeamNames_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

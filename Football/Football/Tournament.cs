@@ -33,7 +33,6 @@ namespace Football
             _name3 = name3;
             _name4 = name4;
            
-
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
