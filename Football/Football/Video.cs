@@ -16,6 +16,7 @@ using System.Configuration;
 
 namespace Football
 {
+
     public class Video : Picture
     {
         //objects
@@ -52,7 +53,8 @@ namespace Football
             return true;
         }
 
-        public bool TakeAVideo(bool filepath_exists)  // user config -> saves last used file-path)
+        public override bool TakeASource()
+
         {
             if (!filepath_exists)
             {
@@ -90,7 +92,8 @@ namespace Football
                 _timer.Start();
                 return true;
             }
-             else return TakeAVideo(false);
+            
+             else return TakeASource();
         }
 
         public bool StartLastUsedVideo()
@@ -102,6 +105,7 @@ namespace Football
                 return true;
             }
             else return TakeAVideo(true);
+
         }
 
         public bool StartCamera()

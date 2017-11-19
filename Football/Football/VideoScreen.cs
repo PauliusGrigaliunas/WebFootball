@@ -19,13 +19,14 @@ using Emgu.CV.Cuda;
 using System.Data.SqlClient;
 namespace Football
 {
+    delegate bool Source<in T>();
 
     public partial class VideoScreen : Form
     {
+        
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        //Lazy<Video> _videoInstance = new Lazy<Video>(() => new Video());
         Video _video;
 
         GoalsChecker _gcheck;
@@ -117,7 +118,11 @@ namespace Football
 
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            _video.StartVideo();
+            //Covariance
+            Source<Video> source = _video.TakeASource;
+            bool isCorrect = source();
+            if (isCorrect)
+                _video.StartVideo();
         }
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -286,10 +291,17 @@ namespace Football
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            Source<Picture> source = _picture.TakeASource;
+            bool isCorrect = source();
+            if (isCorrect)
+                OriginalPictureBox.Image = _picture.GetImage.Bitmap;
+            /*
             if (_picture != null)
             {
-                OriginalPictureBox.Image = _picture.TakeAPicture().Bitmap;
-            }
+                _picture.TakeASource();
+                OriginalPictureBox.Image = _picture.GetImage.Bitmap;
+            }*/
         }
 
         //Coordinates
