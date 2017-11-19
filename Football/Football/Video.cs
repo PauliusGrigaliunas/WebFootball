@@ -56,8 +56,8 @@ namespace Football
         public override bool TakeASource()
 
         {
-            if (!filepath_exists)
-            {
+           // if (!filepath_exists)
+            //{
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Video Files |*.mp4";
 
@@ -72,7 +72,7 @@ namespace Football
                     return true;
                 }
                 else return false;
-            }
+            /*}
             else
             {
                 Capture = new Emgu.CV.VideoCapture(Properties.Settings.Default.lastfilepath);
@@ -81,7 +81,7 @@ namespace Football
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
                 return true;
-            }
+            }*/
         }
 
         public bool StartVideo()
@@ -104,7 +104,7 @@ namespace Football
                 _timer.Start();
                 return true;
             }
-            else return TakeAVideo(true);
+            else return TakeASource();
 
         }
 
