@@ -54,34 +54,21 @@ namespace Football
         }
 
         public override bool TakeASource()
-
         {
-           // if (!filepath_exists)
-            //{
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Video Files |*.mp4";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Video Files |*.mp4";
 
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    SaveUserSettings(ofd.FileName);
-                    Capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                    _timer = new System.Windows.Forms.Timer();
-                    _timer.Interval = 1000 / 30;
-                    _timer.Tick += new EventHandler(_home.TimeTick);
-                    _timer.Start();
-                    return true;
-                }
-                else return false;
-            /*}
-            else
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Capture = new Emgu.CV.VideoCapture(Properties.Settings.Default.lastfilepath);
+                SaveUserSettings(ofd.FileName);
+                Capture = new Emgu.CV.VideoCapture(ofd.FileName);
                 _timer = new System.Windows.Forms.Timer();
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
                 return true;
-            }*/
+            }
+            else return false;
         }
 
         public bool StartVideo()
@@ -104,8 +91,22 @@ namespace Football
                 _timer.Start();
                 return true;
             }
-            else return TakeASource();
+            else return StartLastUsedVid();
+        }
 
+        public bool StartLastUsedVid()
+        {
+            if (Properties.Settings.Default.lastfilepath != "Here is stored the path to the lastest user's used video file")
+            {
+                Capture = new Emgu.CV.VideoCapture(Properties.Settings.Default.lastfilepath);
+                _timer = new System.Windows.Forms.Timer();
+                _timer.Interval = 1000 / 30;
+                _timer.Tick += new EventHandler(_home.TimeTick);
+                _timer.Start();
+                return true;
+            }
+            else
+                return TakeASource();
         }
 
         public bool StartCamera()

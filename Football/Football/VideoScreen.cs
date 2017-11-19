@@ -125,7 +125,7 @@ namespace Football
                 _video.StartVideo();
         }
 
-        private void startToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void startToolStripMenuItem2_Click(object sender, EventArgs e) // start/pause/stop
         {
             _video.StartVideo();
         }
@@ -438,6 +438,11 @@ namespace Football
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void lastUsedToolStripMenuItem_Click(object sender, EventArgs e) // open last used video
+        {
+            _video.StartLastUsedVideo();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
