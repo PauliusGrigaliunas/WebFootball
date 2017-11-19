@@ -465,6 +465,56 @@ namespace Football
 
         }
 
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (btnStart.Text == "Start")
+            {
+                _video.StartVideo();
+                btnStart.Text = "Pause";
+                btnStartLast.Text = "Pause";
+            }
+            else
+            {
+                _video.Pause();
+                btnStart.Text = "Start";
+                btnStartLast.Text = "Load last used video";
+            }
+            comment.StopAllTracks();
+        }
+
+        private void btnStartLast_Click(object sender, EventArgs e)
+        {
+            if (btnStartLast.Text == "Load last used video")
+            {
+                _video.StartLastUsedVideo();
+                btnStart.Text = "Pause";
+                btnStartLast.Text = "Pause";
+            }
+            else
+            {
+                _video.Pause();
+                btnStart.Text = "Start";
+                btnStartLast.Text = "Load last used video";
+            }
+            comment.StopAllTracks();
+        }
+
+        private void btnStopp_Click(object sender, EventArgs e)
+        {
+            _video.Stop();
+            btnStart.Text = "Start";
+            btnStartLast.Text = "Load last used video";
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            if(_video.Check())
+            {
+                aTeamLabel.Text = "0";
+                bTeamLabel.Text = "0";
+            }
+        }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (_video.Check())

@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnStopp = new System.Windows.Forms.Button();
+            this.btnStartLast = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.BallPos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +43,6 @@
             this.playGroundLabel = new System.Windows.Forms.Label();
             this.saveScoreButton = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.btnPause = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.bTeamLabel = new System.Windows.Forms.Label();
@@ -88,6 +91,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.btnReset);
+            this.panel1.Controls.Add(this.btnStopp);
+            this.panel1.Controls.Add(this.btnStartLast);
+            this.panel1.Controls.Add(this.btnStart);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.BallPos);
             this.panel1.Controls.Add(this.label1);
@@ -97,7 +104,6 @@
             this.panel1.Controls.Add(this.playGroundLabel);
             this.panel1.Controls.Add(this.saveScoreButton);
             this.panel1.Controls.Add(this.btnStop);
-            this.panel1.Controls.Add(this.btnPause);
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.bTeamLabel);
@@ -110,15 +116,55 @@
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(653, 757);
+            this.panel1.Size = new System.Drawing.Size(653, 843);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(389, 547);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(116, 66);
+            this.btnReset.TabIndex = 50;
+            this.btnReset.Text = "Reset score";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnStopp
+            // 
+            this.btnStopp.Location = new System.Drawing.Point(264, 547);
+            this.btnStopp.Name = "btnStopp";
+            this.btnStopp.Size = new System.Drawing.Size(119, 66);
+            this.btnStopp.TabIndex = 49;
+            this.btnStopp.Text = "Stop";
+            this.btnStopp.UseVisualStyleBackColor = true;
+            this.btnStopp.Click += new System.EventHandler(this.btnStopp_Click);
+            // 
+            // btnStartLast
+            // 
+            this.btnStartLast.Location = new System.Drawing.Point(138, 547);
+            this.btnStartLast.Name = "btnStartLast";
+            this.btnStartLast.Size = new System.Drawing.Size(120, 66);
+            this.btnStartLast.TabIndex = 48;
+            this.btnStartLast.Text = "Load last used video";
+            this.btnStartLast.UseVisualStyleBackColor = true;
+            this.btnStartLast.Click += new System.EventHandler(this.btnStartLast_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(13, 547);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(119, 66);
+            this.btnStart.TabIndex = 47;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(535, 118);
+            this.button2.Location = new System.Drawing.Point(511, 547);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 31);
+            this.button2.Size = new System.Drawing.Size(121, 66);
             this.button2.TabIndex = 46;
             this.button2.Text = "Save Score";
             this.button2.UseVisualStyleBackColor = true;
@@ -208,16 +254,6 @@
             this.btnStop.TabIndex = 35;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
-            // 
-            // btnPause
-            // 
-            this.btnPause.Location = new System.Drawing.Point(13, 118);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(85, 33);
-            this.btnPause.TabIndex = 34;
-            this.btnPause.Text = "Pause";
-            this.btnPause.UseVisualStyleBackColor = true;
             // 
             // btnPlay
             // 
@@ -314,7 +350,7 @@
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip2.Size = new System.Drawing.Size(87, 736);
+            this.menuStrip2.Size = new System.Drawing.Size(87, 822);
             this.menuStrip2.TabIndex = 42;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -518,7 +554,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(653, 564);
+            this.ClientSize = new System.Drawing.Size(653, 650);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -560,7 +596,6 @@
         private System.Windows.Forms.Label TeamALabel;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button saveScoreButton;
         private System.Windows.Forms.ToolStripMenuItem startPauseStopToolStripMenuItem;
@@ -587,6 +622,10 @@
         //private System.Windows.Forms.Button btnPlaylast;
         private System.Windows.Forms.ToolStripMenuItem lastUsedToolStripMenuItem;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnStopp;
+        private System.Windows.Forms.Button btnStartLast;
+        private System.Windows.Forms.Button btnStart;
     }
 }
 
