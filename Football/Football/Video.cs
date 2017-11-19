@@ -170,6 +170,7 @@ namespace Football
 
         public void SaveUserSettings(String filename)
         {
+            //https://msdn.microsoft.com/en-us/library/a65txexh.aspx
             Properties.Settings.Default.lastfilepath = filename;
             Properties.Settings.Default.Save();
         }
