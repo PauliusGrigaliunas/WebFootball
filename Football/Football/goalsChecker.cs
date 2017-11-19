@@ -17,6 +17,7 @@ namespace Football
 {
     public class GoalsChecker
     {
+        Commentator com = new Commentator();
         VideoCapture _capture { get; set; }
         private Stopwatch _stopwatch = new Stopwatch();
 
@@ -29,7 +30,7 @@ namespace Football
 
         public GoalsChecker(Stopwatch stopwatch)
         {
-            this._stopwatch = stopwatch;
+            _stopwatch = stopwatch;
         }
 
         public string CheckForScoreA(string text)  // goal'as Team A  vartuose, A++
@@ -39,8 +40,10 @@ namespace Football
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
             //if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !ballGoingRight)
-            if (_timeElapsed >= 3 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
+            if (_timeElapsed >= 2 && VideoScreen.isATeamScored && !Ball.BallPosition.goingRight)
             {
+                com.StopAllTracks();
+                com.PlayRandomSound(0, 9);
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();
@@ -56,8 +59,10 @@ namespace Football
             int temp;
             TimeSpan ts = _stopwatch.Elapsed;
             _timeElapsed = ts.Seconds;
-            if (_timeElapsed >= 3 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
+            if (_timeElapsed >= 2 && VideoScreen.isBTeamScored && Ball.BallPosition.goingRight)
             {
+                com.StopAllTracks();
+                com.PlayRandomSound(0, 8);
                 temp = int.Parse(text);
                 temp = temp + 1;
                 text = temp.ToString();

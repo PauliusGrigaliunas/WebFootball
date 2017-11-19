@@ -22,7 +22,6 @@ namespace Football
         private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         System.Windows.Forms.Timer _timer;
-        GoalsChecker _gcheck;
         Ball _ball = new Ball();
         private VideoScreen _home;
 

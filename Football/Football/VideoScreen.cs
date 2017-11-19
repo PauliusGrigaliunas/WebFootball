@@ -26,12 +26,14 @@ namespace Football
         Picture _picture = new Picture();
         Ball _ball = new Ball();
         Video _video;
+        Commentator comment = new Commentator();
 
         public bool isTournament = false;
 
         //variables
         public String _nameFirstTeam { get; set; }
         public String _nameSecondTeam { get; set; }
+        private string _ballColour = "Orange";
 
         public int _TeamAScores { get; set; }
         public int _TeamBScores { get; set; }
@@ -39,8 +41,7 @@ namespace Football
         public int _GoalA { get; set; }
         public int _VictB { get; set; }
         public int _GoalB { get; set; }
-        private string _ballColour = "Orange";
-
+        public bool isRinged = false;
 
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
@@ -90,11 +91,11 @@ namespace Football
         {
             InitializeComponent();
             _video = new Video(this);
-            this.TeamALabel.Text = teamA;
-            this.TeamBLabel.Text = teamB;
+            TeamALabel.Text = teamA;
+            TeamBLabel.Text = teamB;
 
-            ATeam = this.TeamALabel.Text;
-            BTeam = this.TeamBLabel.Text;
+            ATeam = TeamALabel.Text;
+            BTeam = TeamBLabel.Text;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,8 +177,49 @@ namespace Football
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
-
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
             BallPos.Text = _ball.PositionComment;
+            Comment();
+        }
+
+        private void Comment()
+        {
+            if (_ball.PositionComment == ATeam + " Team Defenders" || _ball.PositionComment == BTeam + " Team Defenders")
+            {
+                if ( isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayRandomSound(16, 18);
+                    isRinged = true;
+                }
+            }
+            else if (_ball.PositionComment == ATeam + " Team Attackers" || _ball.PositionComment == BTeam + " Team Attackers")
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayRandomSound(14, 16);
+                    isRinged = true;
+                }
+            }
+            else if (_ball.PositionComment == ATeam + " Team Middle 5" || _ball.PositionComment == BTeam + " Team Middle 5")
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayRandomSound(14, 16);
+                    isRinged = true;
+                }
+            }
+            else
+            {
+                if (isRinged == false)
+                {
+                    comment.StopAllTracks();
+                    comment.PlayRandomSound(12, 14);
+                    isRinged = true;
+                }
+            }
         }
 
         // Buttons------------
@@ -193,6 +235,7 @@ namespace Football
                 _video.Pause();
                 btnPlay.Text = "Start";
             }
+            comment.StopAllTracks();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -233,16 +276,19 @@ namespace Football
         //+----------------------
         private void Form1_Load(object sender, EventArgs e)
         {
+            comment.StopAllTracks();
             aTeamLabel.Text = "0";
             bTeamLabel.Text = "0";
+            comment.PlayIndexedSoundWithLoop(11);
         }
 
    
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this._TeamBScores = int.Parse(aTeamLabel.Text);
-            this._TeamAScores = int.Parse(bTeamLabel.Text);
+            _video.Stop();
+            _TeamBScores = int.Parse(aTeamLabel.Text);
+            _TeamAScores = int.Parse(bTeamLabel.Text);
 
             _VictA = 0;
             _GoalA = 0;
@@ -256,13 +302,34 @@ namespace Football
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA=_VictA+1;
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
             }
             else if (_TeamAScores < _TeamBScores)
             {
                 _VictB= _VictB +1;
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
+            }
+            else
+            {
+                comment.PlayIndexedSound(9);
+                DialogResult result = MessageBox.Show("Draw!\nScore: " + _TeamAScores + " : " + _TeamBScores);
+                if (result == DialogResult.Cancel || result == DialogResult.OK)
+                {
+                    comment.StopAllTracks();
+                }
             }
 
-           if(!compare(_nameFirstTeam))
+            if (!compare(_nameFirstTeam))
             {
                 team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
                 _GoalA = _TeamAScores;
@@ -285,8 +352,7 @@ namespace Football
                 _GoalB = team.GetGoals(_nameSecondTeam) + _TeamBScores;
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
-
-            MessageBox.Show("Saved");
+            comment.PlayIndexedSound(11);
             
         }      
 
