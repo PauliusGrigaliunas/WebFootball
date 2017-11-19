@@ -84,14 +84,7 @@ namespace Football
     {
         TeamNames names = new TeamNames();
         names.Show();
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            TeamNames names = new TeamNames();
-            names.Show();
-            
-        }
-
+    }
         private void MainMenu_Load(object sender, EventArgs e)
         {
             player.PlayIndexedSoundWithLoop(10);
@@ -102,5 +95,4 @@ namespace Football
             player.StopAllTracks();
         }
     }
-}
 }

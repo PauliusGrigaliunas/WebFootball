@@ -33,5 +33,17 @@ namespace Football.Properties {
                 return ((string)(this["database121ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Last Opened Video\'s File-Path")]
+        public string lastfilepath {
+            get {
+                return ((string)(this["lastfilepath"]));
+            }
+            set {
+                this["lastfilepath"] = value;
+            }
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            _video = _videoInstance.Value;
+            //_video = _videoInstance.Value;
             _gcheck = new GoalsChecker(_stopwatch);
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
@@ -231,11 +231,30 @@ namespace Football
             {
                 _video.StartVideo();
                 btnPlay.Text = "Pause";
+                btnPlaylast.Text = "Pause";
             }
             else
             {
                 _video.Pause();
                 btnPlay.Text = "Start";
+                btnPlaylast.Text = "Load last used video";
+            }
+            comment.StopAllTracks();
+        }
+
+        private void btnPlaylast_Click(object sender, EventArgs e)
+        {
+            if (btnPlaylast.Text == "Load last used video")
+            {
+                _video.StartLastUsedVideo();
+                btnPlay.Text = "Pause";
+                btnPlaylast.Text = "Pause";
+            }
+            else
+            {
+                _video.Pause();
+                btnPlay.Text = "Start";
+                btnPlaylast.Text = "Load last used video";
             }
             comment.StopAllTracks();
         }
@@ -249,6 +268,7 @@ namespace Football
         {
             _video.Stop();
             btnPlay.Text = "Start";
+            btnPlaylast.Text = "Load last used video";
         }
         // End Buttons------------
 

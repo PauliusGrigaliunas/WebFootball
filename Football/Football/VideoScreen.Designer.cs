@@ -71,6 +71,7 @@
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPlaylast = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -86,6 +87,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.btnPlaylast);
             this.panel1.Controls.Add(this.BallPos);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.button1);
@@ -130,9 +132,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(339, 544);
+            this.button1.Location = new System.Drawing.Point(396, 544);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 54);
+            this.button1.Size = new System.Drawing.Size(118, 54);
             this.button1.TabIndex = 43;
             this.button1.Text = "Reset Score";
             this.button1.UseVisualStyleBackColor = true;
@@ -173,10 +175,10 @@
             // 
             // saveScoreButton
             // 
-            this.saveScoreButton.Location = new System.Drawing.Point(484, 544);
+            this.saveScoreButton.Location = new System.Drawing.Point(521, 544);
             this.saveScoreButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveScoreButton.Name = "saveScoreButton";
-            this.saveScoreButton.Size = new System.Drawing.Size(128, 54);
+            this.saveScoreButton.Size = new System.Drawing.Size(119, 54);
             this.saveScoreButton.TabIndex = 36;
             this.saveScoreButton.Text = "Save Score";
             this.saveScoreButton.UseVisualStyleBackColor = true;
@@ -184,7 +186,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(190, 544);
+            this.btnStop.Location = new System.Drawing.Point(261, 544);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(129, 54);
@@ -206,10 +208,10 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(47, 544);
+            this.btnPlay.Location = new System.Drawing.Point(137, 544);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(126, 54);
+            this.btnPlay.Size = new System.Drawing.Size(118, 54);
             this.btnPlay.TabIndex = 33;
             this.btnPlay.Text = "Start";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -489,6 +491,16 @@
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
+            // btnPlaylast
+            // 
+            this.btnPlaylast.Location = new System.Drawing.Point(13, 544);
+            this.btnPlaylast.Name = "btnPlaylast";
+            this.btnPlaylast.Size = new System.Drawing.Size(118, 54);
+            this.btnPlaylast.TabIndex = 46;
+            this.btnPlaylast.Text = "Load last used video";
+            this.btnPlaylast.UseVisualStyleBackColor = true;
+            this.btnPlaylast.Click += new System.EventHandler(this.btnPlaylast_Click);
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
@@ -561,6 +573,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label BallPos;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnPlaylast;
     }
 }
 
