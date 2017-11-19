@@ -65,7 +65,6 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            _video = new Video();
             _gcheck = new GoalsChecker(_stopwatch);
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
