@@ -12,82 +12,45 @@ using System.Threading;
 
 namespace Football
 {
+
     public partial class FormAllTeams : Form
     {
 
-        Lazy<FootballEntities> lazy = new Lazy<Football.FootballEntities>();
+      
         FootballEntities context;
         InputThread inputThread;
+        Teams team = new Teams();
+        Lazy<List<teamTable>> allTeams;
+        Lazy<List<teamTable>> victories;
+        Lazy<List<teamTable>> goals;
+        Lazy<List<teamTable>> bestTeams;
 
 
         public FormAllTeams()
         {           
-            context = lazy.Value;
-            InitializeComponent();       
+     
+            InitializeComponent();
+
+            allTeams = new Lazy<List<teamTable>>(() => team.AllDataToList());
+            victories = new Lazy<List<teamTable>>(() => team.OrderByVictories());
+            goals = new Lazy<List<teamTable>>(() => team.OrderByGoals());
+            bestTeams = new Lazy<List<teamTable>>(() => team.BestToList());
+
+
         }
      
         
-        public void FillData()
-        {           
-
-            var team = from i in context.teamTables
-                         orderby i.Victories descending
-                         select new { i.Name, i.Victories, i.Goals };
-
-            dataAllTeamsGrid.DataSource = team.ToList();
-
-            Colour();
-
-        }
-
         private void FormAllTeams_Load(object sender, EventArgs e)
         {
             inputThread = InputThread.Instance;
             inputThread.Start();
             FillData();
         }
-
-        private void VictoriesToolStripMenuItem_Click(object sender, EventArgs e)
+       
+        public void FillData()
         {
-           
-            var team = from i in context.teamTables
-                       orderby i.Victories descending
-                       select new{i.Name, i.Victories};
-                       
-            dataAllTeamsGrid.DataSource = team.ToList();
-            Colour();
-
-        }
-
-        private void GoalsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var team = from i in context.teamTables
-                       orderby i.Goals descending
-                       select new { i.Name, i.Goals };
-
-
-            dataAllTeamsGrid.DataSource = team.ToList();
-            Colour();
-
-        }
-
-        private void VictoriesGoals0ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var team = from i in context.teamTables
-                       where i.Victories != 0
-                       where i.Goals != 0
-                       orderby i.Victories descending
-                       select new { i.Name, i.Victories, i.Goals };
-
-            dataAllTeamsGrid.DataSource = team.ToList();
-            Colour();
-
-        }
-
-        private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FillData();
-            Colour();
+            dataGridViewAll.DataSource = team.AllDataToList().Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+  
         }
 
         private void Colour()
@@ -95,12 +58,43 @@ namespace Football
            
             for(int i=0; i<3;i++)
             {
-                dataAllTeamsGrid.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
+                dataGridViewAll.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
             }
 
 
         }
+       
+        private void dataGridViewAll_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewAll.DataSource = allTeams.Value.Select(i=>new { i.Name, i.Victories, i.Goals }).ToList();
+            Colour();
+        }
 
+  
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewAll.DataSource = allTeams.Value.Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+        }
+
+        private void victoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewAll.DataSource = victories.Value.Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+            Colour();
+        }
+
+        private void goalsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewAll.DataSource = goals.Value.Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+            Colour();
+        }
+
+        private void bestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewAll.DataSource = bestTeams.Value.Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
+            Colour();
+        }
+
+     
     }
 
 }

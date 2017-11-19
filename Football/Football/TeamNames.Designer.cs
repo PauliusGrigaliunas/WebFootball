@@ -145,6 +145,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "TeamNames";
             this.Text = "TeamNames";
+            this.Load += new System.EventHandler(this.TeamNames_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

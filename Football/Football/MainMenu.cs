@@ -80,20 +80,20 @@ namespace Football
         form.ShowDialog();
     }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            TeamNames names = new TeamNames();
-            names.Show();
-        }
+    private void button3_Click(object sender, EventArgs e)
+    {
+        TeamNames names = new TeamNames();
+        names.Show();
+    }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-            player.PlayIndexedSoundWithLoop(10);
-        }
+    private void MainMenu_Load(object sender, EventArgs e)
+    {
+         player.PlayIndexedSoundWithLoop(10);
+    }
 
-        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            player.StopAllTracks();
-        }
+    private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+    {
+         player.StopAllTracks();
+    }
     }
 }

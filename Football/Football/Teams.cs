@@ -12,6 +12,8 @@ namespace Football
 {
     public class Teams
     {
+      
+
         public void AddToTable(String name, int victories, int goals)
         {
             using (FootballEntities contex = new FootballEntities())
@@ -49,7 +51,6 @@ namespace Football
             }  
            
                return exsists;
-            
             
        }
 
@@ -103,23 +104,49 @@ namespace Football
                 contex.teamTables.Remove(team);
             }
         }
-
-      /*  public List<teamTable> getAllData ()
+        //database loaded to list
+        public List<teamTable> AllDataToList ()
         {
             FootballEntities context = new FootballEntities();
-            List<teamTable> list = new List<teamTable>();
-            var teams = context.teamTables.OrderBy(i => i.Victories).Select(i => new { i.Name, i.Victories, i.Goals }).ToList();
-            list = teams;
-            foreach(var i in teams)
-            {
-                teamTable team = context.teamTables.FirstOrDefault(r => r.Name == i.Name);
-                list.Add(team);
-            }
-            list.OrderByDescending(i => i.Victories).OrderByDescending(i => i.Goals);
-            { i.Name, i.Victories, i.Goals })
-            return teams;
+            var teams = from i in context.teamTables
+                        select i;
+            var list = teams.ToList();
+            
+            return list;
         }
-    */
+
+        public List<teamTable> OrderByVictories()
+        {
+            FootballEntities context = new FootballEntities();
+            var teams = from i in context.teamTables
+                        orderby i.Victories descending
+                        select i;
+            var list = teams.ToList();
+
+            return list;
+        }
+        public List<teamTable> OrderByGoals()
+        {
+            FootballEntities context = new FootballEntities();
+            var teams = from i in context.teamTables
+                        orderby i.Goals descending
+                        select i;
+            var list = teams.ToList();
+
+            return list;
+        }
+        public List<teamTable> BestToList()
+        {
+            FootballEntities context = new FootballEntities();
+            var teams = from i in context.teamTables
+                        where i.Goals!=0
+                        where i.Victories!=0
+                        orderby i.Victories descending
+                        select i;
+            var list = teams.ToList();
+
+            return list;
+        }
 
     }
 }
