@@ -24,8 +24,13 @@ namespace Football
     {
         //objects
         Picture _picture = new Picture();
-        Ball _ball = new Ball();
+        Ball _ball = new Ball();      
+        Lazy<Video> _videoInstance = new Lazy<Video>(() => new Video());
         Video _video;
+
+        GoalsChecker _gcheck;
+        private Mat mat = new Mat();
+        private Stopwatch _stopwatch = new Stopwatch();
         Commentator comment = new Commentator();
 
         public bool isTournament = false;
@@ -58,12 +63,9 @@ namespace Football
         public List<int> _xCoordList = new List<int>();
         //
 
-        GoalsChecker _gcheck;
-        private Mat mat;
-        private Stopwatch _stopwatch = new Stopwatch();
-
         public void TimeTick(object sender, EventArgs e)
         {
+            _video = _videoInstance.Value;
             _gcheck = new GoalsChecker(_stopwatch);
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
@@ -362,20 +364,9 @@ namespace Football
             Application.Exit();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void statisticsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
- //           MainMenu a = new MainMenu();
- //           a.
             FormAllTeams form = new FormAllTeams();
             form.Show();
         }

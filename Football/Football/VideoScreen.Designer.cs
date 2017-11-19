@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BallPos = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.BallImgBox = new System.Windows.Forms.PictureBox();
             this.PlayerImgBox = new System.Windows.Forms.PictureBox();
             this.playGroundLabel = new System.Windows.Forms.Label();
@@ -68,9 +71,6 @@
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.BallPos = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -109,7 +109,34 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 851);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // BallPos
+            // 
+            this.BallPos.AutoSize = true;
+            this.BallPos.Location = new System.Drawing.Point(282, 496);
+            this.BallPos.Name = "BallPos";
+            this.BallPos.Size = new System.Drawing.Size(61, 17);
+            this.BallPos.TabIndex = 45;
+            this.BallPos.Text = "Nobody.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(76, 496);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 17);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Who is controlling the ball? -->";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 544);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 54);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "Reset Score";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // BallImgBox
             // 
@@ -285,7 +312,6 @@
             this.statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
             this.statisticsToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.statisticsToolStripMenuItem.Text = "Statistics";
-            this.statisticsToolStripMenuItem.Click += new System.EventHandler(this.statisticsToolStripMenuItem_Click);
             // 
             // allToolStripMenuItem
             // 
@@ -462,34 +488,6 @@
             this.yellowToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(339, 544);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 54);
-            this.button1.TabIndex = 43;
-            this.button1.Text = "Reset Score";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 496);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 17);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Who is controlling the ball? -->";
-            // 
-            // BallPos
-            // 
-            this.BallPos.AutoSize = true;
-            this.BallPos.Location = new System.Drawing.Point(282, 496);
-            this.BallPos.Name = "BallPos";
-            this.BallPos.Size = new System.Drawing.Size(61, 17);
-            this.BallPos.TabIndex = 45;
-            this.BallPos.Text = "Nobody.";
             // 
             // VideoScreen
             // 

@@ -30,7 +30,6 @@ namespace Football
         Image<Gray, byte> _imgFiltered { get; set; }
 
         //variables
-        private int _i = 0;
         public List<int> _xCoordList = new List<int>();
 
         public Video()
