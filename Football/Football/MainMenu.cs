@@ -80,16 +80,11 @@ namespace Football
         form.ShowDialog();
     }
 
-    private void button3_Click(object sender, EventArgs e)
-    {
-        TeamNames names = new TeamNames();
-        names.Show();
-
         private void button3_Click(object sender, EventArgs e)
         {
             TeamNames names = new TeamNames();
             names.Show();
-            
+
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -102,5 +97,4 @@ namespace Football
             player.StopAllTracks();
         }
     }
-}
 }

@@ -25,11 +25,11 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        Lazy<Video> _videoInstance = new Lazy<Video>(() => new Video());
+        //Lazy<Video> _videoInstance = new Lazy<Video>(() => new Video());
         Video _video;
 
         GoalsChecker _gcheck;
-        private Mat mat = new Mat();
+        private Mat mat;
         private Stopwatch _stopwatch = new Stopwatch();
         Commentator comment = new Commentator();
 
@@ -65,7 +65,7 @@ namespace Football
 
         public void TimeTick(object sender, EventArgs e)
         {
-            _video = _videoInstance.Value;
+            _video = new Video();
             _gcheck = new GoalsChecker(_stopwatch);
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
@@ -393,6 +393,11 @@ namespace Football
         private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ballColour = "Yellow";
+        }
+
+        private void OriginalPictureBox_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
