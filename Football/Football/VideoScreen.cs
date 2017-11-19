@@ -228,8 +228,8 @@ namespace Football
         {
             if (btnPlay.Text == "Start")
             {
-                _video.StartVideo();
-                btnPlay.Text = "Pause";
+                if(_video.StartVideo())
+                    btnPlay.Text = "Pause";
             }
             else
             {

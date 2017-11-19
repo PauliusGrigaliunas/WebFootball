@@ -41,16 +41,17 @@ namespace Football
             this._home = hm;
         }
 
-        public void Camera()
+        public bool Camera()
         {
             Capture = new Emgu.CV.VideoCapture(0);
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000 / 30;
             _timer.Tick += new EventHandler(_home.TimeTick);
             _timer.Start();
+            return true;
         }
 
-        public void TakeAVideo()
+        public bool TakeAVideo()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Video Files |*.mp4";
@@ -61,27 +62,32 @@ namespace Football
                 _timer.Interval = 1000 / 30;
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
+                return true;
             }
+            else return false;
         }
 
-        public void StartVideo()
+        public bool StartVideo()
         {
             if (_timer != null)
             {
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
+                return true;
             }
-            else TakeAVideo();
+            
+             else return TakeAVideo();
         }
 
-        public void StartCamera()
+        public bool StartCamera()
         {
             if (_timer != null)
             {
                 _timer.Tick += new EventHandler(_home.TimeTick);
                 _timer.Start();
+                return true;
             }
-            Camera();
+            else return Camera();
         }
 
         public void Pause()
