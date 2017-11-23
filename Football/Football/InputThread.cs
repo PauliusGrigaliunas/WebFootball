@@ -10,8 +10,8 @@ namespace Football
     class InputThread
     {
         private static InputThread instance = null;
-        public Thread TakeData;
-        
+        public Task takeData;
+
         private InputThread() {
             TakeInfoAboutTeams();
         }
@@ -31,13 +31,13 @@ namespace Football
         private void TakeInfoAboutTeams()
         {
             FormAllTeams teams = new FormAllTeams();
-            TakeData = new Thread(() => teams.FillData());
-            TakeData.Start();
+            takeData = new Task(() => teams.FillData());
+            takeData.Start();
         }
 
-        public void Start() {
+        public async void Start() {
+            await takeData;
 
-            TakeData.Join();
         }
     }
 }

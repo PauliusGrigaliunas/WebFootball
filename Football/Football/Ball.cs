@@ -15,18 +15,6 @@ namespace Football
 {
     public class Ball
     {
-        /* public struct BallColor
-         {
-             public string Name { get; set; }
-             public int LowBlue { get; set; }
-             public int LowGreen { get; set; }
-             public int LowRed { get; set; }
-             public int HighBlue { get; set; }
-             public int HighGreen { get; set; }
-             public int HighRed { get; set; }
-
-         }*/
-
 
         public struct BallPosition
         {
