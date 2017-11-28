@@ -10,6 +10,7 @@ namespace Football
 {
     public class Commentator
     {
+        public event EventHandler Sounds;
         private SoundPlayer[] sounds;
         public Commentator()
         {
