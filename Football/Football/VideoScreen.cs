@@ -23,7 +23,9 @@ namespace Football
 
     public partial class VideoScreen : Form
     {
-        
+        //
+        Task sound;
+
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
@@ -151,7 +153,7 @@ namespace Football
         }
         // End Menu items------------
 
-        public void BallDetection(string colourName = "Default", int colorNumber = 0)
+        public async Task BallDetection(string colourName = "Default", int colorNumber = 0)
         {
             Colour colour;
             //! pritaikyti protingai galime Enum
@@ -185,7 +187,12 @@ namespace Football
             _gcheck = _ball.Gcheck;
             if (_ball.PositionComment != BallPos.Text) isRinged = false;
             BallPos.Text = _ball.PositionComment;
-            Comment();
+
+            sound = new Task(() => Comment());
+            sound.Start();
+            await sound;
+            //Comment();
+
         }
 
         private void Comment()
