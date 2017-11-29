@@ -10,6 +10,7 @@ namespace Football
 {
     public interface IVideo
     {
+        VideoCapture Capture { get; set; }
         Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> ImgFiltered { get; set; }
         bool TakeASource();

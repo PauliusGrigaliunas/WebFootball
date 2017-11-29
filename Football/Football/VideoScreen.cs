@@ -29,7 +29,7 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        Source _video;
+        IVideo _video;
 
         GoalsChecker _gcheck;
         private Mat mat;
@@ -91,16 +91,13 @@ namespace Football
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
 
             mat = _video.Capture.QueryFrame();       //getting frames        
-            //if (mat == null) return;    
+            if (mat == null) return;
             
-            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+                _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+            
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
-
-
-            //_ball.BallDetection(_video, _gcheck, "Orange");
             BallDetection(_ballColour);
 
-            //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)

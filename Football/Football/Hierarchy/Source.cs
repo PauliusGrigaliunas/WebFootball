@@ -14,16 +14,14 @@ namespace Football
 {
     public abstract class Source : IVideo
     {
-        internal VideoCapture Capture { get; set; }
+        public VideoCapture Capture { get; set; }
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
-        public Mat mat;
+        internal Mat mat;
         internal Stopwatch _stopwatch = new Stopwatch();
         internal System.Windows.Forms.Timer _timer;
         internal VideoScreen _home;
         internal Ball _ball = new Ball();
-
-        //public List<int> _xCoordList = new List<int>();
 
 
         public virtual bool TakeASource() {
