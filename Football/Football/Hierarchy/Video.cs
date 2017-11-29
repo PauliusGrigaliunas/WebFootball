@@ -39,20 +39,5 @@ namespace Football
             }
             else return false;
         }
-
-        
-        public override  Image<Gray, byte> ConvertToGray()
-        {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
-
-            return imgRange;
-
-        }
-
-        public override Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed,int highBlue, int highGreen, int highRed)
-        {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
-            return imgRange;
-        }
     }
 }

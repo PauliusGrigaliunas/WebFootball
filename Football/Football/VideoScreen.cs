@@ -29,7 +29,7 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        Video _video;
+        Source _video;
 
         GoalsChecker _gcheck;
         private Mat mat;
