@@ -125,6 +125,7 @@ namespace Football
             bool isCorrect = source();
             if (isCorrect)
                 _video.StartVideo();
+
         }
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e) // start/pause/stop

@@ -15,7 +15,7 @@ using Emgu.CV.CvEnum;
 
 namespace Football
 {
-    public class Picture
+    public class Picture: Source
     {
         //laukai
         private Image<Bgr, byte> _imgInput;
@@ -28,13 +28,8 @@ namespace Football
                 return _imgInput;
             }
         }
-        //--------------------------------------
-        public double Square(double a)
-        {
-            return a * a;
-        }
         //***
-        public virtual bool TakeASource()
+        public override bool TakeASource()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -47,7 +42,7 @@ namespace Football
 
         }
         //--------------------------------------------------
-        public virtual Image<Gray, byte> ConvertToGray()
+        public override Image<Gray, byte> ConvertToGray()
         {
             try
             {
@@ -103,7 +98,7 @@ namespace Football
             }
         }
         //------------------------------------------------------
-        public virtual Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
+        public override Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
         {
             try
             {

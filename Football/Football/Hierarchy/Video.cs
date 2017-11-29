@@ -17,15 +17,16 @@ using System.Configuration;
 namespace Football
 {
 
-    public class Video : Picture
+    public class Video : Source
     {
         //objects
-        public VideoCapture Capture { get; set; }
-        private Mat mat;
-        private Stopwatch _stopwatch = new Stopwatch();
-        System.Windows.Forms.Timer _timer;
-        Ball _ball = new Ball();
-        private VideoScreen _home;
+        internal VideoCapture Capture { get; set; }
+        internal Mat mat;
+        internal Stopwatch _stopwatch = new Stopwatch();
+        internal System.Windows.Forms.Timer _timer;
+        internal VideoScreen _home;
+        internal Ball _ball = new Ball();
+        
 
         //picture variables
         public Image<Bgr, byte> ImgOriginal { get; set; }
@@ -34,10 +35,6 @@ namespace Football
         //variables
         public List<int> _xCoordList = new List<int>();
 
-        public Video()
-        {
-
-        }
         public Video( VideoScreen hm )
         {
             this._home = hm;
@@ -150,7 +147,7 @@ namespace Football
         }
 
         
-        public override Image<Gray, byte> ConvertToGray()
+        public override  Image<Gray, byte> ConvertToGray()
         {
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
@@ -185,6 +182,21 @@ namespace Football
             //https://msdn.microsoft.com/en-us/library/a65txexh.aspx
             Properties.Settings.Default.lastfilepath = filename;
             Properties.Settings.Default.Save();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
