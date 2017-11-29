@@ -29,7 +29,7 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        Video _video = null;
+        Video _video;
 
         GoalsChecker _gcheck;
         private Mat mat;
@@ -90,9 +90,9 @@ namespace Football
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
 
-            mat = _video.Capture.QueryFrame();       //getting frames            
-            if (mat == null) return;
-
+            mat = _video.Capture.QueryFrame();       //getting frames        
+            //if (mat == null) return;    
+            
             _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
 

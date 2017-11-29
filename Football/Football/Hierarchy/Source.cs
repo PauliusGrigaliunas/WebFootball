@@ -12,10 +12,10 @@ using System.Drawing;
 
 namespace Football
 {
-    public abstract class Source : IShowable
+    public abstract class Source : IVideo
     {
         internal VideoCapture Capture { get; set; }
-        public Image<Gray, byte> ImgOriginal { get; set; }
+        public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
         public Mat mat;
         internal Stopwatch _stopwatch = new Stopwatch();
@@ -39,14 +39,21 @@ namespace Football
             _timer.Start();
             return true;
         }
+        //+ not necessary
+        public Image<Gray, byte> ConvertToGray()
+        {
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
-        public virtual Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed) {
-            return null;
-        }
-        public virtual Image<Gray, byte> ConvertToGray() {
-            return null;
+            return imgRange;
+
         }
 
+        public Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
+        {
+            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
+            return imgRange;
+        }
+        //-
         public Image<Gray, byte> GetFilteredImage(Colour colour)
         {
             Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
@@ -87,8 +94,6 @@ namespace Football
 
             else return TakeASource();
         }
-
-
 
         public bool StartLastUsedVideo()
         {

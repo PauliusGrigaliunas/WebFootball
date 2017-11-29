@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Football
 {
-    public interface IShowable
+    public interface IVideo
     {
-        Image<Gray, byte> ImgOriginal { get; set; }
+        Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> ImgFiltered { get; set; }
         bool TakeASource();
         bool StartVideo();

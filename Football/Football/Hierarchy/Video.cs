@@ -19,8 +19,6 @@ namespace Football
 
     public class Video : Source
     {
-        Image<Gray, byte> ImgOriginal { get; set; }
-        Image<Gray, byte> ImgFiltered { get; set; }
 
 
         public Video( VideoScreen hm )
