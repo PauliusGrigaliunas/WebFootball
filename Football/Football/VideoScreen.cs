@@ -29,7 +29,7 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();      
-        Video _video;
+        Video _video = null;
 
         GoalsChecker _gcheck;
         private Mat mat;
@@ -66,6 +66,24 @@ namespace Football
         public List<int> _xCoordList = new List<int>();
         //
 
+        public VideoScreen()
+        {
+            InitializeComponent();
+            _video = new Video(this);
+            
+
+        }
+
+        public VideoScreen(String teamA, String teamB)
+        {
+            InitializeComponent();
+            _video = new Video(this);
+            TeamALabel.Text = teamA;
+            TeamBLabel.Text = teamB;
+
+            ATeam = TeamALabel.Text;
+            BTeam = TeamBLabel.Text;
+        }
         public void TimeTick(object sender, EventArgs e)
         {
             _gcheck = new GoalsChecker(_stopwatch);
@@ -83,23 +101,6 @@ namespace Football
             BallDetection(_ballColour);
 
             //_home.FilteredPictureBox.Image = imgCircles.Bitmap;
-        }
-
-        public VideoScreen()
-        {
-            InitializeComponent();
-            _video = new Video(this);
-        }
-
-        public VideoScreen(String teamA, String teamB)
-        {
-            InitializeComponent();
-            _video = new Video(this);
-            TeamALabel.Text = teamA;
-            TeamBLabel.Text = teamB;
-
-            ATeam = TeamALabel.Text;
-            BTeam = TeamBLabel.Text;
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)

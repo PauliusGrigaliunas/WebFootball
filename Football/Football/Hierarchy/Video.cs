@@ -19,35 +19,13 @@ namespace Football
 
     public class Video : Source
     {
-        //objects
-        internal VideoCapture Capture { get; set; }
-        internal Mat mat;
-        internal Stopwatch _stopwatch = new Stopwatch();
-        internal System.Windows.Forms.Timer _timer;
-        internal VideoScreen _home;
-        internal Ball _ball = new Ball();
-        
+        Image<Gray, byte> ImgOriginal { get; set; }
+        Image<Gray, byte> ImgFiltered { get; set; }
 
-        //picture variables
-        public Image<Bgr, byte> ImgOriginal { get; set; }
-        Image<Gray, byte> _imgFiltered { get; set; }
-
-        //variables
-        public List<int> _xCoordList = new List<int>();
 
         public Video( VideoScreen hm )
         {
             this._home = hm;
-        }
-
-        public bool Camera()
-        {
-            Capture = new Emgu.CV.VideoCapture(0);
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 1000 / 30;
-            _timer.Tick += new EventHandler(_home.TimeTick);
-            _timer.Start();
-            return true;
         }
 
         public override bool TakeASource()
@@ -59,91 +37,9 @@ namespace Football
             {
                 SaveUserSettings(ofd.FileName);
                 Capture = new Emgu.CV.VideoCapture(ofd.FileName);
-                _timer = new System.Windows.Forms.Timer();
-                _timer.Interval = 1000 / 30;
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
+                return Starter();
             }
             else return false;
-        }
-
-        public bool StartVideo()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
-            }
-            
-             else return TakeASource();
-        }
-
-        public bool StartLastUsedVideo()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
-            }
-            else return StartLastUsedVid();
-        }
-
-        public bool StartLastUsedVid()
-        {
-            if (Properties.Settings.Default.lastfilepath != "Here is stored the path to the lastest user's used video file")
-            {
-                Capture = new Emgu.CV.VideoCapture(Properties.Settings.Default.lastfilepath);
-                _timer = new System.Windows.Forms.Timer();
-                _timer.Interval = 1000 / 30;
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
-            }
-            else
-                return TakeASource();
-        }
-
-        public bool StartCamera()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
-            }
-            else return Camera();
-        }
-
-        public void Pause()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(_home.TimeTick);
-                _timer.Stop();
-            }
-        }
-        public bool Check() {
-            if (_timer == null)
-            {
-                DialogResult dialogResult = MessageBox.Show("Would you like to reset" +
-                    "points to 0 : 0?", "Adding another video", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes) return true;
-                else return false;
-            }
-            return false;
-        }
-
-        public void Stop()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick -= new EventHandler(_home.TimeTick);
-                _timer.Stop();
-                _timer = null;
-            }
         }
 
         
@@ -159,44 +55,6 @@ namespace Football
         {
             Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
             return imgRange;
-        }
-
-        public Image<Gray, byte> GetFilteredImage(Colour colour) 
-        {
-            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
-
-            var erodeImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(5, 5), new Point(-1, -1));
-            CvInvoke.Erode(imgSmoothed, imgSmoothed, erodeImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            var dilateImage = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(6, 6), new Point(-1, -1));
-            CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-            return imgSmoothed;
-        }
-        public Image<Gray, byte> GetFilteredImageZones(Colour colour)
-        {
-            Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
-            return imgSmoothed;
-        }
-
-        public void SaveUserSettings(String filename)
-        {
-            //https://msdn.microsoft.com/en-us/library/a65txexh.aspx
-            Properties.Settings.Default.lastfilepath = filename;
-            Properties.Settings.Default.Save();
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }
