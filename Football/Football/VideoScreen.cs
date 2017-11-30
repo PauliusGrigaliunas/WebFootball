@@ -245,17 +245,10 @@ namespace Football
         //Picture
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             Source<Picture> source = _picture.TakeASource;
             bool isCorrect = source();
             if (isCorrect)
                 OriginalPictureBox.Image = _picture.GetImage.Bitmap;
-            /*
-            if (_picture != null)
-            {
-                _picture.TakeASource();
-                OriginalPictureBox.Image = _picture.GetImage.Bitmap;
-            }*/
         }
 
         //Coordinates
@@ -269,9 +262,6 @@ namespace Football
             float lightness = color.GetBrightness();
 
             MessageBox.Show("X=" + e.X.ToString() + ";  Y=" + e.Y.ToString() + "\nB="+ color.B+ " G=" + color.G + " R=" + color.R + "\nH="+ hue + "\nS="+ saturation + "\nL="+ lightness + ";");
-
-            
-
         }
 
         //+----------------------
@@ -529,6 +519,11 @@ namespace Football
                 aTeamLabel.Text = "0";
                 bTeamLabel.Text = "0";
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)

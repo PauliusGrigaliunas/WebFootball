@@ -95,8 +95,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="IsEqualException.cs" />
-    <Compile Include="IsTooShortException.cs" />
+    <Compile Include="Exception\IsEqualException.cs" />
+    <Compile Include="Exception\IsTooShortException.cs" />
     <Compile Include="Hierarchy\IVideo.cs" />
     <Compile Include="Hierarchy\Source.cs" />
     <Compile Include="TeamNames.cs">

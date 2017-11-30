@@ -76,6 +76,7 @@
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -91,6 +92,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.btnReset);
             this.panel1.Controls.Add(this.btnStopp);
             this.panel1.Controls.Add(this.btnStartLast);
@@ -548,6 +550,18 @@
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PC Camera",
+            "Video"});
+            this.comboBox1.Location = new System.Drawing.Point(11, 524);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 51;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
@@ -626,6 +640,7 @@
         private System.Windows.Forms.Button btnStopp;
         private System.Windows.Forms.Button btnStartLast;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
