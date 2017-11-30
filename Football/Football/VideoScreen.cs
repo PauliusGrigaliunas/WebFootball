@@ -23,14 +23,12 @@ namespace Football
 
     public partial class VideoScreen : Form
     {
-        //
         Task sound;
 
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();
-        Lazy<Video> video = new Lazy<Video>();
-        Lazy<Camera> camera = new Lazy<Camera>();
+        Switch switcher = new Switch();
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -68,16 +66,16 @@ namespace Football
         public List<int> _xCoordList = new List<int>();
         //
 
-        public VideoScreen()
-        {
-            InitializeComponent();
-            _video = new Video(this);
-        }
-
         public VideoScreen(String teamA, String teamB)
         {
             InitializeComponent();
-            _video = new Video(this);
+
+            Source._home = this; // neištrint
+            _video = new Video(); // tik dėl stop pause mygtukų
+            comboBox1.DataSource = Enum.GetValues(typeof(Switch.Sources)); // inisialijuojam source pagal pasirinkimą!
+
+            ButtonDisabler();
+
             TeamALabel.Text = teamA;
             TeamBLabel.Text = teamB;
 
@@ -85,6 +83,41 @@ namespace Football
             BTeam = TeamBLabel.Text;
 
         }
+
+        private void ButtonDisabler()
+        {
+
+            btnStartLast.Enabled = false;
+            btnStopp.Enabled = false;
+            btnReset.Enabled = false;
+            button2.Enabled = false;
+            StartToolStripMenuItem.Enabled = false;
+            PauseToolStripMenuItem.Enabled = false;
+            StopToolStripMenuItem.Enabled = false;
+            StopCameraToolStripMenuItem.Enabled = false;
+            PauseCameraToolStripMenuItem.Enabled = false;
+            StopVideoToolStripMenuItem.Enabled = false;
+            PauseVideoToolStripMenuItem.Enabled = false;
+            lastUsedToolStripMenuItem.Enabled = false;
+        }
+
+        private void ButtonEnabler()
+        {
+
+            btnStartLast.Enabled = true;
+            btnStopp.Enabled = true;
+            btnReset.Enabled = true;
+            button2.Enabled = true;
+            StartToolStripMenuItem.Enabled = true;
+            PauseToolStripMenuItem.Enabled = true;
+            StopToolStripMenuItem.Enabled = true;
+            StopCameraToolStripMenuItem.Enabled = true;
+            PauseCameraToolStripMenuItem.Enabled = true;
+            StopVideoToolStripMenuItem.Enabled = true;
+            PauseVideoToolStripMenuItem.Enabled = true;
+            lastUsedToolStripMenuItem.Enabled = true;
+        }
+
         public void TimeTick(object sender, EventArgs e)
         {
             _gcheck = new GoalsChecker(_stopwatch);
@@ -93,9 +126,9 @@ namespace Football
 
             mat = _video.Capture.QueryFrame();       //getting frames        
             if (mat == null) return;
-            
-                _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
-            
+
+            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
             BallDetection(_ballColour);
 
@@ -103,7 +136,13 @@ namespace Football
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _video.StartCamera();
+            _video = switcher.Controler(1);
+            Source<Camera> source = _video.TakeASource;
+            if (source())
+            {
+                _video.StartVideo();
+                ButtonEnabler();
+            }
         }
 
         private void pauseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,10 +159,13 @@ namespace Football
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Covariance
+            _video = switcher.Controler(0);
             Source<Video> source = _video.TakeASource;
-            bool isCorrect = source();
-            if (isCorrect)
+            if (source())
+            {
                 _video.StartVideo();
+                ButtonEnabler();
+            }
 
         }
 
@@ -199,7 +241,7 @@ namespace Football
         {
             if (_ball.PositionComment == ATeam + " Team Defenders" || _ball.PositionComment == BTeam + " Team Defenders")
             {
-                if ( isRinged == false)
+                if (isRinged == false)
                 {
                     comment.StopAllTracks();
                     comment.PlayRandomSound(16, 18);
@@ -240,7 +282,7 @@ namespace Football
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _video.Pause();
-            if(!isTournament) Application.Exit();
+            if (!isTournament) Application.Exit();
         }
 
         //Picture
@@ -262,7 +304,7 @@ namespace Football
             float saturation = color.GetSaturation();
             float lightness = color.GetBrightness();
 
-            MessageBox.Show("X=" + e.X.ToString() + ";  Y=" + e.Y.ToString() + "\nB="+ color.B+ " G=" + color.G + " R=" + color.R + "\nH="+ hue + "\nS="+ saturation + "\nL="+ lightness + ";");
+            MessageBox.Show("X=" + e.X.ToString() + ";  Y=" + e.Y.ToString() + "\nB=" + color.B + " G=" + color.G + " R=" + color.R + "\nH=" + hue + "\nS=" + saturation + "\nL=" + lightness + ";");
         }
 
         //+----------------------
@@ -274,7 +316,7 @@ namespace Football
             comment.PlayIndexedSoundWithLoop(11);
         }
 
-   
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -293,7 +335,7 @@ namespace Football
 
             if (_TeamAScores > _TeamBScores)
             {
-                _VictA=_VictA+1;
+                _VictA = _VictA + 1;
                 comment.PlayIndexedSound(9);
                 DialogResult result = MessageBox.Show("Winner: " + _nameFirstTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
                 if (result == DialogResult.Cancel || result == DialogResult.OK)
@@ -303,7 +345,7 @@ namespace Football
             }
             else if (_TeamAScores < _TeamBScores)
             {
-                _VictB= _VictB +1;
+                _VictB = _VictB + 1;
                 comment.PlayIndexedSound(9);
                 DialogResult result = MessageBox.Show("Winner: " + _nameSecondTeam + "!\nScore: " + _TeamAScores + " : " + _TeamBScores);
                 if (result == DialogResult.Cancel || result == DialogResult.OK)
@@ -336,7 +378,7 @@ namespace Football
             if (!compare(_nameSecondTeam))
             {
                 team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
-                _GoalB= _TeamBScores;
+                _GoalB = _TeamBScores;
             }
             else
             {
@@ -345,8 +387,8 @@ namespace Football
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
             comment.PlayIndexedSound(11);
-            
-        }      
+
+        }
 
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -385,15 +427,6 @@ namespace Football
             _ballColour = "Yellow";
         }
 
-        private void OriginalPictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void lastUsedToolStripMenuItem_Click(object sender, EventArgs e) // open last used video
         {
@@ -469,17 +502,26 @@ namespace Football
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
             comment.PlayIndexedSound(11);
-
         }
+
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            if (_video == null || _video.Capture == null)
+            {
+                _video = switcher.Controler(comboBox1.SelectedIndex);
+            }
+
             if (btnStart.Text == "Start")
             {
-                _video.StartVideo();
-                btnStart.Text = "Pause";
-                btnStartLast.Text = "Pause";
+                if (_video.StartVideo())
+                {
+                    ButtonEnabler();
+                    btnStart.Text = "Pause";
+                    btnStartLast.Text = "Pause";
+                }
             }
+
             else
             {
                 _video.Pause();
@@ -515,16 +557,11 @@ namespace Football
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            if(_video.Check())
+            if (_video.Check())
             {
                 aTeamLabel.Text = "0";
                 bTeamLabel.Text = "0";
             }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)

@@ -8,12 +8,8 @@ using Emgu.CV.Structure;
 
 namespace Football
 {
-    public class Camera : Video
+    public class Camera : Source
     {
-        public Camera(VideoScreen hm) : base(hm)
-        {
-            this._home = hm;
-        }
 
         public override bool TakeASource()
         {

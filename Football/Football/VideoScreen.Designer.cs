@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnStopp = new System.Windows.Forms.Button();
             this.btnStartLast = new System.Windows.Forms.Button();
@@ -76,7 +77,6 @@
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -120,7 +120,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 843);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PC Camera",
+            "Video"});
+            this.comboBox1.Location = new System.Drawing.Point(11, 524);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 51;
             // 
             // btnReset
             // 
@@ -340,7 +350,6 @@
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
-            this.OriginalPictureBox.Click += new System.EventHandler(this.OriginalPictureBox_Click);
             this.OriginalPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // menuStrip2
@@ -419,7 +428,7 @@
             this.StopCameraToolStripMenuItem,
             this.PauseCameraToolStripMenuItem});
             this.CameraToolStripMenuItem.Name = "CameraToolStripMenuItem";
-            this.CameraToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.CameraToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.CameraToolStripMenuItem.Text = "Camera";
             // 
             // StartCameraToolStripMenuItem
@@ -451,48 +460,48 @@
             this.PauseVideoToolStripMenuItem,
             this.lastUsedToolStripMenuItem});
             this.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem";
-            this.VideoToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.VideoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.VideoToolStripMenuItem.Text = "Video";
             // 
             // StartVideoToolStripMenuItem
             // 
             this.StartVideoToolStripMenuItem.Name = "StartVideoToolStripMenuItem";
-            this.StartVideoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.StartVideoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.StartVideoToolStripMenuItem.Text = "Start";
             this.StartVideoToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem1_Click);
             // 
             // StopVideoToolStripMenuItem
             // 
             this.StopVideoToolStripMenuItem.Name = "StopVideoToolStripMenuItem";
-            this.StopVideoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.StopVideoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.StopVideoToolStripMenuItem.Text = "Stop";
             this.StopVideoToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem1_Click);
             // 
             // PauseVideoToolStripMenuItem
             // 
             this.PauseVideoToolStripMenuItem.Name = "PauseVideoToolStripMenuItem";
-            this.PauseVideoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.PauseVideoToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.PauseVideoToolStripMenuItem.Text = "Pause";
             this.PauseVideoToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem1_Click);
             // 
             // lastUsedToolStripMenuItem
             // 
             this.lastUsedToolStripMenuItem.Name = "lastUsedToolStripMenuItem";
-            this.lastUsedToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.lastUsedToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.lastUsedToolStripMenuItem.Text = "Last Used";
             this.lastUsedToolStripMenuItem.Click += new System.EventHandler(this.lastUsedToolStripMenuItem_Click);
             // 
             // PictureToolStripMenuItem
             // 
             this.PictureToolStripMenuItem.Name = "PictureToolStripMenuItem";
-            this.PictureToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.PictureToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.PictureToolStripMenuItem.Text = "Picture";
             this.PictureToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -549,18 +558,6 @@
             this.yellowToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.yellowToolStripMenuItem.Text = "Yellow";
             this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "PC Camera",
-            "Video"});
-            this.comboBox1.Location = new System.Drawing.Point(11, 524);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 51;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // VideoScreen
             // 

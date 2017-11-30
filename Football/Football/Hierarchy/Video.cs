@@ -20,12 +20,6 @@ namespace Football
     public class Video : Source
     {
 
-
-        public Video( VideoScreen hm )
-        {
-            this._home = hm;
-        }
-
         public override bool TakeASource()
         {
             OpenFileDialog ofd = new OpenFileDialog();

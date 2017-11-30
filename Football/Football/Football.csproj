@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="Settings\Switch.cs" />
     <Compile Include="Hierarchy\Camera.cs" />
     <Compile Include="Colour.cs" />
     <Compile Include="Commentator.cs" />

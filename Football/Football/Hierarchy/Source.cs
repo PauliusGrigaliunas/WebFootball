@@ -17,12 +17,15 @@ namespace Football
         public VideoCapture Capture { get; set; }
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
+        public static VideoScreen _home { get; set; }
         internal Mat mat;
         internal Stopwatch _stopwatch = new Stopwatch();
         internal System.Windows.Forms.Timer _timer;
-        internal VideoScreen _home;
         internal Ball _ball = new Ball();
 
+        public Source()
+        {
+        }
 
         public virtual bool TakeASource() {
             return false;
@@ -157,6 +160,7 @@ namespace Football
                 _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
                 _timer = null;
+                Capture = null;
             }
         }
     }

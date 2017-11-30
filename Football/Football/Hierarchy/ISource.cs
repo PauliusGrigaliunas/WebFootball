@@ -1,10 +1,5 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Football
 {
@@ -13,6 +8,7 @@ namespace Football
         VideoCapture Capture { get; set; }
         Image<Bgr, byte> ImgOriginal { get; set; }
         Image<Gray, byte> ImgFiltered { get; set; }
+        //static VideoScreen _home;
         bool TakeASource();
         bool StartVideo();
         bool StartCamera();
