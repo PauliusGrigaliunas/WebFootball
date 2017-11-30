@@ -73,6 +73,7 @@ namespace Football
             Source._home = this; // neištrint
             _video = new Video(); // tik dėl stop pause mygtukų
             comboBox1.DataSource = Enum.GetValues(typeof(Switch.Sources)); // inisialijuojam source pagal pasirinkimą!
+            comboBox2.DataSource = Enum.GetValues(typeof(ChooseColour.Choices));// pnš į praeitą.
 
             ButtonDisabler();
 
@@ -281,7 +282,7 @@ namespace Football
         //closing form
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _video.Pause();
+            if (_video!= null ) _video.Pause();
             if (!isTournament) Application.Exit();
         }
 
@@ -563,6 +564,7 @@ namespace Football
                 bTeamLabel.Text = "0";
             }
         }
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
