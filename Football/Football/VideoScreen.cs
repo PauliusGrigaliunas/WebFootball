@@ -261,7 +261,17 @@ namespace Football
         //Coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
-            MessageBox.Show("X= " + e.X.ToString() + ";  Y= " + e.Y.ToString() + ";");
+
+            Bitmap b = new Bitmap(OriginalPictureBox.Image);
+            Color color = b.GetPixel(e.X, e.Y);
+            float hue = color.GetHue();
+            float saturation = color.GetSaturation();
+            float lightness = color.GetBrightness();
+
+            MessageBox.Show("X=" + e.X.ToString() + ";  Y=" + e.Y.ToString() + "\nB="+ color.B+ " G=" + color.G + " R=" + color.R + "\nH="+ hue + "\nS="+ saturation + "\nL="+ lightness + ";");
+
+            
+
         }
 
         //+----------------------
