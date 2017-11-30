@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Football
 {
-    public interface IVideo
+    public interface ISource
     {
         VideoCapture Capture { get; set; }
         Image<Bgr, byte> ImgOriginal { get; set; }

@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="Exception\IsEqualException.cs" />
     <Compile Include="Exception\IsTooShortException.cs" />
-    <Compile Include="Hierarchy\IVideo.cs" />
+    <Compile Include="Hierarchy\ISource.cs" />
     <Compile Include="Hierarchy\Source.cs" />
     <Compile Include="TeamNames.cs">
       <SubType>Form</SubType>

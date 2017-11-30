@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace Football
 {
-    public abstract class Source : IVideo
+    public abstract class Source : ISource
     {
         public VideoCapture Capture { get; set; }
         public Image<Bgr, byte> ImgOriginal { get; set; }

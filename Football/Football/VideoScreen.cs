@@ -28,8 +28,10 @@ namespace Football
 
         //objects
         Picture _picture = new Picture();
-        Ball _ball = new Ball();      
-        IVideo _video;
+        Ball _ball = new Ball();
+        Lazy<Video> video = new Lazy<Video>();
+        Lazy<Camera> camera = new Lazy<Camera>();
+        ISource _video;
 
         GoalsChecker _gcheck;
         private Mat mat;
@@ -70,8 +72,6 @@ namespace Football
         {
             InitializeComponent();
             _video = new Video(this);
-            
-
         }
 
         public VideoScreen(String teamA, String teamB)
@@ -83,6 +83,7 @@ namespace Football
 
             ATeam = TeamALabel.Text;
             BTeam = TeamBLabel.Text;
+
         }
         public void TimeTick(object sender, EventArgs e)
         {
