@@ -90,7 +90,7 @@
     <Compile Include="ChooseColour.cs" />
     <Compile Include="Settings\Switch.cs" />
     <Compile Include="Hierarchy\Camera.cs" />
-    <Compile Include="Colour.cs" />
+    <Compile Include="ColourPalet.cs" />
     <Compile Include="Commentator.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>

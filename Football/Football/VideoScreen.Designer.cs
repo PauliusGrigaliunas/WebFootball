@@ -75,8 +75,6 @@
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
@@ -539,31 +537,14 @@
             // 
             // ballColourToolStripMenuItem
             // 
-            this.ballColourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.orangeToolStripMenuItem,
-            this.yellowToolStripMenuItem});
             this.ballColourToolStripMenuItem.Name = "ballColourToolStripMenuItem";
             this.ballColourToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.ballColourToolStripMenuItem.Text = "Ball Colour";
             // 
-            // orangeToolStripMenuItem
-            // 
-            this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
-            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.orangeToolStripMenuItem.Text = "Orange";
-            this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
-            // 
-            // yellowToolStripMenuItem
-            // 
-            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.yellowToolStripMenuItem.Text = "Yellow";
-            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
-            // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(320, 0);
+            this.comboBox2.Location = new System.Drawing.Point(307, 0);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 52;
@@ -635,8 +616,6 @@
         private System.Windows.Forms.ToolStripMenuItem teamAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ballColourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label BallPos;
         private System.Windows.Forms.Label label1;

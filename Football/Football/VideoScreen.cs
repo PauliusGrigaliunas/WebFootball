@@ -17,6 +17,8 @@ using Emgu.CV.UI;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Cuda;
 using System.Data.SqlClient;
+using static Football.ColourPalet;
+
 namespace Football
 {
     delegate bool Source<in T>();
@@ -29,6 +31,7 @@ namespace Football
         Picture _picture = new Picture();
         Ball _ball = new Ball();
         Switch switcher = new Switch();
+        ChooseColour chooseColour = new ChooseColour();
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -41,7 +44,6 @@ namespace Football
         //variables
         public String _nameFirstTeam { get; set; }
         public String _nameSecondTeam { get; set; }
-        private string _ballColour = "Orange";
 
         public int _TeamAScores { get; set; }
         public int _TeamBScores { get; set; }
@@ -131,7 +133,7 @@ namespace Football
             _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
 
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
-            BallDetection(_ballColour);
+            BallDetection();
 
         }
         //menu strip tool items
@@ -196,21 +198,21 @@ namespace Football
         }
         // End Menu items------------
 
-        public async Task BallDetection(string colourName = "Default", int colorNumber = 0)
+        public async Task BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
         {
-            Colour colour;
-            //! pritaikyti protingai galime Enum
-            if (colourName != "Default")
-            {
-                colour = _ball.colour.First(x => x.Name == colourName);
-            }
-            else
-                colour = _ball.colour.First(x => x.Number == colorNumber);
+            ColourStruct colour;
+            //! pritaikiau enum, Tomai pagalvok kaip perdaryti!  
+            
+            //buvo
+            // = _ball.colourPalet.Colour.First(x => x.Name == _ballColour);
+   
+            // turi būti **
+            colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
 
-
-            Colour clr;
-            clr = _ball.colour.First(x => x.Name == "BlackDarkGates");
-            clr = _ball.colour.First(x => x.Number == 101);
+            // pns su su vartais bet _gates...Controler(2); pagal ChooseColour
+            ColourStruct clr;
+            clr = _ball.colourPalet.Colour.First(x => x.Name == "BlackDarkGates");
+            clr = _ball.colourPalet.Colour.First(x => x.Number == 101);
             _ImgZones = _video.GetFilteredImageZones(clr);
             _ball.ImgGates = _ImgZones;
             _ball.at = ATeam;
@@ -231,6 +233,7 @@ namespace Football
             if (_ball.PositionComment != BallPos.Text) isRinged = false;
             BallPos.Text = _ball.PositionComment;
 
+            //
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
@@ -418,15 +421,6 @@ namespace Football
             form.Show();
         }
 
-        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ballColour = "Orange";
-        }
-
-        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ballColour = "Yellow";
-        }
 
 
         private void lastUsedToolStripMenuItem_Click(object sender, EventArgs e) // open last used video

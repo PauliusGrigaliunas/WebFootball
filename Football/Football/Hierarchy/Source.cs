@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Emgu.CV.CvEnum;
 using System.Drawing;
+using static Football.ColourPalet;
 
 namespace Football
 {
@@ -55,7 +56,7 @@ namespace Football
             return imgRange;
         }
         //-
-        public Image<Gray, byte> GetFilteredImage(Colour colour)
+        public Image<Gray, byte> GetFilteredImage(ColourStruct colour)
         {
             Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
 
@@ -65,7 +66,7 @@ namespace Football
             CvInvoke.Dilate(imgSmoothed, imgSmoothed, dilateImage, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
             return imgSmoothed;
         }
-        public Image<Gray, byte> GetFilteredImageZones(Colour colour)
+        public Image<Gray, byte> GetFilteredImageZones(ColourStruct colour)
         {
             Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
             return imgSmoothed;

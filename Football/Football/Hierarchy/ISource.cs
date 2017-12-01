@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using static Football.ColourPalet;
 
 namespace Football
 {
@@ -18,8 +19,8 @@ namespace Football
         bool Check();
         Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed);
         Image<Gray, byte> ConvertToGray();
-        Image<Gray, byte> GetFilteredImageZones(Colour clr);
-        Image<Gray, byte> GetFilteredImage(Colour colour);
+        Image<Gray, byte> GetFilteredImageZones(ColourStruct clr);
+        Image<Gray, byte> GetFilteredImage(ColourStruct colour);
 
     }
 }

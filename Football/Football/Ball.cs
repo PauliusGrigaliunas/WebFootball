@@ -10,6 +10,7 @@ using System.Threading;
 using Emgu.CV.UI;
 using System.Drawing;
 using System.Diagnostics;
+using static Football.ColourPalet;
 
 namespace Football
 {
@@ -33,75 +34,27 @@ namespace Football
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
         public Image<Gray, byte> ImgGates { get; set; }
-        public Colour[] colour;
+        //public Colour[] Colour { get; set; }
         public string PositionComment;
         public string at, bt;
         delegate int Distance(int A, int B);
         delegate void Print(List<int> list);
 
-        public Ball()
+        public ColourPalet colourPalet = new ColourPalet();
+        public ChooseColour chooseColour = new ChooseColour();
+
+//        pakeisti tuo kuris yra VideoScreen
+/*        public void BallDetection(Video _video) 
         {
-            BallColorQuery();
-        }
+            ColourStruct _colour = colourPalet.Colour[1];
 
-        private void BallColorQuery()
-        {
-            //colour = lazy.Value;
-            colour = new[] {
-                new Colour
-                {
-                    Number = 0,
-                    Name = "Default",
-                    Low = new Hsv(0, 0, 0),
-                    High = new Hsv(10, 10, 10),
-                },
-
-                new Colour
-                {
-                    Number = 1,
-                    Name = "Orange",
-                    Low = new Hsv(0, 140, 150),
-                    High = new Hsv(180, 255, 255),
-                },
-                new Colour
-                {
-                    Number = 2,
-                    Name = "Yellow",
-                    Low = new Hsv(0, 93, 0),
-                    High = new Hsv(255, 255, 89),
-
-                },
-                new Colour
-                {
-                    Number = 101,
-                    Name = "BlackDarkGates",
-                    Low = new Hsv(0, 0, 0),
-                    High = new Hsv(255, 255, 10),
-
-                }
-            };
-
-        }
-
-
-        public void BallDetection(Video _video, GoalsChecker goalscheck, string colourName = "Default", int colorNumber = 0)
-        {
-            Colour _colour;
-            //! pritaikyti protingai galime Enum
-            if (colourName != "Default")
-            {
-                _colour = colour.First(x => x.Name == colourName);
-            }
-            else
-                _colour = colour.First(x => x.Number == colorNumber);
-
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
+            Image <Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
 
             ImgFiltered = _video.GetFilteredImage(_colour);
             ImgOriginal = _video.ImgOriginal;
 
             BallPositionDraw(imgCircles);
-        }
+        }*/
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
