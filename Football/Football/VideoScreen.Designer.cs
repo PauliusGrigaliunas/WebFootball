@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnStopp = new System.Windows.Forms.Button();
             this.btnStartLast = new System.Windows.Forms.Button();
@@ -74,8 +75,7 @@
             this.PauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -91,6 +91,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.btnReset);
             this.panel1.Controls.Add(this.btnStopp);
             this.panel1.Controls.Add(this.btnStartLast);
@@ -118,7 +119,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 843);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PC Camera",
+            "Video"});
+            this.comboBox1.Location = new System.Drawing.Point(11, 524);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 51;
             // 
             // btnReset
             // 
@@ -338,7 +349,6 @@
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
-            this.OriginalPictureBox.Click += new System.EventHandler(this.OriginalPictureBox_Click);
             this.OriginalPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // menuStrip2
@@ -527,26 +537,17 @@
             // 
             // ballColourToolStripMenuItem
             // 
-            this.ballColourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.orangeToolStripMenuItem,
-            this.yellowToolStripMenuItem});
             this.ballColourToolStripMenuItem.Name = "ballColourToolStripMenuItem";
             this.ballColourToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.ballColourToolStripMenuItem.Text = "Ball Colour";
             // 
-            // orangeToolStripMenuItem
+            // comboBox2
             // 
-            this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
-            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.orangeToolStripMenuItem.Text = "Orange";
-            this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
-            // 
-            // yellowToolStripMenuItem
-            // 
-            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.yellowToolStripMenuItem.Text = "Yellow";
-            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(307, 0);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 52;
             // 
             // VideoScreen
             // 
@@ -555,6 +556,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(653, 650);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -614,8 +616,6 @@
         private System.Windows.Forms.ToolStripMenuItem teamAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ballColourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem orangeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label BallPos;
         private System.Windows.Forms.Label label1;
@@ -626,6 +626,8 @@
         private System.Windows.Forms.Button btnStopp;
         private System.Windows.Forms.Button btnStartLast;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 

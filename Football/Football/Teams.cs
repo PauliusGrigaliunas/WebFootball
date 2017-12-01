@@ -117,13 +117,15 @@ namespace Football
 
         public List<teamTable> OrderByVictories()
         {
-            FootballEntities context = new FootballEntities();
-            var teams = from i in context.teamTables
-                        orderby i.Victories descending
-                        select i;
-            var list = teams.ToList();
-
+            using (FootballEntities context = new FootballEntities())
+            {
+                var teams = from i in context.teamTables
+                            orderby i.Victories descending
+                            select i;
+                var list = teams.ToList();
+            
             return list;
+            }
         }
         public List<teamTable> OrderByGoals()
         {
