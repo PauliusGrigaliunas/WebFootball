@@ -195,37 +195,19 @@ namespace Football
 
         public async Task BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
         {
-            //ColourStruct colour;
-            //! pritaikiau enum, Tomai pagalvok kaip perdaryti!  
-
-            //buvo
-            // = _ball.colourPalet.Colour.First(x => x.Name == _ballColour);
-
-            // turi būti **
-            //colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
-
-            // pns su su vartais bet _gates...Controler(2); pagal ChooseColour
-
             ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
             _ImgZones = _video.GetFilteredImageZones(clr);
-            _ball.ImgGates = _ImgZones;
-            _ball.at = ATeam;
-            _ball.bt = BTeam;
 
             ColourStruct colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();    
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            _ball.Gcheck = _gcheck;
-            _ball.xCoordList = _xCoordList;
-            _ball.Index = _i;
+            setValues();
+
             _ball.BallPositionDraw(imgCircles);
-            _i = _ball.Index;
-            _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.Gcheck;
-            if (_ball.PositionComment != BallPos.Text) isRinged = false;
-            BallPos.Text = _ball.PositionComment;
+
+            unifyValues();
 
             //
             sound = new Task(() => Comment());
@@ -278,7 +260,7 @@ namespace Football
         //closing form
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_video!= null ) _video.Pause();
+            if (_video != null) _video.Pause();
             if (!isTournament) Application.Exit();
         }
 
@@ -555,6 +537,31 @@ namespace Football
                 temp = 0;
                 bTeamLabel.Text = temp.ToString();
             }
+        }
+
+        private void setValues()
+        {
+            _ball.ImgGates = _ImgZones;
+            _ball.at = ATeam;
+            _ball.bt = BTeam;
+            _ball.Gcheck = _gcheck;
+            _ball.xCoordList = _xCoordList;
+            _ball.Index = _i;
+        }
+
+        private void unifyValues()
+        {
+            _i = _ball.Index;
+            _xCoordList = _ball.xCoordList;
+            _gcheck = _ball.Gcheck;
+
+            commentatorTextCompatibility();
+        }
+
+        private void commentatorTextCompatibility()
+        {
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
+            BallPos.Text = _ball.PositionComment;
         }
     }
 }
