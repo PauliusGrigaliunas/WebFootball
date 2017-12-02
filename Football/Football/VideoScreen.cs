@@ -226,7 +226,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(16, 18);
+                    if(!enableSound.Checked)
+                        comment.PlayRandomSound(16, 18);
                     isRinged = true;
                 }
             }
@@ -235,7 +236,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(14, 16);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -244,7 +246,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(14, 16);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -253,7 +256,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(12, 14);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(12, 14);
                     isRinged = true;
                 }
             }
@@ -562,13 +566,13 @@ namespace Football
         private void editScore_Click(object sender, EventArgs e)
         {
             _video.Pause();
-            String str1 = bTeamLabel.Text;
-            String str2 = aTeamLabel.Text;
-            SE = new ScoreEditor(ATeam, BTeam, str1, str2);
+            SE = new ScoreEditor(ATeam, BTeam, bTeamLabel.Text, aTeamLabel.Text);
             SE.ShowDialog();
 
-            bTeamLabel.Text = SE.aPoints.ToString();
-            aTeamLabel.Text = SE.bPoints.ToString();
+            int AP = SE.returnA();
+            int BP = SE.returnB();
+            bTeamLabel.Text = AP.ToString();
+            aTeamLabel.Text = BP.ToString();
         }
 
         private void commentatorTextCompatibility()
