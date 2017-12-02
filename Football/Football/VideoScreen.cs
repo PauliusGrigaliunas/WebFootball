@@ -202,18 +202,20 @@ namespace Football
         {
             ColourStruct colour;
             //! pritaikiau enum, Tomai pagalvok kaip perdaryti!  
-            
+
             //buvo
             // = _ball.colourPalet.Colour.First(x => x.Name == _ballColour);
-   
+
             // turi būti **
-            colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
+            //colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
+            int SelectedIndex = 101;
+            colour = _ball.chooseColour.Controler(SelectedIndex);
 
             // pns su su vartais bet _gates...Controler(2); pagal ChooseColour
             ColourStruct clr;
             clr = _ball.colourPalet.Colour.First(x => x.Name == "BlackDarkGates");
             clr = _ball.colourPalet.Colour.First(x => x.Number == 101);
-            _ImgZones = _video.GetFilteredImageZones(clr);
+            _ImgZones = _video.GetFilteredImageZones(colour);
             _ball.ImgGates = _ImgZones;
             _ball.at = ATeam;
             _ball.bt = BTeam;
