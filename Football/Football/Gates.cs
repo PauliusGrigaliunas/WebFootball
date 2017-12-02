@@ -19,18 +19,7 @@ namespace Football
         public ColourPalet colourPalet = new ColourPalet();
         public ChooseColour chooseColour = new ChooseColour();
 
-        public int aSideGates;
-        public int bSideGates;
-
         public delegate int Distance(int A, int B, Image<Gray, byte> ImgOriginal);
-
-        public void infoAboutGates(Image<Gray, byte> ImgGates)
-        {
-            aSideGates = FindAGates(ImgGates);
-            bSideGates = FindBGates(ImgGates);
-
-
-        }
 
         public Distance dist = delegate (int AG, int BG, Image<Gray, byte> img)
         {

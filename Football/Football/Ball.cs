@@ -38,7 +38,7 @@ namespace Football
         public string PositionComment;
         public string at, bt;
         delegate int Distance(int A, int B);
-        delegate void Print(List<int> list);
+        delegate void Print(List<int> list, int AGATES, int BGATES, int ABdistance);
         Gates _gates = new Gates();
 
         public ColourPalet colourPalet = new ColourPalet();
@@ -78,23 +78,9 @@ namespace Football
 
                 int AGATES = _gates.FindAGates(ImgGates); // O <--
                 int BGATES = _gates.FindBGates(ImgGates); // --> O
-
-                
                 int ABdistance = _gates.dist(AGATES, BGATES, ImgFiltered);
-
-                Print print = delegate (List<int> list)   // delegate with generics
-                {
-                    IEnumerator<int> enumerator = list.GetEnumerator();
-                    while (enumerator.MoveNext())
-                    {
-                        int item = enumerator.Current;
-                        Debug.WriteLine(item);
-                    }
-                    Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: " + BallPosition.X);
-                };
-                //print(xCoordList);
-
-
+                
+                //print(xCoordList, AGATES, BGATES, ABdistance); // Diagnostic info
 
                 PositionComment = getBallStatus(ABdistance, AGATES);
             }
@@ -104,81 +90,17 @@ namespace Football
             }
         }
 
-        /*
-        private int DistanceBetweenGates(int AGates, int BGates)
-        {
-            int result = BGates - AGates;
-            if (result <= 0)
-                return ImgOriginal.Width * 5 / 6;
-            else
-                return result;
-        }
 
-        private int FindAGates()
+        Print print = delegate (List<int> list, int AGATES, int BGATES, int ABdistance)  
         {
-            int i, j, red = 0, green = 0, blue = 0, counter = 0, X = 0;
-            Color clr;
-            int width = ImgGates.Width * 1 / 4;                      // 1/4  | 3/4
-            int sheight = ImgGates.Height * 2 / 5;                   // 2/5  | 2/5
-            int height = ImgGates.Height * 4 / 5;                    // 4/5  | 4/5
-            Bitmap bmp = new Bitmap(ImgGates.Bitmap);
-
-            for (i = 0; i < width; ++i)
+            IEnumerator<int> enumerator = list.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                for (j = sheight; j < height; j++)
-                {
-                    clr = bmp.GetPixel(i, j);
-                    red = clr.R;
-                    green = clr.G;
-                    blue = clr.B;
-
-                    if (red >= 245 && green >= 245 && blue >= 245)
-                        counter++;
-                    else
-                        counter = 0;
-
-                    if (counter >= 5)
-                    {
-                        X = i - 1;
-                        return X;
-                    }
-                }
+                int item = enumerator.Current;
+                Debug.WriteLine(item);
             }
-            return X;
-        }
-
-        private int FindBGates()
-        {
-            int i, j, red = 0, green = 0, blue = 0, counter = 0, X = 0;
-            Color clr;
-            int width = ImgGates.Width * 3 / 4;
-            int sheight = ImgGates.Height * 2 / 5;
-            int height = ImgGates.Height * 4 / 5;
-            Bitmap bmp = new Bitmap(ImgGates.Bitmap);
-
-            for (i = width; i < ImgGates.Width; ++i)
-            {
-                for (j = sheight; j < height; j++)
-                {
-                    clr = bmp.GetPixel(i, j);
-                    red = clr.R;
-                    green = clr.G;
-                    blue = clr.B;
-
-                    if (red >= 245 && green >= 245 && blue >= 245)
-                        counter++;
-                    else
-                        counter = 0;
-
-                    if (counter >= 5)
-                    {
-                        X = i - 1;
-                        return X;
-                    }
-                }
-            }
-            return X;
-        }*/
+            Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: " + BallPosition.X);
+        };
 
         private string getBallStatus(int dist, int diff)
         {
@@ -209,16 +131,6 @@ namespace Football
             else
             {
                 return "Unknown";
-            }
-        }
-
-        private void Display(List<int> list)
-        {
-            IEnumerator<int> enumerator = list.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                int item = enumerator.Current;
-                Debug.WriteLine(item);
             }
         }
     }
