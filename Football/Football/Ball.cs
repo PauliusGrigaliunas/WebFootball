@@ -16,14 +16,12 @@ namespace Football
 {
     public class Ball
     {
-
         public struct BallPosition
         {
             public static int X { get; set; }
             public static int Y { get; set; }
             public static bool goingRight { get; set; }
         }
-
 
         //objects
         public GoalsChecker Gcheck { get; set; }
@@ -82,7 +80,7 @@ namespace Football
                 
                 //print(xCoordList, AGATES, BGATES, ABdistance); // Diagnostic info
 
-                PositionComment = getBallStatus(ABdistance, AGATES);
+                PositionComment = getBallStatus(ABdistance, AGATES); // commentator logics
             }
             catch (Exception)
             {

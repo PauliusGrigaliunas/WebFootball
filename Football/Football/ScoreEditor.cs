@@ -234,7 +234,8 @@ namespace Football
 
         private void AMinus_Click(object sender, EventArgs e)
         {
-            aPoints--;
+            if(aPoints != 0)
+                aPoints--;
             TeamAScore.Text = aPoints.ToString();
         }
 
@@ -246,7 +247,8 @@ namespace Football
 
         private void BMinus_Click(object sender, EventArgs e)
         {
-            bPoints--;
+            if (bPoints != 0)
+                bPoints--;
             TeamBScore.Text = bPoints.ToString();
         }
 

@@ -155,7 +155,6 @@ namespace Football
             _video.Stop();
         }
 
-
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Covariance
@@ -301,8 +300,6 @@ namespace Football
             comment.PlayIndexedSoundWithLoop(11);
         }
 
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             _video.Stop();
@@ -371,7 +368,6 @@ namespace Football
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
             comment.PlayIndexedSound(11);
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
