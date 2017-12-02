@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Football
 {
-    public class ScoreEditor : Form
+    public partial class ScoreEditor : Form
     {
         private ContextMenuStrip contextMenuStrip1;
         private ContextMenuStrip contextMenuStrip2;
@@ -193,7 +193,6 @@ namespace Football
         public int aPoints;
         public int bPoints;
 
-
         public ScoreEditor(String ATeam, String BTeam, String aScore, String bScore)
         {
             InitializeComponent();
@@ -202,6 +201,9 @@ namespace Football
             bName = BTeam;
             aPoints = int.Parse(aScore);
             bPoints = int.Parse(bScore);
+
+            TeamAScore.Text = aScore;
+            TeamBScore.Text = bScore;
         }
 
         private void TeamA_Click(object sender, EventArgs e)
@@ -216,37 +218,51 @@ namespace Football
 
         private void TeamAScore_Click(object sender, EventArgs e)
         {
-
+            // do nothing
         }
 
         private void TeamBScore_Click(object sender, EventArgs e)
         {
-
+            // do nothing
         }
 
         private void APlus_Click(object sender, EventArgs e)
         {
-
+            aPoints++;
+            TeamAScore.Text = aPoints.ToString();
         }
 
         private void AMinus_Click(object sender, EventArgs e)
         {
-
+            aPoints--;
+            TeamAScore.Text = aPoints.ToString();
         }
 
         private void BPlus_Click(object sender, EventArgs e)
         {
-
+            bPoints++;
+            TeamBScore.Text = bPoints.ToString();
         }
 
         private void BMinus_Click(object sender, EventArgs e)
         {
-
+            bPoints--;
+            TeamBScore.Text = bPoints.ToString();
         }
 
         private void Close_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        public int returnA()
+        {
+            return aPoints;
+        }
+
+        public int returnB()
+        {
+            return bPoints;
         }
     }
 }

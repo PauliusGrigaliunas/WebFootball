@@ -33,6 +33,7 @@ namespace Football
         Gates _gates = new Gates();
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
+        ScoreEditor SE;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -560,10 +561,14 @@ namespace Football
 
         private void editScore_Click(object sender, EventArgs e)
         {
-            //TeamNames names = new TeamNames();
-            //names.Show();
-            ScoreEditor SE = new ScoreEditor(ATeam, BTeam, aTeamLabel.Text, bTeamLabel.Text);
-            SE.Show();
+            _video.Pause();
+            String str1 = bTeamLabel.Text;
+            String str2 = aTeamLabel.Text;
+            SE = new ScoreEditor(ATeam, BTeam, str1, str2);
+            SE.ShowDialog();
+
+            bTeamLabel.Text = SE.aPoints.ToString();
+            aTeamLabel.Text = SE.bPoints.ToString();
         }
 
         private void commentatorTextCompatibility()
