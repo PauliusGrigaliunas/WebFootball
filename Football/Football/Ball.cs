@@ -39,22 +39,11 @@ namespace Football
         public string at, bt;
         delegate int Distance(int A, int B);
         delegate void Print(List<int> list);
+        Gates _gates = new Gates();
 
         public ColourPalet colourPalet = new ColourPalet();
         public ChooseColour chooseColour = new ChooseColour();
 
-//        pakeisti tuo kuris yra VideoScreen
-/*        public void BallDetection(Video _video) 
-        {
-            ColourStruct _colour = colourPalet.Colour[1];
-
-            Image <Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
-
-            ImgFiltered = _video.GetFilteredImage(_colour);
-            ImgOriginal = _video.ImgOriginal;
-
-            BallPositionDraw(imgCircles);
-        }*/
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
         {
@@ -86,18 +75,12 @@ namespace Football
                     Index = 4;
                 }
 
-                int AGATES = FindAGates(); // O <--
-                int BGATES = FindBGates(); // --> O
 
-                Distance dist = delegate (int AG, int BG) // anonymous | distance between gates
-                {
-                    int result = AG - BG;
-                    if (result <= 0)
-                        return ImgOriginal.Width * 5 / 6;
-                    else
-                        return result;
-                };
-                int ABdistance = dist(AGATES, BGATES);
+                int AGATES = _gates.FindAGates(ImgGates); // O <--
+                int BGATES = _gates.FindBGates(ImgGates); // --> O
+
+                
+                int ABdistance = _gates.dist(AGATES, BGATES, ImgFiltered);
 
                 Print print = delegate (List<int> list)   // delegate with generics
                 {
@@ -110,6 +93,8 @@ namespace Football
                     Debug.WriteLine(AGATES + "   <--->   " + BGATES + "   dist = " + ABdistance + " ballpos: " + BallPosition.X);
                 };
                 //print(xCoordList);
+
+
 
                 PositionComment = getBallStatus(ABdistance, AGATES);
             }
@@ -127,7 +112,7 @@ namespace Football
                 return ImgOriginal.Width * 5 / 6;
             else
                 return result;
-        }*/
+        }
 
         private int FindAGates()
         {
@@ -193,7 +178,7 @@ namespace Football
                 }
             }
             return X;
-        }
+        }*/
 
         private string getBallStatus(int dist, int diff)
         {

@@ -193,7 +193,7 @@ namespace Football
         }
         // End Menu items------------
 
-        public void BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
+        public void BallDetection()
         {
             ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
             _ImgZones = _video.GetFilteredImageZones(clr);
@@ -216,7 +216,6 @@ namespace Football
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
-            //Comment();
         }
 
         private void Comment()
