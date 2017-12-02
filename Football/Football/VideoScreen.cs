@@ -193,7 +193,7 @@ namespace Football
         }
         // End Menu items------------
 
-        public async Task BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
+        public void BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
         {
             ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
             _ImgZones = _video.GetFilteredImageZones(clr);
@@ -204,12 +204,15 @@ namespace Football
             _ball.ImgOriginal = _video.ImgOriginal;
 
             setValues();
-
             _ball.BallPositionDraw(imgCircles);
-
             unifyValues();
+            addSoundEffects();
+        }
 
-            //
+        public async Task addSoundEffects()
+        {
+            commentatorTextCompatibility();
+
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
@@ -554,8 +557,6 @@ namespace Football
             _i = _ball.Index;
             _xCoordList = _ball.xCoordList;
             _gcheck = _ball.Gcheck;
-
-            commentatorTextCompatibility();
         }
 
         private void commentatorTextCompatibility()
