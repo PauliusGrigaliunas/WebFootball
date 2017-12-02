@@ -76,6 +76,7 @@
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.editScore = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -91,6 +92,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.editScore);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.btnReset);
             this.panel1.Controls.Add(this.btnStopp);
@@ -549,6 +551,16 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 52;
             // 
+            // editScore
+            // 
+            this.editScore.Location = new System.Drawing.Point(497, 118);
+            this.editScore.Name = "editScore";
+            this.editScore.Size = new System.Drawing.Size(144, 31);
+            this.editScore.TabIndex = 52;
+            this.editScore.Text = "Edit Score Manually";
+            this.editScore.UseVisualStyleBackColor = true;
+            this.editScore.Click += new System.EventHandler(this.editScore_Click);
+            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
@@ -628,6 +640,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button editScore;
     }
 }
 

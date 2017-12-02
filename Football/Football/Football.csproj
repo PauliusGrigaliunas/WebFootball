@@ -89,6 +89,9 @@
     <Compile Include="Ball.cs" />
     <Compile Include="ChooseColour.cs" />
     <Compile Include="Gates.cs" />
+    <Compile Include="ScoreEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings\Switch.cs" />
     <Compile Include="Hierarchy\Camera.cs" />
     <Compile Include="ColourPalet.cs" />
@@ -170,6 +173,9 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Hierarchy\Video.cs" />
+    <EmbeddedResource Include="ScoreEditor.resx">
+      <DependentUpon>ScoreEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TeamNames.resx">
       <DependentUpon>TeamNames.cs</DependentUpon>
     </EmbeddedResource>

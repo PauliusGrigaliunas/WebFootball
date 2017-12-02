@@ -558,6 +558,14 @@ namespace Football
             _gcheck = _ball.Gcheck;
         }
 
+        private void editScore_Click(object sender, EventArgs e)
+        {
+            //TeamNames names = new TeamNames();
+            //names.Show();
+            ScoreEditor SE = new ScoreEditor(ATeam, BTeam, aTeamLabel.Text, bTeamLabel.Text);
+            SE.Show();
+        }
+
         private void commentatorTextCompatibility()
         {
             if (_ball.PositionComment != BallPos.Text) isRinged = false;
