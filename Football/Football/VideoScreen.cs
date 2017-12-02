@@ -30,6 +30,7 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();
+        Gates _gates = new Gates();
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
         ISource _video;
@@ -56,7 +57,6 @@ namespace Football
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
-
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
         Image<Gray, byte> _ImgZones { get; set; }
@@ -64,9 +64,9 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
+        private int GatesColorIndex = 2;
         //
         public List<int> _xCoordList = new List<int>();
-        //
 
         public VideoScreen(String teamA, String teamB)
         {
@@ -84,12 +84,10 @@ namespace Football
 
             ATeam = TeamALabel.Text;
             BTeam = TeamBLabel.Text;
-
         }
 
         private void ButtonDisabler()
         {
-
             btnStartLast.Enabled = false;
             btnStopp.Enabled = false;
             btnReset.Enabled = false;
@@ -106,7 +104,6 @@ namespace Football
 
         private void ButtonEnabler()
         {
-
             btnStartLast.Enabled = true;
             btnStopp.Enabled = true;
             btnReset.Enabled = true;
@@ -134,7 +131,6 @@ namespace Football
 
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
             BallDetection();
-
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,7 +165,6 @@ namespace Football
                 _video.StartVideo();
                 ButtonEnabler();
             }
-
         }
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e) // start/pause/stop
@@ -200,7 +195,7 @@ namespace Football
 
         public async Task BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
         {
-            ColourStruct colour;
+            //ColourStruct colour;
             //! pritaikiau enum, Tomai pagalvok kaip perdaryti!  
 
             //buvo
@@ -208,20 +203,17 @@ namespace Football
 
             // turi būti **
             //colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
-            int SelectedIndex = 101;
-            colour = _ball.chooseColour.Controler(SelectedIndex);
 
             // pns su su vartais bet _gates...Controler(2); pagal ChooseColour
-            ColourStruct clr;
-            clr = _ball.colourPalet.Colour.First(x => x.Name == "BlackDarkGates");
-            clr = _ball.colourPalet.Colour.First(x => x.Number == 101);
-            _ImgZones = _video.GetFilteredImageZones(colour);
+
+            ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
+            _ImgZones = _video.GetFilteredImageZones(clr);
             _ball.ImgGates = _ImgZones;
             _ball.at = ATeam;
             _ball.bt = BTeam;
 
-
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
+            ColourStruct colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();    
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
@@ -240,7 +232,6 @@ namespace Football
             sound.Start();
             await sound;
             //Comment();
-
         }
 
         private void Comment()
@@ -303,7 +294,6 @@ namespace Football
         //Coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
-
             Bitmap b = new Bitmap(OriginalPictureBox.Image);
             Color color = b.GetPixel(e.X, e.Y);
             float hue = color.GetHue();
@@ -338,7 +328,6 @@ namespace Football
             Teams team = new Teams();
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
 
-
             if (_TeamAScores > _TeamBScores)
             {
                 _VictA = _VictA + 1;
@@ -396,12 +385,10 @@ namespace Football
 
         }
 
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -423,8 +410,6 @@ namespace Football
             form.Show();
         }
 
-
-
         private void lastUsedToolStripMenuItem_Click(object sender, EventArgs e) // open last used video
         {
             _video.StartLastUsedVideo();
@@ -443,7 +428,6 @@ namespace Football
 
             Teams team = new Teams();
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
-
 
             if (_TeamAScores > _TeamBScores)
             {
@@ -501,7 +485,6 @@ namespace Football
             comment.PlayIndexedSound(11);
         }
 
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (_video == null || _video.Capture == null)
@@ -518,7 +501,6 @@ namespace Football
                     btnStartLast.Text = "Pause";
                 }
             }
-
             else
             {
                 _video.Pause();
@@ -560,7 +542,6 @@ namespace Football
                 bTeamLabel.Text = "0";
             }
         }
-
 
         private void button1_Click_1(object sender, EventArgs e)
         {

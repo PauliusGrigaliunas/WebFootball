@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="Ball.cs" />
     <Compile Include="ChooseColour.cs" />
+    <Compile Include="Gates.cs" />
     <Compile Include="Settings\Switch.cs" />
     <Compile Include="Hierarchy\Camera.cs" />
     <Compile Include="ColourPalet.cs" />
