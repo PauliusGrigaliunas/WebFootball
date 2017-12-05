@@ -30,8 +30,10 @@ namespace Football
         //objects
         Picture _picture = new Picture();
         Ball _ball = new Ball();
+        Gates _gates = new Gates();
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
+        ScoreEditor SE;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -56,7 +58,6 @@ namespace Football
         public static bool isATeamScored = false;
         public static bool isBTeamScored = false;
 
-
         //picture variables
         Image<Gray, byte> _imgFiltered { get; set; }
         Image<Gray, byte> _ImgZones { get; set; }
@@ -64,9 +65,9 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
+        private int GatesColorIndex = 2;
         //
         public List<int> _xCoordList = new List<int>();
-        //
 
         public VideoScreen(String teamA, String teamB)
         {
@@ -84,12 +85,10 @@ namespace Football
 
             ATeam = TeamALabel.Text;
             BTeam = TeamBLabel.Text;
-
         }
 
         private void ButtonDisabler()
         {
-
             btnStartLast.Enabled = false;
             btnStopp.Enabled = false;
             btnReset.Enabled = false;
@@ -107,7 +106,6 @@ namespace Football
 
         private void ButtonEnabler()
         {
-
             btnStartLast.Enabled = true;
             btnStopp.Enabled = true;
             btnReset.Enabled = true;
@@ -136,7 +134,6 @@ namespace Football
 
             OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
             BallDetection();
-
         }
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,7 +157,6 @@ namespace Football
             _video.Stop();
         }
 
-
         private void startToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Covariance
@@ -171,7 +167,6 @@ namespace Football
                 _video.StartVideo();
                 ButtonEnabler();
             }
-
         }
 
         private void startToolStripMenuItem2_Click(object sender, EventArgs e) // start/pause/stop
@@ -200,47 +195,29 @@ namespace Football
         }
         // End Menu items------------
 
-        public async Task BallDetection(/*string colourName = "Default", int colorNumber = 0*/)
+        public void BallDetection()
         {
-            ColourStruct colour;
-            //! pritaikiau enum, Tomai pagalvok kaip perdaryti!  
-            
-            //buvo
-            // = _ball.colourPalet.Colour.First(x => x.Name == _ballColour);
-   
-            // turi būti **
-            colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
-
-            // pns su su vartais bet _gates...Controler(2); pagal ChooseColour
-            ColourStruct clr;
-            clr = _ball.colourPalet.Colour.First(x => x.Name == "BlackDarkGates");
-            clr = _ball.colourPalet.Colour.First(x => x.Number == 101);
+            ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
             _ImgZones = _video.GetFilteredImageZones(clr);
-            _ball.ImgGates = _ImgZones;
-            _ball.at = ATeam;
-            _ball.bt = BTeam;
 
-
-            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();     //copy parameters of original frame image
+            ColourStruct colour = _ball.chooseColour.Controler(comboBox2.SelectedIndex);
+            Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            _ball.Gcheck = _gcheck;
-            _ball.xCoordList = _xCoordList;
-            _ball.Index = _i;
+            setValues();
             _ball.BallPositionDraw(imgCircles);
-            _i = _ball.Index;
-            _xCoordList = _ball.xCoordList;
-            _gcheck = _ball.Gcheck;
-            if (_ball.PositionComment != BallPos.Text) isRinged = false;
-            BallPos.Text = _ball.PositionComment;
+            unifyValues();
+            addSoundEffects();
+        }
 
-            //
+        public async Task addSoundEffects()
+        {
+            commentatorTextCompatibility();
+
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
-            //Comment();
-
         }
 
         private void Comment()
@@ -250,7 +227,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(16, 18);
+                    if(!enableSound.Checked)
+                        comment.PlayRandomSound(16, 18);
                     isRinged = true;
                 }
             }
@@ -259,7 +237,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(14, 16);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -268,7 +247,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(14, 16);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(14, 16);
                     isRinged = true;
                 }
             }
@@ -277,7 +257,8 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    comment.PlayRandomSound(12, 14);
+                    if (!enableSound.Checked)
+                        comment.PlayRandomSound(12, 14);
                     isRinged = true;
                 }
             }
@@ -287,7 +268,7 @@ namespace Football
         //closing form
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_video!= null ) _video.Pause();
+            if (_video != null) _video.Pause();
             if (!isTournament) Application.Exit();
         }
 
@@ -303,7 +284,6 @@ namespace Football
         //Coordinates
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)                          //checking coordinates of the video
         {
-
             Bitmap b = new Bitmap(OriginalPictureBox.Image);
             Color color = b.GetPixel(e.X, e.Y);
             float hue = color.GetHue();
@@ -322,8 +302,6 @@ namespace Football
             comment.PlayIndexedSoundWithLoop(11);
         }
 
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             _video.Stop();
@@ -337,7 +315,6 @@ namespace Football
 
             Teams team = new Teams();
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
-
 
             if (_TeamAScores > _TeamBScores)
             {
@@ -393,15 +370,12 @@ namespace Football
                 team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
             }
             comment.PlayIndexedSound(11);
-
         }
-
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -423,8 +397,6 @@ namespace Football
             form.Show();
         }
 
-
-
         private void lastUsedToolStripMenuItem_Click(object sender, EventArgs e) // open last used video
         {
             _video.StartLastUsedVideo();
@@ -443,7 +415,6 @@ namespace Football
 
             Teams team = new Teams();
             Predicate<String> compare = x => team.NameCheckIfExsist(x) == true;
-
 
             if (_TeamAScores > _TeamBScores)
             {
@@ -501,7 +472,6 @@ namespace Football
             comment.PlayIndexedSound(11);
         }
 
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (_video == null || _video.Capture == null)
@@ -518,7 +488,6 @@ namespace Football
                     btnStartLast.Text = "Pause";
                 }
             }
-
             else
             {
                 _video.Pause();
@@ -561,7 +530,6 @@ namespace Football
             }
         }
 
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (_video.Check())
@@ -574,6 +542,41 @@ namespace Football
                 temp = 0;
                 bTeamLabel.Text = temp.ToString();
             }
+        }
+
+        private void setValues()
+        {
+            _ball.ImgGates = _ImgZones;
+            _ball.at = ATeam;
+            _ball.bt = BTeam;
+            _ball.Gcheck = _gcheck;
+            _ball.xCoordList = _xCoordList;
+            _ball.Index = _i;
+        }
+
+        private void unifyValues()
+        {
+            _i = _ball.Index;
+            _xCoordList = _ball.xCoordList;
+            _gcheck = _ball.Gcheck;
+        }
+
+        private void editScore_Click(object sender, EventArgs e)
+        {
+            _video.Pause();
+            SE = new ScoreEditor(ATeam, BTeam, bTeamLabel.Text, aTeamLabel.Text);
+            SE.ShowDialog();
+
+            int AP = SE.returnA();
+            int BP = SE.returnB();
+            bTeamLabel.Text = AP.ToString();
+            aTeamLabel.Text = BP.ToString();
+        }
+
+        private void commentatorTextCompatibility()
+        {
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
+            BallPos.Text = _ball.PositionComment;
         }
     }
 }
