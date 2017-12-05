@@ -102,6 +102,7 @@ namespace Football
             StopVideoToolStripMenuItem.Enabled = false;
             PauseVideoToolStripMenuItem.Enabled = false;
             lastUsedToolStripMenuItem.Enabled = false;
+            OriginalPictureBox.Enabled = false;
         }
 
         private void ButtonEnabler()
@@ -119,6 +120,7 @@ namespace Football
             StopVideoToolStripMenuItem.Enabled = true;
             PauseVideoToolStripMenuItem.Enabled = true;
             lastUsedToolStripMenuItem.Enabled = true;
+            OriginalPictureBox.Enabled = true;
         }
 
         public void TimeTick(object sender, EventArgs e)
