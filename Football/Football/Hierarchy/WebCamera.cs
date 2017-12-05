@@ -11,7 +11,9 @@ namespace Football.Hierarchy
     {
         public override bool TakeASource()
         {
-            Capture = new Emgu.CV.VideoCapture("http://192.168.8.101:8080/video");
+            Path path = new Path();
+            path.ShowDialog();
+            Capture = new Emgu.CV.VideoCapture(path.PathString);
             return Starter();
         }
     }

@@ -21,7 +21,8 @@ namespace Football
 
         private void Start_Click(object sender, EventArgs e)
         {
-            PathString.Equals(textBox1.Text);
+            PathString = textBox1.Text;
+            this.Close();
         }
     }
 }
