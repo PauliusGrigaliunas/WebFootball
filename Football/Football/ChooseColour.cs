@@ -14,8 +14,8 @@ namespace Football
         public enum Choices
         {
             Orange,
-            Yellow,
-            Dark
+            Yellow
+            //Dark
         }
 
 
