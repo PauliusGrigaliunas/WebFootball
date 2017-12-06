@@ -65,7 +65,7 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
-        private int GatesColorIndex = 2;
+        private int GatesColorIndex = 3;
         //
         public List<int> _xCoordList = new List<int>();
 

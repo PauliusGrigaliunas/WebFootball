@@ -33,21 +33,29 @@ namespace Football
                     Low = new Hsv(0, 140, 150),
                     High = new Hsv(180, 255, 255),
                 },
+
                 new ColourStruct
                 {
                     Number = 2,
                     Name = "Yellow",
                     Low = new Hsv(0, 93, 0),
                     High = new Hsv(255, 255, 89),
-
                 },
+
                 new ColourStruct
                 {
-                    Number = 101,
+                    Number = 3,
+                    Name = "Custom",
+                    Low = new Hsv(0, 140, 150),
+                    High = new Hsv(180, 255, 255),
+                },
+
+                new ColourStruct
+                {
+                    Number = 4,
                     Name = "BlackDarkGates",
                     Low = new Hsv(0, 0, 0),
                     High = new Hsv(255, 255, 10),
-
                 }
             };
         }
