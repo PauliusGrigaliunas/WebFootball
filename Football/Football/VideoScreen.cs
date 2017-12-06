@@ -34,6 +34,7 @@ namespace Football
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
         ScoreEditor SE;
+        CustomColorCreator CCC;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -102,6 +103,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = false;
             lastUsedToolStripMenuItem.Enabled = false;
             OriginalPictureBox.Enabled = false;
+            setCustomColor.Enabled = false;
         }
 
         private void ButtonEnabler()
@@ -119,6 +121,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = true;
             lastUsedToolStripMenuItem.Enabled = true;
             OriginalPictureBox.Enabled = true;
+            setCustomColor.Enabled = true;
         }
 
         public void TimeTick(object sender, EventArgs e)
@@ -571,6 +574,17 @@ namespace Football
             int BP = SE.returnB();
             bTeamLabel.Text = AP.ToString();
             aTeamLabel.Text = BP.ToString();
+        }
+
+        private void setCustomColor_Click(object sender, EventArgs e)
+        {
+            _video.Pause();
+
+            CCC = new CustomColorCreator();
+            CCC.ShowDialog();
+
+            _video.StartVideo();
+            CCC.Dispose();
         }
 
         private void commentatorTextCompatibility()

@@ -99,6 +99,9 @@
     <Compile Include="ScoreEditor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CustomColorCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings\Switch.cs" />
     <Compile Include="Hierarchy\Camera.cs" />
     <Compile Include="ColourPalet.cs" />
