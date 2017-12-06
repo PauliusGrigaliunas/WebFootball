@@ -183,6 +183,9 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Hierarchy\Video.cs" />
+    <EmbeddedResource Include="CustomColorCreator.resx">
+      <DependentUpon>CustomColorCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Path.resx">
       <DependentUpon>Path.cs</DependentUpon>
     </EmbeddedResource>

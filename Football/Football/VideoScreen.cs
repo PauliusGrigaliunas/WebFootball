@@ -580,7 +580,7 @@ namespace Football
         {
             _video.Pause();
 
-            CCC = new CustomColorCreator();
+            CCC = new CustomColorCreator(_video.ImgOriginal);
             CCC.ShowDialog();
 
             _video.StartVideo();
