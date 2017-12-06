@@ -17,16 +17,16 @@ namespace UnitTestFootball
         public void ConnectionString()
         {
             //Access
-            Connector connector = new Connector();
-            SqlConnection first = connector.Connect();
+            //Connector connector = new Connector();
+           // SqlConnection first = connector.Connect();
 
             //Act
-            string constring = @"Server=tcp:paulius.database.windows.net,1433;Initial Catalog=Football;Persist Security Info=False;User ID=Kamikaze;Password=p0m1d0r4s.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+C:\Users\Paulius\Documents\GitHub\FootBall\Football\Football\App.config            string constring = @"Server=tcp:paulius.database.windows.net,1433;Initial Catalog=Football;Persist Security Info=False;User ID=Kamikaze;Password=p0m1d0r4s.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
             SqlConnection second = new SqlConnection(constring);
 
             //Assert
-            Assert.ReferenceEquals(first, second);
+            //Assert.ReferenceEquals(first, second);
         }
     }
 }
