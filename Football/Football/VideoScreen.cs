@@ -583,7 +583,9 @@ namespace Football
             CCC = new CustomColorCreator(_video.ImgOriginal);
             CCC.ShowDialog();
 
-
+            Hsv newLow = CCC.newLow;
+            Hsv newHigh = CCC.newHigh;
+            _ball.setNewColor(newLow, newHigh);
 
             _video.StartVideo();
             CCC.Dispose();

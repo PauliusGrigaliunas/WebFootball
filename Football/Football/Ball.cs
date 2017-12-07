@@ -131,5 +131,10 @@ namespace Football
                 return "Unknown";
             }
         }
+
+        public void setNewColor(Hsv low, Hsv high)
+        {
+
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Football
         private Button closeWindow;
         private Image<Bgr, byte> photo;
         int PointCounter = 0;
-        Hsv hsvColor, newLow, newHigh, hsv1, hsv2, hsv3;
+        public Hsv hsvColor, newLow, newHigh, hsv1, hsv2, hsv3;
         
 
         private void InitializeComponent()
