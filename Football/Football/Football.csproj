@@ -99,7 +99,7 @@
     <Compile Include="ScoreEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomColorCreator.cs">
+    <Compile Include="CustomColorViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings\Switch.cs" />
@@ -183,8 +183,8 @@
       <CustomToolNamespace>t</CustomToolNamespace>
     </Compile>
     <Compile Include="Hierarchy\Video.cs" />
-    <EmbeddedResource Include="CustomColorCreator.resx">
-      <DependentUpon>CustomColorCreator.cs</DependentUpon>
+    <EmbeddedResource Include="CustomColorViewer.resx">
+      <DependentUpon>CustomColorViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Path.resx">
       <DependentUpon>Path.cs</DependentUpon>

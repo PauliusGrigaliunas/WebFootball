@@ -10,7 +10,7 @@ using Emgu.CV.Structure;
 
 namespace Football
 {
-    public class CustomColorCreator : Form
+    public class CustomColorViewer : Form
     {
         private PictureBox pictureBox;
         private Button closeWindow;
@@ -155,7 +155,7 @@ namespace Football
 
         }
 
-        public CustomColorCreator(Image<Bgr, byte> img)
+        public CustomColorViewer(Image<Bgr, byte> img)
         {
             InitializeComponent();
             photo = img;

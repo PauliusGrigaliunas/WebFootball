@@ -34,7 +34,7 @@ namespace Football
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
         ScoreEditor SE;
-        CustomColorCreator CCC;
+        CustomColorViewer CCC;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -590,7 +590,7 @@ namespace Football
             _video.Pause();
             _gcheck.setStopwatch(false);
 
-            CCC = new CustomColorCreator(_video.ImgOriginal);
+            CCC = new CustomColorViewer(_video.ImgOriginal);
             CCC.ShowDialog();
 
             _gcheck.setStopwatch(true);
