@@ -209,8 +209,8 @@ namespace Football
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            System.Diagnostics.Debug.WriteLine(_ball.colourPalet.Colour[2].Low + "  " + _ball.colourPalet.Colour[2].High);   // pasikeicia
-            //System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(2).Low + "    " + _ball.chooseColour.Controler(2).High); // nepasikeicia
+            //System.Diagnostics.Debug.WriteLine(_ball.colourPalet.Colour[2].Low + "  " + _ball.colourPalet.Colour[2].High);   // nepasikeicia
+            System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(2).Low + "    " + _ball.chooseColour.Controler(2).High + "  " + comboBox2.SelectedIndex); // pasikeicia
             
 
             setValues();

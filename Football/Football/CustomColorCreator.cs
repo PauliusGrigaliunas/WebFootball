@@ -49,8 +49,8 @@ namespace Football
             // CustomColorCreator
             // 
             this.ClientSize = new System.Drawing.Size(809, 341);
-            this.Controls.Add(this.closeWindow);
             this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.closeWindow);
             this.Name = "CustomColorCreator";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -72,7 +72,6 @@ namespace Football
             if (PointCounter >= 3)
             {
                 DoCalculations();
-
                 this.Close();
             }
             
@@ -87,11 +86,14 @@ namespace Football
             float saturation = color.GetSaturation();
             float lightness = color.GetBrightness();
 
-            Image<Hsv, Byte> hsvImage = new Image<Hsv, byte>(b);
-
-            hsvColor = hsvImage[e.X, e.Y];  // out of range exception ???
+            //Image<Hsv, Byte> hsvImage = new Image<Hsv, byte>(b);
+            Image<Hsv, Byte> hsvImage = photo.Convert<Hsv, Byte>();
+            System.Diagnostics.Debug.WriteLine(e.X + "  " + e.Y);
+            //hsvColor = hsvImage[e.X, e.Y];  // out of range exception ???
+            hsvColor = hsvImage[e.Y, e.X];
             //System.Diagnostics.Debug.WriteLine(hsvColor.Hue + "  " + hsvColor.Satuation + "  " + hsvColor.Value);
             //System.Diagnostics.Debug.WriteLine(color.R + "  " + color.G + "  " + color.B);
+           
 
             if (PointCounter == 0)
                 hsv1 = hsvColor;

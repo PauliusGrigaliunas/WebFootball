@@ -134,17 +134,37 @@ namespace Football
 
         public void setNewColor(Hsv low, Hsv high)
         {
-            if (low.Hue >= 5)
-                low.Hue = low.Hue - 5;
+            if (low.Hue >= 10)
+                low.Hue = low.Hue - 10;
             else
                 low.Hue = 0;
 
-            if (high.Hue <= 175)
-                high.Hue = high.Hue + 5;
+            if (high.Hue <= 170)
+                high.Hue = high.Hue + 10;
             else
                 high.Hue = 180;
 
-          //  System.Diagnostics.Debug.WriteLine(colourPalet.Colour[2].Low + "  " + colourPalet.Colour[2].High);
+            if (low.Satuation >= 10)
+                low.Satuation = high.Satuation - 10;
+            else
+                low.Satuation = 0;
+
+            if (high.Satuation <= 245)
+                high.Satuation = high.Satuation + 10;
+            else
+                high.Satuation = 0;
+
+            if (low.Value >= 10)
+                low.Value = high.Value - 10;
+            else
+                low.Value = 0;
+
+            if (high.Value <= 245)
+                high.Value = high.Value + 10;
+            else
+                high.Value = 0;
+
+            //  System.Diagnostics.Debug.WriteLine(colourPalet.Colour[2].Low + "  " + colourPalet.Colour[2].High);
 
             chooseColour.colourPalet.Colour[2].Low = low;
             chooseColour.colourPalet.Colour[2].High = high;
