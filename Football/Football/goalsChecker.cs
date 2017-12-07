@@ -116,5 +116,13 @@ namespace Football
             }
             else { /* else detect more balls to work with and do ^*/ }
         }
+
+        public void setStopwatch(bool enabled)
+        {
+            if (enabled)
+                _stopwatch.Start();
+            else
+                _stopwatch.Stop();
+        }
     }
 }
