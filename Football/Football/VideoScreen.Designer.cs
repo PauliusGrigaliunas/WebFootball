@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.setCustomColor = new System.Windows.Forms.Button();
             this.enableSound = new System.Windows.Forms.CheckBox();
             this.enableSoundLabel = new System.Windows.Forms.Label();
             this.editScore = new System.Windows.Forms.Button();
@@ -79,7 +80,6 @@
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.setCustomColor = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -127,6 +127,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 843);
             this.panel1.TabIndex = 2;
+            // 
+            // setCustomColor
+            // 
+            this.setCustomColor.Location = new System.Drawing.Point(486, 82);
+            this.setCustomColor.Name = "setCustomColor";
+            this.setCustomColor.Size = new System.Drawing.Size(155, 31);
+            this.setCustomColor.TabIndex = 55;
+            this.setCustomColor.Text = "Find Color Codes";
+            this.setCustomColor.UseVisualStyleBackColor = true;
+            this.setCustomColor.Click += new System.EventHandler(this.setCustomColor_Click);
             // 
             // enableSound
             // 
@@ -584,16 +594,6 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 52;
-            // 
-            // setCustomColor
-            // 
-            this.setCustomColor.Location = new System.Drawing.Point(486, 82);
-            this.setCustomColor.Name = "setCustomColor";
-            this.setCustomColor.Size = new System.Drawing.Size(155, 31);
-            this.setCustomColor.TabIndex = 55;
-            this.setCustomColor.Text = "Set Custom Ball Color";
-            this.setCustomColor.UseVisualStyleBackColor = true;
-            this.setCustomColor.Click += new System.EventHandler(this.setCustomColor_Click);
             // 
             // VideoScreen
             // 

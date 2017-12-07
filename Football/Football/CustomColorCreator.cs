@@ -21,7 +21,7 @@ namespace Football
         private Label label1;
         private Label hsvlow;
         private Label label2;
-        private PictureBox pictureBox1;
+        private PictureBox colorRectangle;
         private Label label3;
         private Label hsvloww;
         private Label hsvhigh;
@@ -34,13 +34,13 @@ namespace Football
             this.label1 = new System.Windows.Forms.Label();
             this.hsvlow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.colorRectangle = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.hsvloww = new System.Windows.Forms.Label();
             this.hsvhigh = new System.Windows.Forms.Label();
             this.avgrgb = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorRectangle)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -90,13 +90,13 @@ namespace Football
             this.label2.TabIndex = 5;
             this.label2.Text = "HSV High:";
             // 
-            // pictureBox1
+            // colorRectangle
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(497, 135);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(132, 53);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.colorRectangle.Location = new System.Drawing.Point(497, 135);
+            this.colorRectangle.Name = "colorRectangle";
+            this.colorRectangle.Size = new System.Drawing.Size(132, 53);
+            this.colorRectangle.TabIndex = 6;
+            this.colorRectangle.TabStop = false;
             // 
             // label3
             // 
@@ -141,7 +141,7 @@ namespace Football
             this.Controls.Add(this.hsvhigh);
             this.Controls.Add(this.hsvloww);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.colorRectangle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.hsvlow);
             this.Controls.Add(this.label1);
@@ -149,7 +149,7 @@ namespace Football
             this.Controls.Add(this.closeWindow);
             this.Name = "CustomColorCreator";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorRectangle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +210,8 @@ namespace Football
             hsvloww.Text = newLow.ToString();
             hsvhigh.Text = newHigh.ToString();
             avgrgb.Text = bgr.ToString();
+            Color clr = Color.FromArgb((int)bgr.Red, (int)bgr.Green, (int)bgr.Blue);
+            colorRectangle.BackColor = clr;
         }
 
         private void DoCalculations()

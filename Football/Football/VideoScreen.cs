@@ -209,10 +209,6 @@ namespace Football
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            //System.Diagnostics.Debug.WriteLine(_ball.colourPalet.Colour[2].Low + "  " + _ball.colourPalet.Colour[2].High);   // nepasikeicia
-            System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(2).Low + "    " + _ball.chooseColour.Controler(2).High + "  " + comboBox2.SelectedIndex); // pasikeicia
-            
-
             setValues();
             _ball.BallPositionDraw(imgCircles);
             unifyValues();
@@ -584,7 +580,7 @@ namespace Football
         private void setCustomColor_Click(object sender, EventArgs e)
         {
             _video.Pause();
-
+        
             CCC = new CustomColorCreator(_video.ImgOriginal);
             CCC.ShowDialog();
 
