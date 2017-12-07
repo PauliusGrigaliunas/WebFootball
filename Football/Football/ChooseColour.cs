@@ -9,7 +9,7 @@ namespace Football
 {
     public class ChooseColour
     {
-        ColourPalet colourPalet = new ColourPalet();
+        public ColourPalet colourPalet = new ColourPalet();
 
         public enum Choices
         {

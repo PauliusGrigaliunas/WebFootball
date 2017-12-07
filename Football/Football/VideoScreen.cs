@@ -198,6 +198,7 @@ namespace Football
         }
         // End Menu items------------
 
+
         public void BallDetection()
         {
             ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
@@ -207,6 +208,10 @@ namespace Football
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
+
+            System.Diagnostics.Debug.WriteLine(_ball.colourPalet.Colour[2].Low + "  " + _ball.colourPalet.Colour[2].High);   // pasikeicia
+            //System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(2).Low + "    " + _ball.chooseColour.Controler(2).High); // nepasikeicia
+            
 
             setValues();
             _ball.BallPositionDraw(imgCircles);

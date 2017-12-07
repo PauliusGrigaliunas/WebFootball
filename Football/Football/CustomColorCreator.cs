@@ -30,7 +30,7 @@ namespace Football
             // 
             this.pictureBox.Location = new System.Drawing.Point(12, 12);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(1256, 640);
+            this.pictureBox.Size = new System.Drawing.Size(628, 320);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -38,7 +38,7 @@ namespace Football
             // 
             // closeWindow
             // 
-            this.closeWindow.Location = new System.Drawing.Point(1275, 617);
+            this.closeWindow.Location = new System.Drawing.Point(660, 297);
             this.closeWindow.Name = "closeWindow";
             this.closeWindow.Size = new System.Drawing.Size(132, 35);
             this.closeWindow.TabIndex = 1;
@@ -48,7 +48,7 @@ namespace Football
             // 
             // CustomColorCreator
             // 
-            this.ClientSize = new System.Drawing.Size(1419, 655);
+            this.ClientSize = new System.Drawing.Size(809, 341);
             this.Controls.Add(this.closeWindow);
             this.Controls.Add(this.pictureBox);
             this.Name = "CustomColorCreator";
@@ -89,9 +89,9 @@ namespace Football
 
             Image<Hsv, Byte> hsvImage = new Image<Hsv, byte>(b);
 
-            hsvColor = hsvImage[e.X, e.Y];
-            System.Diagnostics.Debug.WriteLine(hsvColor.Hue + "  " + hsvColor.Satuation + "  " + hsvColor.Value);
-            System.Diagnostics.Debug.WriteLine(color.R + "  " + color.G + "  " + color.B);
+            hsvColor = hsvImage[e.X, e.Y];  // out of range exception ???
+            //System.Diagnostics.Debug.WriteLine(hsvColor.Hue + "  " + hsvColor.Satuation + "  " + hsvColor.Value);
+            //System.Diagnostics.Debug.WriteLine(color.R + "  " + color.G + "  " + color.B);
 
             if (PointCounter == 0)
                 hsv1 = hsvColor;
