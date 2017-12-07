@@ -17,20 +17,37 @@ namespace Football
         private Image<Bgr, byte> photo;
         int PointCounter = 0;
         public Hsv hsvColor, newLow, newHigh, hsv1, hsv2, hsv3;
-        
+        public Bgr bgr, bgr1, bgr2, bgr3;
+        private Label label1;
+        private Label hsvlow;
+        private Label label2;
+        private PictureBox pictureBox1;
+        private Label label3;
+        private Label hsvloww;
+        private Label hsvhigh;
+        private Label avgrgb;
 
         private void InitializeComponent()
         {
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.closeWindow = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.hsvlow = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.hsvloww = new System.Windows.Forms.Label();
+            this.hsvhigh = new System.Windows.Forms.Label();
+            this.avgrgb = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
             // 
             this.pictureBox.Location = new System.Drawing.Point(12, 12);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(628, 320);
+            this.pictureBox.Size = new System.Drawing.Size(449, 251);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -38,22 +55,103 @@ namespace Football
             // 
             // closeWindow
             // 
-            this.closeWindow.Location = new System.Drawing.Point(660, 297);
+            this.closeWindow.Location = new System.Drawing.Point(497, 216);
             this.closeWindow.Name = "closeWindow";
             this.closeWindow.Size = new System.Drawing.Size(132, 35);
             this.closeWindow.TabIndex = 1;
-            this.closeWindow.Text = "Set My Color!";
+            this.closeWindow.Text = "Back to game";
             this.closeWindow.UseVisualStyleBackColor = true;
             this.closeWindow.Click += new System.EventHandler(this.closeWindow_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(480, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(174, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Click on the photo 3 times ";
+            // 
+            // hsvlow
+            // 
+            this.hsvlow.AutoSize = true;
+            this.hsvlow.Location = new System.Drawing.Point(467, 40);
+            this.hsvlow.Name = "hsvlow";
+            this.hsvlow.Size = new System.Drawing.Size(69, 17);
+            this.hsvlow.TabIndex = 4;
+            this.hsvlow.Text = "HSV Low:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(467, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "HSV High:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(497, 135);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(132, 53);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(470, 105);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Avg BGR:";
+            // 
+            // hsvloww
+            // 
+            this.hsvloww.AutoSize = true;
+            this.hsvloww.Location = new System.Drawing.Point(542, 40);
+            this.hsvloww.Name = "hsvloww";
+            this.hsvloww.Size = new System.Drawing.Size(89, 17);
+            this.hsvloww.TabIndex = 8;
+            this.hsvloww.Text = "Calculating...";
+            // 
+            // hsvhigh
+            // 
+            this.hsvhigh.AutoSize = true;
+            this.hsvhigh.Location = new System.Drawing.Point(542, 75);
+            this.hsvhigh.Name = "hsvhigh";
+            this.hsvhigh.Size = new System.Drawing.Size(89, 17);
+            this.hsvhigh.TabIndex = 9;
+            this.hsvhigh.Text = "Calculating...";
+            // 
+            // avgrgb
+            // 
+            this.avgrgb.AutoSize = true;
+            this.avgrgb.Location = new System.Drawing.Point(542, 105);
+            this.avgrgb.Name = "avgrgb";
+            this.avgrgb.Size = new System.Drawing.Size(89, 17);
+            this.avgrgb.TabIndex = 10;
+            this.avgrgb.Text = "Calculating...";
+            // 
             // CustomColorCreator
             // 
-            this.ClientSize = new System.Drawing.Size(809, 341);
+            this.ClientSize = new System.Drawing.Size(666, 275);
+            this.Controls.Add(this.avgrgb);
+            this.Controls.Add(this.hsvhigh);
+            this.Controls.Add(this.hsvloww);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.hsvlow);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.closeWindow);
             this.Name = "CustomColorCreator";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,40 +170,47 @@ namespace Football
             if (PointCounter >= 3)
             {
                 DoCalculations();
-                this.Close();
             }
-            
         }
-
 
         private void RequestData(object sender, MouseEventArgs e)
         {
             Bitmap b = new Bitmap(pictureBox.Image);
             Color color = b.GetPixel(e.X, e.Y);
-            float hue = color.GetHue();
-            float saturation = color.GetSaturation();
-            float lightness = color.GetBrightness();
+            bgr.Blue = color.B;
+            bgr.Green = color.G;
+            bgr.Red = color.R;
 
-            //Image<Hsv, Byte> hsvImage = new Image<Hsv, byte>(b);
             Image<Hsv, Byte> hsvImage = photo.Convert<Hsv, Byte>();
             System.Diagnostics.Debug.WriteLine(e.X + "  " + e.Y);
-            //hsvColor = hsvImage[e.X, e.Y];  // out of range exception ???
             hsvColor = hsvImage[e.Y, e.X];
-            //System.Diagnostics.Debug.WriteLine(hsvColor.Hue + "  " + hsvColor.Satuation + "  " + hsvColor.Value);
-            //System.Diagnostics.Debug.WriteLine(color.R + "  " + color.G + "  " + color.B);
            
-
             if (PointCounter == 0)
+            {
                 hsv1 = hsvColor;
+                bgr1 = bgr;
+            }
             if (PointCounter == 1)
+            {
                 hsv2 = hsvColor;
+                bgr2 = bgr;
+            }
             if (PointCounter == 2)
+            {
                 hsv3 = hsvColor;
+                bgr3 = bgr;
+            }
 
             PointCounter++;
             FindColor();
         }
 
+        private void showStuff()
+        {
+            hsvloww.Text = newLow.ToString();
+            hsvhigh.Text = newHigh.ToString();
+            avgrgb.Text = bgr.ToString();
+        }
 
         private void DoCalculations()
         {   // hue
@@ -187,6 +292,41 @@ namespace Football
                 newLow.Value = hsv3.Value;
             }
 
+            if (newLow.Hue >= 10)
+                newLow.Hue = newLow.Hue - 10;
+            else
+                newLow.Hue = 0;
+
+            if (newHigh.Hue <= 170)
+                newHigh.Hue = newHigh.Hue + 10;
+            else
+                newHigh.Hue = 180;
+
+            if (newLow.Satuation >= 10)
+                newLow.Satuation = newLow.Satuation - 10;
+            else
+                newLow.Satuation = 0;
+
+            if (newHigh.Satuation <= 245)
+                newHigh.Satuation = newHigh.Satuation + 10;
+            else
+                newHigh.Satuation = 255;
+
+            if (newLow.Value >= 10)
+                newLow.Value = newLow.Value - 10;
+            else
+                newLow.Value = 0;
+
+            if (newHigh.Value <= 245)
+                newHigh.Value = newHigh.Value + 10;
+            else
+                newHigh.Value = 255;
+
+            bgr.Blue = (int)(bgr1.Blue + bgr2.Blue + bgr3.Blue) / 3;
+            bgr.Green = (int)(bgr1.Green + bgr2.Green + bgr3.Green) / 3;
+            bgr.Red = (int)(bgr1.Red + bgr2.Red + bgr3.Red) / 3;
+
+            showStuff();
             
             buttonClickability(true);
         }
