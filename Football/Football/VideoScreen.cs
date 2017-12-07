@@ -130,14 +130,25 @@ namespace Football
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
 
-            mat = _video.Capture.QueryFrame();       //getting frames        
-            if (mat == null) return;
+            
+            //getting frames        
+            mat = _video.Capture.QueryFrame();
+            //if (mat == null) return;
+            try
+            {
+                _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
 
-            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+                OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
+                BallDetection();
 
-            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
-            BallDetection();
-        }
+                
+            }
+            catch (NullReferenceException n)
+            {
+                MessageBox.Show(n.ToString());
+            }mat = null;
+        }  
+
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -212,13 +223,20 @@ namespace Football
             setValues();
             _ball.BallPositionDraw(imgCircles);
             unifyValues();
+            commentatorTextCompatibility();
+        }
+
+        private void commentatorTextCompatibility()
+        {
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
+            BallPos.Text = _ball.PositionComment;
+
             addSoundEffects();
         }
 
-        public async Task addSoundEffects()
+        public async void addSoundEffects()
         {
-            commentatorTextCompatibility();
-
+            
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
@@ -231,7 +249,7 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    if(!enableSound.Checked)
+                    if (!enableSound.Checked)
                         comment.PlayRandomSound(16, 18);
                     isRinged = true;
                 }
@@ -598,10 +616,5 @@ namespace Football
             CCC.Dispose();
         }
 
-        private void commentatorTextCompatibility()
-        {
-            if (_ball.PositionComment != BallPos.Text) isRinged = false;
-            BallPos.Text = _ball.PositionComment;
-        }
     }
 }

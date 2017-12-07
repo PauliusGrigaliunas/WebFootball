@@ -12,7 +12,7 @@ namespace Football
         //static VideoScreen _home;
         bool TakeASource();
         bool StartVideo();
-        bool StartCamera();
+        //bool StartCamera();
         void Pause();
         void Stop();        
         bool StartLastUsedVideo();

@@ -79,11 +79,11 @@ namespace Football
             Properties.Settings.Default.Save();
         }
 
-        public bool Camera()
+        /*public bool Camera()
         {
             Capture = new Emgu.CV.VideoCapture(0);
             return Starter();
-        }  
+        } */ 
 
         public bool StartVideo()
         {
@@ -123,7 +123,7 @@ namespace Football
                 return TakeASource();
         }
 
-        public bool StartCamera()
+        /*public bool StartCamera()
         {
             if (_timer != null)
             {
@@ -132,7 +132,7 @@ namespace Football
                 return true;
             }
             else return Camera();
-        }
+        }*/
 
         public void Pause()
         {
@@ -161,7 +161,7 @@ namespace Football
                 _timer.Tick -= new EventHandler(_home.TimeTick);
                 _timer.Stop();
                 _timer = null;
-                Capture = null;
+                Capture.Dispose();
             }
         }
     }
