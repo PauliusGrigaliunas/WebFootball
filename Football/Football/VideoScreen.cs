@@ -34,6 +34,7 @@ namespace Football
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
         ScoreEditor SE;
+        CustomColorViewer CCC;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -65,7 +66,7 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
-        private int GatesColorIndex = 2;
+        private int GatesColorIndex = 3;
         //
         public List<int> _xCoordList = new List<int>();
 
@@ -102,6 +103,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = false;
             lastUsedToolStripMenuItem.Enabled = false;
             OriginalPictureBox.Enabled = false;
+            setCustomColor.Enabled = false;
         }
 
         private void ButtonEnabler()
@@ -119,6 +121,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = true;
             lastUsedToolStripMenuItem.Enabled = true;
             OriginalPictureBox.Enabled = true;
+            setCustomColor.Enabled = true;
         }
 
         public void TimeTick(object sender, EventArgs e)
@@ -194,6 +197,7 @@ namespace Football
             _video.Stop();
         }
         // End Menu items------------
+
 
         public void BallDetection()
         {
@@ -491,6 +495,7 @@ namespace Football
             else
             {
                 _video.Pause();
+                _gcheck.setStopwatch(false);
                 btnStart.Text = "Start";
                 btnStartLast.Text = "Load last used video";
             }
@@ -508,6 +513,7 @@ namespace Football
             else
             {
                 _video.Pause();
+                _gcheck.setStopwatch(false);
                 btnStart.Text = "Start";
                 btnStartLast.Text = "Load last used video";
             }
@@ -564,6 +570,8 @@ namespace Football
         private void editScore_Click(object sender, EventArgs e)
         {
             _video.Pause();
+            _gcheck.setStopwatch(false);
+
             SE = new ScoreEditor(ATeam, BTeam, bTeamLabel.Text, aTeamLabel.Text);
             SE.ShowDialog();
 
@@ -571,6 +579,23 @@ namespace Football
             int BP = SE.returnB();
             bTeamLabel.Text = AP.ToString();
             aTeamLabel.Text = BP.ToString();
+
+            _gcheck.setStopwatch(true);
+            _video.StartVideo();
+            SE.Dispose();
+        }
+
+        private void setCustomColor_Click(object sender, EventArgs e)
+        {
+            _video.Pause();
+            _gcheck.setStopwatch(false);
+
+            CCC = new CustomColorViewer(_video.ImgOriginal);
+            CCC.ShowDialog();
+
+            _gcheck.setStopwatch(true);
+            _video.StartVideo();
+            CCC.Dispose();
         }
 
         private void commentatorTextCompatibility()

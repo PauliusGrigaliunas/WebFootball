@@ -9,12 +9,13 @@ namespace Football
 {
     public class ChooseColour
     {
-        ColourPalet colourPalet = new ColourPalet();
+        public ColourPalet colourPalet = new ColourPalet();
 
         public enum Choices
         {
             Orange,
             Yellow
+            //Custom
             //Dark
         }
 
@@ -29,6 +30,8 @@ namespace Football
                     return colourPalet.Colour[1];
                 case 2:
                     return colourPalet.Colour[2];
+                case 3:
+                    return colourPalet.Colour[3];
                 default:
                     return colourPalet.Colour[0];
             }

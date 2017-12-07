@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.setCustomColor = new System.Windows.Forms.Button();
+            this.enableSound = new System.Windows.Forms.CheckBox();
+            this.enableSoundLabel = new System.Windows.Forms.Label();
             this.editScore = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnReset = new System.Windows.Forms.Button();
@@ -77,8 +80,6 @@
             this.StopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ballColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.enableSoundLabel = new System.Windows.Forms.Label();
-            this.enableSound = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerImgBox)).BeginInit();
@@ -94,6 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.setCustomColor);
             this.panel1.Controls.Add(this.enableSound);
             this.panel1.Controls.Add(this.enableSoundLabel);
             this.panel1.Controls.Add(this.editScore);
@@ -126,11 +128,39 @@
             this.panel1.Size = new System.Drawing.Size(653, 843);
             this.panel1.TabIndex = 2;
             // 
+            // setCustomColor
+            // 
+            this.setCustomColor.Location = new System.Drawing.Point(486, 82);
+            this.setCustomColor.Name = "setCustomColor";
+            this.setCustomColor.Size = new System.Drawing.Size(155, 31);
+            this.setCustomColor.TabIndex = 55;
+            this.setCustomColor.Text = "Find Color Codes";
+            this.setCustomColor.UseVisualStyleBackColor = true;
+            this.setCustomColor.Click += new System.EventHandler(this.setCustomColor_Click);
+            // 
+            // enableSound
+            // 
+            this.enableSound.AutoSize = true;
+            this.enableSound.Location = new System.Drawing.Point(170, 127);
+            this.enableSound.Name = "enableSound";
+            this.enableSound.Size = new System.Drawing.Size(18, 17);
+            this.enableSound.TabIndex = 54;
+            this.enableSound.UseVisualStyleBackColor = true;
+            // 
+            // enableSoundLabel
+            // 
+            this.enableSoundLabel.AutoSize = true;
+            this.enableSoundLabel.Location = new System.Drawing.Point(12, 125);
+            this.enableSoundLabel.Name = "enableSoundLabel";
+            this.enableSoundLabel.Size = new System.Drawing.Size(155, 17);
+            this.enableSoundLabel.TabIndex = 53;
+            this.enableSoundLabel.Text = "Disable Sound Effects?";
+            // 
             // editScore
             // 
-            this.editScore.Location = new System.Drawing.Point(497, 118);
+            this.editScore.Location = new System.Drawing.Point(486, 118);
             this.editScore.Name = "editScore";
-            this.editScore.Size = new System.Drawing.Size(144, 31);
+            this.editScore.Size = new System.Drawing.Size(155, 31);
             this.editScore.TabIndex = 52;
             this.editScore.Text = "Edit Score Manually";
             this.editScore.UseVisualStyleBackColor = true;
@@ -565,24 +595,6 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 52;
             // 
-            // enableSoundLabel
-            // 
-            this.enableSoundLabel.AutoSize = true;
-            this.enableSoundLabel.Location = new System.Drawing.Point(12, 125);
-            this.enableSoundLabel.Name = "enableSoundLabel";
-            this.enableSoundLabel.Size = new System.Drawing.Size(155, 17);
-            this.enableSoundLabel.TabIndex = 53;
-            this.enableSoundLabel.Text = "Disable Sound Effects?";
-            // 
-            // enableSound
-            // 
-            this.enableSound.AutoSize = true;
-            this.enableSound.Location = new System.Drawing.Point(170, 127);
-            this.enableSound.Name = "enableSound";
-            this.enableSound.Size = new System.Drawing.Size(18, 17);
-            this.enableSound.TabIndex = 54;
-            this.enableSound.UseVisualStyleBackColor = true;
-            // 
             // VideoScreen
             // 
             this.AllowDrop = true;
@@ -665,6 +677,7 @@
         private System.Windows.Forms.Button editScore;
         private System.Windows.Forms.CheckBox enableSound;
         private System.Windows.Forms.Label enableSoundLabel;
+        private System.Windows.Forms.Button setCustomColor;
     }
 }
 
