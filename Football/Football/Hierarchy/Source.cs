@@ -19,7 +19,6 @@ namespace Football
         public Image<Bgr, byte> ImgOriginal { get; set; }
         public Image<Gray, byte> ImgFiltered { get; set; }
         public static VideoScreen _home { get; set; }
-        internal Mat mat;
         internal Stopwatch _stopwatch = new Stopwatch();
         internal System.Windows.Forms.Timer _timer;
         internal Ball _ball = new Ball();
@@ -41,21 +40,7 @@ namespace Football
             _timer.Start();
             return true;
         }
-        //+ not necessary
-        public Image<Gray, byte> ConvertToGray()
-        {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().Convert<Gray, byte>();
 
-            return imgRange;
-
-        }
-
-        public Image<Gray, Byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed)
-        {
-            Image<Gray, Byte> imgRange = mat.ToImage<Bgr, byte>().InRange(new Bgr(lowBlue, lowGreen, lowRed), new Bgr(highBlue, highGreen, highRed));
-            return imgRange;
-        }
-        //-
         public Image<Gray, byte> GetFilteredImage(ColourStruct colour)
         {
             Image<Gray, byte> imgSmoothed = ImgOriginal.Convert<Hsv, byte>().InRange(colour.Low, colour.High);
@@ -78,12 +63,6 @@ namespace Football
             Properties.Settings.Default.lastfilepath = filename;
             Properties.Settings.Default.Save();
         }
-
-        /*public bool Camera()
-        {
-            Capture = new Emgu.CV.VideoCapture(0);
-            return Starter();
-        } */ 
 
         public bool StartVideo()
         {
@@ -122,17 +101,6 @@ namespace Football
             else
                 return TakeASource();
         }
-
-        /*public bool StartCamera()
-        {
-            if (_timer != null)
-            {
-                _timer.Tick += new EventHandler(_home.TimeTick);
-                _timer.Start();
-                return true;
-            }
-            else return Camera();
-        }*/
 
         public void Pause()
         {

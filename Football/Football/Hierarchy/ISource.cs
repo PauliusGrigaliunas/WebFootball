@@ -17,8 +17,6 @@ namespace Football
         void Stop();        
         bool StartLastUsedVideo();
         bool Check();
-        Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed);
-        Image<Gray, byte> ConvertToGray();
         Image<Gray, byte> GetFilteredImageZones(ColourStruct clr);
         Image<Gray, byte> GetFilteredImage(ColourStruct colour);
 
