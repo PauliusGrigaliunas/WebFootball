@@ -84,22 +84,9 @@ namespace Football
             return vict;
        }
 
-    /*    public int GetGoals( String data)
-        {
-            int goals = 0;
-            using (FootballEntities contex = new FootballEntities())
-            {
-
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-                goals = (int)team.Goals;
-
-            }
-            return goals;
-        }
-*/
         public void UpdateTableTeams(String data, int victories)
         {
-            //irasyti rezultata
+        
             using (FootballEntities1 contex = new FootballEntities1())
             {
 
@@ -134,7 +121,7 @@ namespace Football
 
         }
         //database loaded to list
-        public List<TeamsTable> AllDataToList()  //all teams 
+        public List<TeamsTable> AllDataToList()  
         {
             using (FootballEntities1 context = new FootballEntities1())
             {
@@ -165,6 +152,7 @@ namespace Football
             {
                 var teams = from i in context.GameTables
                             select i;
+               
                 var list = teams.ToList();
 
                 return list;

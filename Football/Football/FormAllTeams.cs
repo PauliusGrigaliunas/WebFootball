@@ -129,7 +129,7 @@ namespace Football
                                                      Name=i.First().Name,
                                                      AllScores=i.Sum(j=>j.Score),
                                                      
-                                                  }).Take(5);
+                                                  });
           
             dataGridViewAll.DataSource = list2.ToList();
             Colour();
