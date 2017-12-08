@@ -55,11 +55,11 @@ namespace Football
             // 
             // closeWindow
             // 
-            this.closeWindow.Location = new System.Drawing.Point(497, 216);
+            this.closeWindow.Location = new System.Drawing.Point(483, 207);
             this.closeWindow.Name = "closeWindow";
-            this.closeWindow.Size = new System.Drawing.Size(132, 35);
+            this.closeWindow.Size = new System.Drawing.Size(171, 47);
             this.closeWindow.TabIndex = 1;
-            this.closeWindow.Text = "Back to game";
+            this.closeWindow.Text = "Set custom color and get back to game";
             this.closeWindow.UseVisualStyleBackColor = true;
             this.closeWindow.Click += new System.EventHandler(this.closeWindow_Click);
             // 
@@ -134,7 +134,7 @@ namespace Football
             this.avgrgb.TabIndex = 10;
             this.avgrgb.Text = "Calculating...";
             // 
-            // CustomColorCreator
+            // CustomColorViewer
             // 
             this.ClientSize = new System.Drawing.Size(666, 275);
             this.Controls.Add(this.avgrgb);
@@ -147,7 +147,7 @@ namespace Football
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.closeWindow);
-            this.Name = "CustomColorCreator";
+            this.Name = "CustomColorViewer";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorRectangle)).EndInit();
             this.ResumeLayout(false);
