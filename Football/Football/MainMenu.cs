@@ -25,7 +25,7 @@ namespace Football
         public MainMenu()
         {
             InitializeComponent();
-            InputThread inputThread = InputThread.Instance;
+            //InputThread inputThread = InputThread.Instance;
         }
 
         private void button1_Click(object sender, EventArgs e)

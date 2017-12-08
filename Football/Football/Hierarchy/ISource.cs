@@ -12,13 +12,11 @@ namespace Football
         //static VideoScreen _home;
         bool TakeASource();
         bool StartVideo();
-        bool StartCamera();
+        //bool StartCamera();
         void Pause();
         void Stop();        
         bool StartLastUsedVideo();
         bool Check();
-        Image<Gray, byte> ColorRange(int lowBlue, int lowGreen, int lowRed, int highBlue, int highGreen, int highRed);
-        Image<Gray, byte> ConvertToGray();
         Image<Gray, byte> GetFilteredImageZones(ColourStruct clr);
         Image<Gray, byte> GetFilteredImage(ColourStruct colour);
 
