@@ -14,30 +14,47 @@ namespace Football
     {
       
 
-        public void AddToTable(String name, int victories, int goals)
+        public void AddToTableTeams(String name, int victories)
         {
-            using (FootballEntities contex = new FootballEntities())
+            using (FootballEntities1 contex = new FootballEntities1())
             {
-                teamTable team = new teamTable()
+                TeamsTable team = new TeamsTable()
                 {
                     Name = name,
                     Victories = victories,
-                    Goals = goals,
+                   
                 };         
  
-                contex.teamTables.Add(team);
+                contex.TeamsTables.Add(team);
+                contex.SaveChanges();
+            }
+        }
+        public void AddToTableGames(int firstTeam, int secondTeam, int goals1, int goals2)
+        {
+            using (FootballEntities1 contex = new FootballEntities1())
+            {
+                GameTable team = new GameTable()
+                {
+                    FirstTeam = firstTeam,
+                    SecondTeam = secondTeam,
+                    FirstTeamScore = goals1,
+                    SecondTeamScore = goals2,
+
+                };
+
+                contex.GameTables.Add(team);
                 contex.SaveChanges();
             }
         }
 
-       public bool NameCheckIfExsist(String data)
+        public bool NameCheckIfExsist(String data)
        {
             bool exsists = false;
             try
             {
-                using (FootballEntities contex = new FootballEntities())
+                using (FootballEntities1 contex = new FootballEntities1())
                 {
-                    teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
+                    var team = contex.TeamsTables.FirstOrDefault(r => r.Name == data);
 
                     if (team.Name == data)
                     {
@@ -58,16 +75,16 @@ namespace Football
        {
             int vict = 0;
 
-            using (FootballEntities contex = new FootballEntities())
+            using (FootballEntities1 contex = new FootballEntities1())
             {
                 
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
+                var team = contex.TeamsTables.FirstOrDefault(r => r.Name == data);
                 vict = (int)team.Victories;
             }
             return vict;
        }
 
-        public int GetGoals( String data)
+    /*    public int GetGoals( String data)
         {
             int goals = 0;
             using (FootballEntities contex = new FootballEntities())
@@ -79,47 +96,62 @@ namespace Football
             }
             return goals;
         }
-
-        public void InsertToTable(String data, int victories, int goals)
+*/
+        public void UpdateTableTeams(String data, int victories)
         {
             //irasyti rezultata
-            using (FootballEntities contex = new FootballEntities())
+            using (FootballEntities1 contex = new FootballEntities1())
             {
 
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
+                TeamsTable team = contex.TeamsTables.FirstOrDefault(r => r.Name == data);
                 team.Victories = victories;
-                team.Goals = goals;
          
                 contex.SaveChanges();
             }
 
         }
-        public void DeleateTableRow(String data)
-        {
-            using (FootballEntities contex = new FootballEntities())
-            {
 
-                teamTable team = contex.teamTables.FirstOrDefault(r => r.Name == data);
-              
-                contex.teamTables.Remove(team);
+
+        public void InsertGame(String name1, String name2, int goal1, int goal2)
+        {
+            using (FootballEntities1 contex = new FootballEntities1())
+            {
+                int team1;
+                int team2;
+
+                //getting id's of teams
+                var team = contex.TeamsTables.FirstOrDefault(r => r.Name == name1);
+                team1 = team.Id;
+
+                team = contex.TeamsTables.FirstOrDefault(r => r.Name == name2);
+                team2 = team.Id;
+
+
+                AddToTableGames(team1, team2, goal1, goal2);
+                contex.SaveChanges();
             }
+
+
         }
         //database loaded to list
-        public List<teamTable> AllDataToList ()
+        public List<TeamsTable> AllDataToList()  //all teams 
         {
-            FootballEntities context = new FootballEntities();
-            var teams = from i in context.teamTables
-                        select i;
-            var list = teams.ToList();
-            
-            return list;
+            using (FootballEntities1 context = new FootballEntities1())
+            {
+                var teams = from i in context.TeamsTables
+                            select i;
+                var list = teams.ToList();
+
+                return list;
+            }
+        
         }
 
-        public List<teamTable> OrderByVictories()
+        public List<TeamsTable> OrderByVictories()
         {
-            using (FootballEntities context = new FootballEntities())
+            using (FootballEntities1 context = new FootballEntities1())
             {
-                var teams = from i in context.teamTables
+                var teams = from i in context.TeamsTables
                             orderby i.Victories descending
                             select i;
                 var list = teams.ToList();
@@ -127,28 +159,18 @@ namespace Football
             return list;
             }
         }
-        public List<teamTable> OrderByGoals()
+        public List<GameTable> AllGamesToList()
         {
-            FootballEntities context = new FootballEntities();
-            var teams = from i in context.teamTables
-                        orderby i.Goals descending
-                        select i;
-            var list = teams.ToList();
+            using (FootballEntities1 context = new FootballEntities1())
+            {
+                var teams = from i in context.GameTables
+                            select i;
+                var list = teams.ToList();
 
-            return list;
+                return list;
+            }
         }
-        public List<teamTable> BestToList()
-        {
-            FootballEntities context = new FootballEntities();
-            var teams = from i in context.teamTables
-                        where i.Goals!=0
-                        where i.Victories!=0
-                        orderby i.Victories descending
-                        select i;
-            var list = teams.ToList();
 
-            return list;
-        }
 
     }
 }

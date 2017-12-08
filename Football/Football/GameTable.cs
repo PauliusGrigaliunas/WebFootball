@@ -12,11 +12,15 @@ namespace Football
     using System;
     using System.Collections.Generic;
     
-    public partial class teamTable
+    public partial class GameTable
     {
-        public int Nr { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Victories { get; set; }
-        public Nullable<int> Goals { get; set; }
+        public int Id { get; set; }
+        public int FirstTeam { get; set; }
+        public int SecondTeam { get; set; }
+        public Nullable<int> FirstTeamScore { get; set; }
+        public Nullable<int> SecondTeamScore { get; set; }
+    
+        public virtual TeamsTable TeamsTable { get; set; }
+        public virtual TeamsTable TeamsTable1 { get; set; }
     }
 }

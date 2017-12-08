@@ -61,6 +61,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(497, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // ToolStripMenuItem
             // 
@@ -72,13 +73,12 @@
             this.ToolStripMenuItem.Name = "ToolStripMenuItem";
             this.ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.ToolStripMenuItem.Text = "Filter";
-           // this.ToolStripMenuItem.Click += new System.EventHandler(this.statisticsToolStripMenuItem_Click);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
             this.allToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.allToolStripMenuItem.Text = "All";
+            this.allToolStripMenuItem.Text = "Teams";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // victoriesToolStripMenuItem
@@ -92,14 +92,14 @@
             // 
             this.goalsToolStripMenuItem.Name = "goalsToolStripMenuItem";
             this.goalsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.goalsToolStripMenuItem.Text = "Order By Goals";
+            this.goalsToolStripMenuItem.Text = "Games";
             this.goalsToolStripMenuItem.Click += new System.EventHandler(this.goalsToolStripMenuItem_Click);
             // 
             // bestToolStripMenuItem
             // 
             this.bestToolStripMenuItem.Name = "bestToolStripMenuItem";
             this.bestToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.bestToolStripMenuItem.Text = "Best";
+            this.bestToolStripMenuItem.Text = "Best ";
             this.bestToolStripMenuItem.Click += new System.EventHandler(this.bestToolStripMenuItem_Click);
             // 
             // FormAllTeams

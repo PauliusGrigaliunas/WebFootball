@@ -370,30 +370,33 @@ namespace Football
                     comment.StopAllTracks();
                 }
             }
-
+            _GoalA = _TeamAScores;
+            _GoalB = _TeamBScores;
             if (!compare(_nameFirstTeam))
             {
-                team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
-                _GoalA = _TeamAScores;
+                team.AddToTableTeams(_nameFirstTeam, _VictA);
+              
             }
             else
             {
                 _VictA = _VictA + team.GetVictories(_nameFirstTeam);
-                _GoalA = team.GetGoals(_nameFirstTeam) + _TeamAScores;
-                team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
+                team.UpdateTableTeams(_nameFirstTeam, _VictA);
+     
             }
 
             if (!compare(_nameSecondTeam))
             {
-                team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
-                _GoalB = _TeamBScores;
+                team.AddToTableTeams(_nameSecondTeam, _VictB);
+                
+       
             }
             else
             {
                 _VictB = _VictB + team.GetVictories(_nameSecondTeam);
-                _GoalB = team.GetGoals(_nameSecondTeam) + _TeamBScores;
-                team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+                team.UpdateTableTeams(_nameSecondTeam, _VictB);
+
             }
+            team.InsertGame(_nameFirstTeam, _nameSecondTeam, _GoalA, _GoalB);
             comment.PlayIndexedSound(11);
         }
 
@@ -470,30 +473,34 @@ namespace Football
                     comment.StopAllTracks();
                 }
             }
-
+            _GoalA = _TeamAScores;
+            _GoalB = _TeamBScores;
             if (!compare(_nameFirstTeam))
             {
-                team.AddToTable(_nameFirstTeam, _VictA, _TeamAScores);
-                _GoalA = _TeamAScores;
+                team.AddToTableTeams(_nameFirstTeam, _VictA);
+                
+               
             }
             else
             {
                 _VictA = _VictA + team.GetVictories(_nameFirstTeam);
-                _GoalA = team.GetGoals(_nameFirstTeam) + _TeamAScores;
-                team.InsertToTable(_nameFirstTeam, _VictA, _GoalA);
+              
+                team.UpdateTableTeams(_nameFirstTeam, _VictA);
+              
             }
 
             if (!compare(_nameSecondTeam))
             {
-                team.AddToTable(_nameSecondTeam, _VictB, _TeamBScores);
-                _GoalB = _TeamBScores;
+                team.AddToTableTeams(_nameSecondTeam, _VictB);             
+               
             }
             else
             {
-                _VictB = _VictB + team.GetVictories(_nameSecondTeam);
-                _GoalB = team.GetGoals(_nameSecondTeam) + _TeamBScores;
-                team.InsertToTable(_nameSecondTeam, _VictB, _GoalB);
+                _VictB = _VictB + team.GetVictories(_nameSecondTeam);        
+                team.UpdateTableTeams(_nameSecondTeam, _VictB);
+                
             }
+            team.InsertGame(_nameFirstTeam, _nameSecondTeam, _GoalA, _GoalB);
             comment.PlayIndexedSound(11);
         }
 
@@ -607,6 +614,7 @@ namespace Football
         }
 
         private void setCustomColor_Click(object sender, EventArgs e)
+
         {
             _video.Pause();
             _gcheck.setStopwatch(false);
