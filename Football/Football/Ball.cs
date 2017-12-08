@@ -41,6 +41,7 @@ namespace Football
 
         public ColourPalet colourPalet = new ColourPalet();
         public ChooseColour chooseColour = new ChooseColour();
+        private const int customColorIndex = 2;
 
 
         private CircleF[] GetCircles(Image<Gray, byte> imgGray)
@@ -130,6 +131,12 @@ namespace Football
             {
                 return "Unknown";
             }
+        }
+
+        public void setCustomColor(Hsv low, Hsv high)
+        {
+            chooseColour.colourPalet.Colour[customColorIndex].Low = low;
+            chooseColour.colourPalet.Colour[customColorIndex].High = high;
         }
     }
 }

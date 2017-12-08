@@ -66,6 +66,7 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
+        private int CustomColorIndex = 2;
         private int GatesColorIndex = 3;
         //
         public List<int> _xCoordList = new List<int>();
@@ -219,6 +220,8 @@ namespace Football
             Image<Bgr, byte> imgCircles = _video.ImgOriginal.CopyBlank();
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
+
+            //System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(CustomColorIndex).Low + " <= low  |  high =>" + _ball.chooseColour.Controler(CustomColorIndex).High);
 
             setValues();
             _ball.BallPositionDraw(imgCircles);
@@ -610,6 +613,8 @@ namespace Football
 
             CCC = new CustomColorViewer(_video.ImgOriginal);
             CCC.ShowDialog();
+
+            _ball.setCustomColor(CCC.newLow, CCC.newHigh);
 
             _gcheck.setStopwatch(true);
             _video.StartVideo();
