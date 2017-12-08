@@ -221,7 +221,7 @@ namespace Football
             _ball.ImgFiltered = _video.GetFilteredImage(colour);
             _ball.ImgOriginal = _video.ImgOriginal;
 
-            System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(CustomColorIndex).Low + " <= low  |  high =>" + _ball.chooseColour.Controler(CustomColorIndex).High);
+            //System.Diagnostics.Debug.WriteLine(_ball.chooseColour.Controler(CustomColorIndex).Low + " <= low  |  high =>" + _ball.chooseColour.Controler(CustomColorIndex).High);
 
             setValues();
             _ball.BallPositionDraw(imgCircles);
