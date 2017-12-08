@@ -34,6 +34,7 @@ namespace Football
         Switch switcher = new Switch();
         ChooseColour chooseColour = new ChooseColour();
         ScoreEditor SE;
+        CustomColorViewer CCC;
         ISource _video;
 
         GoalsChecker _gcheck;
@@ -65,7 +66,7 @@ namespace Football
         //variables
         private int _i = 0;
         public string ATeam, BTeam;
-        private int GatesColorIndex = 2;
+        private int GatesColorIndex = 3;
         //
         public List<int> _xCoordList = new List<int>();
 
@@ -102,6 +103,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = false;
             lastUsedToolStripMenuItem.Enabled = false;
             OriginalPictureBox.Enabled = false;
+            setCustomColor.Enabled = false;
         }
 
         private void ButtonEnabler()
@@ -119,6 +121,7 @@ namespace Football
             PauseVideoToolStripMenuItem.Enabled = true;
             lastUsedToolStripMenuItem.Enabled = true;
             OriginalPictureBox.Enabled = true;
+            setCustomColor.Enabled = true;
         }
 
         public void TimeTick(object sender, EventArgs e)
@@ -127,14 +130,25 @@ namespace Football
             aTeamLabel.Text = _gcheck.CheckForScoreA(aTeamLabel.Text);
             bTeamLabel.Text = _gcheck.CheckForScoreB(bTeamLabel.Text);
 
-            mat = _video.Capture.QueryFrame();       //getting frames        
-            if (mat == null) return;
+            
+            //getting frames        
+            mat = _video.Capture.QueryFrame();
+            //if (mat == null) return;
+            try
+            {
+                _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
 
-            _video.ImgOriginal = mat.ToImage<Bgr, byte>().Resize(OriginalPictureBox.Width, OriginalPictureBox.Height, Inter.Linear);
+                OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
+                BallDetection();
 
-            OriginalPictureBox.Image = _video.ImgOriginal.Bitmap;
-            BallDetection();
-        }
+                
+            }
+            catch (NullReferenceException n)
+            {
+                MessageBox.Show(n.ToString());
+            }mat = null;
+        }  
+
         //menu strip tool items
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -195,6 +209,7 @@ namespace Football
         }
         // End Menu items------------
 
+
         public void BallDetection()
         {
             ColourStruct clr = _gates.chooseColour.Controler(GatesColorIndex);
@@ -208,13 +223,20 @@ namespace Football
             setValues();
             _ball.BallPositionDraw(imgCircles);
             unifyValues();
+            commentatorTextCompatibility();
+        }
+
+        private void commentatorTextCompatibility()
+        {
+            if (_ball.PositionComment != BallPos.Text) isRinged = false;
+            BallPos.Text = _ball.PositionComment;
+
             addSoundEffects();
         }
 
-        public async Task addSoundEffects()
+        public async void addSoundEffects()
         {
-            commentatorTextCompatibility();
-
+            
             sound = new Task(() => Comment());
             sound.Start();
             await sound;
@@ -227,7 +249,7 @@ namespace Football
                 if (isRinged == false)
                 {
                     comment.StopAllTracks();
-                    if(!enableSound.Checked)
+                    if (!enableSound.Checked)
                         comment.PlayRandomSound(16, 18);
                     isRinged = true;
                 }
@@ -498,6 +520,7 @@ namespace Football
             else
             {
                 _video.Pause();
+                _gcheck.setStopwatch(false);
                 btnStart.Text = "Start";
                 btnStartLast.Text = "Load last used video";
             }
@@ -515,6 +538,7 @@ namespace Football
             else
             {
                 _video.Pause();
+                _gcheck.setStopwatch(false);
                 btnStart.Text = "Start";
                 btnStartLast.Text = "Load last used video";
             }
@@ -571,6 +595,8 @@ namespace Football
         private void editScore_Click(object sender, EventArgs e)
         {
             _video.Pause();
+            _gcheck.setStopwatch(false);
+
             SE = new ScoreEditor(ATeam, BTeam, bTeamLabel.Text, aTeamLabel.Text);
             SE.ShowDialog();
 
@@ -578,17 +604,25 @@ namespace Football
             int BP = SE.returnB();
             bTeamLabel.Text = AP.ToString();
             aTeamLabel.Text = BP.ToString();
+
+            _gcheck.setStopwatch(true);
+            _video.StartVideo();
+            SE.Dispose();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void setCustomColor_Click(object sender, EventArgs e)
+
         {
+            _video.Pause();
+            _gcheck.setStopwatch(false);
 
+            CCC = new CustomColorViewer(_video.ImgOriginal);
+            CCC.ShowDialog();
+
+            _gcheck.setStopwatch(true);
+            _video.StartVideo();
+            CCC.Dispose();
         }
 
-        private void commentatorTextCompatibility()
-        {
-            if (_ball.PositionComment != BallPos.Text) isRinged = false;
-            BallPos.Text = _ball.PositionComment;
-        }
     }
 }
