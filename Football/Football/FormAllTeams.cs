@@ -35,7 +35,7 @@ namespace Football
         public void FillData()
         {
             dataGridViewAll.DataSource = team.AllDataToList().Select(i => new { i.Name, i.Victories}).ToList();
-  
+            Colour();
         }
 
         private void Colour()
