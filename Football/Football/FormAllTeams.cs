@@ -40,12 +40,17 @@ namespace Football
 
         private void Colour()
         {
-           
-            for(int i=0; i<3;i++)
+            if (dataGridViewAll.Rows.Count < 3)
             {
-                dataGridViewAll.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
+                dataGridViewAll.Rows[0].DefaultCellStyle.BackColor = Color.LightPink;
             }
-
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    dataGridViewAll.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;
+                }
+            }
 
         }
        
@@ -70,8 +75,7 @@ namespace Football
 
 
         private void goalsToolStripMenuItem_Click(object sender, EventArgs e)
-        {// connect to names
-            
+        {           
             var games = team.AllGamesToList().Select(i => new { i.FirstTeam, i.SecondTeam,
                 i.FirstTeamScore,i.SecondTeamScore }).ToList();
             var teams = team.AllDataToList().Select(i => new {i.Id, i.Name, i.Victories }).ToList();
@@ -98,22 +102,35 @@ namespace Football
 
         private void bestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             var teams = team.AllDataToList().Select(i => new { i.Id, i.Name, i.Victories }).ToList();
-
-            var team1 = team.AllGamesToList().
-                Select(i => new {
-                i.FirstTeam ,
-                i.FirstTeamScore,
-            }).ToList();
-          
-            var team2 = team.AllGamesToList().Select(i => new {
+            var games = team.AllGamesToList().Select(i => new {
+                i.FirstTeam,
                 i.SecondTeam,
-                i.SecondTeamScore,
+                i.FirstTeamScore,
+                i.SecondTeamScore
             }).ToList();
-            var list2 = 
-                ///concat
+            var team1 = (from i in games
+                         let Name = i.FirstTeam
+                         let Score = i.FirstTeamScore
+                         select new { Name, Score }).ToList();
 
+            var team2 = (from i in games
+                         let Name = i.SecondTeam
+                         let Score = i.SecondTeamScore
+                         select new { Name, Score }).ToList();
+
+            var list2 = team1.Concat(team2).Join(teams,
+                                                  i => i.Name,
+                                                  j => j.Id,
+                                                  (i, j) => new { j.Name, i.Score }).GroupBy(i => i.Name).
+                                                  Select(i => new
+                                                  {
+                                                     Name=i.First().Name,
+                                                     AllScores=i.Sum(j=>j.Score),
+                                                     
+                                                  }).Take(5);
+          
             dataGridViewAll.DataSource = list2.ToList();
             Colour();
         }
